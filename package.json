@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@blockly/theme-dark": "^3.0.8",
     "@mdi/font": "5.9.55",
     "blockly": "^7.20211209.5",
     "roboto-fontface": "*",
