@@ -111,7 +111,6 @@ Blockly.Msg.CALCIUM_STR_TOOLTIP = 'A string value.'
 Blockly.Msg.CALCIUM_SUBSCRIPT_TITLE = "%1 's element [ %2 ]"
 Blockly.Msg.CALCIUM_SUBSCRIPT_TOOLTIP = 'Accesses an element of data.'
 
-Blockly.Msg.CALCIUM_UI_APP_TITLE = 'Calcium+'
 Blockly.Msg.CALCIUM_UI_OPEN = 'Open'
 Blockly.Msg.CALCIUM_UI_RUN = 'Execute Program'
 Blockly.Msg.CALCIUM_UI_SAVE = 'Save'

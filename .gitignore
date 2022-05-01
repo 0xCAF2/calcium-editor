@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+prebuild.sh
+index-template.html
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
