@@ -26,5 +26,7 @@ let pyodidePromise = loadPyodideAndPackages()
 onmessage = async (event) => {
   await pyodidePromise
   const code = event.data
-  pyodide.runPythonAsync(code)
+  pyodide.runPythonAsync(code).catch((error) => {
+    postMessage(`error#${error}`)
+  })
 }

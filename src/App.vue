@@ -38,7 +38,8 @@
           </v-col>
         </v-row>
       </v-container>
-      <textarea v-show="running" readonly>{{ output }}</textarea>
+      <textarea id="output" v-show="running" readonly>{{ output }}</textarea>
+      <textarea id="error" v-show="error" readonly>{{ error }}</textarea>
     </v-main>
   </v-app>
 </template>
@@ -60,6 +61,7 @@ export default defineComponent({
   name: 'App',
   data: () => ({
     debuggerEnabled: false,
+    error: '',
     output: '',
     running: false,
     waiting: false,
@@ -108,6 +110,9 @@ export default defineComponent({
         } else if (message.startsWith('output#')) {
           this.output += message.substring(7)
           this.output += '\n'
+        } else if (message.startsWith('error#')) {
+          this.error += message.substring(6)
+          this.error += '\n'
         }
       }
       const jsonCode = generator.workspaceToCode(workspace)
@@ -157,12 +162,13 @@ print()
         this.output = ''
         this.run()
       }
+      this.error = ''
     },
   },
 })
 </script>
 <style scoped>
-textarea {
+#output {
   color: black;
   background-color: white;
   font-family: Consolas, 'SF Mono', monospace, 'Courier New';
@@ -172,5 +178,20 @@ textarea {
   top: 4px;
   right: 4px;
   z-index: 1000;
+}
+#error {
+  color: red;
+  background-color: white;
+  font-family: Consolas, 'SF Mono', monospace, 'Courier New';
+  font-size: small;
+  width: 400px;
+  max-height: 200px;
+  min-height: 200px;
+  height: 200px;
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  z-index: 2000;
+  resize: none;
 }
 </style>
