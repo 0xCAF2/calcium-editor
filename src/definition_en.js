@@ -1347,7 +1347,7 @@ Blockly.defineBlocksWithJsonArray([
 export default [
   {
     kind: 'category',
-    name: '基本',
+    name: 'Core',
     contents: [
       {
         kind: 'block',
@@ -1401,7 +1401,7 @@ export default [
   },
   {
     kind: 'category',
-    name: 'ロジック',
+    name: 'Logic',
     contents: [
       {
         kind: 'block',
@@ -1427,7 +1427,7 @@ export default [
   },
   {
     kind: 'category',
-    name: 'ループ',
+    name: 'Loop',
     contents: [
       {
         kind: 'block',
@@ -1449,7 +1449,7 @@ export default [
   },
   {
     kind: 'category',
-    name: '関数',
+    name: 'Function',
     contents: [
       {
         kind: 'block',
@@ -1483,7 +1483,7 @@ export default [
   },
   {
     kind: 'category',
-    name: 'クラス',
+    name: 'Class',
     contents: [
       {
         kind: 'block',
@@ -2565,9 +2565,7 @@ Blockly.Blocks['calcium_def_repr'] = {
     if (this.parameters) {
       let labelStr = ''
       if (this.countOfParameters > 0) {
-        labelStr = `${
-          Blockly.Msg.CALCIUM_CALL_ARG_TITLE
-        } (${this.parameters.join(', ')}):`
+        labelStr = `(${this.parameters.join(', ')}):`
       }
       Blockly.Events.disable()
       try {
@@ -2622,12 +2620,10 @@ Blockly.Blocks['calcium_defmethod_repr'] = {
     let labelStr = ''
     if (this.countOfParameters > 0) {
       if (this.parameters) {
-        labelStr = `${
-          Blockly.Msg.CALCIUM_CALL_ARG_TITLE
-        } (self, ${this.parameters.join(', ')}):`
+        labelStr = `(self, ${this.parameters.join(', ')}):`
       }
     } else {
-      labelStr = `${Blockly.Msg.CALCIUM_CALL_ARG_TITLE} (self):`
+      labelStr = `(self):`
     }
     Blockly.Events.disable()
     try {

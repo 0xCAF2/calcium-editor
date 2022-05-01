@@ -45,10 +45,10 @@
 
 <script lang>
 import * as Blockly from 'blockly/core'
-import * as Lang from 'blockly/msg/ja'
-import './ja'
+import * as Lang from 'blockly/msg/en'
+import './en'
 import DarkTheme from '@blockly/theme-dark'
-import definition from './definition_ja'
+import definition from './definition_en'
 import generator from './generator'
 import { defineComponent } from 'vue'
 
@@ -65,9 +65,9 @@ export default defineComponent({
     waiting: false,
   }),
   computed: {
-    labelForOpen: () => '開く', // Blockly.Msg.CALCIUM_UI_OPEN,
-    labelForRun: () => 'プログラムを実行', // Blockly.Msg.CALCIUM_UI_RUN,
-    labelForSave: () => '保存する', // Blockly.Msg.CALCIUM_UI_SAVE,
+    labelForOpen: () => Blockly.Msg.CALCIUM_UI_OPEN,
+    labelForRun: () => Blockly.Msg.CALCIUM_UI_RUN,
+    labelForSave: () => Blockly.Msg.CALCIUM_UI_SAVE,
   },
   methods: {
     cancel() {
