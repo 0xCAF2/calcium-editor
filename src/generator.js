@@ -3,7 +3,7 @@ import { parseFullWidthNumber } from './utils'
 
 const generator = new Blockly.Generator('Calcium')
 
-generator['calcium_add_ja'] = function (block) {
+generator['calcium_add_repr'] = function (block) {
   let ref = generator.valueToCode(block, 'REF', 0) || '["var", "x"]'
   ref = JSON.parse(generator.removeParens(ref))
   let value = generator.valueToCode(block, 'VALUE', 0) || '0'
@@ -11,7 +11,7 @@ generator['calcium_add_ja'] = function (block) {
   return JSON.stringify([generator.getIndent(), [], '+=', ref, value]) + ','
 }
 
-generator['calcium_arithmetic'] = generator['calcium_arithmetic_ja'] =
+generator['calcium_arithmetic'] = generator['calcium_arithmetic_repr'] =
   function (block) {
     const op = block.getFieldValue('OP')
     let left = generator.valueToCode(block, 'LEFT', 0) || '0'
@@ -22,7 +22,7 @@ generator['calcium_arithmetic'] = generator['calcium_arithmetic_ja'] =
     return [code, 0]
   }
 
-generator['calcium_assign'] = generator['calcium_assign_ja'] = function (
+generator['calcium_assign'] = generator['calcium_assign_repr'] = function (
   block
 ) {
   let ref = generator.valueToCode(block, 'REF', 0) || `["var", "x"]`
@@ -35,16 +35,15 @@ generator['calcium_assign'] = generator['calcium_assign_ja'] = function (
   return JSON.stringify([generator.getIndent(), [], '=', ref, arg0]) + ','
 }
 
-generator['calcium_attribute'] = generator['calcium_attribute_ja'] = function (
-  block
-) {
-  let ref = generator.valueToCode(block, 'REF', 0) || `["var", "self"]`
-  ref = JSON.parse(generator.removeParens(ref))
-  let attr = ['attr']
-  attr.push(ref) // remove keyword
-  attr.push(block.getFieldValue('ATTR') || 'name')
-  return [JSON.stringify(attr), 0]
-}
+generator['calcium_attribute'] = generator['calcium_attribute_repr'] =
+  function (block) {
+    let ref = generator.valueToCode(block, 'REF', 0) || `["var", "self"]`
+    ref = JSON.parse(generator.removeParens(ref))
+    let attr = ['attr']
+    attr.push(ref) // remove keyword
+    attr.push(block.getFieldValue('ATTR') || 'name')
+    return [JSON.stringify(attr), 0]
+  }
 
 generator['calcium_bitwise'] = function (block) {
   const op = block.getFieldValue('OP')
@@ -62,13 +61,13 @@ generator['calcium_bitwise_not'] = function (block) {
   return [JSON.stringify(['~', value]), 0]
 }
 
-generator['calcium_boolean'] = generator['calcium_boolean_ja'] = function (
+generator['calcium_boolean'] = generator['calcium_boolean_repr'] = function (
   block
 ) {
   return [block.getFieldValue('VALUE'), 0]
 }
 
-generator['calcium_break_continue'] = generator['calcium_break_continue_ja'] =
+generator['calcium_break_continue'] = generator['calcium_break_continue_repr'] =
   function (block) {
     return (
       JSON.stringify([generator.getIndent(), [], block.getFieldValue('FLOW')]) +
@@ -76,7 +75,7 @@ generator['calcium_break_continue'] = generator['calcium_break_continue_ja'] =
     )
   }
 
-generator['calcium_call'] = generator['calcium_call_ja'] = function (block) {
+generator['calcium_call'] = generator['calcium_call_repr'] = function (block) {
   const args = []
   for (let i = 0; i < block.countOfArguments; ++i) {
     let arg = generator.valueToCode(block, 'ARG' + i, 0) || 'null'
@@ -89,7 +88,7 @@ generator['calcium_call'] = generator['calcium_call_ja'] = function (block) {
   return [JSON.stringify(['call', callRef, args]), 0]
 }
 
-generator['calcium_callnoreturn_ja'] = function (block) {
+generator['calcium_callnoreturn_repr'] = function (block) {
   const args = []
   for (let i = 0; i < block.countOfArguments; ++i) {
     let arg = generator.valueToCode(block, 'ARG' + i, 0) || 'null'
@@ -109,7 +108,7 @@ generator['calcium_callnoreturn_ja'] = function (block) {
   )
 }
 
-generator['calcium_callreturn_ja'] = function (block) {
+generator['calcium_callreturn_repr'] = function (block) {
   let returnRef = null
   returnRef = generator.valueToCode(block, 'RETURN', 0) || 'null'
   returnRef = JSON.parse(returnRef)
@@ -133,34 +132,33 @@ generator['calcium_callreturn_ja'] = function (block) {
   )
 }
 
-generator['calcium_class_ja'] = function (block) {
+generator['calcium_class_repr'] = function (block) {
   return [JSON.stringify(['var', block.getField('NAME').getText()]), 0]
 }
 
-generator['calcium_class_def'] = generator['calcium_class_def_ja'] = function (
-  block
-) {
-  const className = block.getFieldValue('NAME')
-  let superclass = generator.valueToCode(block, 'SUPERCLASS', 0) || 'null'
-  superclass = JSON.parse(superclass) // ref or null
+generator['calcium_class_def'] = generator['calcium_class_def_repr'] =
+  function (block) {
+    const className = block.getFieldValue('NAME')
+    let superclass = generator.valueToCode(block, 'SUPERCLASS', 0) || 'null'
+    superclass = JSON.parse(superclass) // ref or null
 
-  generator.shiftIndent(1)
-  const stmts =
-    generator.statementToCode(block, 'STMTS') ||
-    JSON.stringify([generator.getIndent(), [], 'pass']) + ','
-  generator.shiftIndent(-1)
-  return (
-    JSON.stringify([
-      generator.getIndent(),
-      [],
-      'class',
-      className,
-      superclass,
-    ]) +
-    ',' +
-    stmts
-  )
-}
+    generator.shiftIndent(1)
+    const stmts =
+      generator.statementToCode(block, 'STMTS') ||
+      JSON.stringify([generator.getIndent(), [], 'pass']) + ','
+    generator.shiftIndent(-1)
+    return (
+      JSON.stringify([
+        generator.getIndent(),
+        [],
+        'class',
+        className,
+        superclass,
+      ]) +
+      ',' +
+      stmts
+    )
+  }
 
 generator['calcium_comma'] = function (block) {
   let first = generator.valueToCode(block, 'FIRST', 0) || '["var", "a"]'
@@ -179,7 +177,7 @@ generator['calcium_compound_assign'] = function (block) {
   return JSON.stringify([generator.getIndent(), [], op, ref, value]) + ','
 }
 
-generator['calcium_def'] = generator['calcium_def_ja'] = function (block) {
+generator['calcium_def'] = generator['calcium_def_repr'] = function (block) {
   const funcName = block.getField('NAME').getText()
   generator.shiftIndent(1)
   const stmts =
@@ -200,31 +198,30 @@ generator['calcium_def'] = generator['calcium_def_ja'] = function (block) {
   )
 }
 
-generator['calcium_defmethod'] = generator['calcium_defmethod_ja'] = function (
-  block
-) {
-  const name = block.getField('NAME').getText()
-  generator.shiftIndent(1)
-  const stmts =
-    generator.statementToCode(block, 'STMTS') ||
-    JSON.stringify([generator.getIndent(), [], 'pass']) + ','
-  generator.shiftIndent(-1)
+generator['calcium_defmethod'] = generator['calcium_defmethod_repr'] =
+  function (block) {
+    const name = block.getField('NAME').getText()
+    generator.shiftIndent(1)
+    const stmts =
+      generator.statementToCode(block, 'STMTS') ||
+      JSON.stringify([generator.getIndent(), [], 'pass']) + ','
+    generator.shiftIndent(-1)
 
-  const parameters = block.parameters || []
-  return (
-    JSON.stringify([
-      generator.getIndent(),
-      [],
-      'def',
-      name,
-      ['self', ...parameters],
-    ]) +
-    ',' +
-    stmts
-  )
-}
+    const parameters = block.parameters || []
+    return (
+      JSON.stringify([
+        generator.getIndent(),
+        [],
+        'def',
+        name,
+        ['self', ...parameters],
+      ]) +
+      ',' +
+      stmts
+    )
+  }
 
-generator['calcium_dict'] = generator['calcium_dict_ja'] = function () {
+generator['calcium_dict'] = generator['calcium_dict_repr'] = function () {
   return ['{}', 0]
 }
 
@@ -236,7 +233,7 @@ generator['calcium_expr_stmt'] = function (block) {
   return JSON.stringify([generator.getIndent(), [], 'expr', call]) + ','
 }
 
-generator['calcium_for'] = generator['calcium_for_ja'] = function (block) {
+generator['calcium_for'] = generator['calcium_for_repr'] = function (block) {
   let vars = generator.valueToCode(block, 'VARS', 0) || '["var", "i"]'
   vars = JSON.parse(vars)
   let iterable = generator.valueToCode(block, 'ITER', 0) || '"Hello"'
@@ -255,7 +252,7 @@ generator['calcium_for'] = generator['calcium_for_ja'] = function (block) {
   )
 }
 
-generator['calcium_for_range_ja'] = function (block) {
+generator['calcium_for_range_repr'] = function (block) {
   let variable = generator.valueToCode(block, 'VARS', 0) || '["var", "i"]'
   variable = JSON.parse(variable)
 
@@ -304,9 +301,9 @@ generator['calcium_for_range_ja'] = function (block) {
   )
 }
 
-generator['calcium_function_ja'] = generator['calcium_class_ja']
+generator['calcium_function_repr'] = generator['calcium_class_repr']
 
-generator['calcium_if'] = generator['calcium_if_ja'] = function (block) {
+generator['calcium_if'] = generator['calcium_if_repr'] = function (block) {
   let n = 0
   let codeArray = [[generator.getIndent(), [], 'ifs']]
   generator.shiftIndent(1)
@@ -349,7 +346,7 @@ generator['calcium_if'] = generator['calcium_if_ja'] = function (block) {
   return codeStr.substring(1, codeStr.length - 1) + ','
 }
 
-generator['calcium_import'] = generator['calcium_import_ja'] = function (
+generator['calcium_import'] = generator['calcium_import_repr'] = function (
   block
 ) {
   const moduleName = block.getField('NAME').getText()
@@ -363,7 +360,7 @@ generator['calcium_kwarg'] = function (block) {
   return [JSON.stringify(['kwarg', kw, value]), 0]
 }
 
-generator['calcium_list'] = generator['calcium_list_ja'] = function (block) {
+generator['calcium_list'] = generator['calcium_list_repr'] = function (block) {
   const elements = new Array(block.itemCount_)
   for (let i = 0; i < block.itemCount_; ++i) {
     let elem = generator.valueToCode(block, 'ADD' + i, 0) || 'null'
@@ -374,16 +371,16 @@ generator['calcium_list'] = generator['calcium_list_ja'] = function (block) {
   return [code, 0]
 }
 
-generator['calcium_logical'] = generator['calcium_logical_ja'] =
+generator['calcium_logical'] = generator['calcium_logical_repr'] =
   generator['calcium_bitwise']
 
-generator['calcium_method_ja'] = generator['calcium_attribute']
+generator['calcium_method_repr'] = generator['calcium_attribute']
 
 generator['calcium_none'] = function () {
   return ['null', 0]
 }
 
-generator['calcium_not'] = generator['calcium_not_ja'] = function (block) {
+generator['calcium_not'] = generator['calcium_not_repr'] = function (block) {
   let value = generator.valueToCode(block, 'VALUE', 0) || 'true'
   value = JSON.parse(generator.removeParens(value))
   return [JSON.stringify(['not', value]), 0]
@@ -394,7 +391,7 @@ generator['calcium_number'] = function (block) {
   return [parseFullWidthNumber(numStr), 0]
 }
 
-generator['calcium_print_ja'] = function (block) {
+generator['calcium_print_repr'] = function (block) {
   let value = generator.valueToCode(block, 'VALUE', 0) || '""'
   value = generator.removeParens(value)
   value = JSON.parse(value)
@@ -419,10 +416,10 @@ generator['calcium_pass'] = function () {
   return JSON.stringify([generator.getIndent(), [], 'pass']) + ','
 }
 
-generator['calcium_relational'] = generator['calcium_relational_ja'] =
+generator['calcium_relational'] = generator['calcium_relational_repr'] =
   generator['calcium_logical']
 
-generator['calcium_return'] = generator['calcium_return_ja'] = function (
+generator['calcium_return'] = generator['calcium_return_repr'] = function (
   block
 ) {
   let value = generator.valueToCode(block, 'VALUE', 0) || 'null'
@@ -430,7 +427,9 @@ generator['calcium_return'] = generator['calcium_return_ja'] = function (
   return JSON.stringify([generator.getIndent(), [], 'return', value]) + ','
 }
 
-generator['calcium_slice'] = generator['calcium_slice_ja'] = function (block) {
+generator['calcium_slice'] = generator['calcium_slice_repr'] = function (
+  block
+) {
   let start = generator.valueToCode(block, 'START', 0) || 'null'
   start = JSON.parse(generator.removeParens(start))
   let end = generator.valueToCode(block, 'END', 0) || 'null'
@@ -439,34 +438,35 @@ generator['calcium_slice'] = generator['calcium_slice_ja'] = function (block) {
   return [code, 0]
 }
 
-generator['calcium_str'] = generator['calcium_str_ja'] = function (block) {
+generator['calcium_str'] = generator['calcium_str_repr'] = function (block) {
   let str = block.getField('STR').getText() || ''
   return [generator.quote_(str), 0]
 }
 
-generator['calcium_subscript'] = generator['calcium_subscript_ja'] = function (
+generator['calcium_subscript'] = generator['calcium_subscript_repr'] =
+  function (block) {
+    let ref = generator.valueToCode(block, 'REF', 0) || `["var", "s"]`
+    ref = JSON.parse(generator.removeParens(ref))
+
+    let sub = generator.valueToCode(block, 'SUB', 0) || '0'
+    sub = JSON.parse(generator.removeParens(sub))
+    if (sub instanceof Array && sub[0] === 'slice') {
+      const start = sub[1]
+      const end = sub[2]
+      const code = JSON.stringify(['sub', ref, start, end])
+      return [code, 0]
+    } else {
+      const code = JSON.stringify(['sub', ref, sub])
+      return [code, 0]
+    }
+  }
+
+generator['calcium_variable'] = generator['calcium_variable_repr'] =
+  generator['calcium_class_repr']
+
+generator['calcium_while'] = generator['calcium_while_repr'] = function (
   block
 ) {
-  let ref = generator.valueToCode(block, 'REF', 0) || `["var", "s"]`
-  ref = JSON.parse(generator.removeParens(ref))
-
-  let sub = generator.valueToCode(block, 'SUB', 0) || '0'
-  sub = JSON.parse(generator.removeParens(sub))
-  if (sub instanceof Array && sub[0] === 'slice') {
-    const start = sub[1]
-    const end = sub[2]
-    const code = JSON.stringify(['sub', ref, start, end])
-    return [code, 0]
-  } else {
-    const code = JSON.stringify(['sub', ref, sub])
-    return [code, 0]
-  }
-}
-
-generator['calcium_variable'] = generator['calcium_variable_ja'] =
-  generator['calcium_class_ja']
-
-generator['calcium_while'] = generator['calcium_while_ja'] = function (block) {
   let condition = generator.valueToCode(block, 'COND', 0) || 'false'
   condition = JSON.parse(generator.removeParens(condition))
 
