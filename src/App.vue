@@ -133,6 +133,9 @@ print()
       a.click()
     },
   },
+  created() {
+    document.title = Blockly.Msg.CALCIUM_UI_APP_TITLE
+  },
   mounted() {
     workspace = Blockly.inject(this.$refs['div-workspace'], {
       move: {
