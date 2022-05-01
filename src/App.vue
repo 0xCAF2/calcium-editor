@@ -45,13 +45,14 @@
 
 <script lang>
 import * as Blockly from 'blockly/core'
-import * as Ja from 'blockly/msg/ja'
+import * as Lang from 'blockly/msg/ja'
+import './ja'
 import DarkTheme from '@blockly/theme-dark'
-import definition from './definition'
+import definition from './definition_ja'
 import generator from './generator'
 import { defineComponent } from 'vue'
 
-Blockly.setLocale(Ja)
+Blockly.setLocale(Lang)
 
 let workspace = null
 

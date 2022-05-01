@@ -468,8 +468,8 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_add_ja',
-    message0: '%1 に %2 をたす',
+    type: 'calcium_add_repr',
+    message0: '%{BKY_CALCIUM_ADD_TITLE}',
     args0: [
       {
         type: 'input_value',
@@ -503,7 +503,7 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_arithmetic_ja',
+    type: 'calcium_arithmetic_repr',
     message0: '%1 %2 %3',
     args0: [
       {
@@ -523,13 +523,13 @@ Blockly.defineBlocksWithJsonArray([
         type: 'field_dropdown',
         name: 'OP',
         options: [
-          ['たす', '+'],
-          ['ひく', '-'],
-          ['かける', '*'],
-          ['わる（整数）', '//'],
-          ['わる', '/'],
-          ['べき乗', '**'],
-          ['わったあまり', '%'],
+          ['%{BKY_CALCIUM_ARITHMETIC_ADD}', '+'],
+          ['%{BKY_CALCIUM_ARITHMETIC_SUBTRACT}', '-'],
+          ['%{BKY_CALCIUM_ARITHMETIC_MULTIPLICATE}', '*'],
+          ['%{BKY_CALCIUM_ARITHMETIC_FLOOR_DIVIDE}', '//'],
+          ['%{BKY_CALCIUM_ARITHMETIC_DIVIDE}', '/'],
+          ['%{BKY_CALCIUM_ARITHMETIC_EXPONENTIATE}', '**'],
+          ['%{BKY_CALCIUM_ARITHMETIC_REMAIN}', '%'],
         ],
       },
       {
@@ -553,8 +553,8 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_assign_ja',
-    message0: '%1 を %2 にする',
+    type: 'calcium_assign_repr',
+    message0: '%{BKY_CALCIUM_ASSIGN_TITLE}',
     args0: [
       {
         type: 'input_value',
@@ -574,8 +574,8 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_attribute_ja',
-    message0: '%1 の属性 %2',
+    type: 'calcium_attribute_repr',
+    message0: '%{BKY_CALCIUM_ATTRIBUTE_TITLE}',
     args0: [
       {
         type: 'input_value',
@@ -682,15 +682,15 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_boolean_ja',
+    type: 'calcium_boolean_repr',
     message0: '%1',
     args0: [
       {
         type: 'field_dropdown',
         name: 'VALUE',
         options: [
-          ['はい', 'true'],
-          ['いいえ', 'false'],
+          ['%{BKY_CALCIUM_BOOLEAN_TRUE}', 'true'],
+          ['%{BKY_CALCIUM_BOOLEAN_FALSE}', 'false'],
         ],
       },
     ],
@@ -700,15 +700,15 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_break_continue_ja',
+    type: 'calcium_break_continue_repr',
     message0: '%1',
     args0: [
       {
         type: 'field_dropdown',
         name: 'FLOW',
         options: [
-          ['ループを終了する', 'break'],
-          ['次のループへ進む', 'continue'],
+          ['%{BKY_CALCIUM_BREAK}', 'break'],
+          ['%{BKY_CALCIUM_CONTINUE}', 'continue'],
         ],
       },
     ],
@@ -718,7 +718,7 @@ Blockly.defineBlocksWithJsonArray([
   },
   {
     type: 'calcium_call_arg',
-    message0: '引数',
+    message0: '%{BKY_CALCIUM_CALL_ARG_TITLE}',
     inputsInline: true,
     previousStatement: null,
     nextStatement: null,
@@ -759,8 +759,8 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_class_ja',
-    message0: '%1 クラス',
+    type: 'calcium_class_repr',
+    message0: '%{BKY_CALCIUM_CLASS_TITLE}',
     args0: [
       {
         type: 'field_input',
@@ -775,8 +775,8 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_class_def_ja',
-    message0: 'クラス %1 を定義 %2 スーパークラスは %3 %4',
+    type: 'calcium_class_def_repr',
+    message0: '%{BKY_CALCIUM_CLASS_DEF_TITLE}',
     args0: [
       {
         type: 'field_input',
@@ -805,30 +805,13 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_def_param_ja',
-    message0: '引数 %1',
+    type: 'calcium_def_param',
+    message0: '%{BKY_CALCIUM_DEF_PARAM_TITLE}',
     args0: [
       {
         type: 'field_input',
         name: 'PARAM',
         text: 'a',
-      },
-    ],
-    inputsInline: true,
-    previousStatement: null,
-    nextStatement: null,
-    colour: 120,
-    tooltip: '',
-    helpUrl: '',
-  },
-  {
-    type: 'calcium_def_param',
-    message0: '引数名 %1',
-    args0: [
-      {
-        type: 'field_input',
-        name: 'PARAM',
-        text: 'param',
       },
     ],
     inputsInline: true,
@@ -852,16 +835,16 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_dict_ja',
-    message0: '辞書を作る',
+    type: 'calcium_dict_repr',
+    message0: '%{BKY_CALCIUM_DICT_TITLE}',
     output: 'calcium_dict',
     colour: 120,
     tooltip: '',
     helpUrl: '',
   },
   {
-    type: 'calcium_for_ja',
-    message0: '%1 に %2 から取り出して %3 くりかえす %4',
+    type: 'calcium_for_repr',
+    message0: '%{BKY_CALCIUM_FOR_TITLE}',
     args0: [
       {
         type: 'input_value',
@@ -896,8 +879,8 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_for_range_ja',
-    message0: '%1 を %2 から %3 まで %4 ずつ %5 くりかえす %6',
+    type: 'calcium_for_range_repr',
+    message0: '%{BKY_CALCIUM_FOR_RANGE_TITLE}',
     args0: [
       {
         type: 'input_value',
@@ -953,8 +936,8 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_function_ja',
-    message0: '関数 %1',
+    type: 'calcium_function_repr',
+    message0: '%{BKY_CALCIUM_FUNCTION_TITLE}',
     args0: [
       {
         type: 'field_input',
@@ -969,8 +952,8 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_import_ja',
-    message0: '%1 を使う',
+    type: 'calcium_import_repr',
+    message0: '%{BKY_CALCIUM_IMPORT_TITLE}',
     args0: [
       {
         type: 'field_input',
@@ -987,7 +970,7 @@ Blockly.defineBlocksWithJsonArray([
   },
   {
     type: 'calcium_list_item',
-    message0: 'リストの要素',
+    message0: '%{BKY_CALCIUM_LIST_ITEM_TITLE}',
     inputsInline: true,
     previousStatement: null,
     nextStatement: null,
@@ -1009,7 +992,7 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_logical_ja',
+    type: 'calcium_logical_repr',
     message0: '%1 %2 %3',
     args0: [
       {
@@ -1027,8 +1010,8 @@ Blockly.defineBlocksWithJsonArray([
         type: 'field_dropdown',
         name: 'OP',
         options: [
-          ['かつ', 'and'],
-          ['または', 'or'],
+          ['%{BKY_CALCIUM_LOGICAL_AND}', 'and'],
+          ['%{BKY_CALCIUM_LOGICAL_OR}', 'or'],
         ],
       },
       {
@@ -1044,8 +1027,8 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_method_ja',
-    message0: '%1 の %2 メソッド',
+    type: 'calcium_method_repr',
+    message0: '%{BKY_CALCIUM_METHOD_TITLE}',
     args0: [
       {
         type: 'input_value',
@@ -1095,8 +1078,8 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_not_ja',
-    message0: '%1 でない',
+    type: 'calcium_not_repr',
+    message0: '%{BKY_CALCIUM_NOT_TITLE}',
     args0: [
       {
         type: 'input_value',
@@ -1117,7 +1100,7 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_relational_ja',
+    type: 'calcium_relational_repr',
     message0: '%1 %2 %3',
     args0: [
       {
@@ -1137,14 +1120,14 @@ Blockly.defineBlocksWithJsonArray([
         type: 'field_dropdown',
         name: 'OP',
         options: [
-          ['==', '=='],
-          ['!=', '!='],
-          ['<', '<'],
-          ['<=', '<='],
-          ['>', '>'],
-          ['>=', '>='],
-          ['in', 'in'],
-          ['not in', 'not in'],
+          ['%{BKY_CALCIUM_RELATIONAL_EQUAL}', '=='],
+          ['%{BKY_CALCIUM_RELATIONAL_NOT_EQUAL}', '!='],
+          ['%{BKY_CALCIUM_RELATIONAL_LESS_THAN}', '<'],
+          ['%{BKY_CALCIUM_RELATIONAL_LESS_THAN_OR_EQUAL}', '<='],
+          ['%{BKY_CALCIUM_RELATIONAL_GREATER_THAN}', '>'],
+          ['%{BKY_CALCIUM_RELATIONAL_GREATER_THAN_OR_EQUAL}', '>='],
+          ['%{BKY_CALCIUM_RELATIONAL_IN}', 'in'],
+          ['%{BKY_CALCIUM_RELATIONAL_NOT_IN}', 'not in'],
         ],
       },
       {
@@ -1221,8 +1204,8 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_return_ja',
-    message0: '%1 を返して、関数を終了',
+    type: 'calcium_return_repr',
+    message0: '%{BKY_CALCIUM_RETURN_TITLE}',
     args0: [
       {
         type: 'input_value',
@@ -1235,8 +1218,8 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_slice_ja',
-    message0: 'スライス %1 : %2',
+    type: 'calcium_slice_repr',
+    message0: '%{BKY_CALCIUM_SLICE_TITLE}',
     args0: [
       {
         type: 'input_value',
@@ -1270,8 +1253,8 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_str_ja',
-    message0: '文字列 %1',
+    type: 'calcium_str_repr',
+    message0: '%{BKY_CALCIUM_STR_TITLE}',
     args0: [
       {
         type: 'field_input',
@@ -1286,8 +1269,8 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_subscript_ja',
-    message0: '%1 の要素 [ %2 ]',
+    type: 'calcium_subscript_repr',
+    message0: '%{BKY_CALCIUM_SUBSCRIPT_TITLE}',
     args0: [
       {
         type: 'input_value',
@@ -1313,8 +1296,8 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_variable_ja',
-    message0: '変数 %1',
+    type: 'calcium_variable_repr',
+    message0: '%{BKY_CALCIUM_VARIABLE_TITLE}',
     args0: [
       {
         type: 'field_input',
@@ -1329,8 +1312,8 @@ Blockly.defineBlocksWithJsonArray([
     helpUrl: '',
   },
   {
-    type: 'calcium_while_ja',
-    message0: '%1 の間 %2 くりかえす %3',
+    type: 'calcium_while_repr',
+    message0: '%{BKY_CALCIUM_WHILE_TITLE}',
     args0: [
       {
         type: 'input_value',
@@ -1368,23 +1351,23 @@ export default [
     contents: [
       {
         kind: 'block',
-        type: 'calcium_variable_ja',
+        type: 'calcium_variable_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_attribute_ja',
+        type: 'calcium_attribute_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_subscript_ja',
+        type: 'calcium_subscript_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_slice_ja',
+        type: 'calcium_slice_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_arithmetic_ja',
+        type: 'calcium_arithmetic_repr',
       },
       {
         kind: 'block',
@@ -1392,31 +1375,27 @@ export default [
       },
       {
         kind: 'block',
-        type: 'calcium_str_ja',
+        type: 'calcium_str_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_list_ja',
+        type: 'calcium_list_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_dict_ja',
+        type: 'calcium_dict_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_assign_ja',
+        type: 'calcium_assign_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_print_ja',
+        type: 'calcium_print_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_add_ja',
-      },
-      {
-        kind: 'block',
-        type: 'calcium_import_ja',
+        type: 'calcium_import_repr',
       },
     ],
   },
@@ -1426,23 +1405,23 @@ export default [
     contents: [
       {
         kind: 'block',
-        type: 'calcium_relational_ja',
+        type: 'calcium_relational_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_logical_ja',
+        type: 'calcium_logical_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_not_ja',
+        type: 'calcium_not_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_boolean_ja',
+        type: 'calcium_boolean_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_if_ja',
+        type: 'calcium_if_repr',
       },
     ],
   },
@@ -1452,19 +1431,19 @@ export default [
     contents: [
       {
         kind: 'block',
-        type: 'calcium_for_range_ja',
+        type: 'calcium_for_range_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_for_ja',
+        type: 'calcium_for_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_while_ja',
+        type: 'calcium_while_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_break_continue_ja',
+        type: 'calcium_break_continue_repr',
       },
     ],
   },
@@ -1474,31 +1453,31 @@ export default [
     contents: [
       {
         kind: 'block',
-        type: 'calcium_function_ja',
+        type: 'calcium_function_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_method_ja',
+        type: 'calcium_method_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_call_ja',
+        type: 'calcium_call_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_callnoreturn_ja',
+        type: 'calcium_callnoreturn_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_callreturn_ja',
+        type: 'calcium_callreturn_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_def_ja',
+        type: 'calcium_def_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_return_ja',
+        type: 'calcium_return_repr',
       },
     ],
   },
@@ -1508,15 +1487,15 @@ export default [
     contents: [
       {
         kind: 'block',
-        type: 'calcium_class_ja',
+        type: 'calcium_class_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_class_def_ja',
+        type: 'calcium_class_def_repr',
       },
       {
         kind: 'block',
-        type: 'calcium_defmethod_ja',
+        type: 'calcium_defmethod_repr',
       },
     ],
   },
@@ -2269,10 +2248,10 @@ Blockly.Blocks['calcium_list'] = {
   },
 }
 
-Blockly.Blocks['calcium_call_ja'] = {
+Blockly.Blocks['calcium_call_repr'] = {
   init() {
     this.jsonInit({
-      type: 'calcium_call_ja',
+      type: 'calcium_call_repr',
       message0: '%1 を呼び出す',
       args0: [
         {
@@ -2367,10 +2346,10 @@ Blockly.Blocks['calcium_call_ja'] = {
   },
 }
 
-Blockly.Blocks['calcium_callnoreturn_ja'] = {
+Blockly.Blocks['calcium_callnoreturn_repr'] = {
   init() {
     this.jsonInit({
-      type: 'calcium_callnoreturn_ja',
+      type: 'calcium_callnoreturn_repr',
       message0: '%1 を呼び出す',
       args0: [
         {
@@ -2464,10 +2443,10 @@ Blockly.Blocks['calcium_callnoreturn_ja'] = {
   },
 }
 
-Blockly.Blocks['calcium_callreturn_ja'] = {
+Blockly.Blocks['calcium_callreturn_repr'] = {
   init: function () {
     this.jsonInit({
-      type: 'calcium_callreturn_ja',
+      type: 'calcium_callreturn_repr',
       message0: '%1 = %2 を呼び出す',
       args0: [
         {
@@ -2503,18 +2482,18 @@ Blockly.Blocks['calcium_callreturn_ja'] = {
     this.updateShape()
     this.setMutator(new Blockly.Mutator(['calcium_call_arg']))
   },
-  compose: Blockly.Blocks['calcium_callnoreturn_ja'].compose,
-  decompose: Blockly.Blocks['calcium_callnoreturn_ja'].decompose,
-  loadExtraState: Blockly.Blocks['calcium_callnoreturn_ja'].loadExtraState,
-  saveExtraState: Blockly.Blocks['calcium_callnoreturn_ja'].saveExtraState,
-  saveConnections: Blockly.Blocks['calcium_callnoreturn_ja'].saveConnections,
-  updateShape: Blockly.Blocks['calcium_callnoreturn_ja'].updateShape,
+  compose: Blockly.Blocks['calcium_callnoreturn_repr'].compose,
+  decompose: Blockly.Blocks['calcium_callnoreturn_repr'].decompose,
+  loadExtraState: Blockly.Blocks['calcium_callnoreturn_repr'].loadExtraState,
+  saveExtraState: Blockly.Blocks['calcium_callnoreturn_repr'].saveExtraState,
+  saveConnections: Blockly.Blocks['calcium_callnoreturn_repr'].saveConnections,
+  updateShape: Blockly.Blocks['calcium_callnoreturn_repr'].updateShape,
 }
 
-Blockly.Blocks['calcium_def_ja'] = {
+Blockly.Blocks['calcium_def_repr'] = {
   init() {
     this.jsonInit({
-      type: 'calcium_def_ja',
+      type: 'calcium_def_repr',
       message0: '関数 %1 を定義 %2 %3 %4',
       args0: [
         {
@@ -2598,10 +2577,10 @@ Blockly.Blocks['calcium_def_ja'] = {
   },
 }
 
-Blockly.Blocks['calcium_defmethod_ja'] = {
+Blockly.Blocks['calcium_defmethod_repr'] = {
   init() {
     this.jsonInit({
-      type: 'calcium_defmethod_ja',
+      type: 'calcium_defmethod_repr',
       message0: 'メソッド %1 を定義 %2 %3 %4',
       args0: [
         {
@@ -2632,11 +2611,11 @@ Blockly.Blocks['calcium_defmethod_ja'] = {
     this.updateShape()
     this.setMutator(new Blockly.Mutator(['calcium_def_param']))
   },
-  compose: Blockly.Blocks['calcium_def_ja'].compose,
-  decompose: Blockly.Blocks['calcium_def_ja'].decompose,
-  loadExtraState: Blockly.Blocks['calcium_def_ja'].loadExtraState,
-  saveExtraState: Blockly.Blocks['calcium_def_ja'].saveExtraState,
-  saveConnections: Blockly.Blocks['calcium_def_ja'].saveConnections,
+  compose: Blockly.Blocks['calcium_def_repr'].compose,
+  decompose: Blockly.Blocks['calcium_def_repr'].decompose,
+  loadExtraState: Blockly.Blocks['calcium_def_repr'].loadExtraState,
+  saveExtraState: Blockly.Blocks['calcium_def_repr'].saveExtraState,
+  saveConnections: Blockly.Blocks['calcium_def_repr'].saveConnections,
   updateShape() {
     let labelStr = ''
     if (this.countOfParameters > 0) {
@@ -2655,10 +2634,10 @@ Blockly.Blocks['calcium_defmethod_ja'] = {
   },
 }
 
-Blockly.Blocks['calcium_print_ja'] = {
+Blockly.Blocks['calcium_print_repr'] = {
   init() {
     this.jsonInit({
-      type: 'calcium_print_ja',
+      type: 'calcium_print_repr',
       message0: '表示する %1',
       args0: [
         {
@@ -2774,7 +2753,7 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.defineBlocksWithJsonArray([
   {
-    type: 'calcium_if_if_ja',
+    type: 'calcium_if_if_repr',
     message0: 'もし',
     nextStatement: null,
     enableContextMenu: false,
@@ -2782,7 +2761,7 @@ Blockly.defineBlocksWithJsonArray([
     tooltip: '',
   },
   {
-    type: 'calcium_if_elseif_ja',
+    type: 'calcium_if_elseif_repr',
     message0: 'そうでなくて、もし',
     previousStatement: null,
     nextStatement: null,
@@ -2791,7 +2770,7 @@ Blockly.defineBlocksWithJsonArray([
     tooltip: '',
   },
   {
-    type: 'calcium_if_else_ja',
+    type: 'calcium_if_else_repr',
     message0: 'それ以外',
     previousStatement: null,
     enableContextMenu: false,
@@ -2800,12 +2779,12 @@ Blockly.defineBlocksWithJsonArray([
   },
 ])
 
-Blockly.Blocks['calcium_if_ja'] = {
+Blockly.Blocks['calcium_if_repr'] = {
   init: function () {
     this.jsonInit(
       // Block for if/elseif/else condition.
       {
-        type: 'calcium_if_ja',
+        type: 'calcium_if_repr',
         message0: 'もし %1:',
         args0: [
           {
@@ -2836,7 +2815,7 @@ Blockly.Blocks['calcium_if_ja'] = {
       }
     )
     this.setMutator(
-      new Blockly.Mutator(['calcium_if_elseif_ja', 'calcium_if_else_ja'])
+      new Blockly.Mutator(['calcium_if_elseif_repr', 'calcium_if_else_repr'])
     )
   },
   elseifCount_: 0,
@@ -2866,17 +2845,17 @@ Blockly.Blocks['calcium_if_ja'] = {
    * @this {Blockly.Block}
    */
   decompose: function (workspace) {
-    var containerBlock = workspace.newBlock('calcium_if_if_ja')
+    var containerBlock = workspace.newBlock('calcium_if_if_repr')
     containerBlock.initSvg()
     var connection = containerBlock.nextConnection
     for (var i = 1; i <= this.elseifCount_; i++) {
-      var elseifBlock = workspace.newBlock('calcium_if_elseif_ja')
+      var elseifBlock = workspace.newBlock('calcium_if_elseif_repr')
       elseifBlock.initSvg()
       connection.connect(elseifBlock.previousConnection)
       connection = elseifBlock.nextConnection
     }
     if (this.elseCount_) {
-      var elseBlock = workspace.newBlock('calcium_if_else_ja')
+      var elseBlock = workspace.newBlock('calcium_if_else_repr')
       elseBlock.initSvg()
       connection.connect(elseBlock.previousConnection)
     }
@@ -2897,12 +2876,12 @@ Blockly.Blocks['calcium_if_ja'] = {
     var elseStatementConnection = null
     while (clauseBlock && !clauseBlock.isInsertionMarker()) {
       switch (clauseBlock.type) {
-        case 'calcium_if_elseif_ja':
+        case 'calcium_if_elseif_repr':
           this.elseifCount_++
           valueConnections.push(clauseBlock.valueConnection_)
           statementConnections.push(clauseBlock.statementConnection_)
           break
-        case 'calcium_if_else_ja':
+        case 'calcium_if_else_repr':
           this.elseCount_++
           elseStatementConnection = clauseBlock.statementConnection_
           break
@@ -2930,7 +2909,7 @@ Blockly.Blocks['calcium_if_ja'] = {
     var i = 1
     while (clauseBlock) {
       switch (clauseBlock.type) {
-        case 'calcium_if_elseif_ja':
+        case 'calcium_if_elseif_repr':
           var inputIf = this.getInput('IF' + i)
           var inputDo = this.getInput('DO' + i)
           clauseBlock.valueConnection_ =
@@ -2939,7 +2918,7 @@ Blockly.Blocks['calcium_if_ja'] = {
             inputDo && inputDo.connection.targetConnection
           i++
           break
-        case 'calcium_if_else_ja':
+        case 'calcium_if_else_repr':
           var inputDo2 = this.getInput('ELSE')
           clauseBlock.statementConnection_ =
             inputDo2 && inputDo2.connection.targetConnection
@@ -3029,10 +3008,10 @@ Blockly.Blocks['calcium_if_ja'] = {
   },
 }
 
-Blockly.Blocks['calcium_list_ja'] = {
+Blockly.Blocks['calcium_list_repr'] = {
   init: function () {
     this.jsonInit({
-      type: 'calcium_list_ja',
+      type: 'calcium_list_repr',
       message0: 'リストを作る',
       output: 'Array',
       colour: 120,
