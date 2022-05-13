@@ -175,7 +175,8 @@ print()
 #output {
   color: black;
   background-color: white;
-  font-family: Consolas, 'SF Mono', monospace, 'Courier New';
+  font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Mono',
+    Consolas, monospace;
   width: 400px;
   min-height: 200px;
   position: absolute;
@@ -186,7 +187,8 @@ print()
 #error {
   color: red;
   background-color: white;
-  font-family: Consolas, 'SF Mono', monospace, 'Courier New';
+  font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Mono',
+    Consolas, monospace;
   font-size: small;
   width: 400px;
   max-height: 200px;
