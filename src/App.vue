@@ -154,6 +154,10 @@ print()
     })
     this.resize()
     window.addEventListener('resize', this.resize, false)
+    window.addEventListener('beforeunload', function (e) {
+      e.preventDefault()
+      e.returnValue = 'c'
+    })
   },
   watch: {
     running(newValue) {
