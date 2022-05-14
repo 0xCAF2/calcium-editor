@@ -25,7 +25,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     colour: 270,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_ASSIGN_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -55,7 +55,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     colour: 270,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_COMPOUND_ASSIGN_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -105,7 +105,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'calcium_arithmetic',
     colour: 75,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_ARITHMETIC_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -126,7 +126,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'calcium_attribute',
     colour: 75,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_ATTRIBUTE_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -144,6 +144,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     previousStatement: null,
     colour: 270,
+    tooltip: '%{BKY_CALCIUM_BREAK_CONTINUE_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -160,7 +161,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     colour: 270,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_EXPR_STMT_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -190,7 +191,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     colour: 270,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_CLASS_DEF_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -198,7 +199,7 @@ Blockly.defineBlocksWithJsonArray([
     message0: '{ }',
     output: 'calcium_dict',
     colour: 75,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_DICT_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -234,7 +235,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     colour: 270,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_FOR_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -251,7 +252,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     colour: 270,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_IMPORT_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -271,7 +272,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'calcium_kwarg',
     colour: 75,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_KWARG_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -314,7 +315,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'Boolean',
     colour: 75,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_LOGICAL_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -323,7 +324,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     colour: 270,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_PASS_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -337,7 +338,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     previousStatement: null,
     colour: 270,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_RETURN_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -372,7 +373,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'calcium_slice',
     colour: 75,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_SLICE_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -388,7 +389,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'String',
     colour: 75,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_STR_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -417,7 +418,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'calcium_subscript',
     colour: 75,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_SUBSCRIPT_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -433,7 +434,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'calcium_variable',
     colour: 75,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_VARIABLE_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -464,7 +465,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     colour: 270,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_WHILE_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -489,9 +490,6 @@ Blockly.defineBlocksWithJsonArray([
           'Number',
           'String',
           'Array',
-          'Number',
-          'String',
-          'Array',
         ],
       },
     ],
@@ -499,7 +497,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     colour: 240,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_ADD_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -549,7 +547,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'calcium_arithmetic',
     colour: 120,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_ARITHMETIC_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -570,7 +568,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     colour: 240,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_ASSIGN_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -591,7 +589,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'calcium_attribute',
     colour: 195,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_ATTRIBUTE_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -637,7 +635,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'Number',
     colour: 75,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_BITWISE_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -660,7 +658,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'Number',
     colour: 75,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_BITWISE_NOT_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -678,7 +676,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     output: 'Boolean',
     colour: 75,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_BOOLEAN_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -696,7 +694,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     output: 'Boolean',
     colour: 120,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_BOOLEAN_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -714,6 +712,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     previousStatement: null,
     colour: 240,
+    tooltip: '%{BKY_CALCIUM_BREAK_CONTINUE_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -723,7 +722,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     colour: 120,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_CALL_ARG_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -755,7 +754,7 @@ Blockly.defineBlocksWithJsonArray([
     output: 'calcium_comma',
     inputsInline: true,
     colour: 75,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_COMMA_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -771,7 +770,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'calcium_class',
     colour: 195,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_CLASS_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -801,7 +800,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     colour: 240,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_CLASS_DEF_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -818,7 +817,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     colour: 120,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_DEF_PARAM_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -839,7 +838,7 @@ Blockly.defineBlocksWithJsonArray([
     message0: '%{BKY_CALCIUM_DICT_TITLE}',
     output: 'calcium_dict',
     colour: 120,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_DICT_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -875,7 +874,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     colour: 240,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_FOR_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -932,7 +931,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     colour: 240,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_FOR_RANGE_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -948,7 +947,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'calcium_function',
     colour: 195,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_FUNCTION_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -965,7 +964,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     colour: 240,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_IMPORT_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -975,7 +974,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     colour: 120,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_LIST_ITEM_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -1023,7 +1022,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'Boolean',
     colour: 120,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_LOGICAL_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -1052,7 +1051,7 @@ Blockly.defineBlocksWithJsonArray([
     message0: 'None',
     output: 'calcium_none',
     colour: 75,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_NONE_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -1074,7 +1073,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'Boolean',
     colour: 75,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_NOT_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -1096,7 +1095,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'Boolean',
     colour: 120,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_NOT_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -1148,7 +1147,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'Boolean',
     colour: 120,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_RELATIONAL_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -1200,7 +1199,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'Boolean',
     colour: 75,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_RELATIONAL_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -1214,7 +1213,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     previousStatement: null,
     colour: 240,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_RETURN_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -1249,7 +1248,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'calcium_slice',
     colour: 195,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_SLICE_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -1265,7 +1264,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'String',
     colour: 120,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_STR_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -1292,7 +1291,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'calcium_subscript',
     colour: 195,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_SUBSCRIPT_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -1308,7 +1307,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'calcium_variable',
     colour: 0,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_VARIABLE_TOOLTIP}',
     helpUrl: '',
   },
   {
@@ -1339,7 +1338,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     colour: 240,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_WHILE_TOOLTIP}',
     helpUrl: '',
   },
 ])
@@ -1662,7 +1661,7 @@ Blockly.Blocks['calcium_call'] = {
 
       output: 'calcium_call',
       colour: 75,
-      tooltip: '',
+      tooltip: '%{BKY_CALCIUM_CALL_TOOLTIP}',
       helpUrl: '',
     })
     this.setInputsInline(true)
@@ -1783,7 +1782,7 @@ Blockly.Blocks['calcium_def'] = {
       previousStatement: null,
       nextStatement: null,
       colour: 270,
-      tooltip: '',
+      tooltip: '%{BKY_CALCIUM_DEF_TOOLTIP}',
       helpUrl: '',
     })
     this.countOfParameters = 0
@@ -1870,7 +1869,7 @@ Blockly.Blocks['calcium_defmethod'] = {
       previousStatement: null,
       nextStatement: null,
       colour: 270,
-      tooltip: '',
+      tooltip: '%{BKY_CALCIUM_DEF_METHOD_TOOLTIP}',
       helpUrl: '',
     })
     this.countOfParameters = 0
@@ -1931,7 +1930,7 @@ Blockly.Blocks['calcium_if'] = {
         previousStatement: null,
         nextStatement: null,
         colour: 270,
-        tooltip: '',
+        tooltip: '%{BKY_CALCIUM_IF_TOOLTIP}',
         helpUrl: '',
       }
     )
@@ -2138,7 +2137,7 @@ Blockly.Blocks['calcium_list'] = {
       message0: '[',
       output: 'Array',
       colour: 75,
-      tooltip: '',
+      tooltip: '%{BKY_CALCIUM_LIST_TOOLTIP}',
       helpUrl: '',
     })
     this.itemCount_ = 0
@@ -2268,7 +2267,7 @@ Blockly.Blocks['calcium_call_repr'] = {
       ],
       output: 'calcium_call',
       colour: 120,
-      tooltip: '',
+      tooltip: '%{BKY_CALCIUM_CALL_TOOLTIP}',
       helpUrl: '',
     })
     this.countOfArguments = 0
@@ -2366,7 +2365,7 @@ Blockly.Blocks['calcium_callnoreturn_repr'] = {
       previousStatement: null,
       nextStatement: null,
       colour: 240,
-      tooltip: '',
+      tooltip: '%{BKY_CALCIUM_CALL_TOOLTIP}',
       helpUrl: '',
     })
     this.countOfArguments = 0
@@ -2475,7 +2474,7 @@ Blockly.Blocks['calcium_callreturn_repr'] = {
       previousStatement: null,
       nextStatement: null,
       colour: 240,
-      tooltip: '',
+      tooltip: '%{BKY_CALCIUM_CALL_RETURN_TOOLTIP}',
       helpUrl: '',
     })
     this.countOfArguments = 0
@@ -2517,7 +2516,7 @@ Blockly.Blocks['calcium_def_repr'] = {
       previousStatement: null,
       nextStatement: null,
       colour: 240,
-      tooltip: '',
+      tooltip: '%{BKY_CALCIUM_DEF_TOOLTIP}',
       helpUrl: '',
     })
     this.countOfParameters = 0
@@ -2606,7 +2605,7 @@ Blockly.Blocks['calcium_defmethod_repr'] = {
       previousStatement: null,
       nextStatement: null,
       colour: 240,
-      tooltip: '',
+      tooltip: '%{BKY_CALCIUM_DEF_METHOD_TOOLTIP}',
       helpUrl: '',
     })
     this.countOfParameters = 0
@@ -2653,7 +2652,7 @@ Blockly.Blocks['calcium_print_repr'] = {
       previousStatement: null,
       nextStatement: null,
       colour: 240,
-      tooltip: '',
+      tooltip: '%{BKY_CALCIUM_PRINT_TOOLTIP}',
       helpUrl: '',
     })
     this.countOfParameters = 0
@@ -2734,7 +2733,7 @@ Blockly.defineBlocksWithJsonArray([
     nextStatement: null,
     enableContextMenu: false,
     colour: 270,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_IF_IF_TOOLTIP}',
   },
   {
     type: 'calcium_if_elseif',
@@ -2743,7 +2742,7 @@ Blockly.defineBlocksWithJsonArray([
     nextStatement: null,
     enableContextMenu: false,
     colour: 270,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_IF_ELSEIF_TOOLTIP}',
   },
   {
     type: 'calcium_if_else',
@@ -2751,7 +2750,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     enableContextMenu: false,
     colour: 270,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_IF_ELSE_TOOLTIP}',
   },
 ])
 
@@ -2762,7 +2761,7 @@ Blockly.defineBlocksWithJsonArray([
     nextStatement: null,
     enableContextMenu: false,
     colour: 240,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_IF_IF_TOOLTIP}',
   },
   {
     type: 'calcium_if_elseif_repr',
@@ -2771,7 +2770,7 @@ Blockly.defineBlocksWithJsonArray([
     nextStatement: null,
     enableContextMenu: false,
     colour: 240,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_IF_ELSEIF_TOOLTIP}',
   },
   {
     type: 'calcium_if_else_repr',
@@ -2779,7 +2778,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     enableContextMenu: false,
     colour: 240,
-    tooltip: '',
+    tooltip: '%{BKY_CALCIUM_IF_ELSE_TOOLTIP}',
   },
 ])
 
@@ -2814,7 +2813,7 @@ Blockly.Blocks['calcium_if_repr'] = {
         previousStatement: null,
         nextStatement: null,
         colour: 240,
-        tooltip: '',
+        tooltip: '%{BKY_CALCIUM_IF_TOOLTIP}',
         helpUrl: '',
       }
     )
@@ -3021,7 +3020,7 @@ Blockly.Blocks['calcium_list_repr'] = {
       message0: '%{BKY_CALCIUM_LIST_TITLE}',
       output: 'Array',
       colour: 120,
-      tooltip: '',
+      tooltip: '%{BKY_CALCIUM_LIST_TOOLTIP}',
       helpUrl: '',
     })
     this.itemCount_ = 0
@@ -3137,6 +3136,6 @@ Blockly.Blocks['calcium_number'] = {
     this.setInputsInline(true)
     this.setOutput(true, 'Number')
     this.setColour(120)
-    this.setTooltip()
+    this.setTooltip(Blockly.Msg.CALCIUM_NUMBER_TOOLTIP)
   },
 }
