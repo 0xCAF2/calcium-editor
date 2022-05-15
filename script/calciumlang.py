@@ -9,6 +9,24 @@ class Runtime:
         self.breakpoints = set()
         self.parser = Parser()
         self._calls = []
+        self._inputcmd = None
+
+    def resume(self, inputstr):
+        self.env.returned_value = inputstr
+        cmd = self._inputcmd
+        self._inputcmd = None
+        try:
+            cmd.execute(self.env)
+            self.skip_to_next_line()
+        except FunctionCalled:
+            caller_addr = self.env.address.clone()
+            self._calls.append(CallingCommand(caller_addr, cmd))
+        except InputCalled:
+            self._inputcmd = cmd
+            return RESULT_PAUSED
+        except:
+            raise
+        return RESULT_EXECUTED
 
     def run(self):
         while True:
@@ -69,6 +87,9 @@ class Runtime:
                 cmd.execute(self.env)
             except FunctionCalled:
                 self._calls.append(CallingCommand(caller_addr, cmd))
+            except InputCalled:
+                self._inputcmd = cmd
+                return RESULT_PAUSED
             except:
                 raise
 
@@ -222,6 +243,7 @@ RESULT_TERMINATED = 0
 RESULT_EXECUTED = 1
 RESULT_BREAKPOINT = 2
 RESULT_EXCEPTION = 3
+RESULT_PAUSED = 4
 
 # results of the block
 BLOCK_RESULT_JUMPPED = 0
@@ -434,6 +456,23 @@ class Call:
         evaluated_args = [
             env.evaluate(arg) for arg in self.args if not isinstance(arg, KeywordArg)
         ]
+
+        # built-in input function requires runtime to be paused
+        if callee is input:
+            if not self.called:
+                self.called = True
+                if len(evaluated_args) > 0:
+                    env.prompt = evaluated_args[0]
+                    print(env.prompt, end="", flush=True)
+                raise InputCalled()
+            else:
+                if not self.returned:
+                    self.returned = True
+                    self.value = env.returned_value
+                    env.returned_value = None
+                    env.prompt = ""
+                return self.value
+
         if not self.called:
             self.called = True
             self.value = callee(*evaluated_args, **kwargs)
@@ -532,13 +571,16 @@ class UnaryOperation:
 class Environment:
     def __init__(self, code_list):
         self.code = code_list
+        self.address = Address(1, 0)  # (indent, line)
+        self.blocks = []
+        self.callstack = []
+        self.exception = None
+
         self.global_context = GlobalScope(None, {})
         self.context = self.global_context
-        self.address = Address(1, 0)  # (indent, line)
-        self.callstack = []
+
+        self.prompt = ""
         self.returned_value = None
-        self.blocks = []
-        self.exception = None
 
     def evaluate(self, obj):
         if (
@@ -1061,6 +1103,10 @@ class BreakOuterLoop(Exception):
 
 
 class FunctionCalled(Exception):
+    pass
+
+
+class InputCalled(Exception):
     pass
 
 

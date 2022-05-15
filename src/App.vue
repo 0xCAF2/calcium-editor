@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app :color="running ? 'orange' : 'blue'">
+    <v-app-bar app :color="running ? 'orange' : 'blue'" style="z-index: 3000">
       <div class="d-flex align-center">
         <v-switch
           style="width: 200px"
@@ -40,6 +40,24 @@
       </v-container>
       <textarea id="output" v-show="running" readonly>{{ output }}</textarea>
       <textarea id="error" v-show="error" readonly>{{ error }}</textarea>
+      <v-overlay v-model="inputting" z-index="2000" absolute :transition="null">
+        <v-container>
+          <v-row style="height: 100px"></v-row>
+          <v-row justify="center" align="center">
+            <v-col cols="8">
+              <input
+                style="background-color: white; color: black"
+                :placeholder="prompt"
+                v-model="input"
+              />
+            </v-col>
+            <v-col cols="3">
+              <v-btn @click="sendInput">OK</v-btn>
+            </v-col>
+          </v-row>
+          <v-row style="height: 700px"></v-row>
+        </v-container>
+      </v-overlay>
     </v-main>
   </v-app>
 </template>
@@ -62,7 +80,10 @@ export default defineComponent({
   data: () => ({
     debuggerEnabled: false,
     error: '',
+    input: '',
+    inputting: false,
     output: '',
+    prompt: '',
     running: false,
     waiting: false,
   }),
@@ -106,21 +127,26 @@ export default defineComponent({
         const message = event.data
         if (message.startsWith('loaded#')) {
           this.waiting = false
-          this.worker.postMessage(code)
+          this.worker.postMessage(`code#${code}`)
         } else if (message.startsWith('output#')) {
           this.output += message.substring(7)
           this.output += '\n'
         } else if (message.startsWith('error#')) {
           this.error += message.substring(6)
           this.error += '\n'
+        } else if (message.startsWith('input#')) {
+          this.input = ''
+          this.prompt = message.substring(6)
+          this.inputting = true
         }
       }
       const jsonCode = generator.workspaceToCode(workspace)
       const code = `runtime = Runtime('${jsonCode
         .replace(/\n/g, '')
         .replace(/'/g, "\\'")}')
-runtime.run()
-print()
+result = runtime.run()
+print(end='', flush=True)
+result
 `
     },
     save() {
@@ -131,6 +157,12 @@ print()
         encodeURIComponent(JSON.stringify(json))
       a.download = 'code.json'
       a.click()
+    },
+    sendInput() {
+      this.inputting = false
+      this.worker.postMessage(
+        `input#${this.input.replace(/\n/g, '').replace(/'/g, "\\'")}`
+      )
     },
   },
   mounted() {
@@ -165,6 +197,8 @@ print()
       if (newValue) {
         this.output = ''
         this.run()
+      } else {
+        this.inputting = false
       }
       this.error = ''
     },
