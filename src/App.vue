@@ -40,22 +40,23 @@
       </v-container>
       <textarea id="output" v-show="running" readonly>{{ output }}</textarea>
       <textarea id="error" v-show="error" readonly>{{ error }}</textarea>
-      <v-overlay v-model="inputting" z-index="2000" absolute :transition="null">
+      <v-overlay v-model="overlayed" z-index="2000" absolute :transition="null">
         <v-container>
           <v-row style="height: 100px"></v-row>
           <v-row justify="center" align="center">
-            <v-col cols="8">
+            <v-col cols="6">
               <input
-                style="background-color: white; color: black"
+                style="background-color: white; color: black; width: 95%"
                 :placeholder="prompt"
                 v-model="input"
               />
             </v-col>
-            <v-col cols="3">
-              <v-btn @click="sendInput">OK</v-btn>
+            <v-col cols="2">
+              <div style="width: 300px">
+                <v-btn @click="sendInput">OK</v-btn>
+              </div>
             </v-col>
           </v-row>
-          <v-row style="height: 700px"></v-row>
         </v-container>
       </v-overlay>
     </v-main>
@@ -83,6 +84,7 @@ export default defineComponent({
     input: '',
     inputting: false,
     output: '',
+    overlayed: false,
     prompt: '',
     running: false,
     waiting: false,
@@ -138,6 +140,7 @@ export default defineComponent({
           this.input = ''
           this.prompt = message.substring(6)
           this.inputting = true
+          this.overlayed = true
         }
       }
       const jsonCode = generator.workspaceToCode(workspace)
@@ -160,6 +163,7 @@ result
     },
     sendInput() {
       this.inputting = false
+      this.overlayed = false
       this.worker.postMessage(
         `input#${this.input.replace(/\n/g, '').replace(/'/g, "\\'")}`
       )
@@ -202,6 +206,13 @@ result
       }
       this.error = ''
     },
+    overlayed(newValue) {
+      if (this.inputting) {
+        this.overlayed = true
+      } else {
+        this.overlayed = newValue
+      }
+    },
   },
 })
 </script>
@@ -211,7 +222,7 @@ result
   background-color: white;
   font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Mono',
     Consolas, monospace;
-  width: 400px;
+  width: 380px;
   min-height: 200px;
   position: absolute;
   top: 4px;
@@ -224,7 +235,7 @@ result
   font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Mono',
     Consolas, monospace;
   font-size: small;
-  width: 400px;
+  width: 380px;
   max-height: 200px;
   min-height: 200px;
   height: 200px;
