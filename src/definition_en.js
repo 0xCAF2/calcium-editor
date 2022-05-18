@@ -2770,7 +2770,7 @@ Blockly.defineBlocksWithJsonArray([
   },
   {
     type: 'calcium_if_else_repr',
-    message0: '',
+    message0: '%{BKY_CALCIUM_IF_ELSE_TITLE}',
     previousStatement: null,
     enableContextMenu: false,
     colour: 240,
