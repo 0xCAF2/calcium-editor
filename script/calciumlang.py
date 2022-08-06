@@ -1,4 +1,5 @@
 import json
+from inspect import signature
 
 
 class Runtime:
@@ -9,6 +10,24 @@ class Runtime:
         self.breakpoints = set()
         self.parser = Parser()
         self._calls = []
+        self._inputcmd = None
+
+    def resume(self, inputstr):
+        self.env.returned_value = inputstr
+        cmd = self._inputcmd
+        self._inputcmd = None
+        try:
+            cmd.execute(self.env)
+            self.env.skip_to_next_line()
+        except FunctionCalled:
+            caller_addr = self.env.address.clone()
+            self._calls.append(CallingCommand(caller_addr, cmd))
+        except InputCalled:
+            self._inputcmd = cmd
+            return RESULT_PAUSED
+        except:
+            raise
+        return RESULT_EXECUTED
 
     def run(self):
         while True:
@@ -17,35 +36,6 @@ class Runtime:
                 continue
             else:
                 return result
-
-    def skip_to_next_line(self):
-        try:
-            while True:
-                next_line_index = self.env.address.line + 1
-                try:
-                    while True:
-                        next_line = self.env.code[next_line_index]
-                        next_indent = next_line[INDEX_INDENT]
-                        delta = self.env.address.indent - next_indent
-                        if delta >= 0:
-                            for _ in range(delta):
-                                block = self.env.blocks[-1]
-                                result = block.did_exit(self.env)
-                                if result == BLOCK_RESULT_JUMPPED:
-                                    raise BreakInnerLoop()
-                            raise BreakOuterLoop()
-                        else:
-                            next_line_index += 1
-                            continue
-                except BreakInnerLoop:
-                    pass
-                except:
-                    raise
-        except BreakOuterLoop:
-            pass
-        except:
-            raise
-        self.env.address.line = next_line_index
 
     def step(self):
         last_index = len(self.env.code) - 1
@@ -69,19 +59,22 @@ class Runtime:
                 cmd.execute(self.env)
             except FunctionCalled:
                 self._calls.append(CallingCommand(caller_addr, cmd))
+            except InputCalled:
+                self._inputcmd = cmd
+                return RESULT_PAUSED
             except:
                 raise
 
             if isinstance(cmd, End):
                 return RESULT_TERMINATED
 
-            self.skip_to_next_line()
+            self.env.skip_to_next_line()
             next_line = self.env.code[self.env.address.line]
             kw = next_line[INDEX_KEYWORD]
             while kw == KEYWORD_COMMENT or kw == KEYWORD_IFS:
                 cmd = self.parser.read(next_line)
                 cmd.execute(self.env)
-                self.skip_to_next_line()
+                self.env.skip_to_next_line()
                 next_line = self.env.code[self.env.address.line]
                 kw = next_line[INDEX_KEYWORD]
 
@@ -222,6 +215,7 @@ RESULT_TERMINATED = 0
 RESULT_EXECUTED = 1
 RESULT_BREAKPOINT = 2
 RESULT_EXCEPTION = 3
+RESULT_PAUSED = 4
 
 # results of the block
 BLOCK_RESULT_JUMPPED = 0
@@ -434,8 +428,29 @@ class Call:
         evaluated_args = [
             env.evaluate(arg) for arg in self.args if not isinstance(arg, KeywordArg)
         ]
+
+        # built-in input function requires runtime to be paused
+        if callee is input:
+            if not self.called:
+                self.called = True
+                if len(evaluated_args) > 0:
+                    env.prompt = evaluated_args[0]
+                raise InputCalled()
+            else:
+                if not self.returned:
+                    self.returned = True
+                    self.value = env.returned_value
+                    env.returned_value = None
+                    env.prompt = ""
+                return self.value
+
         if not self.called:
             self.called = True
+            if callable(callee) and callee.__module__ == __name__:
+                # user defined function
+                sig = signature(callee)
+                if "*args" in str(sig):
+                    kwargs["is_called_by_library"] = False
             self.value = callee(*evaluated_args, **kwargs)
             self.returned = True  # built-ins reach here
             return self.value
@@ -532,13 +547,16 @@ class UnaryOperation:
 class Environment:
     def __init__(self, code_list):
         self.code = code_list
+        self.address = Address(1, 0)  # (indent, line)
+        self.blocks = []
+        self.callstack = []
+        self.exception = None
+
         self.global_context = GlobalScope(None, {})
         self.context = self.global_context
-        self.address = Address(1, 0)  # (indent, line)
-        self.callstack = []
+
+        self.prompt = ""
         self.returned_value = None
-        self.blocks = []
-        self.exception = None
 
     def evaluate(self, obj):
         if (
@@ -560,6 +578,35 @@ class Environment:
             return {self.evaluate(e) for e in obj}
         else:
             return obj.evaluate(self)
+
+    def skip_to_next_line(self):
+        try:
+            while True:
+                next_line_index = self.address.line + 1
+                try:
+                    while True:
+                        next_line = self.code[next_line_index]
+                        next_indent = next_line[INDEX_INDENT]
+                        delta = self.address.indent - next_indent
+                        if delta >= 0:
+                            for _ in range(delta):
+                                block = self.blocks[-1]
+                                result = block.did_exit(self)
+                                if result == BLOCK_RESULT_JUMPPED:
+                                    raise BreakInnerLoop()
+                            raise BreakOuterLoop()
+                        else:
+                            next_line_index += 1
+                            continue
+                except BreakInnerLoop:
+                    pass
+                except:
+                    raise
+        except BreakOuterLoop:
+            pass
+        except:
+            raise
+        self.address.line = next_line_index
 
 
 # commands
@@ -716,7 +763,8 @@ class Def:
         is_classscope = isinstance(env.context, ClassScope)
         is_init = self.name == "__init__" and is_classscope
 
-        def _func(*args):
+        def _func(*args, is_called_by_library=True):
+            # could be called by standard libraries
             caller_addr = env.address.clone()
             local = FuncScope(
                 nesting_scope,
@@ -730,6 +778,8 @@ class Def:
                 env.context = local
                 return True
 
+            has_exited = False
+
             def exit(env):
                 env.address.jump(caller_addr)
                 env.address.calls -= 1
@@ -737,11 +787,35 @@ class Def:
                 if is_init:
                     env.returned_value = env.context.lookup("self")
                 env.context = env.callstack.pop()
+                nonlocal has_exited
+                has_exited = True
                 return BLOCK_RESULT_JUMPPED
 
             block = Block(BLOCK_KIND_CALL, callee_addr, enter, exit)
             block.will_enter(env)
-            raise FunctionCalled()
+            if not is_called_by_library:
+                raise FunctionCalled()
+            else:
+                parser = Parser()
+                while not has_exited:
+                    env.skip_to_next_line()
+                    last_index = len(env.code) - 1
+                    if env.address.indent == 0:
+                        end_of_code = parser.read(env.code[last_index])
+                        if not isinstance(end_of_code, End):
+                            raise InvalidEnd()
+                        break
+                    else:
+                        if env.address.line >= last_index:
+                            break
+                    line = env.code[env.address.line]
+                    cmd = parser.read(line)
+                    cmd.execute(env)
+
+                env.skip_to_next_line()
+                value = env.returned_value
+                env.returned_value = None
+                return value
 
         env.context.register(self.name, _func)
 
@@ -1061,6 +1135,10 @@ class BreakOuterLoop(Exception):
 
 
 class FunctionCalled(Exception):
+    pass
+
+
+class InputCalled(Exception):
     pass
 
 
