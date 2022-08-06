@@ -56,17 +56,20 @@
         <v-container>
           <v-row style="height: 100px"></v-row>
           <v-row justify="center" align="center">
-            <v-col cols="6">
+            <v-col cols="8">
               <input
-                style="background-color: white; color: black; width: 95%"
+                style="
+                  background-color: white;
+                  color: black;
+                  width: 400px;
+                  max-width: 95%;
+                "
                 :placeholder="prompt"
                 v-model="input"
               />
             </v-col>
-            <v-col cols="2">
-              <div style="width: 300px">
-                <v-btn @click="sendInput">OK</v-btn>
-              </div>
+            <v-col cols="4">
+              <v-btn @click="sendInput">OK</v-btn>
             </v-col>
           </v-row>
         </v-container>
@@ -135,13 +138,13 @@ export default defineComponent({
         const message = event.data
         if (message.loaded) {
           this.waiting = false
-        } else if (message.output) {
+        } else if (message.output || message.output === '') {
           this.output += message.output
           this.output += '\n'
         } else if (message.error) {
           this.error += message.error
           this.error += '\n'
-        } else if (message.input) {
+        } else if (message.input || message.input === '') {
           this.input = ''
           this.prompt = message.input
           this.inputting = true
@@ -162,7 +165,6 @@ export default defineComponent({
         .replace(/'/g, "\\'")}')
 result = runtime.run()
 print(end='', flush=True)
-del runtime
 result
 `
       this.worker.postMessage({ code })
@@ -238,11 +240,13 @@ result
   font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Mono',
     Consolas, monospace;
   width: 380px;
+  max-width: 95%;
   min-height: 200px;
   position: absolute;
   top: 4px;
   right: 4px;
   z-index: 1000;
+  padding: 4px;
 }
 #error {
   color: red;
@@ -251,9 +255,8 @@ result
     Consolas, monospace;
   font-size: small;
   width: 380px;
-  max-height: 200px;
+  max-width: 95%;
   min-height: 200px;
-  height: 200px;
   position: absolute;
   bottom: 4px;
   right: 4px;
