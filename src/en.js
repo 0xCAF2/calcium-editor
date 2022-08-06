@@ -138,7 +138,8 @@ Blockly.Msg.CALCIUM_SUBSCRIPT_TITLE = "%1 's element [ %2 ]"
 Blockly.Msg.CALCIUM_SUBSCRIPT_TOOLTIP = 'Accesses the element of the data.'
 
 Blockly.Msg.CALCIUM_UI_OPEN = 'Open'
-Blockly.Msg.CALCIUM_UI_RUN = 'Execute Program'
+Blockly.Msg.CALCIUM_UI_RESET = 'Reset Runtime'
+Blockly.Msg.CALCIUM_UI_RUN = 'Run'
 Blockly.Msg.CALCIUM_UI_SAVE = 'Save'
 
 Blockly.Msg.CALCIUM_VARIABLE_TITLE = 'variable %1'

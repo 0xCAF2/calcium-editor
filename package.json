@@ -1,6 +1,6 @@
 {
   "name": "calciumed",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vite preview",
@@ -11,7 +11,7 @@
   "dependencies": {
     "@blockly/theme-dark": "^3.0.8",
     "@mdi/font": "5.9.55",
-    "blockly": "^7.20211209.5",
+    "blockly": "^8.0.4",
     "roboto-fontface": "*",
     "vue": "^3.2.25",
     "vuetify": "^3.0.0-beta.0",

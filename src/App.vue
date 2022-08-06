@@ -3,10 +3,11 @@
     <v-app-bar app :color="running ? 'orange' : 'blue'" style="z-index: 3000">
       <div class="d-flex align-center">
         <v-switch
-          style="width: 200px"
+          style="width: 100px"
           v-model="running"
           color="white"
           hide-details="auto"
+          :disabled="waiting"
         >
           <template #label>
             <span class="text-white py-3"
@@ -14,12 +15,6 @@
             >
           </template>
         </v-switch>
-        <v-progress-circular
-          v-show="running"
-          color="white"
-          :indeterminate="waiting"
-          class="mr-2"
-        ></v-progress-circular>
         <v-btn color="white" @click="save">
           <v-icon dark x-large>mdi-download</v-icon>
           <span>{{ labelForSave }}</span>
@@ -28,6 +23,23 @@
           <v-icon dark x-large>mdi-file-document-outline</v-icon>
           <span>{{ labelForOpen }}</span>
         </v-btn>
+        <v-menu bottom>
+          <template #activator="{ props }">
+            <v-btn icon color="white" v-bind="props" :hidden="waiting">
+              <v-icon>mdi-dots-horizontal</v-icon>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item @click="resetRuntime">
+              <v-list-item-title>{{ labelForReset }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+        <v-progress-circular
+          color="white"
+          :indeterminate="waiting"
+          :hidden="!waiting"
+        ></v-progress-circular>
       </div>
     </v-app-bar>
     <v-main>
@@ -87,18 +99,15 @@ export default defineComponent({
     overlayed: false,
     prompt: '',
     running: false,
-    waiting: false,
+    waiting: true,
   }),
   computed: {
     labelForOpen: () => Blockly.Msg.CALCIUM_UI_OPEN,
+    labelForReset: () => Blockly.Msg.CALCIUM_UI_RESET,
     labelForRun: () => Blockly.Msg.CALCIUM_UI_RUN,
     labelForSave: () => Blockly.Msg.CALCIUM_UI_SAVE,
   },
   methods: {
-    cancel() {
-      this.worker?.terminate()
-      this.worker = null
-    },
     open() {
       const inputFile = document.createElement('input')
       inputFile.type = 'file'
@@ -116,6 +125,30 @@ export default defineComponent({
       })
       inputFile.click()
     },
+    resetRuntime() {
+      this.worker?.terminate()
+      this.worker = null
+      this.running = false
+      this.waiting = true
+      this.worker = new Worker('/script/worker.js')
+      this.worker.onmessage = (event) => {
+        const message = event.data
+        if (message.loaded) {
+          this.waiting = false
+        } else if (message.output) {
+          this.output += message.output
+          this.output += '\n'
+        } else if (message.error) {
+          this.error += message.error
+          this.error += '\n'
+        } else if (message.input) {
+          this.input = ''
+          this.prompt = message.input
+          this.inputting = true
+          this.overlayed = true
+        }
+      }
+    },
     resize() {
       const divWorkspace = this.$refs['div-workspace']
       divWorkspace.style.height = window.innerHeight - 80 + 'px'
@@ -123,34 +156,16 @@ export default defineComponent({
       Blockly.svgResize(workspace)
     },
     run() {
-      this.cancel()
-      this.worker = new Worker('/script/worker.js')
-      this.worker.onmessage = (event) => {
-        const message = event.data
-        if (message.startsWith('loaded#')) {
-          this.waiting = false
-          this.worker.postMessage(`code#${code}`)
-        } else if (message.startsWith('output#')) {
-          this.output += message.substring(7)
-          this.output += '\n'
-        } else if (message.startsWith('error#')) {
-          this.error += message.substring(6)
-          this.error += '\n'
-        } else if (message.startsWith('input#')) {
-          this.input = ''
-          this.prompt = message.substring(6)
-          this.inputting = true
-          this.overlayed = true
-        }
-      }
       const jsonCode = generator.workspaceToCode(workspace)
       const code = `runtime = Runtime('${jsonCode
         .replace(/\n/g, '')
         .replace(/'/g, "\\'")}')
 result = runtime.run()
 print(end='', flush=True)
+del runtime
 result
 `
+      this.worker.postMessage({ code })
     },
     save() {
       const json = Blockly.serialization.workspaces.save(workspace)
@@ -164,9 +179,9 @@ result
     sendInput() {
       this.inputting = false
       this.overlayed = false
-      this.worker.postMessage(
-        `input#${this.input.replace(/\n/g, '').replace(/'/g, "\\'")}`
-      )
+      this.worker.postMessage({
+        input: this.input.replace(/\n/g, '').replace(/'/g, "\\'"),
+      })
     },
   },
   mounted() {
@@ -194,10 +209,10 @@ result
       e.preventDefault()
       e.returnValue = 'c'
     })
+    this.resetRuntime()
   },
   watch: {
     running(newValue) {
-      this.waiting = newValue
       if (newValue) {
         this.output = ''
         this.run()
