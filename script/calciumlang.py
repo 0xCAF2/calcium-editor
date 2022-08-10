@@ -443,6 +443,15 @@ class Call:
                     env.returned_value = None
                     env.prompt = ""
                 return self.value
+        elif callee is super:
+            if self.called:
+                pass
+            else:
+                this = env.context.lookup("self")
+                klass = this.__class__
+                self.called, self.returned = True, True
+                self.value = super(klass, this)
+            return self.value
 
         if not self.called:
             self.called = True
