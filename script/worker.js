@@ -1,7 +1,7 @@
 const RESULT_EXECUTED = 1
 const RESULT_PAUSED = 4
 
-importScripts('https://cdn.jsdelivr.net/pyodide/v0.20.0/full/pyodide.js')
+importScripts('https://cdn.jsdelivr.net/pyodide/v0.21.3/full/pyodide.js')
 
 let pyodide
 
@@ -9,7 +9,7 @@ let isFirstOutput = true
 
 async function loadPyodideAndPackages() {
   pyodide = await loadPyodide({
-    indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.20.0/full/',
+    indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.21.3/full/',
     stdout: (output) => {
       if (isFirstOutput) {
         isFirstOutput = false

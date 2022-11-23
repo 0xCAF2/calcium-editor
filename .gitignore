@@ -25,3 +25,5 @@ index-template.html
 *.njsproj
 *.sln
 *.sw?
+
+/is1
