@@ -24,7 +24,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     previousStatement: null,
     nextStatement: null,
-    colour: 270,
+    colour: 240,
     tooltip: '%{BKY_CALCIUM_ASSIGN_TOOLTIP}',
     helpUrl: '',
   },
@@ -54,7 +54,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     previousStatement: null,
     nextStatement: null,
-    colour: 270,
+    colour: 240,
     tooltip: '%{BKY_CALCIUM_COMPOUND_ASSIGN_TOOLTIP}',
     helpUrl: '',
   },
@@ -104,7 +104,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     inputsInline: true,
     output: 'calcium_arithmetic',
-    colour: 75,
+    colour: 120,
     tooltip: '%{BKY_CALCIUM_ARITHMETIC_TOOLTIP}',
     helpUrl: '',
   },
@@ -125,7 +125,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     inputsInline: true,
     output: 'calcium_attribute',
-    colour: 75,
+    colour: 120,
     tooltip: '%{BKY_CALCIUM_ATTRIBUTE_TOOLTIP}',
     helpUrl: '',
   },
@@ -143,7 +143,7 @@ Blockly.defineBlocksWithJsonArray([
       },
     ],
     previousStatement: null,
-    colour: 270,
+    colour: 240,
     tooltip: '%{BKY_CALCIUM_BREAK_CONTINUE_TOOLTIP}',
     helpUrl: '',
   },
@@ -160,7 +160,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     previousStatement: null,
     nextStatement: null,
-    colour: 270,
+    colour: 240,
     tooltip: '%{BKY_CALCIUM_EXPR_STMT_TOOLTIP}',
     helpUrl: '',
   },
@@ -190,7 +190,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     previousStatement: null,
     nextStatement: null,
-    colour: 270,
+    colour: 240,
     tooltip: '%{BKY_CALCIUM_CLASS_DEF_TOOLTIP}',
     helpUrl: '',
   },
@@ -198,7 +198,7 @@ Blockly.defineBlocksWithJsonArray([
     type: 'calcium_dict',
     message0: '{ }',
     output: 'calcium_dict',
-    colour: 75,
+    colour: 120,
     tooltip: '%{BKY_CALCIUM_DICT_TOOLTIP}',
     helpUrl: '',
   },
@@ -234,7 +234,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     previousStatement: null,
     nextStatement: null,
-    colour: 270,
+    colour: 240,
     tooltip: '%{BKY_CALCIUM_FOR_TOOLTIP}',
     helpUrl: '',
   },
@@ -251,7 +251,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     previousStatement: null,
     nextStatement: null,
-    colour: 270,
+    colour: 240,
     tooltip: '%{BKY_CALCIUM_IMPORT_TOOLTIP}',
     helpUrl: '',
   },
@@ -271,7 +271,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     inputsInline: true,
     output: 'calcium_kwarg',
-    colour: 75,
+    colour: 120,
     tooltip: '%{BKY_CALCIUM_KWARG_TOOLTIP}',
     helpUrl: '',
   },
@@ -314,7 +314,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     inputsInline: true,
     output: 'Boolean',
-    colour: 75,
+    colour: 120,
     tooltip: '%{BKY_CALCIUM_LOGICAL_TOOLTIP}',
     helpUrl: '',
   },
@@ -323,7 +323,7 @@ Blockly.defineBlocksWithJsonArray([
     message0: 'pass',
     previousStatement: null,
     nextStatement: null,
-    colour: 270,
+    colour: 240,
     tooltip: '%{BKY_CALCIUM_PASS_TOOLTIP}',
     helpUrl: '',
   },
@@ -337,7 +337,7 @@ Blockly.defineBlocksWithJsonArray([
       },
     ],
     previousStatement: null,
-    colour: 270,
+    colour: 240,
     tooltip: '%{BKY_CALCIUM_RETURN_TOOLTIP}',
     helpUrl: '',
   },
@@ -372,7 +372,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     inputsInline: true,
     output: 'calcium_slice',
-    colour: 75,
+    colour: 120,
     tooltip: '%{BKY_CALCIUM_SLICE_TOOLTIP}',
     helpUrl: '',
   },
@@ -388,7 +388,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     inputsInline: true,
     output: 'String',
-    colour: 75,
+    colour: 120,
     tooltip: '%{BKY_CALCIUM_STR_TOOLTIP}',
     helpUrl: '',
   },
@@ -417,7 +417,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     inputsInline: true,
     output: 'calcium_subscript',
-    colour: 75,
+    colour: 120,
     tooltip: '%{BKY_CALCIUM_SUBSCRIPT_TOOLTIP}',
     helpUrl: '',
   },
@@ -433,7 +433,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     inputsInline: true,
     output: 'calcium_variable',
-    colour: 75,
+    colour: 120,
     tooltip: '%{BKY_CALCIUM_VARIABLE_TOOLTIP}',
     helpUrl: '',
   },
@@ -464,7 +464,7 @@ Blockly.defineBlocksWithJsonArray([
     inputsInline: true,
     previousStatement: null,
     nextStatement: null,
-    colour: 270,
+    colour: 240,
     tooltip: '%{BKY_CALCIUM_WHILE_TOOLTIP}',
     helpUrl: '',
   },
@@ -634,7 +634,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     inputsInline: true,
     output: 'Number',
-    colour: 75,
+    colour: 120,
     tooltip: '%{BKY_CALCIUM_BITWISE_TOOLTIP}',
     helpUrl: '',
   },
@@ -657,7 +657,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     inputsInline: true,
     output: 'Number',
-    colour: 75,
+    colour: 120,
     tooltip: '%{BKY_CALCIUM_BITWISE_NOT_TOOLTIP}',
     helpUrl: '',
   },
@@ -675,7 +675,7 @@ Blockly.defineBlocksWithJsonArray([
       },
     ],
     output: 'Boolean',
-    colour: 75,
+    colour: 120,
     tooltip: '%{BKY_CALCIUM_BOOLEAN_TOOLTIP}',
     helpUrl: '',
   },
@@ -753,7 +753,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     output: 'calcium_comma',
     inputsInline: true,
-    colour: 75,
+    colour: 120,
     tooltip: '%{BKY_CALCIUM_COMMA_TOOLTIP}',
     helpUrl: '',
   },
@@ -1050,7 +1050,7 @@ Blockly.defineBlocksWithJsonArray([
     type: 'calcium_none',
     message0: 'None',
     output: 'calcium_none',
-    colour: 75,
+    colour: 120,
     tooltip: '%{BKY_CALCIUM_NONE_TOOLTIP}',
     helpUrl: '',
   },
@@ -1072,7 +1072,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     inputsInline: true,
     output: 'Boolean',
-    colour: 75,
+    colour: 120,
     tooltip: '%{BKY_CALCIUM_NOT_TOOLTIP}',
     helpUrl: '',
   },
@@ -1198,7 +1198,7 @@ Blockly.defineBlocksWithJsonArray([
     ],
     inputsInline: true,
     output: 'Boolean',
-    colour: 75,
+    colour: 120,
     tooltip: '%{BKY_CALCIUM_RELATIONAL_TOOLTIP}',
     helpUrl: '',
   },
@@ -1350,101 +1350,83 @@ export default [
     contents: [
       {
         kind: 'block',
-        type: 'calcium_variable_repr',
+        type: 'pseudo_variable',
       },
       {
         kind: 'block',
-        type: 'calcium_attribute_repr',
+        type: 'pseudo_number',
       },
       {
         kind: 'block',
-        type: 'calcium_subscript_repr',
+        type: 'pseudo_str',
       },
       {
         kind: 'block',
-        type: 'calcium_slice_repr',
+        type: 'pseudo_array',
       },
       {
         kind: 'block',
-        type: 'calcium_arithmetic_repr',
-      },
-      {
-        kind: 'block',
-        type: 'calcium_number',
-      },
-      {
-        kind: 'block',
-        type: 'calcium_str_repr',
-      },
-      {
-        kind: 'block',
-        type: 'calcium_list_repr',
-      },
-      {
-        kind: 'block',
-        type: 'calcium_dict_repr',
-      },
-      {
-        kind: 'block',
-        type: 'calcium_assign_repr',
-      },
-      {
-        kind: 'block',
-        type: 'calcium_print_repr',
-      },
-      {
-        kind: 'block',
-        type: 'calcium_import_repr',
+        type: 'pseudo_array_slice',
       },
     ],
   },
   {
     kind: 'category',
-    name: 'ロジック',
+    name: '代入',
     contents: [
       {
         kind: 'block',
-        type: 'calcium_relational_repr',
+        type: 'pseudo_assign',
       },
       {
         kind: 'block',
-        type: 'calcium_logical_repr',
+        type: 'pseudo_assign_array',
       },
       {
         kind: 'block',
-        type: 'calcium_not_repr',
+        type: 'pseudo_assign_zero',
       },
       {
         kind: 'block',
-        type: 'calcium_boolean_repr',
+        type: 'pseudo_int_input',
       },
       {
         kind: 'block',
-        type: 'calcium_if_repr',
+        type: 'pseudo_str_input',
       },
     ],
   },
   {
     kind: 'category',
-    name: 'ループ',
+    name: '演算',
     contents: [
       {
         kind: 'block',
-        type: 'calcium_for_range_repr',
+        type: 'pseudo_arithmetic',
       },
       {
         kind: 'block',
-        type: 'calcium_for_repr',
+        type: 'pseudo_relational',
       },
       {
         kind: 'block',
-        type: 'calcium_while_repr',
+        type: 'pseudo_logical',
       },
       {
         kind: 'block',
-        type: 'calcium_break_continue_repr',
+        type: 'pseudo_not',
       },
     ],
+  },
+  {
+    kind: 'category',
+    name: '条件分岐',
+    contents: [],
+  },
+  {
+    kind: 'category',
+    name: '繰返し',
+    contents: [],
   },
   {
     kind: 'category',
@@ -1452,49 +1434,7 @@ export default [
     contents: [
       {
         kind: 'block',
-        type: 'calcium_function_repr',
-      },
-      {
-        kind: 'block',
-        type: 'calcium_method_repr',
-      },
-      {
-        kind: 'block',
-        type: 'calcium_call_repr',
-      },
-      {
-        kind: 'block',
-        type: 'calcium_callnoreturn_repr',
-      },
-      {
-        kind: 'block',
-        type: 'calcium_callreturn_repr',
-      },
-      {
-        kind: 'block',
-        type: 'calcium_def_repr',
-      },
-      {
-        kind: 'block',
-        type: 'calcium_return_repr',
-      },
-    ],
-  },
-  {
-    kind: 'category',
-    name: 'クラス',
-    contents: [
-      {
-        kind: 'block',
-        type: 'calcium_class_repr',
-      },
-      {
-        kind: 'block',
-        type: 'calcium_class_def_repr',
-      },
-      {
-        kind: 'block',
-        type: 'calcium_defmethod_repr',
+        type: 'pseudo_len',
       },
     ],
   },
@@ -1660,7 +1600,7 @@ Blockly.Blocks['calcium_call'] = {
       ],
 
       output: 'calcium_call',
-      colour: 75,
+      colour: 120,
       tooltip: '%{BKY_CALCIUM_CALL_TOOLTIP}',
       helpUrl: '',
     })
@@ -1781,7 +1721,7 @@ Blockly.Blocks['calcium_def'] = {
       ],
       previousStatement: null,
       nextStatement: null,
-      colour: 270,
+      colour: 240,
       tooltip: '%{BKY_CALCIUM_DEF_TOOLTIP}',
       helpUrl: '',
     })
@@ -1868,7 +1808,7 @@ Blockly.Blocks['calcium_defmethod'] = {
       ],
       previousStatement: null,
       nextStatement: null,
-      colour: 270,
+      colour: 240,
       tooltip: '%{BKY_CALCIUM_DEF_METHOD_TOOLTIP}',
       helpUrl: '',
     })
@@ -1929,7 +1869,7 @@ Blockly.Blocks['calcium_if'] = {
         ],
         previousStatement: null,
         nextStatement: null,
-        colour: 270,
+        colour: 240,
         tooltip: '%{BKY_CALCIUM_IF_TOOLTIP}',
         helpUrl: '',
       }
@@ -2136,7 +2076,7 @@ Blockly.Blocks['calcium_list'] = {
       type: 'calcium_list',
       message0: '[',
       output: 'Array',
-      colour: 75,
+      colour: 120,
       tooltip: '%{BKY_CALCIUM_LIST_TOOLTIP}',
       helpUrl: '',
     })
@@ -2732,7 +2672,7 @@ Blockly.defineBlocksWithJsonArray([
     message0: 'if',
     nextStatement: null,
     enableContextMenu: false,
-    colour: 270,
+    colour: 240,
     tooltip: '%{BKY_CALCIUM_IF_IF_TOOLTIP}',
   },
   {
@@ -2741,7 +2681,7 @@ Blockly.defineBlocksWithJsonArray([
     previousStatement: null,
     nextStatement: null,
     enableContextMenu: false,
-    colour: 270,
+    colour: 240,
     tooltip: '%{BKY_CALCIUM_IF_ELSEIF_TOOLTIP}',
   },
   {
@@ -2749,7 +2689,7 @@ Blockly.defineBlocksWithJsonArray([
     message0: 'else',
     previousStatement: null,
     enableContextMenu: false,
-    colour: 270,
+    colour: 240,
     tooltip: '%{BKY_CALCIUM_IF_ELSE_TOOLTIP}',
   },
 ])
@@ -3137,5 +3077,551 @@ Blockly.Blocks['calcium_number'] = {
     this.setOutput(true, 'Number')
     this.setColour(120)
     this.setTooltip(Blockly.Msg.CALCIUM_NUMBER_TOOLTIP)
+  },
+}
+
+Blockly.Blocks['pseudo_number'] = {
+  init() {
+    this.appendDummyInput().appendField(
+      new Blockly.FieldTextInput('0', function (newValue) {
+        try {
+          const parsedNum = parseFullWidthNumber(newValue)
+          return parsedNum
+        } catch {
+          return null
+        }
+      }),
+      'NUM'
+    )
+    this.setInputsInline(true)
+    this.setOutput(true, 'Number')
+    this.setColour(0)
+    this.setTooltip(Blockly.Msg.CALCIUM_NUMBER_TOOLTIP)
+  },
+}
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: 'pseudo_arithmetic',
+    message0: '%1 %2 %3',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'LEFT',
+        check: [
+          'calcium_variable',
+          'calcium_attribute',
+          'calcium_subscript',
+          'calcium_call',
+          'calcium_arithmetic',
+          'Number',
+          'String',
+        ],
+      },
+      {
+        type: 'field_dropdown',
+        name: 'OP',
+        options: [
+          ['+', '+'],
+          ['-', '-'],
+          ['*', '*'],
+          ['/', '/'],
+          ['÷', '//'],
+          ['%', '%'],
+          ['**', '**'],
+        ],
+      },
+      {
+        type: 'input_value',
+        name: 'RIGHT',
+        check: [
+          'calcium_variable',
+          'calcium_attribute',
+          'calcium_subscript',
+          'calcium_call',
+          'calcium_arithmetic',
+          'Number',
+          'String',
+        ],
+      },
+    ],
+    inputsInline: true,
+    output: 'calcium_arithmetic',
+    colour: 0,
+    tooltip: '算術演算を実行します。',
+    helpUrl: '',
+  },
+  {
+    type: 'pseudo_array',
+    message0: '%1 [ %2 ]',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'REF',
+        check: ['calcium_variable'],
+      },
+      {
+        type: 'input_value',
+        name: 'SUB',
+        check: ['Number', 'calcium_variable'],
+      },
+    ],
+    inputsInline: true,
+    output: 'calcium_subscript',
+    colour: 0,
+    tooltip: '配列の要素を1つだけ指定します。',
+    helpUrl: '',
+  },
+  {
+    type: 'pseudo_array_slice',
+    message0: '%1 [ %2 , %3 ]',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'REF',
+        check: ['calcium_variable'],
+      },
+      {
+        type: 'input_value',
+        name: 'SUB1',
+        check: ['Number', 'calcium_variable'],
+      },
+      {
+        type: 'input_value',
+        name: 'SUB2',
+        check: ['Number', 'calcium_variable'],
+      },
+    ],
+    inputsInline: true,
+    output: 'calcium_subscript',
+    colour: 0,
+    tooltip: '配列の範囲を決めて、要素を指定します。',
+    helpUrl: '',
+  },
+  {
+    type: 'pseudo_logical',
+    message0: '%1 %2 %3',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'LEFT',
+        check: [
+          'Boolean',
+          'calcium_variable',
+          'calcium_attribute',
+          'calcium_call',
+          'calcium_subscript',
+          'calcium_arithmetic',
+        ],
+      },
+      {
+        type: 'field_dropdown',
+        name: 'OP',
+        options: [
+          ['and', 'and'],
+          ['or', 'or'],
+        ],
+      },
+      {
+        type: 'input_value',
+        name: 'RIGHT',
+        check: [
+          'Boolean',
+          'calcium_variable',
+          'calcium_attribute',
+          'calcium_call',
+          'calcium_subscript',
+          'calcium_arithmetic',
+        ],
+      },
+    ],
+    inputsInline: true,
+    output: 'Boolean',
+    colour: 0,
+    tooltip: '%{BKY_CALCIUM_LOGICAL_TOOLTIP}',
+    helpUrl: '',
+  },
+  {
+    type: 'pseudo_not',
+    message0: 'not %1',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'VALUE',
+        check: [
+          'calcium_variable',
+          'calcium_attribute',
+          'calcium_subscript',
+          'calcium_call',
+          'Boolean',
+        ],
+      },
+    ],
+    inputsInline: true,
+    output: 'Boolean',
+    colour: 0,
+    tooltip: '%{BKY_CALCIUM_NOT_TOOLTIP}',
+    helpUrl: '',
+  },
+  {
+    type: 'pseudo_relational',
+    message0: '%1 %2 %3',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'LEFT',
+        check: [
+          'calcium_variable',
+          'calcium_attribute',
+          'calcium_subscript',
+          'calcium_call',
+          'calcium_arithmetic',
+          'Number',
+          'String',
+        ],
+      },
+      {
+        type: 'field_dropdown',
+        name: 'OP',
+        options: [
+          ['==', '=='],
+          ['!=', '!='],
+          ['<', '<'],
+          ['<=', '<='],
+          ['>', '>'],
+          ['>=', '>='],
+        ],
+      },
+      {
+        type: 'input_value',
+        name: 'RIGHT',
+        check: [
+          'calcium_variable',
+          'calcium_attribute',
+          'calcium_subscript',
+          'calcium_call',
+          'calcium_arithmetic',
+          'Number',
+          'String',
+        ],
+      },
+    ],
+    inputsInline: true,
+    output: 'Boolean',
+    colour: 0,
+    tooltip: '比較演算を実行します。',
+    helpUrl: '',
+  },
+  {
+    type: 'pseudo_variable',
+    message0: '\0 %1 \0',
+    args0: [
+      {
+        type: 'field_input',
+        name: 'NAME',
+        text: 'kazu',
+      },
+    ],
+    inputsInline: true,
+    output: 'calcium_variable',
+    colour: 0,
+    tooltip: '%{BKY_CALCIUM_VARIABLE_TOOLTIP}',
+    helpUrl: '',
+  },
+  {
+    type: 'pseudo_str',
+    message0: '"%1"',
+    args0: [
+      {
+        type: 'field_input',
+        name: 'STR',
+        text: '文字列',
+      },
+    ],
+    inputsInline: true,
+    output: 'String',
+    colour: 0,
+    tooltip: '%{BKY_CALCIUM_STR_TOOLTIP}',
+    helpUrl: '',
+  },
+])
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: 'pseudo_assign',
+    message0: '%1 = %2',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'REF',
+        check: ['calcium_variable', 'calcium_attribute', 'calcium_subscript'],
+      },
+      {
+        type: 'input_value',
+        name: 'VALUE',
+      },
+    ],
+    inputsInline: true,
+    previousStatement: null,
+    nextStatement: null,
+    colour: 210,
+    tooltip: '代入文です。変数などの中身を変更します。',
+    helpUrl: '',
+  },
+  {
+    type: 'pseudo_assign_zero',
+    message0: '%1 のすべての値を0にする',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'REF',
+        check: ['calcium_variable'],
+      },
+    ],
+    inputsInline: true,
+    previousStatement: null,
+    nextStatement: null,
+    colour: 210,
+    tooltip: '配列の要素をすべて0に書き換えます。',
+    helpUrl: '',
+  },
+  {
+    type: 'pseudo_int_input',
+    message0: '%1 =【外部からの入力（数）】',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'REF',
+        check: ['calcium_variable'],
+      },
+    ],
+    inputsInline: true,
+    previousStatement: null,
+    nextStatement: null,
+    colour: 210,
+    tooltip: '数を入力から受け取って、変数に代入します。',
+    helpUrl: '',
+  },
+  {
+    type: 'pseudo_str_input',
+    message0: '%1 =【外部からの入力（文字列）】',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'REF',
+        check: ['calcium_variable'],
+      },
+    ],
+    inputsInline: true,
+    previousStatement: null,
+    nextStatement: null,
+    colour: 210,
+    tooltip: '文字列を入力から受け取って、変数に代入します。',
+    helpUrl: '',
+  },
+  {
+    type: 'pseudo_int',
+    message0: '%1 = 整数( %2 )',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'REF',
+        check: ['calcium_variable', 'calcium_attribute', 'calcium_subscript'],
+      },
+      {
+        type: 'input_value',
+        name: 'INT',
+        check: ['calcium_variable', 'calcium_subscript'],
+      },
+    ],
+    inputsInline: true,
+    previousStatement: null,
+    nextStatement: null,
+    colour: 210,
+    tooltip: '',
+    helpUrl: '',
+  },
+  {
+    type: 'pseudo_len',
+    message0: '%1 = 要素数( %2 )',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'REF',
+        check: ['calcium_variable', 'calcium_attribute', 'calcium_subscript'],
+      },
+      {
+        type: 'input_value',
+        name: 'ARRAY',
+        check: ['calcium_variable'],
+      },
+    ],
+    inputsInline: true,
+    previousStatement: null,
+    nextStatement: null,
+    colour: 210,
+    tooltip: '配列の要素数を返して、変数に代入します。',
+    helpUrl: '',
+  },
+])
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: 'pseudo_assign_array_item',
+    message0: '要素を追加',
+    inputsInline: true,
+    previousStatement: null,
+    nextStatement: null,
+    colour: 210,
+    tooltip: '要素を追加して、配列の大きさを変えます。',
+    helpUrl: '',
+  },
+  {
+    type: 'pseudo_assign_array_item_container',
+    message0: '%1',
+    args0: [
+      {
+        type: 'input_statement',
+        name: 'STACK',
+      },
+    ],
+    colour: 210,
+    tooltip: '',
+    helpUrl: '',
+  },
+])
+
+Blockly.Extensions.registerMutator(
+  'pseudo_assign_array_mutator',
+  {
+    saveExtraState: function () {
+      return {
+        itemCount: this.itemCount_,
+      }
+    },
+
+    loadExtraState: function (state) {
+      this.itemCount_ = state['itemCount']
+      // This is a helper function which adds or removes inputs from the block.
+      this.updateShape_()
+    },
+    /**
+     * Populate the mutator's dialog with this block's components.
+     * @param {!Blockly.Workspace} workspace Mutator's workspace.
+     * @return {!Blockly.Block} Root block in mutator.
+     * @this {Blockly.Block}
+     */
+    decompose: function (workspace) {
+      var containerBlock = workspace.newBlock(
+        'pseudo_assign_array_item_container'
+      )
+      containerBlock.initSvg()
+      var connection = containerBlock.getInput('STACK').connection
+      for (var i = 0; i < this.itemCount_; i++) {
+        var itemBlock = workspace.newBlock('pseudo_assign_array_item')
+        itemBlock.initSvg()
+        connection.connect(itemBlock.previousConnection)
+        connection = itemBlock.nextConnection
+      }
+      return containerBlock
+    },
+    /**
+     * Reconfigure this block based on the mutator dialog's components.
+     * @param {!Blockly.Block} containerBlock Root block in mutator.
+     * @this {Blockly.Block}
+     */
+    compose: function (containerBlock) {
+      var itemBlock = containerBlock.getInputTargetBlock('STACK')
+      // Count number of inputs.
+      var connections = []
+      while (itemBlock && !itemBlock.isInsertionMarker()) {
+        connections.push(itemBlock.valueConnection_)
+        itemBlock =
+          itemBlock.nextConnection && itemBlock.nextConnection.targetBlock()
+      }
+      // Disconnect any children that don't belong.
+      for (var i = 0; i < this.itemCount_; i++) {
+        var connection = this.getInput('ADD' + i).connection.targetConnection
+        if (connection && connections.indexOf(connection) == -1) {
+          connection.disconnect()
+        }
+      }
+      this.itemCount_ = connections.length
+      this.updateShape_()
+      // Reconnect any child blocks.
+      for (i = 0; i < this.itemCount_; i++) {
+        Blockly.Mutator.reconnect(connections[i], this, 'ADD' + i)
+      }
+    },
+    /**
+     * Store pointers to any connected child blocks.
+     * @param {!Blockly.Block} containerBlock Root block in mutator.
+     * @this {Blockly.Block}
+     */
+    saveConnections: function (containerBlock) {
+      var itemBlock = containerBlock.getInputTargetBlock('STACK')
+      var i = 0
+      while (itemBlock) {
+        var input = this.getInput('ADD' + i)
+        itemBlock.valueConnection_ = input && input.connection.targetConnection
+        i++
+        itemBlock =
+          itemBlock.nextConnection && itemBlock.nextConnection.targetBlock()
+      }
+    },
+    /**
+     * Modify this block to have the correct number of inputs.
+     * @private
+     * @this {Blockly.Block}
+     */
+    updateShape_: function () {
+      if (this.getInput(']')) {
+        this.removeInput(']')
+      }
+      let i
+      // Add new inputs.
+      for (i = 0; i < this.itemCount_; i++) {
+        if (!this.getInput('ADD' + i)) {
+          const input = this.appendValueInput('ADD' + i)
+          input.init()
+          if (i !== 0) {
+            input.appendField(',')
+          }
+        }
+      }
+      this.appendDummyInput(']').appendField(']')
+      // Remove deleted inputs.
+      while (this.getInput('ADD' + i)) {
+        this.removeInput('ADD' + i)
+        i++
+      }
+    },
+  },
+  undefined,
+  ['pseudo_assign_array_item']
+)
+
+Blockly.Blocks['pseudo_assign_array'] = {
+  init: function () {
+    this.jsonInit({
+      type: 'pseudo_assign_array',
+      message0: '%1 = [',
+      args0: [
+        {
+          type: 'input_value',
+          name: 'REF',
+          check: ['calcium_variable'],
+        },
+      ],
+      inputsInline: true,
+      previousStatement: null,
+      nextStatement: null,
+      colour: 210,
+      tooltip: '新しい配列を代入します。',
+      helpUrl: '',
+      mutator: 'pseudo_assign_array_mutator',
+    })
+    this.itemCount_ = 6
+    this.updateShape_()
   },
 }
