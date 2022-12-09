@@ -1436,6 +1436,18 @@ export default [
         kind: 'block',
         type: 'pseudo_len',
       },
+      {
+        kind: 'block',
+        type: 'pseudo_int',
+      },
+      {
+        kind: 'block',
+        type: 'pseudo_random',
+      },
+      {
+        kind: 'block',
+        type: 'pseudo_print',
+      },
     ],
   },
   {
@@ -3419,37 +3431,29 @@ Blockly.defineBlocksWithJsonArray([
     tooltip: '文字列を入力から受け取って、変数に代入します。',
     helpUrl: '',
   },
+])
+
+Blockly.defineBlocksWithJsonArray([
   {
     type: 'pseudo_int',
-    message0: '%1 = 整数( %2 )',
+    message0: '整数 ( %1 )',
     args0: [
       {
         type: 'input_value',
-        name: 'REF',
-        check: ['calcium_variable', 'calcium_attribute', 'calcium_subscript'],
-      },
-      {
-        type: 'input_value',
         name: 'INT',
-        check: ['calcium_variable', 'calcium_subscript'],
+        check: ['calcium_variable', 'calcium_subscript', 'calcium_arithmetic'],
       },
     ],
     inputsInline: true,
-    previousStatement: null,
-    nextStatement: null,
-    colour: 210,
-    tooltip: '',
+    output: 'calcium_call',
+    colour: 0,
+    tooltip: '文字列や小数を、整数に変換します。',
     helpUrl: '',
   },
   {
     type: 'pseudo_len',
-    message0: '%1 = 要素数( %2 )',
+    message0: '要素数 ( %1 )',
     args0: [
-      {
-        type: 'input_value',
-        name: 'REF',
-        check: ['calcium_variable', 'calcium_attribute', 'calcium_subscript'],
-      },
       {
         type: 'input_value',
         name: 'ARRAY',
@@ -3457,10 +3461,18 @@ Blockly.defineBlocksWithJsonArray([
       },
     ],
     inputsInline: true,
-    previousStatement: null,
-    nextStatement: null,
-    colour: 210,
-    tooltip: '配列の要素数を返して、変数に代入します。',
+    output: 'calcium_call',
+    colour: 0,
+    tooltip: '配列の要素数を返します。',
+    helpUrl: '',
+  },
+  {
+    type: 'pseudo_random',
+    message0: '乱数 ( \0 )',
+    inputsInline: true,
+    output: 'calcium_call',
+    colour: 0,
+    tooltip: '0 以上 1 未満のランダムな小数を返します。',
     helpUrl: '',
   },
 ])
@@ -3483,6 +3495,29 @@ Blockly.defineBlocksWithJsonArray([
       {
         type: 'input_statement',
         name: 'STACK',
+      },
+    ],
+    colour: 210,
+    tooltip: '',
+    helpUrl: '',
+  },
+  {
+    type: 'pseudo_print_arg',
+    message0: '引数を追加',
+    inputsInline: true,
+    previousStatement: null,
+    nextStatement: null,
+    colour: 210,
+    tooltip: '表示する引数を追加します。',
+    helpUrl: '',
+  },
+  {
+    type: 'pseudo_print_args_container',
+    message0: '%1',
+    args0: [
+      {
+        type: 'input_statement',
+        name: 'ARGS',
       },
     ],
     colour: 210,
@@ -3623,5 +3658,104 @@ Blockly.Blocks['pseudo_assign_array'] = {
     })
     this.itemCount_ = 6
     this.updateShape_()
+  },
+}
+
+Blockly.Extensions.registerMutator(
+  'pseudo_print_mutator',
+  {
+    compose(containerBlock) {
+      let itemBlock = containerBlock.getInputTargetBlock('ARGS')
+      const connections = []
+      while (itemBlock) {
+        connections.push(itemBlock.valueConnection_)
+        itemBlock =
+          itemBlock.nextConnection && itemBlock.nextConnection.targetBlock()
+      }
+      for (let i = 0; i < this.countOfArguments; ++i) {
+        const connection = this.getInput('ARG' + i).connection.targetConnection
+        if (connection && connections.indexOf(connection) === -1) {
+          connection.disconnect()
+        }
+      }
+      this.countOfArguments = connections.length
+      this.updateShape()
+      for (let i = 0; i < this.countOfArguments; ++i) {
+        Blockly.Mutator.reconnect(connections[i], this, 'ARG' + i)
+      }
+    },
+    decompose(workspace) {
+      const containerBlock = workspace.newBlock('pseudo_print_args_container')
+      containerBlock.initSvg()
+      let connection = containerBlock.getInput('ARGS').connection
+      for (let i = 0; i < this.countOfArguments; ++i) {
+        const itemBlock = workspace.newBlock('pseudo_print_arg')
+        itemBlock.initSvg()
+        connection.connect(itemBlock.previousConnection)
+        connection = itemBlock.nextConnection
+      }
+      return containerBlock
+    },
+    saveExtraState: function () {
+      return {
+        countOfArguments: this.countOfArguments,
+      }
+    },
+
+    loadExtraState: function (state) {
+      this.countOfArguments = state['countOfArguments']
+      this.updateShape()
+    },
+    saveConnections: function (containerBlock) {
+      let itemBlock = containerBlock.getInputTargetBlock('ARGS')
+      let i = 0
+      while (itemBlock) {
+        const input = this.getInput('ARG' + i)
+        itemBlock.valueConnection_ = input && input.connection.targetConnection
+        ++i
+        itemBlock =
+          itemBlock.nextConnection && itemBlock.nextConnection.targetBlock()
+      }
+    },
+    updateShape() {
+      if (this.getInput(')')) {
+        this.removeInput(')')
+      }
+      let i
+      for (i = 0; i < this.countOfArguments; ++i) {
+        if (!this.getInput('ARG' + i)) {
+          const input = this.appendValueInput('ARG' + i)
+          input.init()
+          if (i !== 0) {
+            input.appendField(',')
+          }
+        }
+      }
+      this.appendDummyInput(')').appendField(')')
+      while (this.getInput('ARG' + i)) {
+        this.removeInput('ARG' + i)
+        ++i
+      }
+    },
+  },
+  undefined,
+  ['pseudo_print_arg']
+)
+
+Blockly.Blocks['pseudo_print'] = {
+  init() {
+    this.jsonInit({
+      type: 'pseudo_print',
+      message0: '表示する (',
+      inputsInline: true,
+      previousStatement: null,
+      nextStatement: null,
+      colour: 210,
+      tooltip: '画面上に値を表示します。',
+      helpUrl: '',
+      mutator: 'pseudo_print_mutator',
+    })
+    this.countOfArguments = 1
+    this.updateShape()
   },
 }
