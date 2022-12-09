@@ -1421,7 +1421,12 @@ export default [
   {
     kind: 'category',
     name: '条件分岐',
-    contents: [],
+    contents: [
+      {
+        kind: 'block',
+        type: 'pseudo_if',
+      },
+    ],
   },
   {
     kind: 'category',
@@ -3757,5 +3762,267 @@ Blockly.Blocks['pseudo_print'] = {
     })
     this.countOfArguments = 1
     this.updateShape()
+  },
+}
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: 'pseudo_if_if',
+    message0: 'もし',
+    nextStatement: null,
+    enableContextMenu: false,
+    colour: 210,
+    tooltip: '',
+  },
+  {
+    type: 'pseudo_if_elseif',
+    message0: 'そうでなくもし',
+    previousStatement: null,
+    nextStatement: null,
+    enableContextMenu: false,
+    colour: 210,
+    tooltip: '',
+  },
+  {
+    type: 'pseudo_if_else',
+    message0: 'そうでなければ',
+    previousStatement: null,
+    enableContextMenu: false,
+    colour: 210,
+    tooltip: '',
+  },
+])
+
+Blockly.Extensions.registerMutator(
+  'pseudo_if_mutator',
+  {
+    saveExtraState() {
+      return {
+        elseifCount: this.elseifCount_,
+        elseCount: this.elseCount_,
+      }
+    },
+    loadExtraState(state) {
+      this.elseifCount_ = state['elseifCount']
+      this.elseCount_ = state['elseCount']
+      this.rebuildShape_()
+    },
+    /**
+     * Populate the mutator's dialog with this block's components.
+     * @param {!Blockly.Workspace} workspace Mutator's workspace.
+     * @return {!Blockly.Block} Root block in mutator.
+     * @this {Blockly.Block}
+     */
+    decompose: function (workspace) {
+      var containerBlock = workspace.newBlock('pseudo_if_if')
+      containerBlock.initSvg()
+      var connection = containerBlock.nextConnection
+      for (var i = 1; i <= this.elseifCount_; i++) {
+        var elseifBlock = workspace.newBlock('pseudo_if_elseif')
+        elseifBlock.initSvg()
+        connection.connect(elseifBlock.previousConnection)
+        connection = elseifBlock.nextConnection
+      }
+      if (this.elseCount_) {
+        var elseBlock = workspace.newBlock('pseudo_if_else')
+        elseBlock.initSvg()
+        connection.connect(elseBlock.previousConnection)
+      }
+      return containerBlock
+    },
+    /**
+     * Reconfigure this block based on the mutator dialog's components.
+     * @param {!Blockly.Block} containerBlock Root block in mutator.
+     * @this {Blockly.Block}
+     */
+    compose: function (containerBlock) {
+      var clauseBlock = containerBlock.nextConnection.targetBlock()
+      // Count number of inputs.
+      this.elseifCount_ = 0
+      this.elseCount_ = 0
+      var valueConnections = [null]
+      var statementConnections = [null]
+      var elseStatementConnection = null
+      while (clauseBlock && !clauseBlock.isInsertionMarker()) {
+        switch (clauseBlock.type) {
+          case 'pseudo_if_elseif':
+            this.elseifCount_++
+            valueConnections.push(clauseBlock.valueConnection_)
+            statementConnections.push(clauseBlock.statementConnection_)
+            break
+          case 'pseudo_if_else':
+            this.elseCount_++
+            elseStatementConnection = clauseBlock.statementConnection_
+            break
+          default:
+            throw TypeError('Unknown block type: ' + clauseBlock.type)
+        }
+        clauseBlock =
+          clauseBlock.nextConnection && clauseBlock.nextConnection.targetBlock()
+      }
+      this.updateShape_()
+      // Reconnect any child blocks.
+      this.reconnectChildBlocks_(
+        valueConnections,
+        statementConnections,
+        elseStatementConnection
+      )
+    },
+    /**
+     * Store pointers to any connected child blocks.
+     * @param {!Blockly.Block} containerBlock Root block in mutator.
+     * @this {Blockly.Block}
+     */
+    saveConnections: function (containerBlock) {
+      var clauseBlock = containerBlock.nextConnection.targetBlock()
+      var i = 1
+      while (clauseBlock) {
+        switch (clauseBlock.type) {
+          case 'pseudo_if_elseif':
+            var inputIf = this.getInput('IF' + i)
+            var inputDo = this.getInput('DO' + i)
+            clauseBlock.valueConnection_ =
+              inputIf && inputIf.connection.targetConnection
+            clauseBlock.statementConnection_ =
+              inputDo && inputDo.connection.targetConnection
+            i++
+            break
+          case 'pseudo_if_else':
+            var inputDo2 = this.getInput('ELSE')
+            clauseBlock.statementConnection_ =
+              inputDo2 && inputDo2.connection.targetConnection
+            break
+          default:
+            throw TypeError('Unknown block type: ' + clauseBlock.type)
+        }
+        clauseBlock =
+          clauseBlock.nextConnection && clauseBlock.nextConnection.targetBlock()
+      }
+    },
+    /**
+     * Reconstructs the block with all child blocks attached.
+     * @this {Blockly.Block}
+     */
+    rebuildShape_: function () {
+      var valueConnections = [null]
+      var statementConnections = [null]
+      var elseStatementConnection = null
+
+      if (this.getInput('ELSE')) {
+        elseStatementConnection =
+          this.getInput('ELSE').connection.targetConnection
+      }
+      var i = 1
+      while (this.getInput('IF' + i)) {
+        var inputIf = this.getInput('IF' + i)
+        var inputDo = this.getInput('DO' + i)
+        valueConnections.push(inputIf.connection.targetConnection)
+        statementConnections.push(inputDo.connection.targetConnection)
+        i++
+      }
+      this.updateShape_()
+      this.reconnectChildBlocks_(
+        valueConnections,
+        statementConnections,
+        elseStatementConnection
+      )
+    },
+    /**
+     * Modify this block to have the correct number of inputs.
+     * @this {Blockly.Block}
+     * @private
+     */
+    updateShape_: function () {
+      // Delete everything.
+      if (this.getInput('ELSE')) {
+        this.removeInput('ELSE')
+        this.removeInput('ELSE_LABEL')
+      }
+      var i = 1
+      while (this.getInput('IF' + i)) {
+        this.removeInput('IF' + i)
+        this.removeInput(':' + i)
+        this.removeInput('DO' + i)
+        i++
+      }
+      // Rebuild block.
+      for (i = 1; i <= this.elseifCount_; i++) {
+        this.appendValueInput('IF' + i)
+          .setCheck('Boolean')
+          .appendField('そうでなくもし')
+        this.appendDummyInput(':' + i).appendField('ならば:')
+        this.appendStatementInput('DO' + i).appendField('')
+      }
+      if (this.elseCount_) {
+        this.appendDummyInput('ELSE_LABEL').appendField('そうでなければ:')
+        this.appendStatementInput('ELSE').appendField('')
+      }
+    },
+    /**
+     * Reconnects child blocks.
+     * @param {!Array.<?Blockly.RenderedConnection>} valueConnections List of
+     * value connections for 'if' input.
+     * @param {!Array.<?Blockly.RenderedConnection>} statementConnections List of
+     * statement connections for 'do' input.
+     * @param {?Blockly.RenderedConnection} elseStatementConnection Statement
+     * connection for else input.
+     * @this {Blockly.Block}
+     */
+    reconnectChildBlocks_: function (
+      valueConnections,
+      statementConnections,
+      elseStatementConnection
+    ) {
+      for (var i = 1; i <= this.elseifCount_; i++) {
+        Blockly.Mutator.reconnect(valueConnections[i], this, 'IF' + i)
+        Blockly.Mutator.reconnect(statementConnections[i], this, 'DO' + i)
+      }
+      Blockly.Mutator.reconnect(elseStatementConnection, this, 'ELSE')
+    },
+  },
+  undefined,
+  ['pseudo_if_elseif', 'pseudo_if_else']
+)
+
+Blockly.Blocks['pseudo_if'] = {
+  init: function () {
+    this.jsonInit({
+      type: 'pseudo_if',
+      message0: 'もし %1 ならば:',
+      args0: [
+        {
+          type: 'input_value',
+          name: 'IF0',
+          check: [
+            'Boolean',
+            'calcium_variable',
+            'calcium_attribute',
+            'calcium_subscript',
+            'calcium_call',
+          ],
+        },
+      ],
+      message1: '%1',
+      args1: [
+        {
+          type: 'input_statement',
+          name: 'DO0',
+        },
+      ],
+      previousStatement: null,
+      nextStatement: null,
+      colour: 210,
+      tooltip: '条件によって、実行する文を決めます。',
+      helpUrl: '',
+      mutator: 'pseudo_if_mutator',
+    })
+    this.elseifCount_ = 0
+    this.elseCount_ = 0
+
+    /**
+     * Don't automatically add STATEMENT_PREFIX and STATEMENT_SUFFIX to generated
+     * code.  These will be handled manually in this block's generators.
+     */
+    this.suppressPrefixSuffix = true
   },
 }
