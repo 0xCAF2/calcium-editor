@@ -1430,8 +1430,21 @@ export default [
   },
   {
     kind: 'category',
-    name: '繰返し',
-    contents: [],
+    name: '繰り返し',
+    contents: [
+      {
+        kind: 'block',
+        type: 'pseudo_for_increment',
+      },
+      {
+        kind: 'block',
+        type: 'pseudo_for_decrement',
+      },
+      {
+        kind: 'block',
+        type: 'pseudo_while',
+      },
+    ],
   },
   {
     kind: 'category',
@@ -4026,3 +4039,150 @@ Blockly.Blocks['pseudo_if'] = {
     this.suppressPrefixSuffix = true
   },
 }
+
+Blockly.defineBlocksWithJsonArray([
+  {
+    type: 'pseudo_for_decrement',
+    message0: '%1 を %2 から %3 まで %4 ずつ減らしながら %5 繰り返す %6',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'VARS',
+        check: ['calcium_variable'],
+      },
+      {
+        type: 'input_value',
+        name: 'START',
+        check: [
+          'Number',
+          'calcium_variable',
+          'calcium_attribute',
+          'calcium_subscript',
+          'calcium_arithmetic',
+        ],
+      },
+      {
+        type: 'input_value',
+        name: 'STOP',
+        check: [
+          'Number',
+          'calcium_variable',
+          'calcium_attribute',
+          'calcium_subscript',
+          'calcium_arithmetic',
+        ],
+      },
+      {
+        type: 'input_value',
+        name: 'STEP',
+        check: [
+          'Number',
+          'calcium_variable',
+          'calcium_attribute',
+          'calcium_subscript',
+          'calcium_arithmetic',
+        ],
+      },
+      {
+        type: 'input_dummy',
+      },
+      {
+        type: 'input_statement',
+        name: 'STMTS',
+      },
+    ],
+    inputsInline: true,
+    previousStatement: null,
+    nextStatement: null,
+    colour: 210,
+    tooltip: '変数の値を減らしながら、繰り返します。',
+    helpUrl: '',
+  },
+  {
+    type: 'pseudo_for_increment',
+    message0: '%1 を %2 から %3 まで %4 ずつ増やしながら %5 繰り返す %6',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'VARS',
+        check: ['calcium_variable'],
+      },
+      {
+        type: 'input_value',
+        name: 'START',
+        check: [
+          'Number',
+          'calcium_variable',
+          'calcium_attribute',
+          'calcium_subscript',
+          'calcium_arithmetic',
+        ],
+      },
+      {
+        type: 'input_value',
+        name: 'STOP',
+        check: [
+          'Number',
+          'calcium_variable',
+          'calcium_attribute',
+          'calcium_subscript',
+          'calcium_arithmetic',
+        ],
+      },
+      {
+        type: 'input_value',
+        name: 'STEP',
+        check: [
+          'Number',
+          'calcium_variable',
+          'calcium_attribute',
+          'calcium_subscript',
+          'calcium_arithmetic',
+        ],
+      },
+      {
+        type: 'input_dummy',
+      },
+      {
+        type: 'input_statement',
+        name: 'STMTS',
+      },
+    ],
+    inputsInline: true,
+    previousStatement: null,
+    nextStatement: null,
+    colour: 210,
+    tooltip: '変数の値を増やしながら、繰り返します。',
+    helpUrl: '',
+  },
+  {
+    type: 'pseudo_while',
+    message0: '%1 の間繰り返す: %2 %3',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'COND',
+        check: [
+          'Boolean',
+          'calcium_variable',
+          'calcium_attribute',
+          'calcium_subscript',
+          'calcium_call',
+        ],
+      },
+      {
+        type: 'input_dummy',
+      },
+      {
+        type: 'input_statement',
+        name: 'STMTS',
+      },
+    ],
+    inputsInline: true,
+    previousStatement: null,
+    nextStatement: null,
+    colour: 210,
+    tooltip: '条件を満たす間、繰り返します。',
+    helpUrl: '',
+  },
+])
