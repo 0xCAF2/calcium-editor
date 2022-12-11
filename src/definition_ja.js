@@ -574,7 +574,7 @@ Blockly.defineBlocksWithJsonArray([
         name: 'ARGS',
       },
     ],
-    colour: 240,
+    colour: 120,
     tooltip: '',
     helpUrl: '',
   },
@@ -1019,102 +1019,109 @@ Blockly.Blocks['calcium_call'] = {
           ],
         },
       ],
-
       output: 'calcium_call',
       colour: 120,
       tooltip: '%{BKY_CALCIUM_CALL_TOOLTIP}',
       helpUrl: '',
+      mutator: 'calcium_call_mutator',
     })
     this.setInputsInline(true)
     this.countOfArguments = 0
     this.updateShape()
-    this.setMutator(new Blockly.Mutator(['calcium_call_arg']))
-  },
-  compose(containerBlock) {
-    let itemBlock = containerBlock.getInputTargetBlock('ARGS')
-    const connections = []
-    while (itemBlock) {
-      connections.push(itemBlock.valueConnection_)
-      itemBlock =
-        itemBlock.nextConnection && itemBlock.nextConnection.targetBlock()
-    }
-    for (let i = 0; i < this.countOfArguments; ++i) {
-      const connection = this.getInput('ARG' + i).connection.targetConnection
-      if (connection && connections.indexOf(connection) === -1) {
-        connection.disconnect()
-      }
-    }
-    this.countOfArguments = connections.length
-    this.updateShape()
-    for (let i = 0; i < this.countOfArguments; ++i) {
-      Blockly.Mutator.reconnect(connections[i], this, 'ARG' + i)
-    }
-  },
-  decompose(workspace) {
-    const containerBlock = workspace.newBlock('calcium_call_arg_container')
-    containerBlock.initSvg()
-    let connection = containerBlock.getInput('ARGS').connection
-    for (let i = 0; i < this.countOfArguments; ++i) {
-      const itemBlock = workspace.newBlock('calcium_call_arg')
-      itemBlock.initSvg()
-      connection.connect(itemBlock.previousConnection)
-      connection = itemBlock.nextConnection
-    }
-    return containerBlock
-  },
-  saveExtraState: function () {
-    return {
-      countOfArguments: this.countOfArguments,
-    }
-  },
-
-  loadExtraState: function (state) {
-    this.countOfArguments = state['countOfArguments']
-    this.updateShape()
-  },
-  saveConnections: function (containerBlock) {
-    let itemBlock = containerBlock.getInputTargetBlock('ARGS')
-    let i = 0
-    while (itemBlock) {
-      const input = this.getInput('ARG' + i)
-      itemBlock.valueConnection_ = input && input.connection.targetConnection
-      ++i
-      itemBlock =
-        itemBlock.nextConnection && itemBlock.nextConnection.targetBlock()
-    }
-  },
-  updateShape() {
-    if (this.getInput('CLOSE_PAREN')) {
-      this.removeInput('CLOSE_PAREN')
-    }
-    let i
-    for (i = 0; i < this.countOfArguments; ++i) {
-      if (!this.getInput('ARG' + i)) {
-        const input = this.appendValueInput('ARG' + i)
-        input.init()
-        if (i === 0) {
-          input.appendField('(')
-        } else {
-          input.appendField(',')
-        }
-      }
-    }
-    if (i > 0) {
-      const dummy = this.appendDummyInput('CLOSE_PAREN')
-      dummy.appendField(')')
-    }
-    if (i === 0 && !this.getInput('PAREN')) {
-      const dummy = this.appendDummyInput('PAREN')
-      dummy.appendField('( )')
-    } else if (i !== 0 && this.getInput('PAREN')) {
-      this.removeInput('PAREN')
-    }
-    while (this.getInput('ARG' + i)) {
-      this.removeInput('ARG' + i)
-      ++i
-    }
   },
 }
+
+Blockly.Extensions.registerMutator(
+  'calcium_call_mutator',
+  {
+    compose(containerBlock) {
+      let itemBlock = containerBlock.getInputTargetBlock('ARGS')
+      const connections = []
+      while (itemBlock) {
+        connections.push(itemBlock.valueConnection_)
+        itemBlock =
+          itemBlock.nextConnection && itemBlock.nextConnection.targetBlock()
+      }
+      for (let i = 0; i < this.countOfArguments; ++i) {
+        const connection = this.getInput('ARG' + i).connection.targetConnection
+        if (connection && connections.indexOf(connection) === -1) {
+          connection.disconnect()
+        }
+      }
+      this.countOfArguments = connections.length
+      this.updateShape()
+      for (let i = 0; i < this.countOfArguments; ++i) {
+        Blockly.Mutator.reconnect(connections[i], this, 'ARG' + i)
+      }
+    },
+    decompose(workspace) {
+      const containerBlock = workspace.newBlock('calcium_call_arg_container')
+      containerBlock.initSvg()
+      let connection = containerBlock.getInput('ARGS').connection
+      for (let i = 0; i < this.countOfArguments; ++i) {
+        const itemBlock = workspace.newBlock('calcium_call_arg')
+        itemBlock.initSvg()
+        connection.connect(itemBlock.previousConnection)
+        connection = itemBlock.nextConnection
+      }
+      return containerBlock
+    },
+    saveExtraState: function () {
+      return {
+        countOfArguments: this.countOfArguments,
+      }
+    },
+
+    loadExtraState: function (state) {
+      this.countOfArguments = state['countOfArguments']
+      this.updateShape()
+    },
+    saveConnections: function (containerBlock) {
+      let itemBlock = containerBlock.getInputTargetBlock('ARGS')
+      let i = 0
+      while (itemBlock) {
+        const input = this.getInput('ARG' + i)
+        itemBlock.valueConnection_ = input && input.connection.targetConnection
+        ++i
+        itemBlock =
+          itemBlock.nextConnection && itemBlock.nextConnection.targetBlock()
+      }
+    },
+    updateShape() {
+      if (this.getInput('CLOSE_PAREN')) {
+        this.removeInput('CLOSE_PAREN')
+      }
+      let i
+      for (i = 0; i < this.countOfArguments; ++i) {
+        if (!this.getInput('ARG' + i)) {
+          const input = this.appendValueInput('ARG' + i)
+          input.init()
+          if (i === 0) {
+            input.appendField('(')
+          } else {
+            input.appendField(',')
+          }
+        }
+      }
+      if (i > 0) {
+        const dummy = this.appendDummyInput('CLOSE_PAREN')
+        dummy.appendField(')')
+      }
+      if (i === 0 && !this.getInput('PAREN')) {
+        const dummy = this.appendDummyInput('PAREN')
+        dummy.appendField('( )')
+      } else if (i !== 0 && this.getInput('PAREN')) {
+        this.removeInput('PAREN')
+      }
+      while (this.getInput('ARG' + i)) {
+        this.removeInput('ARG' + i)
+        ++i
+      }
+    },
+  },
+  undefined,
+  ['calcium_call_arg']
+)
 
 Blockly.Blocks['calcium_def'] = {
   init() {
@@ -1145,11 +1152,14 @@ Blockly.Blocks['calcium_def'] = {
       colour: 240,
       tooltip: '%{BKY_CALCIUM_DEF_TOOLTIP}',
       helpUrl: '',
+      mutator: 'calcium_def_mutator',
     })
     this.countOfParameters = 0
     this.updateShape()
-    this.setMutator(new Blockly.Mutator(['calcium_def_param']))
   },
+}
+
+const defMutator = {
   compose(containerBlock) {
     let itemBlock = containerBlock.getInputTargetBlock('PARAMS')
     const connections = []
@@ -1203,6 +1213,13 @@ Blockly.Blocks['calcium_def'] = {
   },
 }
 
+Blockly.Extensions.registerMutator(
+  'calcium_def_mutator',
+  defMutator,
+  undefined,
+  ['calcium_def_param']
+)
+
 Blockly.Blocks['calcium_defmethod'] = {
   init() {
     this.jsonInit({
@@ -1232,33 +1249,41 @@ Blockly.Blocks['calcium_defmethod'] = {
       colour: 240,
       tooltip: '%{BKY_CALCIUM_DEF_METHOD_TOOLTIP}',
       helpUrl: '',
+      mutator: 'calcium_def_method_mutator',
     })
     this.countOfParameters = 0
     this.updateShape()
-    this.setMutator(new Blockly.Mutator(['calcium_def_param']))
-  },
-  compose: Blockly.Blocks['calcium_def'].compose,
-  decompose: Blockly.Blocks['calcium_def'].decompose,
-  loadExtraState: Blockly.Blocks['calcium_def'].loadExtraState,
-  saveExtraState: Blockly.Blocks['calcium_def'].saveExtraState,
-  saveConnections: Blockly.Blocks['calcium_def'].saveConnections,
-  updateShape() {
-    let labelStr = ''
-    if (this.countOfParameters > 0) {
-      if (this.parameters) {
-        labelStr = `(self, ${this.parameters.join(', ')}):`
-      }
-    } else {
-      labelStr = `(self):`
-    }
-    Blockly.Events.disable()
-    try {
-      this.setFieldValue(labelStr, 'LABELS')
-    } finally {
-      Blockly.Events.enable()
-    }
   },
 }
+
+Blockly.Extensions.registerMutator(
+  'calcium_def_method_mutator',
+  {
+    compose: defMutator.compose,
+    decompose: defMutator.decompose,
+    loadExtraState: defMutator.loadExtraState,
+    saveExtraState: defMutator.saveExtraState,
+    saveConnections: defMutator.saveConnections,
+    updateShape() {
+      let labelStr = ''
+      if (this.countOfParameters > 0) {
+        if (this.parameters) {
+          labelStr = `(self, ${this.parameters.join(', ')}):`
+        }
+      } else {
+        labelStr = `(self):`
+      }
+      Blockly.Events.disable()
+      try {
+        this.setFieldValue(labelStr, 'LABELS')
+      } finally {
+        Blockly.Events.enable()
+      }
+    },
+  },
+  undefined,
+  ['calcium_def_param']
+)
 
 Blockly.Blocks['calcium_if'] = {
   init: function () {
@@ -1293,203 +1318,203 @@ Blockly.Blocks['calcium_if'] = {
         colour: 240,
         tooltip: '%{BKY_CALCIUM_IF_TOOLTIP}',
         helpUrl: '',
+        mutator: 'calcium_if_mutator',
       }
     )
-    this.setMutator(
-      new Blockly.Mutator(['calcium_if_elseif', 'calcium_if_else'])
-    )
-  },
-  elseifCount_: 0,
-  elseCount_: 0,
-
-  /**
-   * Don't automatically add STATEMENT_PREFIX and STATEMENT_SUFFIX to generated
-   * code.  These will be handled manually in this block's generators.
-   */
-  suppressPrefixSuffix: true,
-
-  saveExtraState() {
-    return {
-      elseifCount: this.elseifCount_,
-      elseCount: this.elseCount_,
-    }
-  },
-  loadExtraState(state) {
-    this.elseifCount_ = state['elseifCount']
-    this.elseCount_ = state['elseCount']
-    this.rebuildShape_()
-  },
-  /**
-   * Populate the mutator's dialog with this block's components.
-   * @param {!Blockly.Workspace} workspace Mutator's workspace.
-   * @return {!Blockly.Block} Root block in mutator.
-   * @this {Blockly.Block}
-   */
-  decompose: function (workspace) {
-    var containerBlock = workspace.newBlock('calcium_if_if')
-    containerBlock.initSvg()
-    var connection = containerBlock.nextConnection
-    for (var i = 1; i <= this.elseifCount_; i++) {
-      var elseifBlock = workspace.newBlock('calcium_if_elseif')
-      elseifBlock.initSvg()
-      connection.connect(elseifBlock.previousConnection)
-      connection = elseifBlock.nextConnection
-    }
-    if (this.elseCount_) {
-      var elseBlock = workspace.newBlock('calcium_if_else')
-      elseBlock.initSvg()
-      connection.connect(elseBlock.previousConnection)
-    }
-    return containerBlock
-  },
-  /**
-   * Reconfigure this block based on the mutator dialog's components.
-   * @param {!Blockly.Block} containerBlock Root block in mutator.
-   * @this {Blockly.Block}
-   */
-  compose: function (containerBlock) {
-    var clauseBlock = containerBlock.nextConnection.targetBlock()
-    // Count number of inputs.
     this.elseifCount_ = 0
     this.elseCount_ = 0
-    var valueConnections = [null]
-    var statementConnections = [null]
-    var elseStatementConnection = null
-    while (clauseBlock && !clauseBlock.isInsertionMarker()) {
-      switch (clauseBlock.type) {
-        case 'calcium_if_elseif':
-          this.elseifCount_++
-          valueConnections.push(clauseBlock.valueConnection_)
-          statementConnections.push(clauseBlock.statementConnection_)
-          break
-        case 'calcium_if_else':
-          this.elseCount_++
-          elseStatementConnection = clauseBlock.statementConnection_
-          break
-        default:
-          throw TypeError('Unknown block type: ' + clauseBlock.type)
-      }
-      clauseBlock =
-        clauseBlock.nextConnection && clauseBlock.nextConnection.targetBlock()
-    }
-    this.updateShape_()
-    // Reconnect any child blocks.
-    this.reconnectChildBlocks_(
-      valueConnections,
-      statementConnections,
-      elseStatementConnection
-    )
-  },
-  /**
-   * Store pointers to any connected child blocks.
-   * @param {!Blockly.Block} containerBlock Root block in mutator.
-   * @this {Blockly.Block}
-   */
-  saveConnections: function (containerBlock) {
-    var clauseBlock = containerBlock.nextConnection.targetBlock()
-    var i = 1
-    while (clauseBlock) {
-      switch (clauseBlock.type) {
-        case 'calcium_if_elseif':
-          var inputIf = this.getInput('IF' + i)
-          var inputDo = this.getInput('DO' + i)
-          clauseBlock.valueConnection_ =
-            inputIf && inputIf.connection.targetConnection
-          clauseBlock.statementConnection_ =
-            inputDo && inputDo.connection.targetConnection
-          i++
-          break
-        case 'calcium_if_else':
-          var inputDo2 = this.getInput('ELSE')
-          clauseBlock.statementConnection_ =
-            inputDo2 && inputDo2.connection.targetConnection
-          break
-        default:
-          throw TypeError('Unknown block type: ' + clauseBlock.type)
-      }
-      clauseBlock =
-        clauseBlock.nextConnection && clauseBlock.nextConnection.targetBlock()
-    }
-  },
-  /**
-   * Reconstructs the block with all child blocks attached.
-   * @this {Blockly.Block}
-   */
-  rebuildShape_: function () {
-    var valueConnections = [null]
-    var statementConnections = [null]
-    var elseStatementConnection = null
-
-    if (this.getInput('ELSE')) {
-      elseStatementConnection =
-        this.getInput('ELSE').connection.targetConnection
-    }
-    var i = 1
-    while (this.getInput('IF' + i)) {
-      var inputIf = this.getInput('IF' + i)
-      var inputDo = this.getInput('DO' + i)
-      valueConnections.push(inputIf.connection.targetConnection)
-      statementConnections.push(inputDo.connection.targetConnection)
-      i++
-    }
-    this.updateShape_()
-    this.reconnectChildBlocks_(
-      valueConnections,
-      statementConnections,
-      elseStatementConnection
-    )
-  },
-  /**
-   * Modify this block to have the correct number of inputs.
-   * @this {Blockly.Block}
-   * @private
-   */
-  updateShape_: function () {
-    // Delete everything.
-    if (this.getInput('ELSE')) {
-      this.removeInput('ELSE')
-    }
-    var i = 1
-    while (this.getInput('IF' + i)) {
-      this.removeInput('IF' + i)
-      this.removeInput(':' + i)
-      this.removeInput('DO' + i)
-      i++
-    }
-    // Rebuild block.
-    for (i = 1; i <= this.elseifCount_; i++) {
-      this.appendValueInput('IF' + i)
-        .setCheck('Boolean')
-        .appendField('elif')
-      this.appendDummyInput(':' + i).appendField(':')
-      this.appendStatementInput('DO' + i).appendField('')
-    }
-    if (this.elseCount_) {
-      this.appendStatementInput('ELSE').appendField('else:')
-    }
-  },
-  /**
-   * Reconnects child blocks.
-   * @param {!Array.<?Blockly.RenderedConnection>} valueConnections List of
-   * value connections for 'if' input.
-   * @param {!Array.<?Blockly.RenderedConnection>} statementConnections List of
-   * statement connections for 'do' input.
-   * @param {?Blockly.RenderedConnection} elseStatementConnection Statement
-   * connection for else input.
-   * @this {Blockly.Block}
-   */
-  reconnectChildBlocks_: function (
-    valueConnections,
-    statementConnections,
-    elseStatementConnection
-  ) {
-    for (var i = 1; i <= this.elseifCount_; i++) {
-      Blockly.Mutator.reconnect(valueConnections[i], this, 'IF' + i)
-      Blockly.Mutator.reconnect(statementConnections[i], this, 'DO' + i)
-    }
-    Blockly.Mutator.reconnect(elseStatementConnection, this, 'ELSE')
+    this.suppressPrefixSuffix = true
   },
 }
+
+Blockly.Extensions.registerMutator(
+  'calcium_if_mutator',
+  {
+    saveExtraState() {
+      return {
+        elseifCount: this.elseifCount_,
+        elseCount: this.elseCount_,
+      }
+    },
+    loadExtraState(state) {
+      this.elseifCount_ = state['elseifCount']
+      this.elseCount_ = state['elseCount']
+      this.rebuildShape_()
+    },
+    /**
+     * Populate the mutator's dialog with this block's components.
+     * @param {!Blockly.Workspace} workspace Mutator's workspace.
+     * @return {!Blockly.Block} Root block in mutator.
+     * @this {Blockly.Block}
+     */
+    decompose: function (workspace) {
+      var containerBlock = workspace.newBlock('calcium_if_if')
+      containerBlock.initSvg()
+      var connection = containerBlock.nextConnection
+      for (var i = 1; i <= this.elseifCount_; i++) {
+        var elseifBlock = workspace.newBlock('calcium_if_elseif')
+        elseifBlock.initSvg()
+        connection.connect(elseifBlock.previousConnection)
+        connection = elseifBlock.nextConnection
+      }
+      if (this.elseCount_) {
+        var elseBlock = workspace.newBlock('calcium_if_else')
+        elseBlock.initSvg()
+        connection.connect(elseBlock.previousConnection)
+      }
+      return containerBlock
+    },
+    /**
+     * Reconfigure this block based on the mutator dialog's components.
+     * @param {!Blockly.Block} containerBlock Root block in mutator.
+     * @this {Blockly.Block}
+     */
+    compose: function (containerBlock) {
+      var clauseBlock = containerBlock.nextConnection.targetBlock()
+      // Count number of inputs.
+      this.elseifCount_ = 0
+      this.elseCount_ = 0
+      var valueConnections = [null]
+      var statementConnections = [null]
+      var elseStatementConnection = null
+      while (clauseBlock && !clauseBlock.isInsertionMarker()) {
+        switch (clauseBlock.type) {
+          case 'calcium_if_elseif':
+            this.elseifCount_++
+            valueConnections.push(clauseBlock.valueConnection_)
+            statementConnections.push(clauseBlock.statementConnection_)
+            break
+          case 'calcium_if_else':
+            this.elseCount_++
+            elseStatementConnection = clauseBlock.statementConnection_
+            break
+          default:
+            throw TypeError('Unknown block type: ' + clauseBlock.type)
+        }
+        clauseBlock =
+          clauseBlock.nextConnection && clauseBlock.nextConnection.targetBlock()
+      }
+      this.updateShape_()
+      // Reconnect any child blocks.
+      this.reconnectChildBlocks_(
+        valueConnections,
+        statementConnections,
+        elseStatementConnection
+      )
+    },
+    /**
+     * Store pointers to any connected child blocks.
+     * @param {!Blockly.Block} containerBlock Root block in mutator.
+     * @this {Blockly.Block}
+     */
+    saveConnections: function (containerBlock) {
+      var clauseBlock = containerBlock.nextConnection.targetBlock()
+      var i = 1
+      while (clauseBlock) {
+        switch (clauseBlock.type) {
+          case 'calcium_if_elseif':
+            var inputIf = this.getInput('IF' + i)
+            var inputDo = this.getInput('DO' + i)
+            clauseBlock.valueConnection_ =
+              inputIf && inputIf.connection.targetConnection
+            clauseBlock.statementConnection_ =
+              inputDo && inputDo.connection.targetConnection
+            i++
+            break
+          case 'calcium_if_else':
+            var inputDo2 = this.getInput('ELSE')
+            clauseBlock.statementConnection_ =
+              inputDo2 && inputDo2.connection.targetConnection
+            break
+          default:
+            throw TypeError('Unknown block type: ' + clauseBlock.type)
+        }
+        clauseBlock =
+          clauseBlock.nextConnection && clauseBlock.nextConnection.targetBlock()
+      }
+    },
+    /**
+     * Reconstructs the block with all child blocks attached.
+     * @this {Blockly.Block}
+     */
+    rebuildShape_: function () {
+      var valueConnections = [null]
+      var statementConnections = [null]
+      var elseStatementConnection = null
+
+      if (this.getInput('ELSE')) {
+        elseStatementConnection =
+          this.getInput('ELSE').connection.targetConnection
+      }
+      var i = 1
+      while (this.getInput('IF' + i)) {
+        var inputIf = this.getInput('IF' + i)
+        var inputDo = this.getInput('DO' + i)
+        valueConnections.push(inputIf.connection.targetConnection)
+        statementConnections.push(inputDo.connection.targetConnection)
+        i++
+      }
+      this.updateShape_()
+      this.reconnectChildBlocks_(
+        valueConnections,
+        statementConnections,
+        elseStatementConnection
+      )
+    },
+    /**
+     * Modify this block to have the correct number of inputs.
+     * @this {Blockly.Block}
+     * @private
+     */
+    updateShape_: function () {
+      // Delete everything.
+      if (this.getInput('ELSE')) {
+        this.removeInput('ELSE')
+      }
+      var i = 1
+      while (this.getInput('IF' + i)) {
+        this.removeInput('IF' + i)
+        this.removeInput(':' + i)
+        this.removeInput('DO' + i)
+        i++
+      }
+      // Rebuild block.
+      for (i = 1; i <= this.elseifCount_; i++) {
+        this.appendValueInput('IF' + i)
+          .setCheck('Boolean')
+          .appendField('elif')
+        this.appendDummyInput(':' + i).appendField(':')
+        this.appendStatementInput('DO' + i).appendField('')
+      }
+      if (this.elseCount_) {
+        this.appendStatementInput('ELSE').appendField('else:')
+      }
+    },
+    /**
+     * Reconnects child blocks.
+     * @param {!Array.<?Blockly.RenderedConnection>} valueConnections List of
+     * value connections for 'if' input.
+     * @param {!Array.<?Blockly.RenderedConnection>} statementConnections List of
+     * statement connections for 'do' input.
+     * @param {?Blockly.RenderedConnection} elseStatementConnection Statement
+     * connection for else input.
+     * @this {Blockly.Block}
+     */
+    reconnectChildBlocks_: function (
+      valueConnections,
+      statementConnections,
+      elseStatementConnection
+    ) {
+      for (var i = 1; i <= this.elseifCount_; i++) {
+        Blockly.Mutator.reconnect(valueConnections[i], this, 'IF' + i)
+        Blockly.Mutator.reconnect(statementConnections[i], this, 'DO' + i)
+      }
+      Blockly.Mutator.reconnect(elseStatementConnection, this, 'ELSE')
+    },
+  },
+  undefined,
+  ['calcium_if_elseif', 'calcium_if_else']
+)
 
 Blockly.Blocks['calcium_list'] = {
   init: function () {
@@ -1500,113 +1525,121 @@ Blockly.Blocks['calcium_list'] = {
       colour: 120,
       tooltip: '%{BKY_CALCIUM_LIST_TOOLTIP}',
       helpUrl: '',
+      mutator: 'calcium_list_mutator',
     })
     this.itemCount_ = 0
     this.setInputsInline(true)
     this.updateShape_()
-    this.setMutator(new Blockly.Mutator(['calcium_list_item']))
-  },
-  saveExtraState: function () {
-    return {
-      itemCount: this.itemCount_,
-    }
-  },
-
-  loadExtraState: function (state) {
-    this.itemCount_ = state['itemCount']
-    // This is a helper function which adds or removes inputs from the block.
-    this.updateShape_()
-  },
-  /**
-   * Populate the mutator's dialog with this block's components.
-   * @param {!Blockly.Workspace} workspace Mutator's workspace.
-   * @return {!Blockly.Block} Root block in mutator.
-   * @this {Blockly.Block}
-   */
-  decompose: function (workspace) {
-    var containerBlock = workspace.newBlock('calcium_list_item_container')
-    containerBlock.initSvg()
-    var connection = containerBlock.getInput('STACK').connection
-    for (var i = 0; i < this.itemCount_; i++) {
-      var itemBlock = workspace.newBlock('calcium_list_item')
-      itemBlock.initSvg()
-      connection.connect(itemBlock.previousConnection)
-      connection = itemBlock.nextConnection
-    }
-    return containerBlock
-  },
-  /**
-   * Reconfigure this block based on the mutator dialog's components.
-   * @param {!Blockly.Block} containerBlock Root block in mutator.
-   * @this {Blockly.Block}
-   */
-  compose: function (containerBlock) {
-    var itemBlock = containerBlock.getInputTargetBlock('STACK')
-    // Count number of inputs.
-    var connections = []
-    while (itemBlock && !itemBlock.isInsertionMarker()) {
-      connections.push(itemBlock.valueConnection_)
-      itemBlock =
-        itemBlock.nextConnection && itemBlock.nextConnection.targetBlock()
-    }
-    // Disconnect any children that don't belong.
-    for (var i = 0; i < this.itemCount_; i++) {
-      var connection = this.getInput('ADD' + i).connection.targetConnection
-      if (connection && connections.indexOf(connection) == -1) {
-        connection.disconnect()
-      }
-    }
-    this.itemCount_ = connections.length
-    this.updateShape_()
-    // Reconnect any child blocks.
-    for (i = 0; i < this.itemCount_; i++) {
-      Blockly.Mutator.reconnect(connections[i], this, 'ADD' + i)
-    }
-  },
-  /**
-   * Store pointers to any connected child blocks.
-   * @param {!Blockly.Block} containerBlock Root block in mutator.
-   * @this {Blockly.Block}
-   */
-  saveConnections: function (containerBlock) {
-    var itemBlock = containerBlock.getInputTargetBlock('STACK')
-    var i = 0
-    while (itemBlock) {
-      var input = this.getInput('ADD' + i)
-      itemBlock.valueConnection_ = input && input.connection.targetConnection
-      i++
-      itemBlock =
-        itemBlock.nextConnection && itemBlock.nextConnection.targetBlock()
-    }
-  },
-  /**
-   * Modify this block to have the correct number of inputs.
-   * @private
-   * @this {Blockly.Block}
-   */
-  updateShape_: function () {
-    if (this.getInput(']')) {
-      this.removeInput(']')
-    }
-    let i
-    // Add new inputs.
-    for (i = 0; i < this.itemCount_; i++) {
-      if (!this.getInput('ADD' + i)) {
-        const input = this.appendValueInput('ADD' + i)
-        input.init()
-        if (i !== 0) {
-          input.appendField(',')
-        }
-      }
-    }
-    this.appendDummyInput(']').appendField(']')
-    // Remove deleted inputs.
-    while (this.getInput('ADD' + i)) {
-      this.removeInput('ADD' + i)
-      i++
-    }
   },
 }
+
+Blockly.Extensions.registerMutator(
+  'calcium_list_mutator',
+  {
+    saveExtraState: function () {
+      return {
+        itemCount: this.itemCount_,
+      }
+    },
+
+    loadExtraState: function (state) {
+      this.itemCount_ = state['itemCount']
+      // This is a helper function which adds or removes inputs from the block.
+      this.updateShape_()
+    },
+    /**
+     * Populate the mutator's dialog with this block's components.
+     * @param {!Blockly.Workspace} workspace Mutator's workspace.
+     * @return {!Blockly.Block} Root block in mutator.
+     * @this {Blockly.Block}
+     */
+    decompose: function (workspace) {
+      var containerBlock = workspace.newBlock('calcium_list_item_container')
+      containerBlock.initSvg()
+      var connection = containerBlock.getInput('STACK').connection
+      for (var i = 0; i < this.itemCount_; i++) {
+        var itemBlock = workspace.newBlock('calcium_list_item')
+        itemBlock.initSvg()
+        connection.connect(itemBlock.previousConnection)
+        connection = itemBlock.nextConnection
+      }
+      return containerBlock
+    },
+    /**
+     * Reconfigure this block based on the mutator dialog's components.
+     * @param {!Blockly.Block} containerBlock Root block in mutator.
+     * @this {Blockly.Block}
+     */
+    compose: function (containerBlock) {
+      var itemBlock = containerBlock.getInputTargetBlock('STACK')
+      // Count number of inputs.
+      var connections = []
+      while (itemBlock && !itemBlock.isInsertionMarker()) {
+        connections.push(itemBlock.valueConnection_)
+        itemBlock =
+          itemBlock.nextConnection && itemBlock.nextConnection.targetBlock()
+      }
+      // Disconnect any children that don't belong.
+      for (var i = 0; i < this.itemCount_; i++) {
+        var connection = this.getInput('ADD' + i).connection.targetConnection
+        if (connection && connections.indexOf(connection) == -1) {
+          connection.disconnect()
+        }
+      }
+      this.itemCount_ = connections.length
+      this.updateShape_()
+      // Reconnect any child blocks.
+      for (i = 0; i < this.itemCount_; i++) {
+        Blockly.Mutator.reconnect(connections[i], this, 'ADD' + i)
+      }
+    },
+    /**
+     * Store pointers to any connected child blocks.
+     * @param {!Blockly.Block} containerBlock Root block in mutator.
+     * @this {Blockly.Block}
+     */
+    saveConnections: function (containerBlock) {
+      var itemBlock = containerBlock.getInputTargetBlock('STACK')
+      var i = 0
+      while (itemBlock) {
+        var input = this.getInput('ADD' + i)
+        itemBlock.valueConnection_ = input && input.connection.targetConnection
+        i++
+        itemBlock =
+          itemBlock.nextConnection && itemBlock.nextConnection.targetBlock()
+      }
+    },
+    /**
+     * Modify this block to have the correct number of inputs.
+     * @private
+     * @this {Blockly.Block}
+     */
+    updateShape_: function () {
+      if (this.getInput(']')) {
+        this.removeInput(']')
+      }
+      let i
+      // Add new inputs.
+      for (i = 0; i < this.itemCount_; i++) {
+        if (!this.getInput('ADD' + i)) {
+          const input = this.appendValueInput('ADD' + i)
+          input.init()
+          if (i !== 0) {
+            input.appendField(',')
+          }
+        }
+      }
+      this.appendDummyInput(']').appendField(']')
+      // Remove deleted inputs.
+      while (this.getInput('ADD' + i)) {
+        this.removeInput('ADD' + i)
+        i++
+      }
+    },
+  },
+  undefined,
+  ['calcium_list_item']
+)
 
 Blockly.defineBlocksWithJsonArray([
   {
