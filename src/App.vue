@@ -3,7 +3,7 @@
     <v-app-bar app :color="running ? 'orange' : 'blue'" style="z-index: 3000">
       <div class="d-flex align-center">
         <v-switch
-          style="width: 100px"
+          style="width: 100px; margin-left: 10px"
           v-model="running"
           color="white"
           hide-details="auto"
@@ -243,7 +243,7 @@ result
   max-width: 95%;
   min-height: 200px;
   position: absolute;
-  top: 4px;
+  top: 72px;
   right: 4px;
   z-index: 1000;
   padding: 4px;
