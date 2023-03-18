@@ -1,3 +1,3 @@
-# Calciumed
+# calcium-editor
 
-A visual editor for learning Python on Web
+A visual programming editor for learning Python on Web
