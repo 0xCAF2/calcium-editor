@@ -35,7 +35,7 @@
       <v-container class="mx-0">
         <v-row>
           <v-col class="pa-0" cols="12">
-            <div ref="div-workspace"></div>
+            <div id="div-blockly"></div>
           </v-col>
         </v-row>
       </v-container>
@@ -47,11 +47,11 @@
           <v-row justify="center" align="center">
             <v-col cols="8">
               <input style="
-                        background-color: white;
-                        color: black;
-                        width: 400px;
-                        max-width: 95%;
-                      " :placeholder="prompt" v-model="input" />
+                             background-color: white;
+                             color: black;
+                             width: 400px;
+                             max-width: 95%;
+                             " :placeholder="prompt" v-model="input" />
             </v-col>
             <v-col cols="4">
               <v-btn @click="sendInput">OK</v-btn>
@@ -63,7 +63,7 @@
   </v-app>
 </template>
 
-<script lang>
+<script>
 import * as Blockly from 'blockly/core'
 import * as Lang from 'blockly/msg/ja'
 import './ja'
@@ -138,9 +138,9 @@ export default defineComponent({
       }
     },
     resize() {
-      const divWorkspace = this.$refs['div-workspace']
-      divWorkspace.style.height = window.innerHeight - 80 + 'px'
-      divWorkspace.style.width = window.innerWidth - 8 + 'px'
+      const divBlockly = document.querySelector('#div-blockly')
+      divBlockly.style.height = window.innerHeight - 80 + 'px'
+      divBlockly.style.width = window.innerWidth - 8 + 'px'
       Blockly.svgResize(workspace)
     },
     run() {
@@ -172,7 +172,7 @@ result
     },
   },
   mounted() {
-    workspace = Blockly.inject(this.$refs['div-workspace'], {
+    workspace = Blockly.inject(document.querySelector('#div-blockly'), {
       move: {
         scrollbars: true,
         drag: true,

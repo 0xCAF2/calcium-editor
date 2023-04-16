@@ -639,7 +639,7 @@ function makeForLoop(isIncrement) {
 
     let stop = generator.valueToCode(block, 'STOP', 0) || '9'
     stop = JSON.parse(generator.removeParens(stop))
-    stop = ['+', stop, 1]
+    stop = ['+', stop, isIncrement ? 1 : -1]
 
     let step = generator.valueToCode(block, 'STEP', 0) || '1'
     if (!step) {
