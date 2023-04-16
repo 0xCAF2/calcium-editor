@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar app :color="running ? 'orange' : 'blue'" style="z-index: 3000">
       <div class="d-flex align-center">
-        <v-switch style="margin-left: 20px; width: 100px" v-model="running" color="white" hide-details="auto"
+        <v-switch style="width: 100px; margin-left: 10px" v-model="running" color="white" hide-details="auto"
           :disabled="waiting">
           <template #label>
             <span class="text-white py-3"><b>{{ labelForRun }}</b></span>
@@ -47,11 +47,11 @@
           <v-row justify="center" align="center">
             <v-col cols="8">
               <input style="
-                    background-color: white;
-                    color: black;
-                    width: 400px;
-                    max-width: 95%;
-                  " :placeholder="prompt" v-model="input" />
+                      background-color: white;
+                      color: black;
+                      width: 400px;
+                      max-width: 95%;
+                    " :placeholder="prompt" v-model="input" />
             </v-col>
             <v-col cols="4">
               <v-btn @click="sendInput">OK</v-btn>
@@ -228,7 +228,7 @@ result
   max-width: 95%;
   min-height: 200px;
   position: absolute;
-  top: 4px;
+  top: 72px;
   right: 4px;
   z-index: 1000;
   padding: 4px;

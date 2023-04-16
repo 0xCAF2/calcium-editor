@@ -378,36 +378,40 @@ class Subscript:
     def assign(self, value, env):
         obj = env.evaluate(self.ref)
         index = env.evaluate(self.index)
+        start = env.evaluate(self.start)
+        end = env.evaluate(self.end)
         if index is not None:
             obj[index] = value
         else:
-            if self.start is None:
-                if self.end is None:
+            if start is None:
+                if end is None:
                     obj[:] = value
                 else:
-                    obj[: self.end] = value
+                    obj[:end] = value
             else:
-                if self.end is None:
-                    obj[self.start :] = value
+                if end is None:
+                    obj[start:] = value
                 else:
-                    obj[self.start : self.end] = value
+                    obj[start:end] = value
 
     def evaluate(self, env):
         obj = env.evaluate(self.ref)
         index = env.evaluate(self.index)
+        start = env.evaluate(self.start)
+        end = env.evaluate(self.end)
         if index is not None:
             return obj[index]
         else:
-            if self.start is None:
-                if self.end is None:
+            if start is None:
+                if end is None:
                     return obj[:]
                 else:
-                    return obj[: self.end]
+                    return obj[:end]
             else:
                 if self.end is None:
-                    return obj[self.start :]
+                    return obj[start:]
                 else:
-                    return obj[self.start : self.end]
+                    return obj[start:end]
 
 
 class Call:
