@@ -2,17 +2,10 @@
   <v-app>
     <v-app-bar app :color="running ? 'orange' : 'blue'" style="z-index: 3000">
       <div class="d-flex align-center">
-        <v-switch
-          style="margin-left: 20px; width: 100px"
-          v-model="running"
-          color="white"
-          hide-details="auto"
-          :disabled="waiting"
-        >
+        <v-switch style="margin-left: 20px; width: 100px" v-model="running" color="white" hide-details="auto"
+          :disabled="waiting">
           <template #label>
-            <span class="text-white py-3"
-              ><b>{{ labelForRun }}</b></span
-            >
+            <span class="text-white py-3"><b>{{ labelForRun }}</b></span>
           </template>
         </v-switch>
         <v-btn color="white" @click="save">
@@ -35,11 +28,7 @@
             </v-list-item>
           </v-list>
         </v-menu>
-        <v-progress-circular
-          color="white"
-          :indeterminate="waiting"
-          :hidden="!waiting"
-        ></v-progress-circular>
+        <v-progress-circular color="white" :indeterminate="waiting" :hidden="!waiting"></v-progress-circular>
       </div>
     </v-app-bar>
     <v-main>
@@ -57,16 +46,12 @@
           <v-row style="height: 100px"></v-row>
           <v-row justify="center" align="center">
             <v-col cols="8">
-              <input
-                style="
-                  background-color: white;
-                  color: black;
-                  width: 400px;
-                  max-width: 95%;
-                "
-                :placeholder="prompt"
-                v-model="input"
-              />
+              <input style="
+                    background-color: white;
+                    color: black;
+                    width: 400px;
+                    max-width: 95%;
+                  " :placeholder="prompt" v-model="input" />
             </v-col>
             <v-col cols="4">
               <v-btn @click="sendInput">OK</v-btn>
@@ -80,10 +65,10 @@
 
 <script lang>
 import * as Blockly from 'blockly/core'
-import * as Lang from 'blockly/msg/en'
-import './en'
+import * as Lang from 'blockly/msg/ja'
+import './ja'
 import DarkTheme from '@blockly/theme-dark'
-import definition from './definition_en'
+import definition from './definition_ja'
 import generator from './generator'
 import { defineComponent } from 'vue'
 
@@ -248,6 +233,7 @@ result
   z-index: 1000;
   padding: 4px;
 }
+
 #error {
   color: red;
   background-color: white;
