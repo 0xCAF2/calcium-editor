@@ -41,17 +41,17 @@
       </v-container>
       <textarea id="output" v-show="running" readonly>{{ output }}</textarea>
       <textarea id="error" v-show="error" readonly>{{ error }}</textarea>
-      <v-overlay v-model="overlayed" z-index="2000" absolute :transition="null">
+      <v-overlay v-model="overlayed" z-index="2000" absolute>
         <v-container>
           <v-row style="height: 100px"></v-row>
           <v-row justify="center" align="center">
             <v-col cols="8">
               <input style="
-                      background-color: white;
-                      color: black;
-                      width: 400px;
-                      max-width: 95%;
-                    " :placeholder="prompt" v-model="input" />
+                        background-color: white;
+                        color: black;
+                        width: 400px;
+                        max-width: 95%;
+                      " :placeholder="prompt" v-model="input" />
             </v-col>
             <v-col cols="4">
               <v-btn @click="sendInput">OK</v-btn>
