@@ -4,31 +4,35 @@
       <div class="d-flex align-center">
         <v-switch style="width: 100px; margin-left: 10px" v-model="running" color="white" hide-details="auto"
           :disabled="waiting">
-          <template #label>
-            <span class="text-white py-3"><b>{{ labelForRun }}</b></span>
-          </template>
-        </v-switch>
-        <v-btn color="white" @click="save">
-          <v-icon dark x-large>mdi-download</v-icon>
-          <span>{{ labelForSave }}</span>
-        </v-btn>
-        <v-btn color="white" @click="open">
-          <v-icon dark x-large>mdi-file-document-outline</v-icon>
-          <span>{{ labelForOpen }}</span>
-        </v-btn>
-        <v-menu bottom>
-          <template #activator="{ props }">
-            <v-btn icon color="white" v-bind="props" :hidden="waiting">
-              <v-icon>mdi-dots-horizontal</v-icon>
-            </v-btn>
-          </template>
-          <v-list>
-            <v-list-item @click="resetRuntime">
-              <v-list-item-title>{{ labelForReset }}</v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-        <v-progress-circular color="white" :indeterminate="waiting" :hidden="!waiting"></v-progress-circular>
+          <v-switch style="width: 100px; margin-left: 10px" v-model="running" color="white" hide-details="auto"
+            :disabled="waiting">
+            <template #label>
+              <span class="text-white py-3"><b>{{ labelForRun }}</b></span>
+              <span class="text-white py-3"><b>{{ labelForRun }}</b></span>
+            </template>
+          </v-switch>
+          <v-btn color="white" @click="save">
+            <v-icon dark x-large>mdi-download</v-icon>
+            <span>{{ labelForSave }}</span>
+          </v-btn>
+          <v-btn color="white" @click="open">
+            <v-icon dark x-large>mdi-file-document-outline</v-icon>
+            <span>{{ labelForOpen }}</span>
+          </v-btn>
+          <v-menu bottom>
+            <template #activator="{ props }">
+              <v-btn icon color="white" v-bind="props" :hidden="waiting">
+                <v-icon>mdi-dots-horizontal</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item @click="resetRuntime">
+                <v-list-item-title>{{ labelForReset }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+          <v-progress-circular color="white" :indeterminate="waiting" :hidden="!waiting"></v-progress-circular>
+          <v-progress-circular color="white" :indeterminate="waiting" :hidden="!waiting"></v-progress-circular>
       </div>
     </v-app-bar>
     <v-main>
