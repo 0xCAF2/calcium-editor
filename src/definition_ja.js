@@ -3018,8 +3018,9 @@ Blockly.Extensions.registerMutator(
 
 Blockly.Blocks['pseudo_number'] = {
   init() {
+    this.appendDummyInput().appendField('数')
     this.appendDummyInput().appendField(
-      new Blockly.FieldTextInput('0', function (newValue) {
+      new Blockly.FieldTextInput('100', function (newValue) {
         try {
           const parsedNum = parseFullWidthNumber(newValue)
           return parsedNum
@@ -3250,7 +3251,7 @@ Blockly.defineBlocksWithJsonArray([
   },
   {
     type: 'pseudo_variable',
-    message0: '\0 %1 \0',
+    message0: '変数 %1',
     args0: [
       {
         type: 'field_input',

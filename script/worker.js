@@ -1,26 +1,19 @@
 const RESULT_EXECUTED = 1
 const RESULT_PAUSED = 4
 
-importScripts('https://cdn.jsdelivr.net/pyodide/v0.21.3/full/pyodide.js')
+importScripts('https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js')
 
 let pyodide
 
-let isFirstOutput = true
-
 async function loadPyodideAndPackages() {
   pyodide = await loadPyodide({
-    indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.21.3/full/',
+    indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.23.4/full/',
     stdout: (output) => {
-      if (isFirstOutput) {
-        isFirstOutput = false
-        return ''
-      } else {
-        postMessage({ output })
-      }
+      postMessage({ output })
     },
   })
   pyodide.runPython(await (await fetch('/script/calciumlang.py')).text())
-  await pyodide.loadPackage(['numpy', 'pandas', 'scipy', 'scikit-learn'])
+  // await pyodide.loadPackage(['numpy', 'pandas', 'scipy'])
   postMessage({ loaded: true })
 }
 

@@ -2,24 +2,22 @@
   <v-app>
     <v-app-bar app :color="running ? 'orange' : 'blue'" style="z-index: 3000">
       <div class="d-flex align-center">
-        <v-switch style="width: 100px; margin-left: 10px" v-model="running" color="white" hide-details="auto"
-          :disabled="waiting">
+        <v-switch style="width: 100px; margin-left: 10px" v-model="running" hide-details="auto" :disabled="waiting">
           <template #label>
-            <span class="text-white py-3"><b>{{ labelForRun }}</b></span>
+            <span class="py-3"><b>{{ labelForRun }}</b></span>
           </template>
         </v-switch>
-        <v-btn color="white" @click="save">
-          <v-icon dark x-large>mdi-download</v-icon>
+        <v-btn @click="save" size="large">
           <span>{{ labelForSave }}</span>
         </v-btn>
-        <v-btn color="white" @click="open">
-          <v-icon dark x-large>mdi-file-document-outline</v-icon>
+        <v-btn @click="open" size="large">
           <span>{{ labelForOpen }}</span>
         </v-btn>
+        <v-progress-circular :indeterminate="waiting" v-show="waiting"></v-progress-circular>
         <v-menu bottom>
           <template #activator="{ props }">
-            <v-btn icon color="white" v-bind="props" :hidden="waiting">
-              <v-icon>mdi-dots-horizontal</v-icon>
+            <v-btn v-bind="props" v-show="running">
+              <span><b>...</b></span>
             </v-btn>
           </template>
           <v-list>
@@ -28,7 +26,6 @@
             </v-list-item>
           </v-list>
         </v-menu>
-        <v-progress-circular color="white" :indeterminate="waiting" :hidden="!waiting"></v-progress-circular>
       </div>
     </v-app-bar>
     <v-main>
@@ -39,8 +36,13 @@
           </v-col>
         </v-row>
       </v-container>
-      <textarea id="output" v-show="running" readonly>{{ output }}</textarea>
-      <textarea id="error" v-show="error" readonly>{{ error }}</textarea>
+      <div id="output">
+        <textarea v-show="running" readonly>{{ output }}</textarea>
+        <div class="white-background">
+          <calcium-flame id="calcium-flame" v-show="running" :code="code"></calcium-flame>
+        </div>
+        <textarea id="error" v-show="error" readonly>{{ error }}</textarea>
+      </div>
       <v-overlay v-model="overlayed" z-index="2000" absolute>
         <v-container>
           <v-row style="height: 100px"></v-row>
@@ -71,6 +73,7 @@ import DarkTheme from '@blockly/theme-dark'
 import definition from './definition_ja'
 import generator from './generator'
 import { defineComponent } from 'vue'
+import 'calcium-flame'
 
 Blockly.setLocale(Lang)
 
@@ -80,6 +83,7 @@ export default defineComponent({
   name: 'App',
   data: () => ({
     debuggerEnabled: false,
+    code: '',
     error: '',
     input: '',
     inputting: false,
@@ -145,6 +149,8 @@ export default defineComponent({
     },
     run() {
       const jsonCode = generator.workspaceToCode(workspace)
+      this.code = jsonCode
+      console.log(jsonCode)
       const code = `runtime = Runtime('${jsonCode
         .replace(/\n/g, '')
         .replace(/'/g, "\\'")}')
@@ -221,32 +227,27 @@ result
 <style scoped>
 #output {
   color: black;
-  background-color: white;
-  font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Mono',
-    Consolas, monospace;
-  width: 380px;
-  max-width: 95%;
-  min-height: 200px;
   position: absolute;
   top: 72px;
   right: 4px;
   z-index: 1000;
-  padding: 4px;
 }
 
 #error {
   color: red;
+  font-size: small;
+  margin-top: 4px;
+}
+
+textarea {
   background-color: white;
   font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Mono',
     Consolas, monospace;
-  font-size: small;
   width: 380px;
   max-width: 95%;
-  min-height: 200px;
-  position: absolute;
-  bottom: 4px;
-  right: 4px;
-  z-index: 2000;
-  resize: none;
+}
+
+div.white-background {
+  background-color: white;
 }
 </style>
