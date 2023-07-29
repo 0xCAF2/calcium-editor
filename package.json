@@ -9,9 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@blockly/theme-dark": "^4.0.9",
+    "@blockly/theme-dark": "^6.0.0",
     "@mdi/font": "7.2.96",
-    "blockly": "^9.3.3",
+    "blockly": "^10.0.2",
     "roboto-fontface": "*",
     "sass": "^1.56.1",
     "sass-loader": "^13.2.0",

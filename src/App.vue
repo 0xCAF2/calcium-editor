@@ -39,7 +39,7 @@
       <div id="output">
         <textarea v-show="running" readonly>{{ output }}</textarea>
         <div class="white-background">
-          <calcium-flame id="calcium-flame" v-show="running" :code="code"></calcium-flame>
+          <div id="div-code" v-show="running"></div>
         </div>
         <textarea id="error" v-show="error" readonly>{{ error }}</textarea>
       </div>
@@ -73,7 +73,6 @@ import DarkTheme from '@blockly/theme-dark'
 import definition from './definition_ja'
 import generator from './generator'
 import { defineComponent } from 'vue'
-import 'calcium-flame'
 
 Blockly.setLocale(Lang)
 
