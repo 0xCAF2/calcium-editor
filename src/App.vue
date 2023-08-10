@@ -70,8 +70,11 @@ import * as Blockly from 'blockly/core'
 import * as Lang from 'blockly/msg/ja'
 import './ja'
 import DarkTheme from '@blockly/theme-dark'
-import definition from './definition_ja'
-import generator from './generator'
+// import definition from './definition_ja'
+import { calciumBlocks } from './blocks'
+import { calciumToolbox } from './toolbox'
+// import generator from './generator'
+import { CalciumGenerator } from './calcium-generator'
 import { defineComponent } from 'vue'
 
 Blockly.setLocale(Lang)
@@ -147,6 +150,7 @@ export default defineComponent({
       Blockly.svgResize(workspace)
     },
     run() {
+      const generator = new CalciumGenerator('calcium')
       const jsonCode = generator.workspaceToCode(workspace)
       this.code = jsonCode
       console.log(jsonCode)
@@ -177,6 +181,7 @@ result
     },
   },
   mounted() {
+    Blockly.common.defineBlocks(calciumBlocks)
     workspace = Blockly.inject(document.querySelector('#div-blockly'), {
       move: {
         scrollbars: true,
@@ -192,7 +197,7 @@ result
       theme: DarkTheme,
       toolbox: {
         kind: 'categoryToolbox',
-        contents: definition,
+        contents: calciumToolbox,
       },
     })
     this.resize()
