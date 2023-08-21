@@ -1219,7 +1219,7 @@ Blockly.Extensions.registerMutator(
       this.countOfArguments = connections.length
       this.updateShape()
       for (let i = 0; i < this.countOfArguments; ++i) {
-        connections[i].reconnect(this, 'ARG' + i)
+        connections[i]?.reconnect(this, 'ARG' + i)
       }
     },
     decompose(workspace) {
@@ -1765,7 +1765,7 @@ Blockly.Extensions.registerMutator(
       this.updateShape_()
       // Reconnect any child blocks.
       for (i = 0; i < this.itemCount_; i++) {
-        connections[i].reconnect(this, 'ADD' + i)
+        connections[i]?.reconnect(this, 'ADD' + i)
       }
     },
     /**
@@ -1858,7 +1858,7 @@ Blockly.Extensions.registerMutator(
       this.countOfArguments = connections.length
       this.updateShape()
       for (let i = 0; i < this.countOfArguments; ++i) {
-        connections[i].reconnect(this, 'ARG' + i)
+        connections[i]?.reconnect(this, 'ARG' + i)
       }
     },
     decompose(workspace) {
@@ -1996,7 +1996,7 @@ Blockly.Extensions.registerMutator(
       this.updateShape_()
       // Reconnect any child blocks.
       for (i = 0; i < this.itemCount_; i++) {
-        connections[i].reconnect(this, 'ADD' + i)
+        connections[i]?.reconnect(this, 'ADD' + i)
       }
     },
     /**
@@ -2094,7 +2094,7 @@ Blockly.Extensions.registerMutator(
       this.countOfArguments = connections.length
       this.updateShape()
       for (let i = 0; i < this.countOfArguments; ++i) {
-        connections[i].reconnect(this, 'ARG' + i)
+        connections[i]?.reconnect(this, 'ARG' + i)
       }
     },
     decompose(workspace) {

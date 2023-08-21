@@ -1,7 +1,7 @@
 import Blockly from 'blockly'
 import { parseFullWidthNumber } from './utils'
 
-export class CalciumGenerator extends Blockly.Generator {
+export class PseudoGenerator extends Blockly.Generator {
   indent: number
   constructor(name: string) {
     super(name)
@@ -9,11 +9,9 @@ export class CalciumGenerator extends Blockly.Generator {
 
     const self = this
     this.forBlock['calcium_add_repr'] = function (block) {
-      let ref = self.valueToCode(block, 'REF', 0) || '["var", "x"]'
-      ref = JSON.parse(removeParens(ref))
-      let value = self.valueToCode(block, 'VALUE', 0) || '1'
-      value = JSON.parse(removeParens(value))
-      return JSON.stringify([self.indent, [], '+=', ref, value]) + ','
+      const ref = self.valueToCode(block, 'REF', 0) || 'x'
+      const value = self.valueToCode(block, 'VALUE', 0) || '1'
+      return self.addIndent(`${ref} += ${value}`)
     }
 
     this.forBlock['calcium_arithmetic'] =
@@ -21,11 +19,9 @@ export class CalciumGenerator extends Blockly.Generator {
       this.forBlock['pseudo_arithmetic'] =
         function (block) {
           const op = block.getFieldValue('OP')
-          let left = self.valueToCode(block, 'LEFT', 0) || '["var", "i"]'
-          left = JSON.parse(removeParens(left))
-          let right = self.valueToCode(block, 'RIGHT', 0) || '1'
-          right = JSON.parse(removeParens(right))
-          const code = JSON.stringify([op, left, right])
+          const left = self.valueToCode(block, 'LEFT', 0) || 'i'
+          const right = self.valueToCode(block, 'RIGHT', 0) || '1'
+          const code = `${left} ${op} ${right}`
           return [code, 0]
         }
 
@@ -33,14 +29,9 @@ export class CalciumGenerator extends Blockly.Generator {
       this.forBlock['calcium_assign_repr'] =
       this.forBlock['pseudo_assign'] =
         function (block) {
-          let ref = self.valueToCode(block, 'REF', 0) || `["var", "x"]`
-          ref = removeParens(ref)
-          ref = JSON.parse(ref)
-
-          let arg0 = self.valueToCode(block, 'VALUE', 0) || '0'
-          arg0 = removeParens(arg0)
-          arg0 = JSON.parse(arg0)
-          return JSON.stringify([self.indent, [], '=', ref, arg0]) + ','
+          const ref = self.valueToCode(block, 'REF', 0) || 'x'
+          const value = self.valueToCode(block, 'VALUE', 0) || '0'
+          return self.addIndent(`${ref} = ${value}`)
         }
 
     this.forBlock['calcium_attribute'] = this.forBlock[
@@ -687,6 +678,12 @@ export class CalciumGenerator extends Blockly.Generator {
   /** add offset to indent for the next blocks. */
   shiftIndent(offset: number) {
     this.indent += offset
+  }
+
+  /** add prefix characters at beginning of each line */
+  addIndent(code: string): string {
+    const indent = '｜'.repeat(this.indent - 1)
+    return indent + code + '\n'
   }
 }
 function quote(s: string): string {

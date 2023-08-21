@@ -75,11 +75,14 @@ import { calciumBlocks } from './blocks'
 import { calciumToolbox } from './toolbox'
 // import generator from './generator'
 import { CalciumGenerator } from './calcium-generator'
+import { PseudoGenerator } from './pseudo-generator'
 import { defineComponent } from 'vue'
 
 Blockly.setLocale(Lang)
 
 let workspace = null
+const pseudoGenerator = new PseudoGenerator('pseudo')
+const calciumGenerator = new CalciumGenerator('calcium')
 
 export default defineComponent({
   name: 'App',
@@ -150,8 +153,11 @@ export default defineComponent({
       Blockly.svgResize(workspace)
     },
     run() {
-      const generator = new CalciumGenerator('calcium')
-      const jsonCode = generator.workspaceToCode(workspace)
+      const pseudoCode = pseudoGenerator.workspaceToCode(workspace)
+      console.log(pseudoCode)
+      document.querySelector('#div-code').textContent = pseudoCode
+
+      const jsonCode = calciumGenerator.workspaceToCode(workspace)
       this.code = jsonCode
       console.log(jsonCode)
       const code = `runtime = Runtime('${jsonCode
@@ -253,5 +259,9 @@ textarea {
 
 div.white-background {
   background-color: white;
+}
+
+#div-code {
+  white-space: pre-line;
 }
 </style>
