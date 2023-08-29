@@ -7,23 +7,22 @@ export class CalciumGenerator extends Blockly.Generator {
     super(name)
     this.indent = 1
 
-    const self = this
-    this.forBlock['calcium_add_repr'] = function (block) {
-      let ref = self.valueToCode(block, 'REF', 0) || '["var", "x"]'
+    this.forBlock['calcium_add_repr'] = (block) => {
+      let ref = this.valueToCode(block, 'REF', 0) || '["var", "x"]'
       ref = JSON.parse(removeParens(ref))
-      let value = self.valueToCode(block, 'VALUE', 0) || '1'
+      let value = this.valueToCode(block, 'VALUE', 0) || '1'
       value = JSON.parse(removeParens(value))
-      return JSON.stringify([self.indent, [], '+=', ref, value]) + ','
+      return JSON.stringify([this.indent, [], '+=', ref, value]) + ','
     }
 
     this.forBlock['calcium_arithmetic'] =
       this.forBlock['calcium_arithmetic_repr'] =
       this.forBlock['pseudo_arithmetic'] =
-        function (block) {
+        (block) => {
           const op = block.getFieldValue('OP')
-          let left = self.valueToCode(block, 'LEFT', 0) || '["var", "i"]'
+          let left = this.valueToCode(block, 'LEFT', 0) || '["var", "i"]'
           left = JSON.parse(removeParens(left))
-          let right = self.valueToCode(block, 'RIGHT', 0) || '1'
+          let right = this.valueToCode(block, 'RIGHT', 0) || '1'
           right = JSON.parse(removeParens(right))
           const code = JSON.stringify([op, left, right])
           return [code, 0]
@@ -32,21 +31,21 @@ export class CalciumGenerator extends Blockly.Generator {
     this.forBlock['calcium_assign'] =
       this.forBlock['calcium_assign_repr'] =
       this.forBlock['pseudo_assign'] =
-        function (block) {
-          let ref = self.valueToCode(block, 'REF', 0) || `["var", "x"]`
+        (block) => {
+          let ref = this.valueToCode(block, 'REF', 0) || `["var", "x"]`
           ref = removeParens(ref)
           ref = JSON.parse(ref)
 
-          let arg0 = self.valueToCode(block, 'VALUE', 0) || '0'
+          let arg0 = this.valueToCode(block, 'VALUE', 0) || '0'
           arg0 = removeParens(arg0)
           arg0 = JSON.parse(arg0)
-          return JSON.stringify([self.indent, [], '=', ref, arg0]) + ','
+          return JSON.stringify([this.indent, [], '=', ref, arg0]) + ','
         }
 
     this.forBlock['calcium_attribute'] = this.forBlock[
       'calcium_attribute_repr'
-    ] = function (block) {
-      let ref = self.valueToCode(block, 'REF', 0) || `["var", "self"]`
+    ] = (block) => {
+      let ref = this.valueToCode(block, 'REF', 0) || `["var", "self"]`
       ref = JSON.parse(removeParens(ref))
       let attr = ['attr']
       attr.push(ref) // remove keyword
@@ -54,83 +53,85 @@ export class CalciumGenerator extends Blockly.Generator {
       return [JSON.stringify(attr), 0]
     }
 
-    this.forBlock['calcium_bitwise'] = function (block) {
+    this.forBlock['calcium_bitwise'] = (block) => {
       const op = block.getFieldValue('OP')
-      let left = self.valueToCode(block, 'LEFT', 0) || '0'
+      let left = this.valueToCode(block, 'LEFT', 0) || '0'
       left = JSON.parse(removeParens(left))
-      let right = self.valueToCode(block, 'RIGHT', 0) || '0'
+      let right = this.valueToCode(block, 'RIGHT', 0) || '0'
       right = JSON.parse(removeParens(right))
       const code = JSON.stringify([op, left, right])
       return [code, 0]
     }
 
-    this.forBlock['calcium_bitwise_not'] = function (block) {
-      let value = self.valueToCode(block, 'VALUE', 0) || '0'
+    this.forBlock['calcium_bitwise_not'] = (block) => {
+      let value = this.valueToCode(block, 'VALUE', 0) || '0'
       value = JSON.parse(removeParens(value))
       return [JSON.stringify(['~', value]), 0]
     }
 
-    this.forBlock['calcium_boolean'] = this.forBlock['calcium_boolean_repr'] =
-      function (block) {
-        return [block.getFieldValue('VALUE'), 0]
-      }
+    this.forBlock['calcium_boolean'] = this.forBlock['calcium_boolean_repr'] = (
+      block
+    ) => {
+      return [block.getFieldValue('VALUE'), 0]
+    }
 
     this.forBlock['calcium_break_continue'] = this.forBlock[
       'calcium_break_continue_repr'
-    ] = function (block) {
+    ] = (block) => {
       return (
-        JSON.stringify([self.indent, [], block.getFieldValue('FLOW')]) + ','
+        JSON.stringify([this.indent, [], block.getFieldValue('FLOW')]) + ','
       )
     }
 
-    this.forBlock['calcium_call'] = this.forBlock['calcium_call_repr'] =
-      function (block) {
-        const args: any[] = []
-        const countOfArguments: number = Reflect.get(block, 'countOfArguments')
-        for (let i = 0; i < countOfArguments; ++i) {
-          let arg = self.valueToCode(block, 'ARG' + i, 0) || 'null'
-          arg = removeParens(arg)
-          args.push(JSON.parse(arg))
-        }
-        let callRef = self.valueToCode(block, 'REF', 0) || `["var", "f"]`
-        callRef = JSON.parse(callRef)
-
-        return [JSON.stringify(['call', callRef, args]), 0]
-      }
-
-    this.forBlock['calcium_callnoreturn_repr'] = function (block) {
+    this.forBlock['calcium_call'] = this.forBlock['calcium_call_repr'] = (
+      block
+    ) => {
       const args: any[] = []
       const countOfArguments: number = Reflect.get(block, 'countOfArguments')
       for (let i = 0; i < countOfArguments; ++i) {
-        let arg = self.valueToCode(block, 'ARG' + i, 0) || 'null'
+        let arg = this.valueToCode(block, 'ARG' + i, 0) || 'null'
         arg = removeParens(arg)
         args.push(JSON.parse(arg))
       }
-      let callRef = self.valueToCode(block, 'REF', 0) || `["var", "f"]`
+      let callRef = this.valueToCode(block, 'REF', 0) || `["var", "f"]`
+      callRef = JSON.parse(callRef)
+
+      return [JSON.stringify(['call', callRef, args]), 0]
+    }
+
+    this.forBlock['calcium_callnoreturn_repr'] = (block) => {
+      const args: any[] = []
+      const countOfArguments: number = Reflect.get(block, 'countOfArguments')
+      for (let i = 0; i < countOfArguments; ++i) {
+        let arg = this.valueToCode(block, 'ARG' + i, 0) || 'null'
+        arg = removeParens(arg)
+        args.push(JSON.parse(arg))
+      }
+      let callRef = this.valueToCode(block, 'REF', 0) || `["var", "f"]`
       callRef = JSON.parse(callRef)
 
       return (
-        JSON.stringify([self.indent, [], 'expr', ['call', callRef, args]]) + ','
+        JSON.stringify([this.indent, [], 'expr', ['call', callRef, args]]) + ','
       )
     }
 
-    this.forBlock['calcium_callreturn_repr'] = function (block) {
+    this.forBlock['calcium_callreturn_repr'] = (block) => {
       let returnRef: any = null
-      returnRef = self.valueToCode(block, 'RETURN', 0) || 'null'
+      returnRef = this.valueToCode(block, 'RETURN', 0) || '["var", "x"]'
       returnRef = JSON.parse(returnRef)
       const args: any[] = []
       const countOfArguments: number = Reflect.get(block, 'countOfArguments')
       for (let i = 0; i < countOfArguments; ++i) {
-        let arg = self.valueToCode(block, 'ARG' + i, 0) || 'null'
+        let arg = this.valueToCode(block, 'ARG' + i, 0) || 'null'
         arg = removeParens(arg)
         args.push(JSON.parse(arg))
       }
-      let callRef = self.valueToCode(block, 'REF', 0) || `["var", "f"]`
+      let callRef = this.valueToCode(block, 'REF', 0) || `["var", "f"]`
       callRef = JSON.parse(callRef)
 
       return (
         JSON.stringify([
-          self.indent,
+          this.indent,
           [],
           '=',
           returnRef,
@@ -139,77 +140,78 @@ export class CalciumGenerator extends Blockly.Generator {
       )
     }
 
-    this.forBlock['calcium_class_repr'] = function (block) {
+    this.forBlock['calcium_class_repr'] = (block) => {
       return [JSON.stringify(['var', block.getField('NAME')?.getText()]), 0]
     }
 
     this.forBlock['calcium_class_def'] = this.forBlock[
       'calcium_class_def_repr'
-    ] = function (block) {
+    ] = (block) => {
       const className = block.getFieldValue('NAME')
-      let superclass = self.valueToCode(block, 'SUPERCLASS', 0) || 'null'
+      let superclass = this.valueToCode(block, 'SUPERCLASS', 0) || 'null'
       superclass = JSON.parse(superclass) // ref or null
 
       this.shiftIndent(1)
       const stmts =
         this.statementToCode(block, 'STMTS') ||
-        JSON.stringify([self.indent, [], 'pass']) + ','
+        JSON.stringify([this.indent, [], 'pass']) + ','
       this.shiftIndent(-1)
       return (
-        JSON.stringify([self.indent, [], 'class', className, superclass]) +
+        JSON.stringify([this.indent, [], 'class', className, superclass]) +
         ',' +
         stmts
       )
     }
 
-    this.forBlock['calcium_comma'] = function (block) {
-      let first = self.valueToCode(block, 'FIRST', 0) || '["var", "a"]'
+    this.forBlock['calcium_comma'] = (block) => {
+      let first = this.valueToCode(block, 'FIRST', 0) || '["var", "a"]'
       first = JSON.parse(first)
-      let second = self.valueToCode(block, 'SECOND', 0) || '["var", "b"]'
+      let second = this.valueToCode(block, 'SECOND', 0) || '["var", "b"]'
       second = JSON.parse(second)
       return [JSON.stringify([',', first, second]), 0]
     }
 
-    this.forBlock['calcium_compound_assign'] = function (block) {
-      let ref = self.valueToCode(block, 'REF', 0) || '["var", "x"]'
+    this.forBlock['calcium_compound_assign'] = (block) => {
+      let ref = this.valueToCode(block, 'REF', 0) || '["var", "x"]'
       ref = JSON.parse(removeParens(ref))
       const op = block.getFieldValue('OP')
-      let value = self.valueToCode(block, 'VALUE', 0) || '0'
+      let value = this.valueToCode(block, 'VALUE', 0) || '0'
       value = JSON.parse(removeParens(value))
-      return JSON.stringify([self.indent, [], op, ref, value]) + ','
+      return JSON.stringify([this.indent, [], op, ref, value]) + ','
     }
 
-    this.forBlock['calcium_def'] = this.forBlock['calcium_def_repr'] =
-      function (block) {
-        const funcName = block.getField('NAME')?.getText()
-        this.shiftIndent(1)
-        const stmts =
-          this.statementToCode(block, 'STMTS') ||
-          JSON.stringify([self.indent, [], 'pass']) + ','
-        this.shiftIndent(-1)
+    this.forBlock['calcium_def'] = this.forBlock['calcium_def_repr'] = (
+      block
+    ) => {
+      const funcName = block.getField('NAME')?.getText()
+      this.shiftIndent(1)
+      const stmts =
+        this.statementToCode(block, 'STMTS') ||
+        JSON.stringify([this.indent, [], 'pass']) + ','
+      this.shiftIndent(-1)
 
-        const parameters: any = Reflect.get(block, 'parameters')
-        return (
-          JSON.stringify([self.indent, [], 'def', funcName, parameters]) +
-          ',' +
-          stmts
-        )
-      }
+      const parameters: any = Reflect.get(block, 'parameters')
+      return (
+        JSON.stringify([this.indent, [], 'def', funcName, parameters]) +
+        ',' +
+        stmts
+      )
+    }
 
     this.forBlock['calcium_defmethod'] = this.forBlock[
       'calcium_defmethod_repr'
-    ] = function (block) {
+    ] = (block) => {
       const name = block.getField('NAME')?.getText()
       this.shiftIndent(1)
       const stmts =
         this.statementToCode(block, 'STMTS') ||
-        JSON.stringify([self.indent, [], 'pass']) + ','
+        JSON.stringify([this.indent, [], 'pass']) + ','
       this.shiftIndent(-1)
 
       const parameters = Reflect.get(block, 'parameters') || []
       return (
         JSON.stringify([
-          self.indent,
+          this.indent,
           [],
           'def',
           name,
@@ -219,51 +221,51 @@ export class CalciumGenerator extends Blockly.Generator {
         stmts
       )
     }
-    this.forBlock['calcium_dict'] = this.forBlock['calcium_dict_repr'] =
-      function () {
-        return ['{}', 0]
-      }
-
-    this.forBlock['calcium_expr_stmt'] = function (block) {
-      let call =
-        self.valueToCode(block, 'CALL', 0) || '["call", ["var", "print"], [""]]'
-      call = JSON.parse(call)
-      return JSON.stringify([self.indent, [], 'expr', call]) + ','
+    this.forBlock['calcium_dict'] = this.forBlock['calcium_dict_repr'] = () => {
+      return ['{}', 0]
     }
 
-    this.forBlock['calcium_for'] = this.forBlock['calcium_for_repr'] =
-      function (block) {
-        let vars = self.valueToCode(block, 'VARS', 0) || '["var", "i"]'
-        vars = JSON.parse(vars)
-        let iterable = self.valueToCode(block, 'ITER', 0) || '"Hello"'
-        iterable = JSON.parse(removeParens(iterable))
+    this.forBlock['calcium_expr_stmt'] = (block) => {
+      let call =
+        this.valueToCode(block, 'CALL', 0) || '["call", ["var", "print"], [""]]'
+      call = JSON.parse(call)
+      return JSON.stringify([this.indent, [], 'expr', call]) + ','
+    }
 
-        this.shiftIndent(1)
-        const stmts =
-          this.statementToCode(block, 'STMTS') ||
-          JSON.stringify([self.indent, [], 'pass']) + ','
-        this.shiftIndent(-1)
+    this.forBlock['calcium_for'] = this.forBlock['calcium_for_repr'] = (
+      block
+    ) => {
+      let vars = this.valueToCode(block, 'VARS', 0) || '["var", "i"]'
+      vars = JSON.parse(vars)
+      let iterable = this.valueToCode(block, 'ITER', 0) || '"Hello"'
+      iterable = JSON.parse(removeParens(iterable))
 
-        return (
-          JSON.stringify([self.indent, [], 'for', vars, iterable]) + ',' + stmts
-        )
-      }
+      this.shiftIndent(1)
+      const stmts =
+        this.statementToCode(block, 'STMTS') ||
+        JSON.stringify([this.indent, [], 'pass']) + ','
+      this.shiftIndent(-1)
 
-    this.forBlock['calcium_for_range_repr'] = function (block) {
-      let variable = self.valueToCode(block, 'VARS', 0) || '["var", "i"]'
+      return (
+        JSON.stringify([this.indent, [], 'for', vars, iterable]) + ',' + stmts
+      )
+    }
+
+    this.forBlock['calcium_for_range_repr'] = (block) => {
+      let variable = this.valueToCode(block, 'VARS', 0) || '["var", "i"]'
       variable = JSON.parse(variable)
 
-      let start: string | null = self.valueToCode(block, 'START', 0)
+      let start: any = this.valueToCode(block, 'START', 0)
       if (!start) {
         start = null
       } else {
         start = JSON.parse(removeParens(start))
       }
 
-      let stop = self.valueToCode(block, 'STOP', 0) || '10'
+      let stop: any = this.valueToCode(block, 'STOP', 0) || '10'
       stop = JSON.parse(removeParens(stop))
 
-      let step: string | null = self.valueToCode(block, 'STEP', 0)
+      let step: any = this.valueToCode(block, 'STEP', 0)
       if (!step) {
         step = null
       } else {
@@ -273,9 +275,9 @@ export class CalciumGenerator extends Blockly.Generator {
       this.shiftIndent(1)
       const stmts =
         this.statementToCode(block, 'STMTS') ||
-        JSON.stringify([self.indent, [], 'pass']) + ','
+        JSON.stringify([this.indent, [], 'pass']) + ','
       this.shiftIndent(-1)
-      let range
+      let range: any[]
       if (start === null && step === null) {
         range = [stop]
       } else if (start !== null && step === null) {
@@ -287,7 +289,7 @@ export class CalciumGenerator extends Blockly.Generator {
       }
       return (
         JSON.stringify([
-          self.indent,
+          this.indent,
           [],
           'for',
           variable,
@@ -300,18 +302,18 @@ export class CalciumGenerator extends Blockly.Generator {
 
     this.forBlock['calcium_function_repr'] = this.forBlock['calcium_class_repr']
 
-    this.forBlock['calcium_if'] = this.forBlock['calcium_if_repr'] = function (
+    this.forBlock['calcium_if'] = this.forBlock['calcium_if_repr'] = (
       block
-    ) {
+    ) => {
       let n = 0
-      let codeArray = [[self.indent, [], 'ifs']]
+      let codeArray = [[this.indent, [], 'ifs']]
       this.shiftIndent(1)
       let branchCode, conditionCode
       do {
-        conditionCode = self.valueToCode(block, 'IF' + n, 0) || 'false'
+        conditionCode = this.valueToCode(block, 'IF' + n, 0) || 'false'
         conditionCode = removeParens(conditionCode)
         codeArray.push([
-          self.indent,
+          this.indent,
           [],
           n === 0 ? 'if' : 'elif',
           JSON.parse(conditionCode),
@@ -319,7 +321,7 @@ export class CalciumGenerator extends Blockly.Generator {
         this.shiftIndent(1)
         branchCode =
           this.statementToCode(block, 'DO' + n) ||
-          JSON.stringify([self.indent, [], 'pass']) + ','
+          JSON.stringify([this.indent, [], 'pass']) + ','
         this.shiftIndent(-1)
         // branchCode needs "[" and "]" in order to be a valid JSON array.
         codeArray = codeArray.concat(
@@ -329,11 +331,11 @@ export class CalciumGenerator extends Blockly.Generator {
       } while (block.getInput('IF' + n))
 
       if (block.getInput('ELSE')) {
-        codeArray.push([self.indent, [], 'else'])
+        codeArray.push([this.indent, [], 'else'])
         this.shiftIndent(1)
         branchCode =
           this.statementToCode(block, 'ELSE') ||
-          JSON.stringify([self.indent, [], 'pass']) + ','
+          JSON.stringify([this.indent, [], 'pass']) + ','
         codeArray = codeArray.concat(
           JSON.parse('[' + removeComma(branchCode) + ']')
         )
@@ -345,73 +347,77 @@ export class CalciumGenerator extends Blockly.Generator {
       return codeStr.substring(1, codeStr.length - 1) + ','
     }
 
-    this.forBlock['calcium_import'] = this.forBlock['calcium_import_repr'] =
-      function (block) {
-        const moduleName = block.getField('NAME')?.getText()
-        return JSON.stringify([self.indent, [], 'import', moduleName]) + ','
-      }
+    this.forBlock['calcium_import'] = this.forBlock['calcium_import_repr'] = (
+      block
+    ) => {
+      const moduleName = block.getField('NAME')?.getText()
+      return JSON.stringify([this.indent, [], 'import', moduleName]) + ','
+    }
 
     this.forBlock['calcium_kwarg'] = function (block) {
       const kw = block.getField('NAME')?.getText()
-      let value = self.valueToCode(block, 'VALUE', 0) || '0'
+      let value = this.valueToCode(block, 'VALUE', 0) || '0'
       value = JSON.parse(removeParens(value))
       return [JSON.stringify(['kwarg', kw, value]), 0]
     }
 
-    this.forBlock['calcium_list'] = this.forBlock['calcium_list_repr'] =
-      function (block) {
-        const itemCount = Reflect.get(block, 'itemCount_')
-        const elements = new Array(itemCount)
-        for (let i = 0; i < itemCount; ++i) {
-          let elem = self.valueToCode(block, 'ADD' + i, 0) || 'null'
-          elem = removeParens(elem)
-          elements[i] = elem
-        }
-        const code = '[[' + elements.join(', ') + ']]'
-        return [code, 0]
+    this.forBlock['calcium_list'] = this.forBlock['calcium_list_repr'] = (
+      block
+    ) => {
+      const itemCount = Reflect.get(block, 'itemCount_')
+      const elements = new Array(itemCount)
+      for (let i = 0; i < itemCount; ++i) {
+        let elem = this.valueToCode(block, 'ADD' + i, 0) || 'null'
+        elem = removeParens(elem)
+        elements[i] = elem
       }
+      const code = '[[' + elements.join(', ') + ']]'
+      return [code, 0]
+    }
 
     this.forBlock['calcium_logical'] = this.forBlock['calcium_logical_repr'] =
       this.forBlock['calcium_bitwise']
 
     this.forBlock['calcium_method_repr'] = this.forBlock['calcium_attribute']
 
-    this.forBlock['calcium_none'] = function () {
+    this.forBlock['calcium_none'] = () => {
       return ['null', 0]
     }
 
-    this.forBlock['calcium_not'] = this.forBlock['calcium_not_repr'] =
-      function (block) {
-        let value = self.valueToCode(block, 'VALUE', 0) || 'true'
-        value = JSON.parse(removeParens(value))
-        return [JSON.stringify(['not', value]), 0]
-      }
-
-    this.forBlock['calcium_number'] = this.forBlock['pseudo_number'] =
-      function (block) {
-        const numStr = block.getFieldValue('NUM') || '0'
-        return [parseFullWidthNumber(numStr), 0]
-      }
-
-    this.forBlock['calcium_pass'] = function () {
-      return JSON.stringify([self.indent, [], 'pass']) + ','
+    this.forBlock['calcium_not'] = this.forBlock['calcium_not_repr'] = (
+      block
+    ) => {
+      let value = this.valueToCode(block, 'VALUE', 0) || 'true'
+      value = JSON.parse(removeParens(value))
+      return [JSON.stringify(['not', value]), 0]
     }
 
-    this.forBlock['calcium_print_repr'] = function (block) {
-      let value = self.valueToCode(block, 'VALUE', 0) || '""'
+    this.forBlock['calcium_number'] = this.forBlock['pseudo_number'] = (
+      block
+    ) => {
+      const numStr = block.getFieldValue('NUM') || '0'
+      return [parseFullWidthNumber(numStr), 0]
+    }
+
+    this.forBlock['calcium_pass'] = () => {
+      return JSON.stringify([this.indent, [], 'pass']) + ','
+    }
+
+    this.forBlock['calcium_print_repr'] = (block) => {
+      let value = this.valueToCode(block, 'VALUE', 0) || '""'
       value = removeParens(value)
       value = JSON.parse(value)
       const args: any[] = []
       const countOfArguments: number = Reflect.get(block, 'countOfArguments')
       for (let i = 0; i < countOfArguments; ++i) {
-        let arg = self.valueToCode(block, 'ARG' + i, 0) || 'null'
+        let arg = this.valueToCode(block, 'ARG' + i, 0) || 'null'
         arg = removeParens(arg)
         args.push(JSON.parse(arg))
       }
       args.splice(0, 0, value)
       return (
         JSON.stringify([
-          self.indent,
+          this.indent,
           [],
           'expr',
           ['call', ['var', 'print'], args],
@@ -423,38 +429,40 @@ export class CalciumGenerator extends Blockly.Generator {
       'calcium_relational_repr'
     ] = this.forBlock['calcium_logical']
 
-    this.forBlock['calcium_return'] = this.forBlock['calcium_return_repr'] =
-      function (block) {
-        let value = self.valueToCode(block, 'VALUE', 0) || 'null'
-        value = JSON.parse(removeParens(value))
-        return JSON.stringify([self.indent, [], 'return', value]) + ','
-      }
+    this.forBlock['calcium_return'] = this.forBlock['calcium_return_repr'] = (
+      block
+    ) => {
+      let value = this.valueToCode(block, 'VALUE', 0) || 'null'
+      value = JSON.parse(removeParens(value))
+      return JSON.stringify([this.indent, [], 'return', value]) + ','
+    }
 
-    this.forBlock['calcium_slice'] = this.forBlock['calcium_slice_repr'] =
-      function (block) {
-        let start = self.valueToCode(block, 'START', 0) || 'null'
-        start = JSON.parse(removeParens(start))
-        let end = self.valueToCode(block, 'END', 0) || 'null'
-        end = JSON.parse(removeParens(end))
-        const code = JSON.stringify(['slice', start, end])
-        return [code, 0]
-      }
+    this.forBlock['calcium_slice'] = this.forBlock['calcium_slice_repr'] = (
+      block
+    ) => {
+      let start = this.valueToCode(block, 'START', 0) || '0'
+      start = JSON.parse(removeParens(start))
+      let end = this.valueToCode(block, 'END', 0) || '0'
+      end = JSON.parse(removeParens(end))
+      const code = JSON.stringify(['slice', start, end])
+      return [code, 0]
+    }
 
     this.forBlock['calcium_str'] =
       this.forBlock['calcium_str_repr'] =
       this.forBlock['pseudo_str'] =
-        function (block) {
+        (block) => {
           let str = block.getField('STR')?.getText() || ''
           return [quote(str), 0]
         }
 
     this.forBlock['calcium_subscript'] = this.forBlock[
       'calcium_subscript_repr'
-    ] = function (block) {
-      let ref = self.valueToCode(block, 'REF', 0) || `["var", "s"]`
+    ] = (block) => {
+      let ref = this.valueToCode(block, 'REF', 0) || `["var", "s"]`
       ref = JSON.parse(removeParens(ref))
 
-      let subCode = self.valueToCode(block, 'SUB', 0) || '0'
+      let subCode = this.valueToCode(block, 'SUB', 0) || '0'
       let sub = JSON.parse(removeParens(subCode))
       if (sub instanceof Array && sub[0] === 'slice') {
         const start = sub[1]
@@ -470,45 +478,44 @@ export class CalciumGenerator extends Blockly.Generator {
     this.forBlock['calcium_variable'] =
       this.forBlock['calcium_variable_repr'] =
       this.forBlock['pseudo_variable'] =
-        function (block) {
+        (block) => {
           return [JSON.stringify(['var', block.getField('NAME')?.getText()]), 0]
         }
 
-    this.forBlock['calcium_while'] = this.forBlock['calcium_while_repr'] =
-      function (block) {
-        let condition = self.valueToCode(block, 'COND', 0) || 'false'
-        condition = JSON.parse(removeParens(condition))
+    this.forBlock['calcium_while'] = this.forBlock['calcium_while_repr'] = (
+      block
+    ) => {
+      let condition = this.valueToCode(block, 'COND', 0) || 'false'
+      condition = JSON.parse(removeParens(condition))
 
-        this.shiftIndent(1)
-        const stmts =
-          this.statementToCode(block, 'STMTS') ||
-          JSON.stringify([self.indent, [], 'pass']) + ','
-        this.shiftIndent(-1)
+      this.shiftIndent(1)
+      const stmts =
+        this.statementToCode(block, 'STMTS') ||
+        JSON.stringify([this.indent, [], 'pass']) + ','
+      this.shiftIndent(-1)
 
-        return (
-          JSON.stringify([self.indent, [], 'while', condition]) + ',' + stmts
-        )
-      }
+      return JSON.stringify([this.indent, [], 'while', condition]) + ',' + stmts
+    }
 
-    this.forBlock['pseudo_array'] = function (block) {
-      let ref = self.valueToCode(block, 'REF', 0) || '["var", "Data"]'
+    this.forBlock['pseudo_array'] = (block) => {
+      let ref = this.valueToCode(block, 'REF', 0) || '["var", "Data"]'
       ref = JSON.parse(removeParens(ref))
 
-      let sub = self.valueToCode(block, 'SUB', 0) || '0'
+      let sub = this.valueToCode(block, 'SUB', 0) || '0'
       sub = JSON.parse(removeParens(sub))
 
       const code = JSON.stringify(['sub', ref, sub])
       return [code, 0]
     }
 
-    this.forBlock['pseudo_array_slice'] = function (block) {
-      let ref = self.valueToCode(block, 'REF', 0) || '["var", "Data"]'
+    this.forBlock['pseudo_array_slice'] = (block) => {
+      let ref = this.valueToCode(block, 'REF', 0) || '["var", "Data"]'
       ref = JSON.parse(removeParens(ref))
 
-      let start = self.valueToCode(block, 'START', 0) || 'null'
+      let start = this.valueToCode(block, 'START', 0) || 'null'
       start = JSON.parse(removeParens(start))
 
-      let endStr = self.valueToCode(block, 'END', 0) || 'null'
+      let endStr = this.valueToCode(block, 'END', 0) || 'null'
       let end = JSON.parse(removeParens(endStr))
       if (end !== null) {
         end = ['+', end, 1]
@@ -518,43 +525,43 @@ export class CalciumGenerator extends Blockly.Generator {
       return [code, 0]
     }
 
-    this.forBlock['pseudo_assign_array'] = function (block) {
-      let ref = self.valueToCode(block, 'REF', 0) || '["var", "Data"]'
+    this.forBlock['pseudo_assign_array'] = (block) => {
+      let ref = this.valueToCode(block, 'REF', 0) || '["var", "Data"]'
       ref = JSON.parse(removeParens(ref))
 
       const itemCount = Reflect.get(block, 'itemCount_')
       const elements = new Array(itemCount)
       for (let i = 0; i < itemCount; ++i) {
-        let elem = self.valueToCode(block, 'ADD' + i, 0) || '0'
+        let elem = this.valueToCode(block, 'ADD' + i, 0) || '0'
         elem = removeParens(elem)
         elements[i] = elem
       }
       let array = '[[' + elements.join(', ') + ']]'
       array = JSON.parse(array)
-      return JSON.stringify([self.indent, [], '=', ref, array]) + ','
+      return JSON.stringify([this.indent, [], '=', ref, array]) + ','
     }
 
-    this.forBlock['pseudo_assign_zero'] = function (block) {
-      let ref = self.valueToCode(block, 'REF', 0) || '["var", "Data"]'
+    this.forBlock['pseudo_assign_zero'] = (block) => {
+      let ref = this.valueToCode(block, 'REF', 0) || '["var", "Data"]'
       ref = JSON.parse(removeParens(ref))
 
       const forRange = [
-        self.indent,
+        this.indent,
         [],
         'for',
         ['var', 'i'],
         ['call', ['var', 'range'], [['call', ['var', 'len'], [ref]]]],
       ]
-      const assign = [self.indent + 1, [], '=', ['sub', ref, ['var', 'i']], 0]
+      const assign = [this.indent + 1, [], '=', ['sub', ref, ['var', 'i']], 0]
       return `${JSON.stringify(forRange)},${JSON.stringify(assign)},`
     }
 
-    this.forBlock['pseudo_int_input'] = function (block) {
-      let ref = self.valueToCode(block, 'REF', 0) || '["var", "data"]'
+    this.forBlock['pseudo_int_input'] = (block) => {
+      let ref = this.valueToCode(block, 'REF', 0) || '["var", "data"]'
       ref = JSON.parse(removeParens(ref))
 
       const code = [
-        self.indent,
+        this.indent,
         [],
         '=',
         ref,
@@ -563,46 +570,48 @@ export class CalciumGenerator extends Blockly.Generator {
       return JSON.stringify(code) + ','
     }
 
-    this.forBlock['pseudo_str_input'] = function (block) {
-      let ref = self.valueToCode(block, 'REF', 0) || '["var", "data"]'
+    this.forBlock['pseudo_str_input'] = (block) => {
+      let ref = this.valueToCode(block, 'REF', 0) || '["var", "data"]'
       ref = JSON.parse(removeParens(ref))
 
-      const code = [self.indent, [], '=', ref, ['call', ['var', 'input'], ['']]]
+      const code = [this.indent, [], '=', ref, ['call', ['var', 'input'], ['']]]
       return JSON.stringify(code) + ','
     }
 
-    this.forBlock['pseudo_int'] = function (block) {
-      let value = self.valueToCode(block, 'INT', 0) || '["var", "data"]'
+    this.forBlock['pseudo_int'] = (block) => {
+      let value = this.valueToCode(block, 'INT', 0) || '["var", "data"]'
       value = JSON.parse(removeParens(value))
 
       const code = ['call', ['var', 'int'], [value]]
       return [JSON.stringify(code), 0]
     }
 
-    this.forBlock['pseudo_len'] = function (block) {
-      let array = self.valueToCode(block, 'ARRAY', 0) || '[[]]'
+    this.forBlock['pseudo_len'] = (block) => {
+      let array = this.valueToCode(block, 'ARRAY', 0) || '[[]]'
       array = JSON.parse(removeParens(array))
 
       const code = ['call', ['var', 'len'], [array]]
       return [JSON.stringify(code), 0]
     }
 
-    this.forBlock['pseudo_random'] = function (block) {
+    this.forBlock['pseudo_random'] = (block) => {
       const code = ['call', ['attr', ['var', 'random'], 'random'], []]
       return [JSON.stringify(code), 0]
     }
 
-    this.forBlock['pseudo_print'] = function (block) {
+    this.forBlock['pseudo_relational'] = this.forBlock['calcium_relational']
+
+    this.forBlock['pseudo_print'] = (block) => {
       const args: any[] = []
       const countOfArguments: number = Reflect.get(block, 'countOfArguments')
       for (let i = 0; i < countOfArguments; ++i) {
-        let arg = self.valueToCode(block, 'ARG' + i, 0) || '""'
+        let arg = this.valueToCode(block, 'ARG' + i, 0) || '""'
         arg = removeParens(arg)
         args.push(JSON.parse(arg))
       }
       return (
         JSON.stringify([
-          self.indent,
+          this.indent,
           [],
           'expr',
           ['call', ['var', 'print'], args],
@@ -612,12 +621,12 @@ export class CalciumGenerator extends Blockly.Generator {
 
     this.forBlock['pseudo_if'] = this.forBlock['calcium_if']
 
-    function makeForLoop(isIncrement) {
-      return function (block) {
-        let variable = self.valueToCode(block, 'VAR', 0) || '["var", "i"]'
+    function makeForLoop(isIncrement: boolean) {
+      return (block: Blockly.Block) => {
+        let variable = this.valueToCode(block, 'VAR', 0) || '["var", "i"]'
         variable = JSON.parse(variable)
 
-        let startStr = self.valueToCode(block, 'START', 0)
+        let startStr = this.valueToCode(block, 'START', 0)
         let start: number
         if (!startStr) {
           start = 0
@@ -625,11 +634,11 @@ export class CalciumGenerator extends Blockly.Generator {
           start = JSON.parse(removeParens(startStr))
         }
 
-        let stopStr = self.valueToCode(block, 'STOP', 0) || '9'
+        let stopStr = this.valueToCode(block, 'STOP', 0) || '9'
         let stop = JSON.parse(removeParens(stopStr))
         stop = ['+', stop, isIncrement ? 1 : -1]
 
-        let stepStr = self.valueToCode(block, 'STEP', 0) || '1'
+        let stepStr = this.valueToCode(block, 'STEP', 0) || '1'
         let step: number | any[]
         if (!stepStr) {
           step = isIncrement ? 1 : -1
@@ -641,12 +650,12 @@ export class CalciumGenerator extends Blockly.Generator {
         this.shiftIndent(1)
         const stmts =
           this.statementToCode(block, 'STMTS') ||
-          JSON.stringify([self.indent, [], 'pass']) + ','
+          JSON.stringify([this.indent, [], 'pass']) + ','
         this.shiftIndent(-1)
         const range = [start, stop, step]
         return (
           JSON.stringify([
-            self.indent,
+            this.indent,
             [],
             'for',
             variable,
@@ -668,7 +677,7 @@ export class CalciumGenerator extends Blockly.Generator {
     this.indent = 1
   }
 
-  finish(code) {
+  finish(code: string) {
     const start = JSON.stringify([1, [], '#', '0.0.5'])
     const importRandom = JSON.stringify([1, [], 'import', 'random'])
     const end = JSON.stringify([1, [], 'end'])

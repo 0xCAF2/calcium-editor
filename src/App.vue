@@ -263,5 +263,7 @@ div.white-background {
 
 #div-code {
   white-space: pre-line;
+  font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Mono',
+    Consolas, monospace;
 }
 </style>
