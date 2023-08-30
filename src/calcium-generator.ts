@@ -621,7 +621,7 @@ export class CalciumGenerator extends Blockly.Generator {
 
     this.forBlock['pseudo_if'] = this.forBlock['calcium_if']
 
-    function makeForLoop(isIncrement: boolean) {
+    const makeForLoop = (isIncrement: boolean) => {
       return (block: Blockly.Block) => {
         let variable = this.valueToCode(block, 'VAR', 0) || '["var", "i"]'
         variable = JSON.parse(variable)

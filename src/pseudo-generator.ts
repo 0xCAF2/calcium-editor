@@ -8,7 +8,7 @@ export class PseudoGenerator extends Blockly.Generator {
     this.indent = 1
 
     this.forBlock['calcium_add_repr'] = (block) => {
-      const ref = this.valueToCode(block, 'REF', 0) || 'x'
+      const ref = this.valueToCode(block, 'REF', 0) || 'n'
       const value = this.valueToCode(block, 'VALUE', 0) || '1'
       return this.addIndent(`${ref} += ${value}`)
     }
@@ -24,14 +24,19 @@ export class PseudoGenerator extends Blockly.Generator {
           return [code, 0]
         }
 
-    this.forBlock['calcium_assign'] =
-      this.forBlock['calcium_assign_repr'] =
-      this.forBlock['pseudo_assign'] =
-        (block) => {
-          const ref = this.valueToCode(block, 'REF', 0) || 'x'
-          const value = this.valueToCode(block, 'VALUE', 0) || '0'
-          return this.addIndent(`${ref} = ${value}`)
-        }
+    this.forBlock['calcium_assign'] = this.forBlock['calcium_assign_repr'] = (
+      block
+    ) => {
+      const ref = this.valueToCode(block, 'REF', 0) || 'n'
+      const value = this.valueToCode(block, 'VALUE', 0) || '0'
+      return this.addIndent(`${ref} = ${value}`)
+    }
+
+    this.forBlock['pseudo_assign'] = (block) => {
+      const ref = this.valueToCode(block, 'REF', 0) || 'n'
+      const value = this.valueToCode(block, 'VALUE', 0) || '0'
+      return this.addPseudoIndent(`${ref} = ${value}`)
+    }
 
     this.forBlock['calcium_attribute'] = this.forBlock[
       'calcium_attribute_repr'
@@ -43,7 +48,7 @@ export class PseudoGenerator extends Blockly.Generator {
 
     this.forBlock['calcium_bitwise'] = (block) => {
       const op = block.getFieldValue('OP')
-      const left = this.valueToCode(block, 'LEFT', 0) || '0'
+      const left = this.valueToCode(block, 'LEFT', 0) || '1'
       const right = this.valueToCode(block, 'RIGHT', 0) || '0'
       const code = `${left} ${op} ${right}`
       return [code, 0]
@@ -363,7 +368,7 @@ export class PseudoGenerator extends Blockly.Generator {
       this.forBlock['calcium_variable_repr'] =
       this.forBlock['pseudo_variable'] =
         (block) => {
-          return [block.getField('NAME')?.getText() || 'n', 0]
+          return [block.getField('NAME')?.getText().trimStart() || 'n', 0]
         }
 
     this.forBlock['calcium_while'] = this.forBlock['calcium_while_repr'] = (
@@ -456,7 +461,6 @@ export class PseudoGenerator extends Blockly.Generator {
     this.forBlock['pseudo_if'] = (block) => {
       let n = 0
       let code: string = ''
-      this.shiftIndent(1)
       let branchCode: string, conditionCode: string
       do {
         const ifOrElif = n === 0 ? 'もし' : 'そうでなくもし'
@@ -478,11 +482,10 @@ export class PseudoGenerator extends Blockly.Generator {
         this.shiftIndent(-1)
         code += branchCode
       }
-      this.shiftIndent(-1)
       return code
     }
 
-    function makeForLoop(isIncrement: boolean) {
+    const makeForLoop = (isIncrement: boolean) => {
       return (block: Blockly.Block) => {
         const variable = this.valueToCode(block, 'VAR', 0) || 'i'
 
@@ -526,8 +529,31 @@ export class PseudoGenerator extends Blockly.Generator {
   }
 
   finish(code: string) {
-    return `＜プログラムの先頭＞\n${code}＜プログラムの終わり＞`
+    const prefix = '｜'
+    const blockPrefix = '⎿'
+    const lines = code.split('\n')
+    lines.push('')
+    for (let i = lines.length - 2; i > 0; --i) {
+      const targetLine = lines[i].trimStart()
+      const nextLine = lines[i + 1].trimStart()
+      let index = -1
+      while (targetLine && targetLine[index + 1].startsWith(prefix)) {
+        ++index
+      }
+      if (
+        index >= 0 &&
+        (index >= nextLine.length || !nextLine[index].startsWith(blockPrefix))
+      ) {
+        lines[i] =
+          targetLine.substring(0, index) +
+          blockPrefix +
+          targetLine.substring(index + 1)
+      }
+    }
+    lines.pop()
+    return `＜プログラムの先頭＞\n${lines.join('\n')}＜プログラムの終わり＞`
   }
+
   scrub_(block: Blockly.Block, code: string, opt_thisOnly: boolean) {
     const nextBlock = block.nextConnection && block.nextConnection.targetBlock()
     const nextCode = opt_thisOnly ? '' : this.blockToCode(nextBlock)
@@ -546,13 +572,13 @@ export class PseudoGenerator extends Blockly.Generator {
   /** add characters at beginning of each line */
   addPseudoIndent(code: string): string {
     const indent = '｜'.repeat(this.indent - 1)
-    return indent + code + '\n'
+    return ` ${indent}${code}\n`
   }
 
   /** add spaces at beginning of each line */
   addIndent(code: string): string {
     const indent = '　'.repeat(this.indent - 1)
-    return indent + code + '\n'
+    return ` ${indent}${code}\n`
   }
 }
 function quote(s: string): string {
