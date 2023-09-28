@@ -465,7 +465,7 @@ export class PseudoGenerator extends Blockly.Generator {
       do {
         const ifOrElif = n === 0 ? 'もし' : 'そうでなくもし'
         conditionCode = this.valueToCode(block, 'IF' + n, 0) || 'False'
-        code += this.addPseudoIndent(`${ifOrElif} ${conditionCode}:`)
+        code += this.addPseudoIndent(`${ifOrElif} ${conditionCode} ならば:`)
         this.shiftIndent(1)
         branchCode =
           this.statementToCode(block, 'DO' + n) || this.addPseudoIndent('pass')
