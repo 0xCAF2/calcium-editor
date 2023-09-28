@@ -1,13 +1,12 @@
 const RESULT_EXECUTED = 1
 const RESULT_PAUSED = 4
 
-importScripts('https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js')
+importScripts('https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js')
 
 let pyodide
 
 async function loadPyodideAndPackages() {
   pyodide = await loadPyodide({
-    indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.23.4/full/',
     stdout: (output) => {
       postMessage({ output })
     },
