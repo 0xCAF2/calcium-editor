@@ -35,7 +35,7 @@ export class PseudoGenerator extends Blockly.Generator {
     this.forBlock['pseudo_assign'] = (block) => {
       const ref = this.valueToCode(block, 'REF', 0) || 'n'
       const value = this.valueToCode(block, 'VALUE', 0) || '0'
-      return this.addPseudoIndent(`${ref} = ${value}`)
+      return this.addPseudoIndent('assign', `${ref} = ${value}`)
     }
 
     this.forBlock['calcium_attribute'] = this.forBlock[
@@ -409,22 +409,25 @@ export class PseudoGenerator extends Blockly.Generator {
         elements[i] = elem
       }
       const array = `[${elements.join(', ')}]`
-      return this.addPseudoIndent(`${ref} = ${array}`)
+      return this.addPseudoIndent('assign', `${ref} = ${array}`)
     }
 
     this.forBlock['pseudo_assign_zero'] = (block) => {
       const ref = this.valueToCode(block, 'REF', 0) || 'Data'
-      return this.addPseudoIndent(`${ref} のすべての値を0にする`)
+      return this.addPseudoIndent('assign', `${ref} のすべての値を0にする`)
     }
 
     this.forBlock['pseudo_int_input'] = (block) => {
       const ref = this.valueToCode(block, 'REF', 0) || 'n'
-      return this.addPseudoIndent(`${ref} =【外部からの入力（数）】`)
+      return this.addPseudoIndent('assign', `${ref} =【外部からの入力（数）】`)
     }
 
     this.forBlock['pseudo_str_input'] = (block) => {
       const ref = this.valueToCode(block, 'REF', 0) || 's'
-      return this.addPseudoIndent(`${ref} =【外部からの入力（文字列）】`)
+      return this.addPseudoIndent(
+        'assign',
+        `${ref} =【外部からの入力（文字列）】`
+      )
     }
 
     this.forBlock['pseudo_int'] = (block) => {
@@ -455,7 +458,7 @@ export class PseudoGenerator extends Blockly.Generator {
         const arg = this.valueToCode(block, 'ARG' + i, 0) || '""'
         args.push(arg)
       }
-      return this.addPseudoIndent(`表示する(${args.join(', ')})`)
+      return this.addPseudoIndent('call', `表示する(${args.join(', ')})`)
     }
 
     this.forBlock['pseudo_if'] = (block) => {
@@ -463,22 +466,28 @@ export class PseudoGenerator extends Blockly.Generator {
       let code: string = ''
       let branchCode: string, conditionCode: string
       do {
-        const ifOrElif = n === 0 ? 'もし' : 'そうでなくもし'
+        const isIfStmt = n === 0
+        const prefixKeyword = isIfStmt ? 'もし' : 'そうでなくもし'
         conditionCode = this.valueToCode(block, 'IF' + n, 0) || 'False'
-        code += this.addPseudoIndent(`${ifOrElif} ${conditionCode} ならば:`)
+        code += this.addPseudoIndent(
+          isIfStmt ? 'if' : 'elif',
+          `${prefixKeyword} ${conditionCode} ならば:`
+        )
         this.shiftIndent(1)
         branchCode =
-          this.statementToCode(block, 'DO' + n) || this.addPseudoIndent('pass')
+          this.statementToCode(block, 'DO' + n) ||
+          this.addPseudoIndent('pass', 'pass')
         this.shiftIndent(-1)
         code += branchCode
         ++n
       } while (block.getInput('IF' + n))
 
       if (block.getInput('ELSE')) {
-        code += this.addPseudoIndent('そうでなければ:')
+        code += this.addPseudoIndent('else', 'そうでなければ:')
         this.shiftIndent(1)
         branchCode =
-          this.statementToCode(block, 'ELSE') || this.addIndent('pass')
+          this.statementToCode(block, 'ELSE') ||
+          this.addPseudoIndent('pass', 'pass')
         this.shiftIndent(-1)
         code += branchCode
       }
@@ -497,10 +506,12 @@ export class PseudoGenerator extends Blockly.Generator {
 
         this.shiftIndent(1)
         const stmts =
-          this.statementToCode(block, 'STMTS') || this.addIndent('pass')
+          this.statementToCode(block, 'STMTS') ||
+          this.addPseudoIndent('pass', 'pass')
         this.shiftIndent(-1)
         return (
-          this.addIndent(
+          this.addPseudoIndent(
+            'for',
             `${variable} を ${start} から ${stop} まで ${step} ずつ ` +
               (isIncrement ? '増やしながら' : '減らしながら') +
               '繰り返す:'
@@ -517,10 +528,11 @@ export class PseudoGenerator extends Blockly.Generator {
 
       this.shiftIndent(1)
       const stmts =
-        this.statementToCode(block, 'STMTS') || this.addIndent('pass')
+        this.statementToCode(block, 'STMTS') ||
+        this.addPseudoIndent('pass', 'pass')
       this.shiftIndent(-1)
 
-      return this.addIndent(`${condition} の間繰り返す:`) + stmts
+      return this.addPseudoIndent('while', `${condition} の間繰り返す:`) + stmts
     }
   }
 
@@ -529,29 +541,55 @@ export class PseudoGenerator extends Blockly.Generator {
   }
 
   finish(code: string) {
-    const prefix = '｜'
-    const blockPrefix = '⎿'
-    const lines = code.split('\n')
-    lines.push('')
-    for (let i = lines.length - 2; i > 0; --i) {
-      const targetLine = lines[i].trimStart()
-      const nextLine = lines[i + 1].trimStart()
-      let index = -1
-      while (targetLine && targetLine[index + 1].startsWith(prefix)) {
-        ++index
-      }
-      if (
-        index >= 0 &&
-        (index >= nextLine.length || !nextLine[index].startsWith(blockPrefix))
-      ) {
-        lines[i] =
-          targetLine.substring(0, index) +
-          blockPrefix +
-          targetLine.substring(index + 1)
+    const blockPrefix = '｜'
+    const endPrefix = '⎿'
+    // remove last comma
+    const lines: Line[] = JSON.parse(`[${code.substring(0, code.length - 1)}]`)
+
+    const setLeadingChars = (line: Line) => {
+      if (line.keyword !== 'py' && line.indent > 1) {
+        line.leading = blockPrefix.repeat(line.indent - 1)
       }
     }
+    for (let line of lines) {
+      setLeadingChars(line)
+    }
+
+    const replaceFromRight = (
+      currentIndent: number,
+      nextIndent: number
+    ): string => {
+      let result = ''
+      for (let i = nextIndent; i < currentIndent; ++i) {
+        result += endPrefix
+      }
+      const endLength = result.length
+      for (let i = 0; i < currentIndent - 1 - endLength; ++i) {
+        result = blockPrefix + result
+      }
+      return result
+    }
+
+    // add the last line
+    lines.push({ keyword: 'end', indent: 1, code: '' })
+    const replaceEndPrefix = (current: Line, next: Line) => {
+      if (!(next.keyword === 'elif' || next.keyword === 'else')) {
+        current.leading = replaceFromRight(current.indent, next.indent)
+      } else if (current.indent - next.indent > 1) {
+        current.leading = replaceFromRight(current.indent, next.indent + 1)
+      }
+    }
+    for (let i = lines.length - 1; i > 0; --i) {
+      replaceEndPrefix(lines[i - 1], lines[i])
+    }
+    // remove the last line
     lines.pop()
-    return `＜プログラムの先頭＞\n${lines.join('\n')}＜プログラムの終わり＞`
+
+    return `＜プログラムの先頭＞\n${lines
+      .map((v) => {
+        return `${v.leading ?? ''}${v.code}`
+      })
+      .join('\n')}\n＜プログラムの終わり＞`
   }
 
   scrub_(block: Blockly.Block, code: string, opt_thisOnly: boolean) {
@@ -570,15 +608,13 @@ export class PseudoGenerator extends Blockly.Generator {
   }
 
   /** add characters at beginning of each line */
-  addPseudoIndent(code: string): string {
-    const indent = '｜'.repeat(this.indent - 1)
-    return ` ${indent}${code}\n`
+  addPseudoIndent(keyword: Keyword, code: string): string {
+    return JSON.stringify({ keyword, indent: this.indent, code }) + ','
   }
 
   /** add spaces at beginning of each line */
   addIndent(code: string): string {
-    const indent = '　'.repeat(this.indent - 1)
-    return ` ${indent}${code}\n`
+    return JSON.stringify({ keyword: 'py', indent: this.indent, code }) + ','
   }
 }
 function quote(s: string): string {
@@ -591,17 +627,16 @@ function quote(s: string): string {
   return quote + str + quote
 }
 
-function removeComma(codeStr: string): string {
-  return codeStr.substring(0, codeStr.length - 1)
-}
+type Line = { keyword: string; indent: number; code: string; leading?: string }
 
-/**
- * removes surrounding parentheses.
- */
-function removeParens(codeStr: string): string {
-  let strWithoutParens = codeStr
-  if (codeStr && codeStr[0] === '(') {
-    strWithoutParens = codeStr.substring(1, codeStr.length - 1)
-  }
-  return strWithoutParens
-}
+type Keyword =
+  | 'py'
+  | 'assign'
+  | 'call'
+  | 'if'
+  | 'elif'
+  | 'else'
+  | 'for'
+  | 'while'
+  | 'pass'
+  | 'end'
