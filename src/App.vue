@@ -37,7 +37,7 @@
         </v-row>
       </v-container>
       <div id="output">
-        <textarea v-show="running" readonly>{{ output }}</textarea>
+        <textarea id="output-textarea" v-show="running" readonly>{{ output }}</textarea>
         <div class="white-background">
           <div id="div-code" v-show="running"></div>
         </div>
@@ -241,6 +241,10 @@ result
   top: 72px;
   right: 4px;
   z-index: 1000;
+}
+
+#output-textarea {
+  min-height: 120px;
 }
 
 #error {
