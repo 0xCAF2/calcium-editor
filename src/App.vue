@@ -154,12 +154,10 @@ export default defineComponent({
     },
     run() {
       const pseudoCode = pseudoGenerator.workspaceToCode(workspace)
-      console.log(pseudoCode)
       document.querySelector('#div-code').textContent = pseudoCode
 
       const jsonCode = calciumGenerator.workspaceToCode(workspace)
       this.code = jsonCode
-      console.log(jsonCode)
       const code = `runtime = Runtime('${jsonCode
         .replace(/\n/g, '')
         .replace(/'/g, "\\'")}')
