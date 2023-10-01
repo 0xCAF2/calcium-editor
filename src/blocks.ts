@@ -1682,7 +1682,7 @@ Blockly.Extensions.registerMutator(
         valueConnections[i].reconnect(this, 'IF' + i)
         statementConnections[i].reconnect(this, 'DO' + i)
       }
-      elseStatementConnection.reconnect(this, 'ELSE')
+      elseStatementConnection?.reconnect(this, 'ELSE')
     },
   },
   undefined,

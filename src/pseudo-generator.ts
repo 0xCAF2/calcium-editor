@@ -7,29 +7,20 @@ export class PseudoGenerator extends Blockly.Generator {
     super(name)
     this.indent = 1
 
-    this.forBlock['calcium_add_repr'] = (block) => {
-      const ref = this.valueToCode(block, 'REF', 0) || 'n'
-      const value = this.valueToCode(block, 'VALUE', 0) || '1'
-      return this.addIndent(`${ref} += ${value}`)
-    }
-
-    this.forBlock['calcium_arithmetic'] =
-      this.forBlock['calcium_arithmetic_repr'] =
-      this.forBlock['pseudo_arithmetic'] =
-        (block) => {
-          const op = block.getFieldValue('OP')
-          const left = this.valueToCode(block, 'LEFT', 0) || 'i'
-          const right = this.valueToCode(block, 'RIGHT', 0) || '1'
-          const code = `${left} ${op} ${right}`
-          return [code, 0]
-        }
-
-    this.forBlock['calcium_assign'] = this.forBlock['calcium_assign_repr'] = (
+    this.forBlock['calcium_arithmetic'] = this.forBlock['pseudo_arithmetic'] = (
       block
     ) => {
+      const op = block.getFieldValue('OP')
+      const left = this.valueToCode(block, 'LEFT', 0) || 'i'
+      const right = this.valueToCode(block, 'RIGHT', 0) || '1'
+      const code = `${left} ${op} ${right}`
+      return [code, 0]
+    }
+
+    this.forBlock['calcium_assign'] = (block) => {
       const ref = this.valueToCode(block, 'REF', 0) || 'n'
       const value = this.valueToCode(block, 'VALUE', 0) || '0'
-      return this.addIndent(`${ref} = ${value}`)
+      return this.addPseudoIndent('assign', `${ref} = ${value}`)
     }
 
     this.forBlock['pseudo_assign'] = (block) => {
@@ -38,9 +29,7 @@ export class PseudoGenerator extends Blockly.Generator {
       return this.addPseudoIndent('assign', `${ref} = ${value}`)
     }
 
-    this.forBlock['calcium_attribute'] = this.forBlock[
-      'calcium_attribute_repr'
-    ] = (block) => {
+    this.forBlock['calcium_attribute'] = (block) => {
       const ref = this.valueToCode(block, 'REF', 0) || 'self'
       const attr = block.getFieldValue('ATTR') || 'name'
       return [`${ref}.${attr}`, 0]
@@ -59,22 +48,16 @@ export class PseudoGenerator extends Blockly.Generator {
       return [`~${value}`, 0]
     }
 
-    this.forBlock['calcium_boolean'] = this.forBlock['calcium_boolean_repr'] = (
-      block
-    ) => {
+    this.forBlock['calcium_boolean'] = (block) => {
       const value = block.getFieldValue('VALUE') === 'true' ? 'True' : 'False'
       return [value, 0]
     }
 
-    this.forBlock['calcium_break_continue'] = this.forBlock[
-      'calcium_break_continue_repr'
-    ] = (block) => {
-      return this.addIndent(block.getFieldValue('FLOW'))
+    this.forBlock['calcium_break_continue'] = (block) => {
+      return this.addPseudoIndent('break_continue', block.getFieldValue('FLOW'))
     }
 
-    this.forBlock['calcium_call'] = this.forBlock['calcium_call_repr'] = (
-      block
-    ) => {
+    this.forBlock['calcium_call'] = (block) => {
       const args: any[] = []
       const countOfArguments: number = Reflect.get(block, 'countOfArguments')
       for (let i = 0; i < countOfArguments; ++i) {
@@ -85,45 +68,18 @@ export class PseudoGenerator extends Blockly.Generator {
       return [`${callRef}(${args.join(', ')})`, 0]
     }
 
-    this.forBlock['calcium_callnoreturn_repr'] = (block) => {
-      const args: any[] = []
-      const countOfArguments: number = Reflect.get(block, 'countOfArguments')
-      for (let i = 0; i < countOfArguments; ++i) {
-        const arg = this.valueToCode(block, 'ARG' + i, 0) || 'None'
-        args.push(arg)
-      }
-      const callRef = this.valueToCode(block, 'REF', 0) || 'f'
-      return this.addIndent(`${callRef}(${args.join(', ')})`)
-    }
-
-    this.forBlock['calcium_callreturn_repr'] = (block) => {
-      const returnRef = this.valueToCode(block, 'RETURN', 0) || 'x'
-      const args: any[] = []
-      const countOfArguments: number = Reflect.get(block, 'countOfArguments')
-      for (let i = 0; i < countOfArguments; ++i) {
-        const arg = this.valueToCode(block, 'ARG' + i, 0) || 'None'
-        args.push(arg)
-      }
-      const callRef = this.valueToCode(block, 'REF', 0) || 'f'
-      return this.addIndent(`${returnRef} = ${callRef}(${args.join(', ')})`)
-    }
-
-    this.forBlock['calcium_class_repr'] = (block) => {
-      return [block.getField('NAME')?.getText() ?? 'MyClass', 0]
-    }
-
-    this.forBlock['calcium_class_def'] = this.forBlock[
-      'calcium_class_def_repr'
-    ] = (block) => {
+    this.forBlock['calcium_class_def'] = (block) => {
       const className = block.getFieldValue('NAME')
       const superclass = this.valueToCode(block, 'SUPERCLASS', 0) || null
 
       this.shiftIndent(1)
       const stmts =
-        this.statementToCode(block, 'STMTS') || this.addIndent('pass')
+        this.statementToCode(block, 'STMTS') ||
+        this.addPseudoIndent('pass', 'pass')
       this.shiftIndent(-1)
       return (
-        this.addIndent(
+        this.addPseudoIndent(
+          'class',
           `class ${className}${superclass ? `(${superclass})` : ''}`
         ) + stmts
       )
@@ -139,134 +95,97 @@ export class PseudoGenerator extends Blockly.Generator {
       const ref = this.valueToCode(block, 'REF', 0) || 'x'
       const op = block.getFieldValue('OP')
       const value = this.valueToCode(block, 'VALUE', 0) || '1'
-      return this.addIndent(`${ref} ${op} ${value}`)
+      return this.addPseudoIndent('assign', `${ref} ${op} ${value}`)
     }
 
-    this.forBlock['calcium_def'] = this.forBlock['calcium_def_repr'] = (
-      block
-    ) => {
+    this.forBlock['calcium_def'] = (block) => {
       const funcName = block.getField('NAME')?.getText()
       this.shiftIndent(1)
       const stmts =
-        this.statementToCode(block, 'STMTS') || this.addIndent('pass')
+        this.statementToCode(block, 'STMTS') ||
+        this.addPseudoIndent('pass', 'pass')
       this.shiftIndent(-1)
 
       const parameters: any[] = Reflect.get(block, 'parameters') || []
       return (
-        this.addIndent(`def ${funcName}(${parameters.join(', ')}):`) + stmts
+        this.addPseudoIndent(
+          'def',
+          `def ${funcName}(${parameters.join(', ')}):`
+        ) + stmts
       )
     }
 
-    this.forBlock['calcium_defmethod'] = this.forBlock[
-      'calcium_defmethod_repr'
-    ] = (block) => {
+    this.forBlock['calcium_defmethod'] = (block) => {
       const name = block.getField('NAME')?.getText()
       this.shiftIndent(1)
       const stmts =
-        this.statementToCode(block, 'STMTS') || this.addIndent(`pass`)
+        this.statementToCode(block, 'STMTS') ||
+        this.addPseudoIndent('pass', 'pass')
       this.shiftIndent(-1)
 
       const parameters: any[] = Reflect.get(block, 'parameters') || []
       parameters.unshift('self')
-      return this.addIndent(`def ${name}(${parameters.join(', ')}):`) + stmts
+      return (
+        this.addPseudoIndent('def', `def ${name}(${parameters.join(', ')}):`) +
+        stmts
+      )
     }
 
-    this.forBlock['calcium_dict'] = this.forBlock['calcium_dict_repr'] = () => {
+    this.forBlock['calcium_dict'] = () => {
       return ['{}', 0]
     }
 
     this.forBlock['calcium_expr_stmt'] = (block) => {
       const call = this.valueToCode(block, 'CALL', 0)
-      return this.addIndent(call)
+      return this.addPseudoIndent('call', call)
     }
 
     // TODO: edit here
-    this.forBlock['calcium_for'] = this.forBlock['calcium_for_repr'] = (
-      block
-    ) => {
+    this.forBlock['calcium_for'] = (block) => {
       const vars = this.valueToCode(block, 'VARS', 0) || 's'
       const iterable = this.valueToCode(block, 'ITER', 0) || '"Hello"'
 
       this.shiftIndent(1)
       const stmts =
-        this.statementToCode(block, 'STMTS') || this.addIndent('pass')
+        this.statementToCode(block, 'STMTS') ||
+        this.addPseudoIndent('pass', 'pass')
       this.shiftIndent(-1)
 
-      return this.addIndent(`for ${vars} in ${iterable}:`) + stmts
+      return this.addPseudoIndent('for', `for ${vars} in ${iterable}:`) + stmts
     }
 
-    this.forBlock['calcium_for_range_repr'] = (block) => {
-      const variable = this.valueToCode(block, 'VARS', 0) || 'i'
-
-      let start: string | null = this.valueToCode(block, 'START', 0)
-      if (!start) {
-        start = null
-      }
-
-      const stop = this.valueToCode(block, 'STOP', 0) || '10'
-
-      let step: string | null = this.valueToCode(block, 'STEP', 0)
-      if (!step) {
-        step = null
-      }
-
-      this.shiftIndent(1)
-      const stmts =
-        this.statementToCode(block, 'STMTS') || this.addIndent('pass')
-      this.shiftIndent(-1)
-      let range: any[]
-      if (start === null && step === null) {
-        range = [stop]
-      } else if (start !== null && step === null) {
-        range = [start, stop]
-      } else if (start !== null && step !== null) {
-        range = [start, stop, step]
-      } else {
-        range = [0, stop, step]
-      }
-      return (
-        this.addIndent(`for ${variable} in range(${range.join(', ')}):`) + stmts
-      )
-    }
-
-    this.forBlock['calcium_function_repr'] = this.forBlock['calcium_class_repr']
-
-    this.forBlock['calcium_if'] = this.forBlock['calcium_if_repr'] = (
-      block
-    ) => {
+    this.forBlock['calcium_if'] = (block) => {
       let n = 0
       let code: string = ''
-      this.shiftIndent(1)
       let branchCode: string, conditionCode: string
       do {
         const ifOrElif = n === 0 ? 'if' : 'elif'
         conditionCode = this.valueToCode(block, 'IF' + n, 0) || 'False'
-        code += this.addIndent(`${ifOrElif} ${conditionCode}:`)
+        code += this.addPseudoIndent(ifOrElif, `${ifOrElif} ${conditionCode}:`)
         this.shiftIndent(1)
         branchCode =
-          this.statementToCode(block, 'DO' + n) || this.addIndent('pass')
+          this.statementToCode(block, 'DO' + n) ||
+          this.addPseudoIndent('pass', 'pass')
         this.shiftIndent(-1)
         code += branchCode
         ++n
       } while (block.getInput('IF' + n))
 
       if (block.getInput('ELSE')) {
-        code += this.addIndent('else:')
+        code += this.addPseudoIndent('else', 'else:')
         this.shiftIndent(1)
         branchCode =
-          this.statementToCode(block, 'ELSE') || this.addIndent('pass')
+          this.statementToCode(block, 'ELSE') ||
+          this.addPseudoIndent('pass', 'pass')
         this.shiftIndent(-1)
         code += branchCode
       }
-      this.shiftIndent(-1)
       return code
     }
 
-    this.forBlock['calcium_import'] = this.forBlock['calcium_import_repr'] = (
-      block
-    ) => {
+    this.forBlock['calcium_import'] = (block) => {
       const moduleName = block.getField('NAME')?.getText()
-      return this.addIndent(`import ${moduleName}`)
+      return this.addPseudoIndent('import', `import ${moduleName}`)
     }
 
     this.forBlock['calcium_kwarg'] = (block) => {
@@ -275,9 +194,7 @@ export class PseudoGenerator extends Blockly.Generator {
       return [`${kw}=${value}`, 0]
     }
 
-    this.forBlock['calcium_list'] = this.forBlock['calcium_list_repr'] = (
-      block
-    ) => {
+    this.forBlock['calcium_list'] = (block) => {
       const itemCount = Reflect.get(block, 'itemCount_')
       const elements = new Array(itemCount)
       for (let i = 0; i < itemCount; ++i) {
@@ -288,18 +205,13 @@ export class PseudoGenerator extends Blockly.Generator {
       return [code, 0]
     }
 
-    this.forBlock['calcium_logical'] = this.forBlock['calcium_logical_repr'] =
-      this.forBlock['calcium_bitwise']
-
-    this.forBlock['calcium_method_repr'] = this.forBlock['calcium_attribute']
+    this.forBlock['calcium_logical'] = this.forBlock['calcium_bitwise']
 
     this.forBlock['calcium_none'] = () => {
       return ['None', 0]
     }
 
-    this.forBlock['calcium_not'] = this.forBlock['calcium_not_repr'] = (
-      block
-    ) => {
+    this.forBlock['calcium_not'] = (block) => {
       const value = this.valueToCode(block, 'VALUE', 0) || 'True'
       return [`not ${value}`, 0]
     }
@@ -312,76 +224,51 @@ export class PseudoGenerator extends Blockly.Generator {
     }
 
     this.forBlock['calcium_pass'] = () => {
-      return this.addIndent('pass')
+      return this.addPseudoIndent('pass', 'pass')
     }
 
-    this.forBlock['calcium_print_repr'] = (block) => {
-      const value = this.valueToCode(block, 'VALUE', 0) || '""'
-      const args: any[] = []
-      const countOfArguments: number = Reflect.get(block, 'countOfArguments')
-      for (let i = 0; i < countOfArguments; ++i) {
-        const arg = this.valueToCode(block, 'ARG' + i, 0) || 'None'
-        args.push(arg)
-      }
-      args.splice(0, 0, value)
-      return this.addIndent(`print(${args.join(', ')})`)
-    }
+    this.forBlock['calcium_relational'] = this.forBlock['calcium_logical']
 
-    this.forBlock['calcium_relational'] = this.forBlock[
-      'calcium_relational_repr'
-    ] = this.forBlock['calcium_logical']
-
-    this.forBlock['calcium_return'] = this.forBlock['calcium_return_repr'] = (
-      block
-    ) => {
+    this.forBlock['calcium_return'] = (block) => {
       let value = this.valueToCode(block, 'VALUE', 0) || 'None'
-      return this.addIndent(`return ${value}`)
+      return this.addPseudoIndent('return', `return ${value}`)
     }
 
-    this.forBlock['calcium_slice'] = this.forBlock['calcium_slice_repr'] = (
-      block
-    ) => {
+    this.forBlock['calcium_slice'] = (block) => {
       const start = this.valueToCode(block, 'START', 0) || '0'
       const end = this.valueToCode(block, 'END', 0) || '0'
       const code = `${start}:${end}`
       return [code, 0]
     }
 
-    this.forBlock['calcium_str'] =
-      this.forBlock['calcium_str_repr'] =
-      this.forBlock['pseudo_str'] =
-        (block) => {
-          let str = block.getField('STR')?.getText() || ''
-          return [quote(str), 0]
-        }
+    this.forBlock['calcium_str'] = this.forBlock['pseudo_str'] = (block) => {
+      let str = block.getField('STR')?.getText() || ''
+      return [quote(str), 0]
+    }
 
-    this.forBlock['calcium_subscript'] = this.forBlock[
-      'calcium_subscript_repr'
-    ] = (block) => {
+    this.forBlock['calcium_subscript'] = (block) => {
       const ref = this.valueToCode(block, 'REF', 0) || `array`
       const subCode = this.valueToCode(block, 'SUB', 0) || '0'
       const code = `${ref}[${subCode}]`
       return [code, 0]
     }
 
-    this.forBlock['calcium_variable'] =
-      this.forBlock['calcium_variable_repr'] =
-      this.forBlock['pseudo_variable'] =
-        (block) => {
-          return [block.getField('NAME')?.getText().trimStart() || 'n', 0]
-        }
-
-    this.forBlock['calcium_while'] = this.forBlock['calcium_while_repr'] = (
+    this.forBlock['calcium_variable'] = this.forBlock['pseudo_variable'] = (
       block
     ) => {
+      return [block.getField('NAME')?.getText().trimStart() || 'n', 0]
+    }
+
+    this.forBlock['calcium_while'] = (block) => {
       const condition = this.valueToCode(block, 'COND', 0) || 'False'
 
       this.shiftIndent(1)
       const stmts =
-        this.statementToCode(block, 'STMTS') || this.addIndent('pass')
+        this.statementToCode(block, 'STMTS') ||
+        this.addPseudoIndent('pass', 'pass')
       this.shiftIndent(-1)
 
-      return this.addIndent(`while ${condition}:`) + stmts
+      return this.addPseudoIndent('while', `while ${condition}:`) + stmts
     }
 
     this.forBlock['pseudo_array'] = (block) => {
@@ -618,11 +505,6 @@ export class PseudoGenerator extends Blockly.Generator {
   addPseudoIndent(keyword: Keyword, code: string): string {
     return JSON.stringify({ keyword, indent: this.indent, code }) + ','
   }
-
-  /** add spaces at beginning of each line */
-  addIndent(code: string): string {
-    return JSON.stringify({ keyword: 'py', indent: this.indent, code }) + ','
-  }
 }
 function quote(s: string): string {
   let str = s.replace(/\\/g, '\\\\').replace(/\n/g, '\\\n')
@@ -637,7 +519,6 @@ function quote(s: string): string {
 type Line = { keyword: string; indent: number; code: string; leading?: string }
 
 type Keyword =
-  | 'py'
   | 'assign'
   | 'call'
   | 'if'
@@ -647,3 +528,8 @@ type Keyword =
   | 'while'
   | 'pass'
   | 'end'
+  | 'break_continue'
+  | 'return'
+  | 'class'
+  | 'def'
+  | 'import'
