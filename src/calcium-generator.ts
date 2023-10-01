@@ -594,6 +594,8 @@ export class CalciumGenerator extends Blockly.Generator {
       return [JSON.stringify(code), 0]
     }
 
+    this.forBlock['pseudo_logical'] = this.forBlock['calcium_logical']
+
     this.forBlock['pseudo_random'] = (block) => {
       const code = ['call', ['attr', ['var', 'random'], 'random'], []]
       return [JSON.stringify(code), 0]

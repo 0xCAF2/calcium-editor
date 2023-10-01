@@ -440,6 +440,13 @@ export class PseudoGenerator extends Blockly.Generator {
       return [`要素数(${array})`, 0]
     }
 
+    this.forBlock['pseudo_logical'] = (block) => {
+      const left = this.valueToCode(block, 'LEFT', 0) || 'False'
+      const right = this.valueToCode(block, 'RIGHT', 0) || 'False'
+      const op = block.getFieldValue('OP')
+      return [`${left} ${op} ${right}`, 0]
+    }
+
     this.forBlock['pseudo_random'] = () => {
       return ['乱数()', 0]
     }
