@@ -1,12 +1,14 @@
 <template>
   <v-app>
     <v-app-bar app :color="running ? 'orange' : 'blue'" style="z-index: 3000">
-      <div class="d-flex align-center">
-        <v-switch style="width: 100px; margin-left: 10px" v-model="running" hide-details="auto" :disabled="waiting">
+      <template v-slot:prepend>
+        <v-switch style="margin-left: 10px" v-model="running" hide-details="auto" :disabled="waiting">
           <template #label>
-            <span class="py-3"><b>{{ labelForRun }}</b></span>
+            <span><b>{{ labelForRun }}</b></span>
           </template>
         </v-switch>
+      </template>
+      <v-app-bar-title>
         <v-btn @click="save" size="large">
           <span>{{ labelForSave }}</span>
         </v-btn>
@@ -16,7 +18,7 @@
         <v-progress-circular :indeterminate="waiting" v-show="waiting"></v-progress-circular>
         <v-menu bottom>
           <template #activator="{ props }">
-            <v-btn v-bind="props" v-show="running">
+            <v-btn icon v-bind="props" v-show="running" small>
               <span><b>...</b></span>
             </v-btn>
           </template>
@@ -26,7 +28,12 @@
             </v-list-item>
           </v-list>
         </v-menu>
-      </div>
+      </v-app-bar-title>
+      <template v-slot:append>
+        <v-btn icon href="https://calcium.0xcaf2.dev" target="_blank">
+          <span><b>？</b></span>
+        </v-btn>
+      </template>
     </v-app-bar>
     <v-main>
       <v-container class="mx-0">
