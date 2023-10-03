@@ -1679,8 +1679,8 @@ Blockly.Extensions.registerMutator(
       elseStatementConnection
     ) {
       for (var i = 1; i <= this.elseifCount_; i++) {
-        valueConnections[i].reconnect(this, 'IF' + i)
-        statementConnections[i].reconnect(this, 'DO' + i)
+        valueConnections[i]?.reconnect(this, 'IF' + i)
+        statementConnections[i]?.reconnect(this, 'DO' + i)
       }
       elseStatementConnection?.reconnect(this, 'ELSE')
     },
