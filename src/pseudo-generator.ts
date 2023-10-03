@@ -441,7 +441,7 @@ export class PseudoGenerator extends Blockly.Generator {
     const lines: Line[] = JSON.parse(`[${code.substring(0, code.length - 1)}]`)
 
     const setLeadingChars = (line: Line) => {
-      if (line.keyword !== 'py' && line.indent > 1) {
+      if (line.indent > 1) {
         line.leading = blockPrefix.repeat(line.indent - 1)
       }
     }
@@ -479,11 +479,11 @@ export class PseudoGenerator extends Blockly.Generator {
     // remove the last line
     lines.pop()
 
-    return `＜プログラムの先頭＞\n${lines
+    return `\n${lines
       .map((v) => {
         return `${v.leading ?? ''}${v.code}`
       })
-      .join('\n')}\n＜プログラムの終わり＞`
+      .join('\n')}\n`
   }
 
   scrub_(block: Blockly.Block, code: string, opt_thisOnly: boolean) {
