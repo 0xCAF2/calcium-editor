@@ -15,7 +15,7 @@ export class PseudoGenerator extends Blockly.Generator {
       this.forBlock['pseudo_logical'] =
       this.forBlock['pseudo_relational'] =
         (block) => {
-          const code = this.addParenToValueCode(block)
+          const code = this.convertToCode(block)
           return [code, 0]
         }
 
@@ -482,24 +482,23 @@ export class PseudoGenerator extends Blockly.Generator {
     return JSON.stringify({ keyword, indent: this.indent, code }) + ','
   }
 
-  addParenToValueCode(block: Blockly.Block): string {
-    const op = block.getFieldValue('OP')
-
-    let left = this.valueToCode(block, 'LEFT', 0) || 'i'
-    const leftType = block.getInputTargetBlock('LEFT')?.type
-    if (needsParen(leftType)) {
-      left = `(${left})`
-    }
-
-    let right = this.valueToCode(block, 'RIGHT', 0) || '1'
-    const rightType = block.getInputTargetBlock('RIGHT')?.type
-    if (needsParen(rightType)) {
-      right = `(${right})`
-    }
-
+  convertToCode(block: Blockly.Block): string {
+    const op = getOperator(block)
+    const left = this.addParenToExpr(block, 'LEFT', 'i')
+    const right = this.addParenToExpr(block, 'RIGHT', '1')
     return `${left} ${op} ${right}`
   }
+
+  addParenToExpr(block: Blockly.Block, name: string, initial: string): string {
+    let code = this.valueToCode(block, name, 0) || initial
+    const blockType = block.getInputTargetBlock(name)?.type
+    if (needsParen(blockType)) {
+      code = `(${code})`
+    }
+    return code
+  }
 }
+
 function quote(s: string): string {
   let str = s.replace(/\\/g, '\\\\').replace(/\n/g, '\\\n')
 
@@ -520,6 +519,14 @@ function needsParen(blockType?: string) {
     blockType === 'pseudo_logical' ||
     blockType === 'pseudo_relational'
   )
+}
+
+function getOperator(block: Blockly.Block): string {
+  let op = block.getFieldValue('OP')
+  if (block.type === 'pseudo_arithmetic' && op === '//') {
+    op = '÷'
+  }
+  return op
 }
 
 type Line = { keyword: string; indent: number; code: string; leading?: string }
