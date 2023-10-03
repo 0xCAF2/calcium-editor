@@ -105,6 +105,10 @@ export default defineComponent({
       inputFile.addEventListener('change', () => {
         const file = inputFile.files?.[0]
         if (!file) return
+        if (file.type !== 'application/json') {
+          alert('ファイルを開くことができませんでした')
+          return
+        }
         const reader = new FileReader()
         reader.addEventListener('load', () => {
           const json = reader.result
