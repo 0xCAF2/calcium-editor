@@ -479,11 +479,11 @@ export class PseudoGenerator extends Blockly.Generator {
     // remove the last line
     lines.pop()
 
-    return `\n${lines
+    return `${lines
       .map((v) => {
         return `${v.leading ?? ''}${v.code}`
       })
-      .join('\n')}\n`
+      .join('\n')}`
   }
 
   scrub_(block: Blockly.Block, code: string, opt_thisOnly: boolean) {

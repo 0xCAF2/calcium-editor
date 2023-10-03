@@ -43,17 +43,23 @@
           </v-col>
         </v-row>
       </v-container>
-      <div id="output">
-        <textarea id="output-textarea" v-show="running" readonly>{{ output }}</textarea>
-        <div class="white-background">
-          <div id="div-code" v-show="running"></div>
-        </div>
-        <textarea id="error" v-show="error" readonly>{{ error }}</textarea>
-      </div>
+      <v-container id="output">
+        <v-row>
+          <v-textarea v-show="error" variant="outlined" bg-color="white" v-model="error" base-color="red" color="red"
+            readonly></v-textarea>
+        </v-row>
+        <v-row>
+          <v-textarea v-show="running" variant="solo-filled" bg-color="white" v-model="output" readonly></v-textarea>
+        </v-row>
+        <v-row>
+          <v-textarea v-show="running" variant="outlined" bg-color="white" v-model="pseudoCode" base-color="blue"
+            color="blue" readonly auto-grow></v-textarea>
+        </v-row>
+      </v-container>
       <v-dialog v-model="overlayed">
-        <v-text-field base-color="white" bg-color="white" color="black" variant="solo-filled" :label="prompt"
+        <v-text-field base-color="white" bg-color="white" color="black" variant="solo-filled" autofocus :label="prompt"
           v-model="input" />
-        <v-btn @click="sendInput">OK</v-btn>
+        <v-btn @click="sendInput" color="blue">OK</v-btn>
       </v-dialog>
     </v-main>
   </v-app>
@@ -88,6 +94,7 @@ export default defineComponent({
     inputting: false,
     output: '',
     overlayed: false,
+    pseudoCode: '',
     prompt: '',
     running: false,
     waiting: true,
@@ -152,7 +159,7 @@ export default defineComponent({
     },
     run() {
       const pseudoCode = pseudoGenerator.workspaceToCode(workspace)
-      document.querySelector('#div-code').textContent = pseudoCode
+      this.pseudoCode = pseudoCode
 
       const jsonCode = calciumGenerator.workspaceToCode(workspace)
       this.code = jsonCode
@@ -232,37 +239,15 @@ result
 </script>
 <style scoped>
 #output {
-  color: black;
   position: absolute;
   top: 72px;
   right: 4px;
   z-index: 1000;
-}
-
-#output-textarea {
-  min-height: 120px;
-}
-
-#error {
-  color: red;
-  font-size: small;
-  margin-top: 4px;
-}
-
-textarea {
-  background-color: white;
-  font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Mono',
-    Consolas, monospace;
-  width: 380px;
+  width: 480px;
   max-width: 95%;
 }
 
-div.white-background {
-  background-color: white;
-}
-
-#div-code {
-  white-space: pre-line;
+.v-textarea {
   font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Mono',
     Consolas, monospace;
 }
