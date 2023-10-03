@@ -56,7 +56,7 @@
             color="blue" readonly auto-grow></v-textarea>
         </v-row>
       </v-container>
-      <v-dialog v-model="overlayed">
+      <v-dialog v-model="overlayed" id="dialog">
         <v-text-field base-color="white" bg-color="white" color="black" variant="solo-filled" autofocus :label="prompt"
           v-model="input" />
         <v-btn @click="sendInput" color="blue">OK</v-btn>
@@ -250,5 +250,9 @@ result
 .v-textarea {
   font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Mono',
     Consolas, monospace;
+}
+
+#dialog {
+  max-width: 640px;
 }
 </style>
