@@ -7,15 +7,17 @@ export class PseudoGenerator extends Blockly.Generator {
     super(name)
     this.indent = 1
 
-    this.forBlock['calcium_arithmetic'] = this.forBlock['pseudo_arithmetic'] = (
-      block
-    ) => {
-      const op = block.getFieldValue('OP')
-      const left = this.valueToCode(block, 'LEFT', 0) || 'i'
-      const right = this.valueToCode(block, 'RIGHT', 0) || '1'
-      const code = `${left} ${op} ${right}`
-      return [code, 0]
-    }
+    this.forBlock['calcium_arithmetic'] =
+      this.forBlock['calcium_bitwise'] =
+      this.forBlock['calcium_logical'] =
+      this.forBlock['calcium_relational'] =
+      this.forBlock['pseudo_arithmetic'] =
+      this.forBlock['pseudo_logical'] =
+      this.forBlock['pseudo_relational'] =
+        (block) => {
+          const code = this.addParenToValueCode(block)
+          return [code, 0]
+        }
 
     this.forBlock['calcium_assign'] = (block) => {
       const ref = this.valueToCode(block, 'REF', 0) || 'n'
@@ -33,14 +35,6 @@ export class PseudoGenerator extends Blockly.Generator {
       const ref = this.valueToCode(block, 'REF', 0) || 'self'
       const attr = block.getFieldValue('ATTR') || 'name'
       return [`${ref}.${attr}`, 0]
-    }
-
-    this.forBlock['calcium_bitwise'] = (block) => {
-      const op = block.getFieldValue('OP')
-      const left = this.valueToCode(block, 'LEFT', 0) || '1'
-      const right = this.valueToCode(block, 'RIGHT', 0) || '0'
-      const code = `${left} ${op} ${right}`
-      return [code, 0]
     }
 
     this.forBlock['calcium_bitwise_not'] = (block) => {
@@ -205,8 +199,6 @@ export class PseudoGenerator extends Blockly.Generator {
       return [code, 0]
     }
 
-    this.forBlock['calcium_logical'] = this.forBlock['calcium_bitwise']
-
     this.forBlock['calcium_none'] = () => {
       return ['None', 0]
     }
@@ -226,8 +218,6 @@ export class PseudoGenerator extends Blockly.Generator {
     this.forBlock['calcium_pass'] = () => {
       return this.addPseudoIndent('pass', 'pass')
     }
-
-    this.forBlock['calcium_relational'] = this.forBlock['calcium_logical']
 
     this.forBlock['calcium_return'] = (block) => {
       let value = this.valueToCode(block, 'VALUE', 0) || 'None'
@@ -306,14 +296,14 @@ export class PseudoGenerator extends Blockly.Generator {
 
     this.forBlock['pseudo_int_input'] = (block) => {
       const ref = this.valueToCode(block, 'REF', 0) || 'n'
-      return this.addPseudoIndent('assign', `${ref} =【外部からの入力（数）】`)
+      return this.addPseudoIndent('assign', `${ref} = 【外部からの入力（数）】`)
     }
 
     this.forBlock['pseudo_str_input'] = (block) => {
       const ref = this.valueToCode(block, 'REF', 0) || 's'
       return this.addPseudoIndent(
         'assign',
-        `${ref} =【外部からの入力（文字列）】`
+        `${ref} = 【外部からの入力（文字列）】`
       )
     }
 
@@ -327,22 +317,8 @@ export class PseudoGenerator extends Blockly.Generator {
       return [`要素数(${array})`, 0]
     }
 
-    this.forBlock['pseudo_logical'] = (block) => {
-      const left = this.valueToCode(block, 'LEFT', 0) || 'False'
-      const right = this.valueToCode(block, 'RIGHT', 0) || 'False'
-      const op = block.getFieldValue('OP')
-      return [`${left} ${op} ${right}`, 0]
-    }
-
     this.forBlock['pseudo_random'] = () => {
       return ['乱数()', 0]
-    }
-
-    this.forBlock['pseudo_relational'] = (block) => {
-      const left = this.valueToCode(block, 'LEFT', 0) || '0'
-      const right = this.valueToCode(block, 'RIGHT', 0) || '0'
-      const op = block.getFieldValue('OP')
-      return [`${left} ${op} ${right}`, 0]
     }
 
     this.forBlock['pseudo_print'] = (block) => {
@@ -505,6 +481,24 @@ export class PseudoGenerator extends Blockly.Generator {
   addPseudoIndent(keyword: Keyword, code: string): string {
     return JSON.stringify({ keyword, indent: this.indent, code }) + ','
   }
+
+  addParenToValueCode(block: Blockly.Block): string {
+    const op = block.getFieldValue('OP')
+
+    let left = this.valueToCode(block, 'LEFT', 0) || 'i'
+    const leftType = block.getInputTargetBlock('LEFT')?.type
+    if (needsParen(leftType)) {
+      left = `(${left})`
+    }
+
+    let right = this.valueToCode(block, 'RIGHT', 0) || '1'
+    const rightType = block.getInputTargetBlock('RIGHT')?.type
+    if (needsParen(rightType)) {
+      right = `(${right})`
+    }
+
+    return `${left} ${op} ${right}`
+  }
 }
 function quote(s: string): string {
   let str = s.replace(/\\/g, '\\\\').replace(/\n/g, '\\\n')
@@ -514,6 +508,18 @@ function quote(s: string): string {
     str = str.replace(/"/g, '\\"')
   }
   return quote + str + quote
+}
+
+function needsParen(blockType?: string) {
+  return (
+    blockType === 'calcium_arithmetic' ||
+    blockType === 'calcium_bitwise' ||
+    blockType === 'calcium_logical' ||
+    blockType === 'calcium_relational' ||
+    blockType === 'pseudo_arithmetic' ||
+    blockType === 'pseudo_logical' ||
+    blockType === 'pseudo_relational'
+  )
 }
 
 type Line = { keyword: string; indent: number; code: string; leading?: string }
