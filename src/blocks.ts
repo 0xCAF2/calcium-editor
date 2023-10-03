@@ -1917,9 +1917,10 @@ Blockly.Extensions.registerMutator(
 Blockly.common.defineBlocks({
   pseudo_number: {
     init() {
-      this.appendDummyInput().appendField('数')
-      this.appendDummyInput().appendField(
-        new Blockly.FieldTextInput('100', function (newValue) {
+      const dummyInput = this.appendDummyInput()
+      dummyInput.appendField('数')
+      dummyInput.appendField(
+        new Blockly.FieldTextInput('10', function (newValue) {
           try {
             const parsedNum = parseFullWidthNumber(newValue)
             return parsedNum
