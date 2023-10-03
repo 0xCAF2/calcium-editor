@@ -43,7 +43,7 @@
           </v-col>
         </v-row>
       </v-container>
-      <v-container id="output">
+      <v-container id="output" v-if="running">
         <v-row>
           <v-textarea v-show="error" variant="outlined" bg-color="white" v-model="error" base-color="red" color="red"
             readonly></v-textarea>
