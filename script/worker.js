@@ -12,7 +12,7 @@ async function loadPyodideAndPackages() {
     },
   })
   pyodide.runPython(await (await fetch('/script/calciumlang.py')).text())
-  // await pyodide.loadPackage(['numpy', 'pandas', 'scipy'])
+  await pyodide.loadPackage(['numpy', 'pandas', 'scipy'])
   postMessage({ loaded: true })
 }
 
