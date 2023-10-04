@@ -586,7 +586,7 @@ class Environment:
         elif isinstance(obj, dict):
             return {k: self.evaluate(obj[k]) for k in obj.keys()}
         elif isinstance(obj, tuple):
-            return (self.evaluate(e) for e in obj)
+            return tuple(self.evaluate(e) for e in obj)
         elif isinstance(obj, set):
             return {self.evaluate(e) for e in obj}
         else:
