@@ -77,6 +77,7 @@ import { calciumToolbox } from './toolbox'
 import { CalciumGenerator } from './calcium-generator'
 import { PseudoGenerator } from './pseudo-generator'
 import { defineComponent } from 'vue'
+import './renderer'
 
 Blockly.setLocale(Lang)
 
@@ -201,7 +202,7 @@ result
         controls: true,
         startScale: 0.7,
       },
-      renderer: 'zelos',
+      renderer: 'calcium_renderer',
       sounds: false,
       theme: DarkTheme,
       toolbox: {

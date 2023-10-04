@@ -47,7 +47,7 @@ Blockly.Msg.CALCIUM_CLASS_DEF_TITLE =
   'クラス %1 を定義 %2 スーパークラスは %3 %4'
 Blockly.Msg.CALCIUM_CLASS_DEF_TOOLTIP = 'クラスを定義します。'
 
-Blockly.Msg.CALCIUM_COMMA_TOOLTIP = '2つの値を同時に使います。'
+Blockly.Msg.CALCIUM_COMMA_TOOLTIP = '2つの変数へ同時に代入します。=, for の左側で使います。'
 
 Blockly.Msg.CALCIUM_COMPOUND_ASSIGN_TOOLTIP =
   '計算してから、変数の中身を更新します。'

@@ -1,6 +1,21 @@
 import * as Blockly from 'blockly'
 import { parseFullWidthNumber } from './util'
 
+const allElementsForTypeChecks = [
+  'calcium_variable',
+  'calcium_attribute',
+  'calcium_subscript',
+  'calcium_call',
+  'calcium_arithmetic',
+  'Number',
+  'String',
+  'Array',
+  'calcium_dict',
+  'calcium_none',
+  'calcium_not',
+  'Boolean',
+]
+
 export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
   [
     {
@@ -20,24 +35,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
         {
           type: 'input_value',
           name: 'VALUE',
-          check: [
-            'calcium_variable',
-            'calcium_attribute',
-            'calcium_subscript',
-            'calcium_call',
-            'calcium_arithmetic',
-            'Number',
-            'String',
-            'Array',
-            'calcium_dict',
-            'calcium_none',
-            'calcium_relational',
-            'calcium_logical',
-            'calcium_not',
-            'Boolean',
-            'calcium_bitwise',
-            'calcium_bitwise_not',
-          ],
+          check: allElementsForTypeChecks,
         },
       ],
       inputsInline: true,
@@ -286,6 +284,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
         {
           type: 'input_value',
           name: 'VALUE',
+          check: allElementsForTypeChecks,
         },
       ],
       inputsInline: true,
@@ -604,10 +603,12 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
         {
           type: 'input_value',
           name: 'FIRST',
+          check: allElementsForTypeChecks,
         },
         {
           type: 'input_value',
           name: 'SECOND',
+          check: allElementsForTypeChecks,
         },
       ],
       output: 'calcium_comma',
@@ -838,7 +839,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
         {
           type: 'input_value',
           name: 'SUB',
-          check: ['Number', 'calcium_variable'],
+          check: ['Number', 'calcium_variable', 'calcium_arithmetic'],
         },
       ],
       inputsInline: true,
@@ -859,12 +860,12 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
         {
           type: 'input_value',
           name: 'START',
-          check: ['Number', 'calcium_variable'],
+          check: ['Number', 'calcium_variable', 'calcium_arithmetic'],
         },
         {
           type: 'input_value',
           name: 'END',
-          check: ['Number', 'calcium_variable'],
+          check: ['Number', 'calcium_variable', 'calcium_arithmetic'],
         },
       ],
       inputsInline: true,
@@ -1031,6 +1032,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
         {
           type: 'input_value',
           name: 'VALUE',
+          check: allElementsForTypeChecks,
         },
       ],
       inputsInline: true,
@@ -1282,6 +1284,8 @@ Blockly.Extensions.registerMutator(
         if (!this.getInput('ARG' + i)) {
           const input = this.appendValueInput('ARG' + i)
           input.init()
+          const checker = allElementsForTypeChecks.concat(['calcium_kwarg'])
+          input.setCheck(checker)
           if (i === 0) {
             input.appendField('(')
           } else {
@@ -1672,7 +1676,14 @@ Blockly.Extensions.registerMutator(
       // Rebuild block.
       for (i = 1; i <= this.elseifCount_; i++) {
         this.appendValueInput('IF' + i)
-          .setCheck('Boolean')
+          .setCheck([
+            'Boolean',
+            'calcium_variable',
+            'calcium_attribute',
+            'calcium_subscript',
+            'calcium_call',
+            'calcium_arithmetic',
+          ])
           .appendField('elif')
         this.appendDummyInput(':' + i).appendField(':')
         this.appendStatementInput('DO' + i).appendField('')
@@ -1817,6 +1828,7 @@ Blockly.Extensions.registerMutator(
         if (!this.getInput('ADD' + i)) {
           const input = this.appendValueInput('ADD' + i)
           input.init()
+          input.setCheck(allElementsForTypeChecks)
           if (i !== 0) {
             input.appendField(',')
           }
@@ -1855,82 +1867,6 @@ Blockly.common.defineBlocks({
     },
   },
 })
-
-Blockly.Extensions.registerMutator(
-  'calcium_callnoreturn_mutator',
-  {
-    compose(containerBlock) {
-      let itemBlock = containerBlock.getInputTargetBlock('ARGS')
-      const connections: any[] = []
-      while (itemBlock) {
-        connections.push(itemBlock.valueConnection_)
-        itemBlock =
-          itemBlock.nextConnection && itemBlock.nextConnection.targetBlock()
-      }
-      for (let i = 0; i < this.countOfArguments; ++i) {
-        const connection = this.getInput('ARG' + i).connection.targetConnection
-        if (connection && connections.indexOf(connection) === -1) {
-          connection.disconnect()
-        }
-      }
-      this.countOfArguments = connections.length
-      this.updateShape()
-      for (let i = 0; i < this.countOfArguments; ++i) {
-        connections[i]?.reconnect(this, 'ARG' + i)
-      }
-    },
-    decompose(workspace) {
-      const containerBlock = workspace.newBlock('calcium_call_arg_container')
-      containerBlock.initSvg()
-      let connection = containerBlock.getInput('ARGS').connection
-      for (let i = 0; i < this.countOfArguments; ++i) {
-        const itemBlock = workspace.newBlock('calcium_call_arg')
-        itemBlock.initSvg()
-        connection.connect(itemBlock.previousConnection)
-        connection = itemBlock.nextConnection
-      }
-      return containerBlock
-    },
-    saveExtraState: function () {
-      return {
-        countOfArguments: this.countOfArguments,
-      }
-    },
-    loadExtraState: function (state) {
-      this.countOfArguments = state['countOfArguments']
-      this.updateShape()
-    },
-    saveConnections: function (containerBlock) {
-      let itemBlock = containerBlock.getInputTargetBlock('ARGS')
-      let i = 0
-      while (itemBlock) {
-        const input = this.getInput('ARG' + i)
-        itemBlock.valueConnection_ = input && input.connection.targetConnection
-        ++i
-        itemBlock =
-          itemBlock.nextConnection && itemBlock.nextConnection.targetBlock()
-      }
-    },
-    updateShape() {
-      let i
-      for (i = 0; i < this.countOfArguments; ++i) {
-        if (!this.getInput('ARG' + i)) {
-          const input = this.appendValueInput('ARG' + i)
-          input.init()
-          if (i === 0) {
-            input.appendField(Blockly.Msg.CALCIUM_CALL_ARG_TITLE)
-          }
-        }
-      }
-      while (this.getInput('ARG' + i)) {
-        this.removeInput('ARG' + i)
-        ++i
-      }
-    },
-  },
-  undefined,
-  ['calcium_call_arg']
-)
 
 Blockly.common.defineBlocks({
   pseudo_number: {
@@ -2049,6 +1985,7 @@ Blockly.Extensions.registerMutator(
         if (!this.getInput('ADD' + i)) {
           const input = this.appendValueInput('ADD' + i)
           input.init()
+          input.setCheck(allElementsForTypeChecks)
           if (i !== 0) {
             input.appendField(',')
           }
@@ -2158,6 +2095,7 @@ Blockly.Extensions.registerMutator(
         if (!this.getInput('ARG' + i)) {
           const input = this.appendValueInput('ARG' + i)
           input.init()
+          input.setCheck(allElementsForTypeChecks)
           if (i !== 0) {
             input.appendField(',')
           }
@@ -2377,7 +2315,14 @@ Blockly.Extensions.registerMutator(
       // Rebuild block.
       for (i = 1; i <= this.elseifCount_; i++) {
         this.appendValueInput('IF' + i)
-          .setCheck('Boolean')
+          .setCheck([
+            'Boolean',
+            'calcium_variable',
+            'calcium_attribute',
+            'calcium_subscript',
+            'calcium_call',
+            'calcium_arithmetic',
+          ])
           .appendField('そうでなくもし')
         this.appendDummyInput(':' + i).appendField('ならば:')
         this.appendStatementInput('DO' + i).appendField('')
@@ -2428,6 +2373,7 @@ Blockly.Blocks['pseudo_if'] = {
             'calcium_attribute',
             'calcium_subscript',
             'calcium_call',
+            'calcium_arithmetic',
           ],
         },
       ],
@@ -2578,6 +2524,7 @@ Blockly.common.defineBlocksWithJsonArray([
           'calcium_attribute',
           'calcium_subscript',
           'calcium_call',
+          'calcium_arithmetic',
         ],
       },
       {
