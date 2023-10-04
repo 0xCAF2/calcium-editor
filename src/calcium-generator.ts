@@ -354,7 +354,7 @@ export class CalciumGenerator extends Blockly.Generator {
       return JSON.stringify([this.indent, [], 'import', moduleName]) + ','
     }
 
-    this.forBlock['calcium_kwarg'] = function (block) {
+    this.forBlock['calcium_kwarg'] = (block) => {
       const kw = block.getField('NAME')?.getText()
       let value = this.valueToCode(block, 'VALUE', 0) || '0'
       value = JSON.parse(removeParens(value))
