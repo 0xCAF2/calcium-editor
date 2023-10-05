@@ -233,7 +233,7 @@ export class PseudoGenerator extends Blockly.Generator {
 
     this.forBlock['calcium_str'] = this.forBlock['pseudo_str'] = (block) => {
       let str = block.getField('STR')?.getText() || ''
-      return [quote(str), 0]
+      return [`"${escape(str)}"`, 0]
     }
 
     this.forBlock['calcium_subscript'] = (block) => {
@@ -499,14 +499,34 @@ export class PseudoGenerator extends Blockly.Generator {
   }
 }
 
-function quote(s: string): string {
-  let str = s.replace(/\\/g, '\\\\').replace(/\n/g, '\\\n')
-
-  const quote = '"'
-  if (str.indexOf('"') !== -1) {
-    str = str.replace(/"/g, '\\"')
+function escape(s: string): string {
+  let result = ''
+  let i = 0
+  while (i < s.length) {
+    const char = s[i]
+    if (char === '\\' && i === s.length - 1) {
+      result += '\\\\'
+      break
+    }
+    if (char === '\\' && s[i + 1] === '\\') {
+      result += '\\\\'
+      i += 2
+      continue
+    }
+    if (char === '\\' && s[i + 1] === '"') {
+      result += '\\"'
+      i += 2
+      continue
+    }
+    if (char === '"') {
+      result += '\\"'
+      i += 1
+      continue
+    }
+    result += char
+    i += 1
   }
-  return quote + str + quote
+  return result
 }
 
 function needsParen(blockType?: string) {

@@ -165,7 +165,7 @@ export default defineComponent({
       const jsonCode = calciumGenerator.workspaceToCode(workspace)
       this.code = jsonCode
       const code = `runtime = Runtime('${jsonCode
-        .replace(/\n/g, '')
+        .replace(/([^\\])\n/g, '$1')
         .replace(/'/g, "\\'")}')
 result = runtime.run()
 print(end='', flush=True)

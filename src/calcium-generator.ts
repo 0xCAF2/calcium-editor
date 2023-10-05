@@ -453,7 +453,7 @@ export class CalciumGenerator extends Blockly.Generator {
       this.forBlock['pseudo_str'] =
         (block) => {
           let str = block.getField('STR')?.getText() || ''
-          return [quote(str), 0]
+          return [addDoubleQuote(str), 0]
         }
 
     this.forBlock['calcium_subscript'] = this.forBlock[
@@ -700,14 +700,40 @@ export class CalciumGenerator extends Blockly.Generator {
     this.indent += offset
   }
 }
-function quote(s: string): string {
-  let str = s.replace(/\\/g, '\\\\').replace(/\n/g, '\\\n')
 
-  const quote = '"'
-  if (str.indexOf('"') !== -1) {
-    str = str.replace(/"/g, '\\"')
+function addDoubleQuote(s: string): string {
+  let result = ''
+  let i = 0
+  while (i < s.length) {
+    const char = s[i]
+    if (char === '\\' && i === s.length - 1) {
+      result += '\\\\\\\\'
+      break
+    }
+    if (char === '\\' && s[i + 1] === '\\') {
+      result += '\\\\\\\\'
+      i += 2
+      continue
+    }
+    if (char === '\\' && s[i + 1] === '"') {
+      result += '\\\\\\"'
+      i += 2
+      continue
+    }
+    if (char === '\\') {
+      result += '\\\\'
+      i += 1
+      continue
+    }
+    if (char === '"') {
+      result += '\\\\\\"'
+      i += 1
+      continue
+    }
+    result += char
+    i += 1
   }
-  return quote + str + quote
+  return `"${result}"`
 }
 
 function removeComma(codeStr: string): string {
