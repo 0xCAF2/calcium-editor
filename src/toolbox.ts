@@ -195,14 +195,14 @@ export const calciumToolbox = [
         kind: 'block',
         type: 'calcium_boolean',
       },
-      {
-        kind: 'block',
-        type: 'calcium_bitwise',
-      },
-      {
-        kind: 'block',
-        type: 'calcium_bitwise_not',
-      },
+      // {
+      //   kind: 'block',
+      //   type: 'calcium_bitwise',
+      // },
+      // {
+      //   kind: 'block',
+      //   type: 'calcium_bitwise_not',
+      // },
     ],
   },
   {

@@ -53,21 +53,21 @@ export class CalciumGenerator extends Blockly.Generator {
       return [JSON.stringify(attr), 0]
     }
 
-    this.forBlock['calcium_bitwise'] = (block) => {
-      const op = block.getFieldValue('OP')
-      let left = this.valueToCode(block, 'LEFT', 0) || '0'
-      left = JSON.parse(removeParens(left))
-      let right = this.valueToCode(block, 'RIGHT', 0) || '0'
-      right = JSON.parse(removeParens(right))
-      const code = JSON.stringify([op, left, right])
-      return [code, 0]
-    }
+    // this.forBlock['calcium_bitwise'] = (block) => {
+    //   const op = block.getFieldValue('OP')
+    //   let left = this.valueToCode(block, 'LEFT', 0) || '0'
+    //   left = JSON.parse(removeParens(left))
+    //   let right = this.valueToCode(block, 'RIGHT', 0) || '0'
+    //   right = JSON.parse(removeParens(right))
+    //   const code = JSON.stringify([op, left, right])
+    //   return [code, 0]
+    // }
 
-    this.forBlock['calcium_bitwise_not'] = (block) => {
-      let value = this.valueToCode(block, 'VALUE', 0) || '0'
-      value = JSON.parse(removeParens(value))
-      return [JSON.stringify(['~', value]), 0]
-    }
+    // this.forBlock['calcium_bitwise_not'] = (block) => {
+    //   let value = this.valueToCode(block, 'VALUE', 0) || '0'
+    //   value = JSON.parse(removeParens(value))
+    //   return [JSON.stringify(['~', value]), 0]
+    // }
 
     this.forBlock['calcium_boolean'] = this.forBlock['calcium_boolean_repr'] = (
       block

@@ -8,7 +8,7 @@ export class PseudoGenerator extends Blockly.Generator {
     this.indent = 1
 
     this.forBlock['calcium_arithmetic'] =
-      this.forBlock['calcium_bitwise'] =
+      // this.forBlock['calcium_bitwise'] =
       this.forBlock['calcium_logical'] =
       this.forBlock['calcium_relational'] =
       this.forBlock['pseudo_arithmetic'] =
@@ -37,10 +37,10 @@ export class PseudoGenerator extends Blockly.Generator {
       return [`${ref}.${attr}`, 0]
     }
 
-    this.forBlock['calcium_bitwise_not'] = (block) => {
-      const value = this.valueToCode(block, 'VALUE', 0) || '0'
-      return [`~${value}`, 0]
-    }
+    // this.forBlock['calcium_bitwise_not'] = (block) => {
+    //   const value = this.valueToCode(block, 'VALUE', 0) || '0'
+    //   return [`~${value}`, 0]
+    // }
 
     this.forBlock['calcium_boolean'] = (block) => {
       const value = block.getFieldValue('VALUE') === 'true' ? 'True' : 'False'
@@ -532,7 +532,7 @@ function escape(s: string): string {
 function needsParen(blockType?: string) {
   return (
     blockType === 'calcium_arithmetic' ||
-    blockType === 'calcium_bitwise' ||
+    // blockType === 'calcium_bitwise' ||
     blockType === 'calcium_logical' ||
     blockType === 'calcium_relational' ||
     blockType === 'pseudo_arithmetic' ||
