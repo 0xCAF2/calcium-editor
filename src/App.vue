@@ -169,7 +169,7 @@ export default defineComponent({
         .replace(/'/g, "\\'")}')
 result = runtime.run()
 print(end='', flush=True)
-result
+result.value
 `
       this.worker.postMessage({ code })
     },

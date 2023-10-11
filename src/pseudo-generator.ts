@@ -8,7 +8,6 @@ export class PseudoGenerator extends Blockly.Generator {
     this.indent = 1
 
     this.forBlock['calcium_arithmetic'] =
-      // this.forBlock['calcium_bitwise'] =
       this.forBlock['calcium_logical'] =
       this.forBlock['calcium_relational'] =
       this.forBlock['pseudo_arithmetic'] =
@@ -532,7 +531,6 @@ function escape(s: string): string {
 function needsParen(blockType?: string) {
   return (
     blockType === 'calcium_arithmetic' ||
-    // blockType === 'calcium_bitwise' ||
     blockType === 'calcium_logical' ||
     blockType === 'calcium_relational' ||
     blockType === 'pseudo_arithmetic' ||
