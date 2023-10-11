@@ -11,29 +11,32 @@ generator['calcium_add_repr'] = function (block) {
   return JSON.stringify([generator.getIndent(), [], '+=', ref, value]) + ','
 }
 
-generator['calcium_arithmetic'] = generator['calcium_arithmetic_repr'] =
-  function (block) {
-    const op = block.getFieldValue('OP')
-    let left = generator.valueToCode(block, 'LEFT', 0) || '0'
-    left = JSON.parse(generator.removeParens(left))
-    let right = generator.valueToCode(block, 'RIGHT', 0) || '1'
-    right = JSON.parse(generator.removeParens(right))
-    const code = JSON.stringify([op, left, right])
-    return [code, 0]
-  }
+generator['calcium_arithmetic'] =
+  generator['calcium_arithmetic_repr'] =
+  generator['pseudo_arithmetic'] =
+    function (block) {
+      const op = block.getFieldValue('OP')
+      let left = generator.valueToCode(block, 'LEFT', 0) || '["var", "i"]'
+      left = JSON.parse(generator.removeParens(left))
+      let right = generator.valueToCode(block, 'RIGHT', 0) || '1'
+      right = JSON.parse(generator.removeParens(right))
+      const code = JSON.stringify([op, left, right])
+      return [code, 0]
+    }
 
-generator['calcium_assign'] = generator['calcium_assign_repr'] = function (
-  block
-) {
-  let ref = generator.valueToCode(block, 'REF', 0) || `["var", "x"]`
-  ref = generator.removeParens(ref)
-  ref = JSON.parse(ref)
+generator['calcium_assign'] =
+  generator['calcium_assign_repr'] =
+  generator['pseudo_assign'] =
+    function (block) {
+      let ref = generator.valueToCode(block, 'REF', 0) || `["var", "x"]`
+      ref = generator.removeParens(ref)
+      ref = JSON.parse(ref)
 
-  let arg0 = generator.valueToCode(block, 'VALUE', 0) || '0'
-  arg0 = generator.removeParens(arg0)
-  arg0 = JSON.parse(arg0)
-  return JSON.stringify([generator.getIndent(), [], '=', ref, arg0]) + ','
-}
+      let arg0 = generator.valueToCode(block, 'VALUE', 0) || '0'
+      arg0 = generator.removeParens(arg0)
+      arg0 = JSON.parse(arg0)
+      return JSON.stringify([generator.getIndent(), [], '=', ref, arg0]) + ','
+    }
 
 generator['calcium_attribute'] = generator['calcium_attribute_repr'] =
   function (block) {
@@ -386,9 +389,13 @@ generator['calcium_not'] = generator['calcium_not_repr'] = function (block) {
   return [JSON.stringify(['not', value]), 0]
 }
 
-generator['calcium_number'] = function (block) {
+generator['calcium_number'] = generator['pseudo_number'] = function (block) {
   const numStr = block.getFieldValue('NUM') || '0'
   return [parseFullWidthNumber(numStr), 0]
+}
+
+generator['calcium_pass'] = function () {
+  return JSON.stringify([generator.getIndent(), [], 'pass']) + ','
 }
 
 generator['calcium_print_repr'] = function (block) {
@@ -410,10 +417,6 @@ generator['calcium_print_repr'] = function (block) {
       ['call', ['var', 'print'], args],
     ]) + ','
   )
-}
-
-generator['calcium_pass'] = function () {
-  return JSON.stringify([generator.getIndent(), [], 'pass']) + ','
 }
 
 generator['calcium_relational'] = generator['calcium_relational_repr'] =
@@ -438,10 +441,13 @@ generator['calcium_slice'] = generator['calcium_slice_repr'] = function (
   return [code, 0]
 }
 
-generator['calcium_str'] = generator['calcium_str_repr'] = function (block) {
-  let str = block.getField('STR').getText() || ''
-  return [generator.quote_(str), 0]
-}
+generator['calcium_str'] =
+  generator['calcium_str_repr'] =
+  generator['pseudo_str'] =
+    function (block) {
+      let str = block.getField('STR').getText() || ''
+      return [generator.quote_(str), 0]
+    }
 
 generator['calcium_subscript'] = generator['calcium_subscript_repr'] =
   function (block) {
@@ -461,8 +467,12 @@ generator['calcium_subscript'] = generator['calcium_subscript_repr'] =
     }
   }
 
-generator['calcium_variable'] = generator['calcium_variable_repr'] =
-  generator['calcium_class_repr']
+generator['calcium_variable'] =
+  generator['calcium_variable_repr'] =
+  generator['pseudo_variable'] =
+    function (block) {
+      return [JSON.stringify(['var', block.getField('NAME').getText()]), 0]
+    }
 
 generator['calcium_while'] = generator['calcium_while_repr'] = function (
   block
@@ -471,7 +481,7 @@ generator['calcium_while'] = generator['calcium_while_repr'] = function (
   condition = JSON.parse(generator.removeParens(condition))
 
   generator.shiftIndent(1)
-  var stmts =
+  const stmts =
     generator.statementToCode(block, 'STMTS') ||
     JSON.stringify([generator.getIndent(), [], 'pass']) + ','
   generator.shiftIndent(-1)
@@ -483,14 +493,196 @@ generator['calcium_while'] = generator['calcium_while_repr'] = function (
   )
 }
 
+generator['pseudo_array'] = function (block) {
+  let ref = generator.valueToCode(block, 'REF', 0) || '["var", "Data"]'
+  ref = JSON.parse(generator.removeParens(ref))
+
+  let sub = generator.valueToCode(block, 'SUB', 0) || '0'
+  sub = JSON.parse(generator.removeParens(sub))
+
+  const code = JSON.stringify(['sub', ref, sub])
+  return [code, 0]
+}
+
+generator['pseudo_array_slice'] = function (block) {
+  let ref = generator.valueToCode(block, 'REF', 0) || '["var", "Data"]'
+  ref = JSON.parse(generator.removeParens(ref))
+
+  let start = generator.valueToCode(block, 'START', 0) || 'null'
+  start = JSON.parse(generator.removeParens(start))
+
+  let end = generator.valueToCode(block, 'END', 0) || 'null'
+  end = JSON.parse(generator.removeParens(end))
+  if (end !== null) {
+    end = ['+', end, 1]
+  }
+
+  const code = JSON.stringify(['sub', ref, start, end])
+  return [code, 0]
+}
+
+generator['pseudo_assign_array'] = function (block) {
+  let ref = generator.valueToCode(block, 'REF', 0) || '["var", "Data"]'
+  ref = JSON.parse(generator.removeParens(ref))
+
+  const elements = new Array(block.itemCount_)
+  for (let i = 0; i < block.itemCount_; ++i) {
+    let elem = generator.valueToCode(block, 'ADD' + i, 0) || '0'
+    elem = generator.removeParens(elem)
+    elements[i] = elem
+  }
+  let array = '[[' + elements.join(', ') + ']]'
+  array = JSON.parse(array)
+  return JSON.stringify([generator.getIndent(), [], '=', ref, array]) + ','
+}
+
+generator['pseudo_assign_zero'] = function (block) {
+  let ref = generator.valueToCode(block, 'REF', 0) || '["var", "Data"]'
+  ref = JSON.parse(generator.removeParens(ref))
+
+  const forRange = [
+    generator.getIndent(),
+    [],
+    'for',
+    ['var', 'i'],
+    ['call', ['var', 'range'], [['call', ['var', 'len'], [ref]]]],
+  ]
+  const assign = [
+    generator.getIndent() + 1,
+    [],
+    '=',
+    ['sub', ref, ['var', 'i']],
+    0,
+  ]
+  return `${JSON.stringify(forRange)},${JSON.stringify(assign)},`
+}
+
+generator['pseudo_int_input'] = function (block) {
+  let ref = generator.valueToCode(block, 'REF', 0) || '["var", "data"]'
+  ref = JSON.parse(generator.removeParens(ref))
+
+  const code = [
+    generator.getIndent(),
+    [],
+    '=',
+    ref,
+    ['call', ['var', 'int'], [['call', ['var', 'input'], ['']]]],
+  ]
+  return JSON.stringify(code) + ','
+}
+
+generator['pseudo_str_input'] = function (block) {
+  let ref = generator.valueToCode(block, 'REF', 0) || '["var", "data"]'
+  ref = JSON.parse(generator.removeParens(ref))
+
+  const code = [
+    generator.getIndent(),
+    [],
+    '=',
+    ref,
+    ['call', ['var', 'input'], ['']],
+  ]
+  return JSON.stringify(code) + ','
+}
+
+generator['pseudo_int'] = function (block) {
+  let value = generator.valueToCode(block, 'INT', 0) || '["var", "data"]'
+  value = JSON.parse(generator.removeParens(value))
+
+  const code = ['call', ['var', 'int'], [value]]
+  return [JSON.stringify(code), 0]
+}
+
+generator['pseudo_len'] = function (block) {
+  let array = generator.valueToCode(block, 'ARRAY', 0) || '[[]]'
+  array = JSON.parse(generator.removeParens(array))
+
+  const code = ['call', ['var', 'len'], [array]]
+  return [JSON.stringify(code), 0]
+}
+
+generator['pseudo_random'] = function (block) {
+  const code = ['call', ['attr', ['var', 'random'], 'random'], []]
+  return [JSON.stringify(code), 0]
+}
+
+generator['pseudo_print'] = function (block) {
+  const args = []
+  for (let i = 0; i < block.countOfArguments; ++i) {
+    let arg = generator.valueToCode(block, 'ARG' + i, 0) || '""'
+    arg = generator.removeParens(arg)
+    args.push(JSON.parse(arg))
+  }
+  return (
+    JSON.stringify([
+      generator.getIndent(),
+      [],
+      'expr',
+      ['call', ['var', 'print'], args],
+    ]) + ','
+  )
+}
+
+generator['pseudo_if'] = generator['calcium_if']
+
+function makeForLoop(isIncrement) {
+  return function (block) {
+    let variable = generator.valueToCode(block, 'VAR', 0) || '["var", "i"]'
+    variable = JSON.parse(variable)
+
+    let start = generator.valueToCode(block, 'START', 0)
+    if (!start) {
+      start = 0
+    } else {
+      start = JSON.parse(generator.removeParens(start))
+    }
+
+    let stop = generator.valueToCode(block, 'STOP', 0) || '9'
+    stop = JSON.parse(generator.removeParens(stop))
+    stop = ['+', stop, isIncrement ? 1 : -1]
+
+    let step = generator.valueToCode(block, 'STEP', 0) || '1'
+    if (!step) {
+      step = isIncrement ? 1 : -1
+    } else {
+      step = JSON.parse(generator.removeParens(step))
+      step = isIncrement ? step : ['-_', step]
+    }
+
+    generator.shiftIndent(1)
+    const stmts =
+      generator.statementToCode(block, 'STMTS') ||
+      JSON.stringify([generator.getIndent(), [], 'pass']) + ','
+    generator.shiftIndent(-1)
+    const range = [start, stop, step]
+    return (
+      JSON.stringify([
+        generator.getIndent(),
+        [],
+        'for',
+        variable,
+        ['call', ['var', 'range'], range],
+      ]) +
+      ',' +
+      stmts
+    )
+  }
+}
+
+generator['pseudo_for_increment'] = makeForLoop(true)
+generator['pseudo_for_decrement'] = makeForLoop(false)
+
+generator['pseudo_while'] = generator['calcium_while']
+
 generator.init = function () {
   generator.indent = 1
 }
 
 generator.finish = function (code) {
-  const start = JSON.stringify([1, [], '#', '0_3'])
+  const start = JSON.stringify([1, [], '#', '0.0.5'])
+  const importRandom = JSON.stringify([1, [], 'import', 'random'])
   const end = JSON.stringify([1, [], 'end'])
-  return `[${start},${code}${end}]`
+  return `[${start},${importRandom},${code}${end}]`
 }
 
 /** gets the indent of a line. */
@@ -501,7 +693,7 @@ generator.getIndent = function () {
 generator.quote_ = function (s) {
   let str = s.replace(/\\/g, '\\\\').replace(/\n/g, '\\\n')
 
-  var quote = '"'
+  const quote = '"'
   if (str.indexOf('"') !== -1) {
     str = str.replace(/"/g, '\\"')
   }
@@ -512,7 +704,9 @@ generator.removeComma = function (codeStr) {
   return codeStr.substring(0, codeStr.length - 1)
 }
 
-/** removes surrounding parentheses. */
+/**
+ * removes surrounding parentheses.
+ */
 generator.removeParens = function (codeStr) {
   let strWithoutParens = codeStr
   if (codeStr && codeStr[0] === '(') {
@@ -522,8 +716,8 @@ generator.removeParens = function (codeStr) {
 }
 
 generator.scrub_ = function (block, code, opt_thisOnly) {
-  var nextBlock = block.nextConnection && block.nextConnection.targetBlock()
-  var nextCode = opt_thisOnly ? '' : generator.blockToCode(nextBlock)
+  const nextBlock = block.nextConnection && block.nextConnection.targetBlock()
+  const nextCode = opt_thisOnly ? '' : generator.blockToCode(nextBlock)
   return code + nextCode
 }
 

@@ -5,21 +5,17 @@ importScripts('https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js')
 
 let pyodide
 
-let isFirstOutput = true
-
 async function loadPyodideAndPackages() {
   pyodide = await loadPyodide({
     stdout: (output) => {
-      if (isFirstOutput) {
-        isFirstOutput = false
-        return ''
-      } else {
-        postMessage({ output })
-      }
+      postMessage({ output })
     },
   })
-  pyodide.runPython(await (await fetch('/script/calciumlang.py')).text())
-  await pyodide.loadPackage(['numpy', 'pandas', 'scipy', 'scikit-learn'])
+  await pyodide.loadPackage(['micropip', 'numpy', 'pandas', 'scipy'])
+  pyodide.runPythonAsync(`import micropip
+await micropip.install('calciumlang')
+from calciumlang.runtime import Runtime
+`)
   postMessage({ loaded: true })
 }
 
@@ -34,7 +30,7 @@ onmessage = async (event) => {
     } else if (event.data.input) {
       result = await pyodide.runPythonAsync(
         `result = runtime.resume('${event.data.input}')
-result`
+result.value`
       )
     }
     if (result === RESULT_PAUSED) {
@@ -42,7 +38,7 @@ result`
     } else if (result === RESULT_EXECUTED) {
       result = await pyodide.runPythonAsync(
         `result = runtime.run()
-result`
+result.value`
       )
       if (result === RESULT_PAUSED) {
         postMessage({ input: pyodide.runPython('runtime.env.prompt') })
