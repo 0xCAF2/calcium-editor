@@ -1,5 +1,5 @@
 import Blockly from 'blockly'
-import { parseFullWidthNumber } from './utils'
+import { parseFullWidthNumber } from './util'
 
 export class CalciumGenerator extends Blockly.Generator {
   indent: number
