@@ -33,6 +33,16 @@ const labelForReset = Blockly.Msg.CALCIUM_UI_RESET
 const labelForRun = Blockly.Msg.CALCIUM_UI_RUN
 const labelForSave = Blockly.Msg.CALCIUM_UI_SAVE
 
+async function loadSampleCode() {
+  const params = new URLSearchParams(window.location.search)
+  const c = params.get('c')
+  if (c) {
+    const response = await fetch(`/samples/${c}.json`)
+    const json = await response.json()
+    Blockly.serialization.workspaces.load(json, workspace!)
+  }
+}
+
 function open() {
   const inputFile = document.createElement('input')
   inputFile.type = 'file'
@@ -59,6 +69,7 @@ function resetRuntime() {
   worker?.terminate()
   worker = null
   running.value = false
+  inputting.value = false
   waiting.value = true
   worker = new Worker('/script/worker.js')
   worker.onmessage = (event) => {
@@ -148,6 +159,7 @@ onMounted(() => {
     e.returnValue = 'c'
   })
   resetRuntime()
+  loadSampleCode()
 })
 
 watch(running, (newValue) => {
@@ -202,7 +214,7 @@ watch(
         </v-menu>
       </v-app-bar-title>
       <template v-slot:append>
-        <v-btn icon href="https://calcium.0xcaf2.dev/" target="_blank">
+        <v-btn icon href="https://calcium.0xcaf2.help/" target="_blank">
           <span><b>？</b></span>
         </v-btn>
       </template>
