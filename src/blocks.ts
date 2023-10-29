@@ -1131,7 +1131,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
     },
     {
       type: 'pseudo_random',
-      message0: '乱数 ( \0 )',
+      message0: '乱数 (  )',
       inputsInline: true,
       output: 'calcium_call',
       colour: 0,
