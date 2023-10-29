@@ -198,9 +198,7 @@ export class CalciumGenerator extends Blockly.Generator {
       )
     }
 
-    this.forBlock['calcium_defmethod'] = this.forBlock[
-      'calcium_defmethod_repr'
-    ] = (block) => {
+    this.forBlock['calcium_def_method'] = (block) => {
       const name = block.getField('NAME')?.getText()
       this.shiftIndent(1)
       const stmts =

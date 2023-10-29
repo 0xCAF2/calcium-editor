@@ -108,7 +108,7 @@ export class PseudoGenerator extends Blockly.Generator {
       )
     }
 
-    this.forBlock['calcium_defmethod'] = (block) => {
+    this.forBlock['calcium_def_method'] = (block) => {
       const name = block.getField('NAME')?.getText()
       this.shiftIndent(1)
       const stmts =
