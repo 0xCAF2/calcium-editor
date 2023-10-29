@@ -117,10 +117,11 @@ export class PseudoGenerator extends Blockly.Generator {
       this.shiftIndent(-1)
 
       const parameters: any[] = Reflect.get(block, 'parameters') || []
-      parameters.unshift('self')
       return (
-        this.addPseudoIndent('def', `def ${name}(${parameters.join(', ')}):`) +
-        stmts
+        this.addPseudoIndent(
+          'def',
+          `def ${name}(${['self', ...parameters].join(', ')}):`
+        ) + stmts
       )
     }
 
