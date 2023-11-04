@@ -73,7 +73,7 @@ export class PseudoGenerator extends Blockly.Generator {
       return (
         this.addPseudoIndent(
           'class',
-          `class ${className}${superclass ? `(${superclass})` : ''}`
+          `class ${className}${superclass ? `(${superclass})` : ''}:`
         ) + stmts
       )
     }
