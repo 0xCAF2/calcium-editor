@@ -184,7 +184,7 @@ watch(
 
 <template>
   <v-app>
-    <v-app-bar app :color="running ? 'orange' : 'blue'" style="z-index: 3000">
+    <v-app-bar app color="blue">
       <template v-slot:prepend>
         <v-switch style="margin-left: 10px" v-model="running" hide-details="auto" :disabled="waiting">
           <template #label>

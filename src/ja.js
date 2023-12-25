@@ -139,7 +139,7 @@ Blockly.Msg.CALCIUM_SUBSCRIPT_TITLE = '%1 の要素 [ %2 ]'
 Blockly.Msg.CALCIUM_SUBSCRIPT_TOOLTIP = 'リストや辞書などの要素を指定します。'
 
 Blockly.Msg.CALCIUM_UI_OPEN = '開く'
-Blockly.Msg.CALCIUM_UI_RESET = '実行をリセット'
+Blockly.Msg.CALCIUM_UI_RESET = 'リセット'
 Blockly.Msg.CALCIUM_UI_RUN = '実行'
 Blockly.Msg.CALCIUM_UI_SAVE = '保存'
 
