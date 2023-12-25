@@ -121,6 +121,10 @@ export const calciumToolbox = [
         kind: 'block',
         type: 'pseudo_print',
       },
+      {
+        kind: 'block',
+        type: 'pseudo_options',
+      },
     ],
   },
   {
