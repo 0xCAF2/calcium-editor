@@ -241,6 +241,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_call',
             'String',
             'Array',
+            'pseudo_options',
           ],
         },
         {
@@ -310,6 +311,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_call',
             'calcium_subscript',
             'calcium_arithmetic',
+            'pseudo_options',
           ],
         },
         {
@@ -330,6 +332,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_call',
             'calcium_subscript',
             'calcium_arithmetic',
+            'pseudo_options',
           ],
         },
       ],
@@ -433,6 +436,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_call',
             'calcium_arithmetic',
             'calcium_slice',
+            'pseudo_options',
           ],
         },
       ],
@@ -472,6 +476,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_subscript',
             'calcium_call',
             'calcium_arithmetic',
+            'pseudo_options',
           ],
         },
         {
@@ -718,6 +723,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_arithmetic',
             'Number',
             'String',
+            'pseudo_options',
           ],
         },
         {
@@ -746,6 +752,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'Number',
             'String',
             'calcium_none',
+            'pseudo_options',
           ],
         },
       ],
@@ -795,6 +802,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_arithmetic',
             'Number',
             'String',
+            'pseudo_options',
           ],
         },
         {
@@ -821,6 +829,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_arithmetic',
             'Number',
             'String',
+            'pseudo_options',
           ],
         },
       ],
@@ -891,6 +900,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_call',
             'calcium_subscript',
             'calcium_arithmetic',
+            'pseudo_options',
           ],
         },
         {
@@ -911,6 +921,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_call',
             'calcium_subscript',
             'calcium_arithmetic',
+            'pseudo_options',
           ],
         },
       ],
@@ -933,6 +944,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_subscript',
             'calcium_call',
             'Boolean',
+            'pseudo_options',
           ],
         },
       ],
@@ -957,6 +969,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_arithmetic',
             'Number',
             'String',
+            'pseudo_options',
           ],
         },
         {
@@ -982,6 +995,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_arithmetic',
             'Number',
             'String',
+            'pseudo_options',
           ],
         },
       ],
@@ -1501,6 +1515,7 @@ Blockly.common.defineBlocks({
                 'calcium_subscript',
                 'calcium_call',
                 'calcium_arithmetic',
+                'pseudo_options',
               ],
             },
           ],
@@ -1686,6 +1701,7 @@ Blockly.Extensions.registerMutator(
             'calcium_subscript',
             'calcium_call',
             'calcium_arithmetic',
+            'pseudo_options',
           ])
           .appendField('elif')
         this.appendDummyInput(':' + i).appendField(':')
@@ -2325,6 +2341,7 @@ Blockly.Extensions.registerMutator(
             'calcium_subscript',
             'calcium_call',
             'calcium_arithmetic',
+            'pseudo_options',
           ])
           .appendField('そうでなくもし')
         this.appendDummyInput(':' + i).appendField('ならば:')
@@ -2378,6 +2395,7 @@ Blockly.common.defineBlocks({
               'calcium_subscript',
               'calcium_call',
               'calcium_arithmetic',
+              'pseudo_options',
             ],
           },
         ],
@@ -2420,6 +2438,7 @@ Blockly.common.defineBlocksWithJsonArray([
           'calcium_attribute',
           'calcium_subscript',
           'calcium_arithmetic',
+          'pseudo_options',
         ],
       },
       {
@@ -2431,6 +2450,7 @@ Blockly.common.defineBlocksWithJsonArray([
           'calcium_attribute',
           'calcium_subscript',
           'calcium_arithmetic',
+          'pseudo_options',
         ],
       },
       {
@@ -2442,6 +2462,7 @@ Blockly.common.defineBlocksWithJsonArray([
           'calcium_attribute',
           'calcium_subscript',
           'calcium_arithmetic',
+          'pseudo_options',
         ],
       },
       {
@@ -2477,6 +2498,7 @@ Blockly.common.defineBlocksWithJsonArray([
           'calcium_attribute',
           'calcium_subscript',
           'calcium_arithmetic',
+          'pseudo_options',
         ],
       },
       {
@@ -2488,6 +2510,7 @@ Blockly.common.defineBlocksWithJsonArray([
           'calcium_attribute',
           'calcium_subscript',
           'calcium_arithmetic',
+          'pseudo_options',
         ],
       },
       {
@@ -2499,6 +2522,7 @@ Blockly.common.defineBlocksWithJsonArray([
           'calcium_attribute',
           'calcium_subscript',
           'calcium_arithmetic',
+          'pseudo_options',
         ],
       },
       {
@@ -2530,6 +2554,7 @@ Blockly.common.defineBlocksWithJsonArray([
           'calcium_subscript',
           'calcium_call',
           'calcium_arithmetic',
+          'pseudo_options',
         ],
       },
       {
