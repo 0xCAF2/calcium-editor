@@ -1,8 +1,22 @@
 import Blockly from 'blockly'
 import { parseFullWidthNumber } from './util'
+import { Ref, ref } from 'vue'
+
+export class Options {
+  selected: Ref<string>
+  index = 0
+
+  constructor(public readonly options: string[]) {
+    this.selected = ref(options[0])
+  }
+}
 
 export class PseudoGenerator extends Blockly.Generator {
+  filledOptions: boolean
   indent: number
+  optionsIndex: number
+  optionsList: Options[]
+
   constructor(name: string) {
     super(name)
     this.indent = 1
@@ -19,13 +33,13 @@ export class PseudoGenerator extends Blockly.Generator {
         }
 
     this.forBlock['calcium_assign'] = (block) => {
-      const ref = this.valueToCode(block, 'REF', 0) || 'n'
+      const ref = this.valueToCode(block, 'REF', 0) || 'x'
       const value = this.valueToCode(block, 'VALUE', 0) || '0'
       return this.addPseudoIndent('assign', `${ref} = ${value}`)
     }
 
     this.forBlock['pseudo_assign'] = (block) => {
-      const ref = this.valueToCode(block, 'REF', 0) || 'n'
+      const ref = this.valueToCode(block, 'REF', 0) || 'x'
       const value = this.valueToCode(block, 'VALUE', 0) || '0'
       return this.addPseudoIndent('assign', `${ref} = ${value}`)
     }
@@ -404,13 +418,41 @@ export class PseudoGenerator extends Blockly.Generator {
 
       return this.addPseudoIndent('while', `${condition} の間繰り返す:`) + stmts
     }
+
+    this.forBlock['pseudo_options'] = (block) => {
+      if (!this.filledOptions) {
+        const optionsStr = this.valueToCode(block, 'OPTIONS', 0) || '[null]'
+        const options = optionsStr
+          .substring(1, optionsStr.length - 1)
+          .split(', ')
+        this.optionsList.push(new Options(options))
+        return [
+          ` Q${this.optionsList.length} (${
+            this.optionsList.at(-1)!.options[0]
+          }) `,
+          0,
+        ]
+      }
+      const currentOptionsNumber = this.optionsIndex + 1
+      const currentOptionsSelectedValue =
+        this.optionsList[this.optionsIndex].selected.value
+      this.optionsIndex += 1
+      return [` Q${currentOptionsNumber} (${currentOptionsSelectedValue}) `, 0]
+    }
+  }
+
+  clearOptions() {
+    this.optionsList = []
+    this.filledOptions = false
   }
 
   init() {
     this.indent = 1
+    this.optionsIndex = 0
   }
 
   finish(code: string) {
+    this.filledOptions = true
     const blockPrefix = '｜'
     const endPrefix = '⎿'
     // remove last comma

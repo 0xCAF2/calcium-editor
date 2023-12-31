@@ -1,7 +1,17 @@
 import Blockly from 'blockly'
 import { parseFullWidthNumber } from './util'
+import { Ref } from 'vue'
+
+class Options {
+  expressions: any[]
+  constructor(expressions: any[]) {
+    this.expressions = expressions
+  }
+}
 
 export class CalciumGenerator extends Blockly.Generator {
+  optionsList: Options[]
+  indices: number[] | null = null
   indent: number
   constructor(name: string) {
     super(name)
@@ -671,14 +681,31 @@ export class CalciumGenerator extends Blockly.Generator {
     this.forBlock['pseudo_for_decrement'] = makeForLoop(false)
 
     this.forBlock['pseudo_while'] = this.forBlock['calcium_while']
+
+    this.forBlock['pseudo_options'] = (block) => {
+      const optionsStr = this.valueToCode(block, 'OPTIONS', 0) || '[null]'
+      // the array of options
+      const options = JSON.parse(optionsStr)[0].map((option: any) =>
+        JSON.stringify(option)
+      )
+      const optionsIndex = this.optionsList.length
+      this.optionsList.push(new Options(options))
+      const index = this.indices?.[optionsIndex] ?? 0
+      return [options[index], 0]
+    }
+  }
+
+  clearOptions() {
+    this.indices = null
   }
 
   init() {
     this.indent = 1
+    this.optionsList = []
   }
 
   finish(code: string) {
-    const start = JSON.stringify([1, [], '#', '0.0.5'])
+    const start = JSON.stringify([1, [], '#', '1.0.0'])
     const importRandom = JSON.stringify([1, [], 'import', 'random'])
     const end = JSON.stringify([1, [], 'end'])
     return `[${start},${importRandom},${code}${end}]`
