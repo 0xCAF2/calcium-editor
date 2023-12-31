@@ -121,6 +121,7 @@ function parse() {
 
 function run() {
   output.value = ''
+  error.value = ''
   const _code = `runtime = Runtime('${code.value
     .replace(/([^\\])\n/g, '$1')
     .replace(/'/g, "\\'")}')
@@ -235,7 +236,7 @@ watch(
         </v-menu>
       </v-app-bar-title>
       <template v-slot:append>
-        <v-btn icon href="https://calcium-help.web.app/" target="_blank">
+        <v-btn icon href="https://help.calcium-pro.app/" target="_blank">
           <span><b>？</b></span>
         </v-btn>
       </template>
@@ -248,24 +249,26 @@ watch(
           </v-col>
         </v-row>
         <v-row v-show="running">
-          <v-col cols="6">
+          <v-col :cols="optionsList.length === 0 ? 0 : 6">
             <p v-for="(options, index) in optionsList" :key="index">
               Q{{ index + 1 }}: <v-select :items="options.options" v-model="options.selected" dense outlined></v-select>
             </p>
           </v-col>
-          <v-col cols="6">
-            <v-textarea variant="outlined" bg-color="white" v-model="output" readonly></v-textarea>
+          <v-col :cols="optionsList.length === 0 ? 12 : 6">
+            <v-container>
+              <v-row>
+                <v-textarea variant="outlined" bg-color="white" v-model="output" readonly></v-textarea>
+              </v-row>
+              <v-row v-show="error">
+                <v-textarea variant="outlined" bg-color="white" v-model="error" base-color="red" color="red"
+                  readonly></v-textarea>
+              </v-row>
+            </v-container>
           </v-col>
         </v-row>
         <v-row v-show="running">
           <v-textarea id="div-pseudo" style="z-index: 1000;" variant="outlined" bg-color="white" v-model="pseudoCode"
             base-color="blue" color="blue" readonly auto-grow></v-textarea>
-        </v-row>
-      </v-container>
-      <v-container id="output" v-if="running">
-        <v-row>
-          <v-textarea v-show="error" variant="outlined" bg-color="white" v-model="error" base-color="red" color="red"
-            readonly></v-textarea>
         </v-row>
       </v-container>
       <v-dialog v-model="overlayed" id="dialog">
