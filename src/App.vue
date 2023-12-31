@@ -6,8 +6,8 @@ import DarkTheme from '@blockly/theme-dark'
 import { calciumBlocks } from './blocks'
 import { calciumToolbox } from './toolbox'
 import { CalciumGenerator } from './calcium-generator'
-import { PseudoGenerator } from './pseudo-generator'
-import { onMounted, ref, watch } from 'vue'
+import { PseudoGenerator, Options } from './pseudo-generator'
+import { Ref, onMounted, ref, watch } from 'vue'
 import './renderer'
 
 Blockly.setLocale(Lang)
@@ -21,6 +21,7 @@ const code = ref('')
 const error = ref('')
 const input = ref('')
 const inputting = ref(false)
+const optionsList: Ref<Options[]> = ref([])
 const output = ref('')
 const overlayed = ref(false)
 const pseudoCode = ref('')
@@ -98,13 +99,30 @@ function resize() {
   Blockly.svgResize(workspace!)
 }
 
-function run() {
+function parse() {
+  pseudoGenerator.clearOptions()
   const _pseudoCode = pseudoGenerator.workspaceToCode(workspace!)
   pseudoCode.value = _pseudoCode
+  optionsList.value = pseudoGenerator.optionsList
+  for (const options of optionsList.value) {
+    watch(() => options.selected, (newValue) => {
+      const index = options.options.indexOf(newValue as unknown as string)
+      options.index = index
+      pseudoCode.value = pseudoGenerator.workspaceToCode(workspace!)
+      calciumGenerator.indices = optionsList.value.map((options) => options.index)
+      code.value = calciumGenerator.workspaceToCode(workspace!)
+    })
+  }
 
+  calciumGenerator.indices = null
   const jsonCode = calciumGenerator.workspaceToCode(workspace!)
   code.value = jsonCode
-  const _code = `runtime = Runtime('${jsonCode
+}
+
+function run() {
+  output.value = ''
+  error.value = ''
+  const _code = `runtime = Runtime('${code.value
     .replace(/([^\\])\n/g, '$1')
     .replace(/'/g, "\\'")}')
 result = runtime.run()
@@ -165,7 +183,7 @@ onMounted(() => {
 watch(running, (newValue) => {
   if (newValue) {
     output.value = ''
-    run()
+    parse()
   } else {
     inputting.value = false
   }
@@ -184,7 +202,7 @@ watch(
 
 <template>
   <v-app>
-    <v-app-bar app :color="running ? 'orange' : 'blue'" style="z-index: 3000">
+    <v-app-bar app color="blue">
       <template v-slot:prepend>
         <v-switch style="margin-left: 10px" v-model="running" hide-details="auto" :disabled="waiting">
           <template #label>
@@ -193,10 +211,14 @@ watch(
         </v-switch>
       </template>
       <v-app-bar-title>
-        <v-btn @click="save" size="large">
+        <!-- show run button with icon -->
+        <v-btn icon @click="run" size="large" v-show="running">
+          <span><b>▶</b></span>
+        </v-btn>
+        <v-btn @click="save" size="large" v-show="!running">
           <span>{{ labelForSave }}</span>
         </v-btn>
-        <v-btn @click="open" size="large" :disabled="running">
+        <v-btn @click="open" size="large" v-show="!running">
           <span>{{ labelForOpen }}</span>
         </v-btn>
         <v-progress-circular :indeterminate="waiting" v-show="waiting"></v-progress-circular>
@@ -214,30 +236,39 @@ watch(
         </v-menu>
       </v-app-bar-title>
       <template v-slot:append>
-        <v-btn icon href="https://calcium.0xcaf2.help/" target="_blank">
+        <v-btn icon href="https://help.calcium-pro.app/" target="_blank">
           <span><b>？</b></span>
         </v-btn>
       </template>
     </v-app-bar>
     <v-main>
       <v-container class="mx-0">
-        <v-row>
+        <v-row v-show="!running">
           <v-col class="pa-0" cols="12">
             <div id="div-blockly"></div>
           </v-col>
         </v-row>
-      </v-container>
-      <v-container id="output" v-if="running">
-        <v-row>
-          <v-textarea v-show="error" variant="outlined" bg-color="white" v-model="error" base-color="red" color="red"
-            readonly></v-textarea>
+        <v-row v-show="running">
+          <v-col :cols="optionsList.length === 0 ? 0 : 6">
+            <p v-for="(options, index) in optionsList" :key="index">
+              Q{{ index + 1 }}: <v-select :items="options.options" v-model="options.selected" dense outlined></v-select>
+            </p>
+          </v-col>
+          <v-col :cols="optionsList.length === 0 ? 12 : 6">
+            <v-container>
+              <v-row>
+                <v-textarea variant="outlined" bg-color="white" v-model="output" readonly></v-textarea>
+              </v-row>
+              <v-row v-show="error">
+                <v-textarea variant="outlined" bg-color="white" v-model="error" base-color="red" color="red"
+                  readonly></v-textarea>
+              </v-row>
+            </v-container>
+          </v-col>
         </v-row>
-        <v-row>
-          <v-textarea v-show="running" variant="solo-filled" bg-color="white" v-model="output" readonly></v-textarea>
-        </v-row>
-        <v-row>
-          <v-textarea v-show="running" variant="outlined" bg-color="white" v-model="pseudoCode" base-color="blue"
-            color="blue" readonly auto-grow></v-textarea>
+        <v-row v-show="running">
+          <v-textarea id="div-pseudo" style="z-index: 1000;" variant="outlined" bg-color="white" v-model="pseudoCode"
+            base-color="blue" color="blue" readonly auto-grow></v-textarea>
         </v-row>
       </v-container>
       <v-dialog v-model="overlayed" id="dialog">
@@ -250,15 +281,6 @@ watch(
 </template>
 
 <style scoped>
-#output {
-  position: absolute;
-  top: 72px;
-  right: 4px;
-  z-index: 1000;
-  width: 480px;
-  max-width: 95%;
-}
-
 .v-textarea {
   font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Mono',
     Consolas, monospace;

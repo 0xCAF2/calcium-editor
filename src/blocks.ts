@@ -14,6 +14,7 @@ const allElementsForTypeChecks = [
   'calcium_none',
   'calcium_not',
   'Boolean',
+  'pseudo_options',
 ]
 
 export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
@@ -90,6 +91,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_arithmetic',
             'Number',
             'String',
+            'pseudo_options',
           ],
         },
         {
@@ -116,6 +118,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_arithmetic',
             'Number',
             'String',
+            'pseudo_options',
           ],
         },
       ],
@@ -238,6 +241,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_call',
             'String',
             'Array',
+            'pseudo_options',
           ],
         },
         {
@@ -307,6 +311,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_call',
             'calcium_subscript',
             'calcium_arithmetic',
+            'pseudo_options',
           ],
         },
         {
@@ -327,6 +332,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_call',
             'calcium_subscript',
             'calcium_arithmetic',
+            'pseudo_options',
           ],
         },
       ],
@@ -430,6 +436,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_call',
             'calcium_arithmetic',
             'calcium_slice',
+            'pseudo_options',
           ],
         },
       ],
@@ -469,6 +476,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_subscript',
             'calcium_call',
             'calcium_arithmetic',
+            'pseudo_options',
           ],
         },
         {
@@ -715,6 +723,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_arithmetic',
             'Number',
             'String',
+            'pseudo_options',
           ],
         },
         {
@@ -743,6 +752,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'Number',
             'String',
             'calcium_none',
+            'pseudo_options',
           ],
         },
       ],
@@ -792,6 +802,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_arithmetic',
             'Number',
             'String',
+            'pseudo_options',
           ],
         },
         {
@@ -818,6 +829,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_arithmetic',
             'Number',
             'String',
+            'pseudo_options',
           ],
         },
       ],
@@ -888,6 +900,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_call',
             'calcium_subscript',
             'calcium_arithmetic',
+            'pseudo_options',
           ],
         },
         {
@@ -908,6 +921,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_call',
             'calcium_subscript',
             'calcium_arithmetic',
+            'pseudo_options',
           ],
         },
       ],
@@ -930,6 +944,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_subscript',
             'calcium_call',
             'Boolean',
+            'pseudo_options',
           ],
         },
       ],
@@ -954,6 +969,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_arithmetic',
             'Number',
             'String',
+            'pseudo_options',
           ],
         },
         {
@@ -979,6 +995,7 @@ export const calciumBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
             'calcium_arithmetic',
             'Number',
             'String',
+            'pseudo_options',
           ],
         },
       ],
@@ -1498,6 +1515,7 @@ Blockly.common.defineBlocks({
                 'calcium_subscript',
                 'calcium_call',
                 'calcium_arithmetic',
+                'pseudo_options',
               ],
             },
           ],
@@ -1683,6 +1701,7 @@ Blockly.Extensions.registerMutator(
             'calcium_subscript',
             'calcium_call',
             'calcium_arithmetic',
+            'pseudo_options',
           ])
           .appendField('elif')
         this.appendDummyInput(':' + i).appendField(':')
@@ -2322,6 +2341,7 @@ Blockly.Extensions.registerMutator(
             'calcium_subscript',
             'calcium_call',
             'calcium_arithmetic',
+            'pseudo_options',
           ])
           .appendField('そうでなくもし')
         this.appendDummyInput(':' + i).appendField('ならば:')
@@ -2358,43 +2378,46 @@ Blockly.Extensions.registerMutator(
   ['pseudo_if_elseif', 'pseudo_if_else']
 )
 
-Blockly.Blocks['pseudo_if'] = {
-  init: function () {
-    this.jsonInit({
-      type: 'pseudo_if',
-      message0: 'もし %1 ならば:',
-      args0: [
-        {
-          type: 'input_value',
-          name: 'IF0',
-          check: [
-            'Boolean',
-            'calcium_variable',
-            'calcium_attribute',
-            'calcium_subscript',
-            'calcium_call',
-            'calcium_arithmetic',
-          ],
-        },
-      ],
-      message1: '%1',
-      args1: [
-        {
-          type: 'input_statement',
-          name: 'DO0',
-        },
-      ],
-      previousStatement: null,
-      nextStatement: null,
-      colour: 210,
-      tooltip: '条件によって、実行する文を決めます。',
-      helpUrl: '',
-      mutator: 'pseudo_if_mutator',
-    })
-    this.elseifCount_ = 0
-    this.elseCount_ = 0
+Blockly.common.defineBlocks({
+  pseudo_if: {
+    init: function () {
+      this.jsonInit({
+        type: 'pseudo_if',
+        message0: 'もし %1 ならば:',
+        args0: [
+          {
+            type: 'input_value',
+            name: 'IF0',
+            check: [
+              'Boolean',
+              'calcium_variable',
+              'calcium_attribute',
+              'calcium_subscript',
+              'calcium_call',
+              'calcium_arithmetic',
+              'pseudo_options',
+            ],
+          },
+        ],
+        message1: '%1',
+        args1: [
+          {
+            type: 'input_statement',
+            name: 'DO0',
+          },
+        ],
+        previousStatement: null,
+        nextStatement: null,
+        colour: 210,
+        tooltip: '条件によって、実行する文を決めます。',
+        helpUrl: '',
+        mutator: 'pseudo_if_mutator',
+      })
+      this.elseifCount_ = 0
+      this.elseCount_ = 0
+    },
   },
-}
+})
 
 Blockly.common.defineBlocksWithJsonArray([
   {
@@ -2415,6 +2438,7 @@ Blockly.common.defineBlocksWithJsonArray([
           'calcium_attribute',
           'calcium_subscript',
           'calcium_arithmetic',
+          'pseudo_options',
         ],
       },
       {
@@ -2426,6 +2450,7 @@ Blockly.common.defineBlocksWithJsonArray([
           'calcium_attribute',
           'calcium_subscript',
           'calcium_arithmetic',
+          'pseudo_options',
         ],
       },
       {
@@ -2437,6 +2462,7 @@ Blockly.common.defineBlocksWithJsonArray([
           'calcium_attribute',
           'calcium_subscript',
           'calcium_arithmetic',
+          'pseudo_options',
         ],
       },
       {
@@ -2472,6 +2498,7 @@ Blockly.common.defineBlocksWithJsonArray([
           'calcium_attribute',
           'calcium_subscript',
           'calcium_arithmetic',
+          'pseudo_options',
         ],
       },
       {
@@ -2483,6 +2510,7 @@ Blockly.common.defineBlocksWithJsonArray([
           'calcium_attribute',
           'calcium_subscript',
           'calcium_arithmetic',
+          'pseudo_options',
         ],
       },
       {
@@ -2494,6 +2522,7 @@ Blockly.common.defineBlocksWithJsonArray([
           'calcium_attribute',
           'calcium_subscript',
           'calcium_arithmetic',
+          'pseudo_options',
         ],
       },
       {
@@ -2525,6 +2554,7 @@ Blockly.common.defineBlocksWithJsonArray([
           'calcium_subscript',
           'calcium_call',
           'calcium_arithmetic',
+          'pseudo_options',
         ],
       },
       {
@@ -2540,6 +2570,25 @@ Blockly.common.defineBlocksWithJsonArray([
     nextStatement: null,
     colour: 210,
     tooltip: '条件を満たす間、繰り返します。',
+    helpUrl: '',
+  },
+])
+
+Blockly.common.defineBlocksWithJsonArray([
+  {
+    type: 'pseudo_options',
+    message0: '選択肢 ( 0, %1 )',
+    args0: [
+      {
+        type: 'input_value',
+        name: 'OPTIONS',
+        check: ['Array'],
+      },
+    ],
+    inputsInline: true,
+    output: 'pseudo_options',
+    colour: 60,
+    tooltip: '解答の選択肢を表します。',
     helpUrl: '',
   },
 ])
