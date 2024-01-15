@@ -29,8 +29,8 @@ const prompt = ref('')
 const running = ref(false)
 const waiting = ref(true)
 
+const labelForCancel = Blockly.Msg.CALCIUM_UI_CANCEL
 const labelForOpen = Blockly.Msg.CALCIUM_UI_OPEN
-const labelForReset = Blockly.Msg.CALCIUM_UI_RESET
 const labelForRun = Blockly.Msg.CALCIUM_UI_RUN
 const labelForSave = Blockly.Msg.CALCIUM_UI_SAVE
 
@@ -230,7 +230,7 @@ watch(
           </template>
           <v-list>
             <v-list-item @click="resetRuntime">
-              <v-list-item-title>{{ labelForReset }}</v-list-item-title>
+              <v-list-item-title>{{ labelForCancel }}</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -251,13 +251,14 @@ watch(
         <v-row v-show="running">
           <v-col :cols="optionsList.length === 0 ? 0 : 6">
             <p v-for="(options, index) in optionsList" :key="index">
-              Q{{ index + 1 }}: <v-select :items="options.options" v-model="options.selected" dense outlined></v-select>
+              問{{ index + 1 }}: <v-select :items="options.options" v-model="options.selected" dense outlined></v-select>
             </p>
           </v-col>
           <v-col :cols="optionsList.length === 0 ? 12 : 6">
             <v-container>
               <v-row>
-                <v-textarea variant="outlined" bg-color="white" v-model="output" readonly></v-textarea>
+                <v-textarea variant="outlined" bg-color="white" v-model="output" readonly
+                  :style="'z-index: ' + Number.MAX_SAFE_INTEGER"></v-textarea>
               </v-row>
               <v-row v-show="error">
                 <v-textarea variant="outlined" bg-color="white" v-model="error" base-color="red" color="red"
@@ -283,7 +284,7 @@ watch(
 <style scoped>
 .v-textarea {
   font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Mono',
-    Consolas, monospace;
+    Consolas, 'Courier New', monospace;
 }
 
 #dialog {

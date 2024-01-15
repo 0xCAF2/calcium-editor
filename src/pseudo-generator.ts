@@ -427,7 +427,7 @@ export class PseudoGenerator extends Blockly.Generator {
           .split(', ')
         this.optionsList.push(new Options(options))
         return [
-          ` Q${this.optionsList.length} (${
+          ` 問${this.optionsList.length} (${
             this.optionsList.at(-1)!.options[0]
           }) `,
           0,
@@ -437,7 +437,7 @@ export class PseudoGenerator extends Blockly.Generator {
       const currentOptionsSelectedValue =
         this.optionsList[this.optionsIndex].selected.value
       this.optionsIndex += 1
-      return [` Q${currentOptionsNumber} (${currentOptionsSelectedValue}) `, 0]
+      return [` 問${currentOptionsNumber} (${currentOptionsSelectedValue}) `, 0]
     }
   }
 
