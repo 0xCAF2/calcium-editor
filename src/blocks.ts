@@ -2588,7 +2588,7 @@ Blockly.common.defineBlocksWithJsonArray([
     inputsInline: true,
     output: 'pseudo_options',
     colour: 60,
-    tooltip: '解答の選択肢を表します。',
+    tooltip: '解答の選択肢を表示する関数。必ずリストを引数に渡します。',
     helpUrl: '',
   },
 ])
