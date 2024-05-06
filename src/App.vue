@@ -236,7 +236,7 @@ watch(
         </v-menu>
       </v-app-bar-title>
       <template v-slot:append>
-        <v-btn icon href="https://help.calcium-pro.app/" target="_blank">
+        <v-btn icon href="https://help.capg.app/" target="_blank">
           <span><b>？</b></span>
         </v-btn>
       </template>

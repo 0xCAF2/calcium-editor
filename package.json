@@ -1,6 +1,6 @@
 {
-  "name": "calcium-pro",
-  "version": "1.0.1",
+  "name": "capg",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "serve": "vite preview",
