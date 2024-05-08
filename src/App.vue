@@ -34,13 +34,18 @@ const labelForOpen = Blockly.Msg.CALCIUM_UI_OPEN
 const labelForRun = Blockly.Msg.CALCIUM_UI_RUN
 const labelForSave = Blockly.Msg.CALCIUM_UI_SAVE
 
-async function loadSampleCode() {
+async function loadCode() {
   const params = new URLSearchParams(window.location.search)
   const c = params.get('c')
   if (c) {
     const response = await fetch(`/samples/${c}.json`)
     const json = await response.json()
     Blockly.serialization.workspaces.load(json, workspace!)
+  } else {
+    const code = localStorage.getItem('code')
+    if (code) {
+      Blockly.serialization.workspaces.load(JSON.parse(code), workspace!)
+    }
   }
 }
 
@@ -174,10 +179,14 @@ onMounted(() => {
   window.addEventListener('resize', resize, false)
   window.addEventListener('beforeunload', function (e) {
     e.preventDefault()
-    e.returnValue = 'c'
   })
   resetRuntime()
-  loadSampleCode()
+  loadCode()
+  workspace.addChangeListener((e) => {
+    const json = Blockly.serialization.workspaces.save(workspace!)
+    const code = JSON.stringify(json)
+    localStorage.setItem('code', code)
+  })
 })
 
 watch(running, (newValue) => {
