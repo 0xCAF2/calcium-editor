@@ -28,6 +28,8 @@ const pseudoCode = ref('')
 const prompt = ref('')
 const running = ref(false)
 const waiting = ref(true)
+const showingErrorMessage = ref(false)
+const errorJp = ref('')
 
 const labelForCancel = Blockly.Msg.CALCIUM_UI_CANCEL
 const labelForOpen = Blockly.Msg.CALCIUM_UI_OPEN
@@ -87,6 +89,7 @@ function resetRuntime() {
             output.value += '\n'
         } else if (message.error) {
             error.value += `${message.error}\nline: ${message.line}\n`
+            errorJp.value = `${message.line}行目でエラーが発生しました：`
         } else if (message.input || message.input === '') {
             input.value = ''
             prompt.value = message.input
@@ -126,6 +129,8 @@ function parse() {
 function run() {
     output.value = ''
     error.value = ''
+    errorJp.value = ''
+    showingErrorMessage.value = false
     const _code = `runtime = Runtime('${code.value
         .replace(/([^\\])\n/g, '$1')
         .replace(/'/g, "\\'")}')
@@ -196,6 +201,8 @@ watch(running, (newValue) => {
         inputting.value = false
     }
     error.value = ''
+    showingErrorMessage.value = false
+    errorJp.value = ''
 })
 
 watch(
@@ -263,12 +270,18 @@ watch(
                     </p>
                 </v-row>
                 <v-row v-show="running">
-                    <v-textarea variant="outlined" bg-color="white" v-model="output" readonly
-                        style="z-index: 2000"></v-textarea>
+                    <v-textarea variant="outlined" bg-color="grey-darken-4" v-model="output" readonly
+                        style="z-index: 2000; font-weight: bold"></v-textarea>
                 </v-row>
                 <v-row v-show="error">
+                    <p style="color: red; font-weight: bold">{{ errorJp }}</p>
+                </v-row>
+                <v-row v-show="error && !showingErrorMessage">
+                    <v-btn @click="showingErrorMessage = true" color="red">エラーを表示</v-btn>
+                </v-row>
+                <v-row v-show="error && showingErrorMessage">
                     <v-textarea variant="outlined" bg-color="white" v-model="error" base-color="red" color="red"
-                        readonly></v-textarea>
+                        style="color: red; font-weight: bold" readonly></v-textarea>
                 </v-row>
                 <v-row v-show="running">
                     <v-textarea id="div-pseudo" style="z-index: 1000;" variant="outlined" bg-color="white"
