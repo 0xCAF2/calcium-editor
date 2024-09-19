@@ -73,6 +73,14 @@ function open() {
     inputFile.click()
 }
 
+function parseErrorMessage(msg: String): String {
+    const errorLines = msg.split('\n')
+    // drop the last empty line
+    errorLines.pop()
+    const calciumErrorLine = errorLines.pop()
+    return calciumErrorLine || ''
+}
+
 function resetRuntime() {
     worker?.terminate()
     worker = null
@@ -88,8 +96,8 @@ function resetRuntime() {
             output.value += message.output
             output.value += '\n'
         } else if (message.error) {
-            error.value += `${message.error}\nline: ${message.line}\n`
-            errorJp.value = `${message.line}行目でエラーが発生しました：`
+            error.value += message.error.toString()
+            errorJp.value = `${message.line} 行目でエラーが発生しました： ${parseErrorMessage(message.error.toString())}`
         } else if (message.input || message.input === '') {
             input.value = ''
             prompt.value = message.input
@@ -277,7 +285,7 @@ watch(
                     <p style="color: red; font-weight: bold">{{ errorJp }}</p>
                 </v-row>
                 <v-row v-show="error && !showingErrorMessage">
-                    <v-btn @click="showingErrorMessage = true" color="red">エラーを表示</v-btn>
+                    <v-btn @click="showingErrorMessage = true" color="red">元のエラーを表示</v-btn>
                 </v-row>
                 <v-row v-show="error && showingErrorMessage">
                     <v-textarea variant="outlined" bg-color="white" v-model="error" base-color="red" color="red"

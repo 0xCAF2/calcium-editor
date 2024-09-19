@@ -46,7 +46,8 @@ result.value`
     }
   } catch (e) {
     // locate the error in the original code
-    // "#" and "import" commands are not counted as lines
+    // Neither "#" nor "import" commands count as lines
+    // since they are not part of the user code
     const lineNumber = pyodide.runPython('runtime.env.addr.line') - 1
     postMessage({ error: e, line: lineNumber })
   }
