@@ -1,7 +1,7 @@
 const RESULT_EXECUTED = 1
 const RESULT_PAUSED = 4
 
-importScripts('https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js')
+importScripts('https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js')
 
 let pyodide
 
@@ -11,7 +11,7 @@ async function loadPyodideAndPackages() {
       postMessage({ output })
     },
   })
-  await pyodide.loadPackage(['micropip', 'numpy', 'pandas', 'scipy'])
+  await pyodide.loadPackage(['micropip'])
   pyodide.runPythonAsync(`import micropip
 await micropip.install('calciumlang')
 from calciumlang.runtime import Runtime
@@ -45,6 +45,10 @@ result.value`
       }
     }
   } catch (e) {
-    postMessage({ error: e })
+    // locate the error in the original code
+    // Neither "#" nor "import" commands count as lines
+    // since they are not part of the user code
+    const lineNumber = pyodide.runPython('runtime.env.addr.line') - 1
+    postMessage({ error: e, line: lineNumber })
   }
 }
