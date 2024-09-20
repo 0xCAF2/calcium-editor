@@ -9,6 +9,7 @@ import { CalciumGenerator } from './calcium-generator'
 import { PseudoGenerator, Options } from './pseudo-generator'
 import { Ref, onMounted, ref, watch } from 'vue'
 import './renderer'
+import { translate } from './ja'
 
 Blockly.setLocale(Lang)
 
@@ -78,7 +79,7 @@ function parseErrorMessage(msg: String): String {
     // drop the last empty line
     errorLines.pop()
     const calciumErrorLine = errorLines.pop()
-    return calciumErrorLine || ''
+    return translate(calciumErrorLine) || ''
 }
 
 function resetRuntime() {

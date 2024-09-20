@@ -148,3 +148,40 @@ Blockly.Msg.CALCIUM_VARIABLE_TOOLTIP = '変数の名前を指定します。'
 
 Blockly.Msg.CALCIUM_WHILE_TITLE = '%1 の間 %2 くりかえす %3'
 Blockly.Msg.CALCIUM_WHILE_TOOLTIP = '条件を満たす間、くり返します。'
+
+export function translate(errorMessage) {
+    if (errorMessage.includes('calciumlang.error.AssignmentNotSupportedError')) {
+        return `代入できません。${errorMessage.replace('calciumlang.error.AssignmentNotSupportedError:', '')}`
+    }
+    if (errorMessage.includes('calciumlang.error.InvalidBreakError')) {
+        return `break できません。${errorMessage.replace('calciumlang.error.InvalidBreakError:', '')}`
+    }
+    if (errorMessage.includes('calciumlang.error.InvalidContinueError')) {
+        return `continue できません。${errorMessage.replace('calciumlang.error.InvalidContinueError:', '')}`
+    }
+    if (errorMessage.includes('calciumlang.error.InvalidModuleNameError')) {
+        return `モジュール名が正しくありません。${errorMessage.replace('calciumlang.error.InvalidModuleNameError:', '')}`
+    }
+    if (errorMessage.includes('calciumlang.error.InvalidReturnError')) {
+        return `return できません。${errorMessage.replace('calciumlang.error.InvalidReturnError:', '')}`
+    }
+    if (errorMessage.includes('calciumlang.error.KeyNotContainedError')) {
+        return `キーが見つかりません。${errorMessage.replace('calciumlang.error.KeyNotContainedError:', '')}`
+    }
+    if (errorMessage.includes('calciumlang.error.NameNotFoundError')) {
+        return `変数が見つかりません。${errorMessage.replace('calciumlang.error.NameNotFoundError:', '')}`
+    }
+    if (errorMessage.includes('calciumlang.error.ObjectNotCallableError')) {
+        return `関数ではありません。${errorMessage.replace('calciumlang.error.ObjectNotCallableError:', '')}`
+    }
+    if (errorMessage.includes('calciumlang.error.ObjectNotIterableError')) {
+        return `繰り返せません。${errorMessage.replace('calciumlang.error.ObjectNotIterableError:', '')}`
+    }
+    if (errorMessage.includes('calciumlang.error.OperatorNotSupportedError')) {
+        return `演算子が正しくありません。${errorMessage.replace('calciumlang.error.OperatorNotSupportedError:', '')}`
+    }
+    if (errorMessage.includes('calciumlang.error.OutOfRangeError')) {
+        return `index が範囲外です。${errorMessage.replace('calciumlang.error.OutOfRangeError:', '')}`
+    }
+    return errorMessage
+}
