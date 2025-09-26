@@ -1,7 +1,7 @@
 name: calcium_editor
-description: "A new Flutter project."
+description: "A visual programming editor to learn Python"
 publish_to: 'none'
-version: 0.1.0
+version: 0.2.0
 
 environment:
   sdk: ^3.9.2
