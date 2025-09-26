@@ -28,3 +28,8 @@ index-template.html
 
 /is1
 /samples
+
+/build
+/.dart_tool
+*.png
+calcium_editor.iml
