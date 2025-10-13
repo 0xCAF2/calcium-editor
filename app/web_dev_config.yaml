@@ -1,0 +1,13 @@
+server:
+  port: 50080
+  proxy:
+    - prefix: "/blockly/"
+      target: "http://localhost:5173/"
+    - prefix: "/src/"
+      target: "http://localhost:5173/"
+    - prefix: "/@vite/"
+      target: "http://localhost:5173/"
+    - prefix: "/@fs/"
+      target: "http://localhost:5173/"
+    - prefix: "/node_modules/"
+      target: "http://localhost:5173/"

@@ -1,5 +1,8 @@
+import 'dart:js_interop';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:web/web.dart' show HTMLIFrameElement, Window, window;
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_web/webview_flutter_web.dart';
 
@@ -15,7 +18,7 @@ class MainApp extends HookWidget {
     final controller = useMemoized(() => WebViewController());
     useEffect(() {
       WebViewPlatform.instance = WebWebViewPlatform();
-      controller.loadRequest(Uri.parse('http://localhost:5173'));
+      controller.loadRequest(Uri.parse('http://localhost:50080/blockly/'));
       return null;
     }, const []);
 
@@ -24,11 +27,29 @@ class MainApp extends HookWidget {
       home: Scaffold(
         body: Column(
           children: [
-            ElevatedButton(onPressed: () {}, child: const Text('Run')),
+            ElevatedButton(
+              onPressed: () {
+                final webView0 = window.webView0;
+                final iframeWindow = webView0.contentWindow;
+                if (iframeWindow == null) {
+                  return;
+                }
+                debugPrint(iframeWindow.generateCode().toDart);
+              },
+              child: const Text('Run'),
+            ),
             Expanded(child: WebViewWidget(controller: controller)),
           ],
         ),
       ),
     );
   }
+}
+
+extension on Window {
+  @JS()
+  external HTMLIFrameElement get webView0;
+
+  @JS()
+  external JSString generateCode();
 }
