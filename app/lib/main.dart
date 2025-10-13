@@ -20,8 +20,14 @@ class MainApp extends HookWidget {
     }, const []);
 
     return MaterialApp(
+      title: 'Calcium Editor | Programming',
       home: Scaffold(
-        body: Center(child: WebViewWidget(controller: controller)),
+        body: Column(
+          children: [
+            ElevatedButton(onPressed: () {}, child: const Text('Run')),
+            Expanded(child: WebViewWidget(controller: controller)),
+          ],
+        ),
       ),
     );
   }
