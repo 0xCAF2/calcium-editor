@@ -18,7 +18,11 @@ class MainApp extends HookWidget {
     final controller = useMemoized(() => WebViewController());
     useEffect(() {
       WebViewPlatform.instance = WebWebViewPlatform();
-      controller.loadRequest(Uri.parse('http://localhost:50080/blockly/'));
+      const url = String.fromEnvironment(
+        'requestUrl',
+        defaultValue: 'http://localhost:50080/blockly/',
+      );
+      controller.loadRequest(Uri.parse(url));
       return null;
     }, const []);
 
