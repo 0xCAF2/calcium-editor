@@ -2,13 +2,13 @@ import { defineConfig } from "vite"
 
 export default defineConfig({
   server: {
-    port: 50081,
+    port: 50082,
     strictPort: true,
     proxy: {
-      "/editor/": {
-        target: "http://localhost:5173/",
+      "/runtime/": {
+        target: "http://localhost:50082/",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/editor/, ""),
+        rewrite: (path) => path.replace(/^\/runtime/, ""),
       },
     },
   },

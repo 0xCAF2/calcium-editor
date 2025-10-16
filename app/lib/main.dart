@@ -19,8 +19,8 @@ class MainApp extends HookWidget {
     useEffect(() {
       WebViewPlatform.instance = WebWebViewPlatform();
       const url = String.fromEnvironment(
-        'requestUrl',
-        defaultValue: 'http://localhost:50080/blockly/',
+        'editorUrl',
+        defaultValue: 'http://localhost:50080/editor/',
       );
       controller.loadRequest(Uri.parse(url));
       return null;
