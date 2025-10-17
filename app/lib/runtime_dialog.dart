@@ -66,17 +66,7 @@ class RuntimeDialog extends HookConsumerWidget {
               ],
             ),
             const SizedBox(height: 16),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SingleChildScrollView(
-                    child: SelectableText(output, maxLines: 10),
-                  ),
-                ],
-              ),
-            ),
+            Expanded(child: SingleChildScrollView(child: Text(output))),
           ],
         ),
       ),

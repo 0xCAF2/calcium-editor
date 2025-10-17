@@ -78,6 +78,7 @@ class MainApp extends HookConsumerWidget {
                     final output = event.data?.output?.toDart;
                     if (output != null && output.isNotEmpty) {
                       ref.read(outputProvider.notifier).append(output);
+                      print(output);
                     }
 
                     final input = event.data?.input?.toDart;
@@ -96,8 +97,7 @@ class MainApp extends HookConsumerWidget {
                           runtimeWindow.input(value.toJS);
                         },
                         onClose: () {
-                          runtimeWindow.onmessage = null;
-                          runtimeWindow.reset();
+                          runtimeWindow.end();
                         },
                       );
                     },
@@ -149,7 +149,7 @@ extension on Window {
   external void run(JSString code);
 
   @JS()
-  external void reset();
+  external void end();
 }
 
 extension on JSAny {

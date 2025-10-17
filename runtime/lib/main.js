@@ -40,6 +40,11 @@
           "result = runtime.resume(input_data); result.value",
           { globals }
         )
+      } else if (event.data.end) {
+        let buffer = new Uint8Array(new ArrayBuffer(1))
+        buffer[0] = 2
+        pyodide.setInterruptBuffer(buffer)
+        return
       }
       if (result === RESULT_PAUSED) {
         postMessage({ input: pyodide.runPython("runtime.env.prompt") })
@@ -68,12 +73,11 @@
     )
     worker.onmessage = (event) => {
       if (event.data.loaded) {
-        console.log("Pyodide and packages loaded.")
+        postMessage({ loaded: true })
       } else if (event.data.output !== undefined) {
         postMessage({ output: event.data.output })
       } else if (event.data.input !== undefined) {
-        console.log("Input requested:", event.data.input)
-        // Here you can provide input back to the worker if needed
+        postMessage({ input: event.data.input })
       } else if (event.data.error) {
         console.error(`Error at line ${event.data.line}:`, event.data.error)
       }
@@ -89,14 +93,12 @@
   }
   window.input = input
 
-  function reset() {
+  function end() {
     if (window.worker) {
-      window.worker.terminate()
-      window.worker = null
+      window.worker.postMessage({ end: true })
     }
-    initialize()
   }
-  window.reset = reset
+  window.end = end
 
   function run(code) {
     if (!window.worker) {
