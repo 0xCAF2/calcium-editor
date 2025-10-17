@@ -15,34 +15,54 @@ class MainApp extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = useMemoized(() => WebViewController());
+    final editorController = useMemoized(() => WebViewController());
+    final runtimeController = useMemoized(() => WebViewController());
+
     useEffect(() {
       WebViewPlatform.instance = WebWebViewPlatform();
-      const url = String.fromEnvironment(
+      const editorUrl = String.fromEnvironment(
         'editorUrl',
         defaultValue: 'http://localhost:50080/editor/',
       );
-      controller.loadRequest(Uri.parse(url));
+      editorController.loadRequest(Uri.parse(editorUrl));
+
+      const runtimeUrl = String.fromEnvironment(
+        'runtimeUrl',
+        defaultValue: 'http://localhost:50080/runtime/',
+      );
+      runtimeController.loadRequest(Uri.parse(runtimeUrl));
       return null;
     }, const []);
 
     return MaterialApp(
-      title: 'Calcium Editor | Programming',
+      title: 'Calcium Editor | Programming', // TODO: localize title
       home: Scaffold(
         body: Column(
           children: [
+            SizedBox(
+              width: 1,
+              height: 1,
+              child: WebViewWidget(controller: runtimeController),
+            ),
             ElevatedButton(
               onPressed: () {
                 final webView0 = window.webView0;
-                final iframeWindow = webView0.contentWindow;
-                if (iframeWindow == null) {
+                final editorWindow = webView0.contentWindow;
+                if (editorWindow == null) {
                   return;
                 }
-                debugPrint(iframeWindow.generateCode().toDart);
+                final code = editorWindow.generateCode().toDart;
+
+                final webView1 = window.webView1;
+                final runtimeWindow = webView1.contentWindow;
+                if (runtimeWindow == null) {
+                  return;
+                }
+                runtimeWindow.run(code.toJS);
               },
               child: const Text('Run'),
             ),
-            Expanded(child: WebViewWidget(controller: controller)),
+            Expanded(child: WebViewWidget(controller: editorController)),
           ],
         ),
       ),
@@ -55,5 +75,11 @@ extension on Window {
   external HTMLIFrameElement get webView0;
 
   @JS()
+  external HTMLIFrameElement get webView1;
+
+  @JS()
   external JSString generateCode();
+
+  @JS()
+  external void run(JSString code);
 }

@@ -2,6 +2,7 @@ import { defineConfig } from "vite"
 
 export default defineConfig({
   server: {
+    host: "localhost",
     port: 50082,
     strictPort: true,
     proxy: {

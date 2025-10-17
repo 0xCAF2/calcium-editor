@@ -13,3 +13,5 @@ server:
       target: "http://localhost:50081/"
     - prefix: "/runtime/"
       target: "http://localhost:50082/"
+    - prefix: "/lib/"
+      target: "http://localhost:50082/"

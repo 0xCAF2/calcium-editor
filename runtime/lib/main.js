@@ -1,5 +1,5 @@
 ;(() => {
-  const code = ```
+  const code = `
 
   const RESULT_EXECUTED = 1
   const RESULT_PAUSED = 4
@@ -58,12 +58,24 @@
       postMessage({ error: e, line: lineNumber })
     }
   }
-  ```
+  `
 
   function initialize() {
-    let worker = new Worker(
+    const worker = new Worker(
       URL.createObjectURL(new Blob([code], { type: "application/javascript" }))
     )
+    worker.onmessage = (event) => {
+      if (event.data.loaded) {
+        console.log("Pyodide and packages loaded.")
+      } else if (event.data.output !== undefined) {
+        console.log(event.data.output)
+      } else if (event.data.input !== undefined) {
+        console.log("Input requested:", event.data.input)
+        // Here you can provide input back to the worker if needed
+      } else if (event.data.error) {
+        console.error(`Error at line ${event.data.line}:`, event.data.error)
+      }
+    }
     window.worker = worker
   }
 
@@ -71,10 +83,19 @@
     if (window.worker) {
       window.worker.terminate()
       window.worker = null
-      initialize()
     }
+    initialize()
   }
-  window.cancel = reset
+  window.reset = reset
+
+  function run(code) {
+    if (!window.worker) {
+      console.error("Worker is not initialized.")
+      return
+    }
+    window.worker.postMessage({ code })
+  }
+  window.run = run
 
   initialize()
 })()
