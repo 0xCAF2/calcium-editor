@@ -1,9 +1,0 @@
-{
-  "@@locale": "en",
-  "title": "Calcium Editor | Programming",
-  "titleDescription": "The application title shown in app window and task switchers",
-  "run": "Run",
-  "runDescription": "Label for the button that runs the user's code",
-  "input": "Input",
-  "inputDescription": "Label for the button that sends input to the runtime"
-}
