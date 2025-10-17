@@ -1,1 +1,14 @@
 .DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+/is1
+/samples
+
+/build
+/.dart_tool
+*.png
+calcium_editor.iml
