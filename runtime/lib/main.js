@@ -79,6 +79,14 @@
     window.worker = worker
   }
 
+  function input(value) {
+    if (window.worker) {
+      window.worker.postMessage({ input: value })
+      return
+    }
+  }
+  window.input = input
+
   function reset() {
     if (window.worker) {
       window.worker.terminate()
