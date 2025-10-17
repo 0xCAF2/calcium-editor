@@ -2,7 +2,8 @@ import 'dart:js_interop';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:web/web.dart' show HTMLIFrameElement, Window, window;
+import 'package:web/web.dart'
+    show HTMLIFrameElement, MessageEvent, Window, window;
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_web/webview_flutter_web.dart';
 
@@ -58,6 +59,11 @@ class MainApp extends HookWidget {
                 if (runtimeWindow == null) {
                   return;
                 }
+                void output(MessageEvent event) {
+                  debugPrint('Runtime output: ${event.data?.output.toDart}');
+                }
+
+                runtimeWindow.onmessage = output.toJS as JSFunction;
                 runtimeWindow.run(code.toJS);
               },
               child: const Text('Run'),
@@ -82,4 +88,9 @@ extension on Window {
 
   @JS()
   external void run(JSString code);
+}
+
+extension on JSAny {
+  @JS()
+  external JSString get output;
 }

@@ -68,7 +68,7 @@
       if (event.data.loaded) {
         console.log("Pyodide and packages loaded.")
       } else if (event.data.output !== undefined) {
-        console.log(event.data.output)
+        postMessage({ output: event.data.output })
       } else if (event.data.input !== undefined) {
         console.log("Input requested:", event.data.input)
         // Here you can provide input back to the worker if needed
