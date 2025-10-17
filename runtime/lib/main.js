@@ -34,9 +34,11 @@
           { globals }
         )
       } else if (event.data.input) {
+        const dict = pyodide.globals.get("dict")
+        const globals = dict(Object.entries({ input_data: event.data.input }))
         result = await pyodide.runPythonAsync(
           "result = runtime.resume(input_data); result.value",
-          { input_data: event.data.input }
+          { globals }
         )
       }
       if (result === RESULT_PAUSED) {
