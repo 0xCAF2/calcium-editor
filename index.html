@@ -5,20 +5,33 @@
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calcium Editor | カルシウム</title>
+    <meta
+      name="description"
+      content="A visual programming editor for learning Python. 擬似言語の学習向けビジュアルプログラミング環境です。"
+    />
     <style>
       html,
       body,
-      #app {
+      #editor {
         margin: 0;
         padding: 0;
         width: 100%;
         height: 100%;
         background-color: black;
       }
+      #menu {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        height: 40px;
+        margin-bottom: 8px;
+      }
     </style>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="menu"></div>
+    <div id="editor"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
