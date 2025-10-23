@@ -1,4 +1,5 @@
-import { ja, en } from "calciumed"
+import * as ja from "./lang/ja-jp"
+import * as en from "./lang/en-us"
 import type { L10N } from "./l10n"
 import { JaJpL10N } from "./l10n/ja-jp"
 import { EnUsL10N } from "./l10n/en-us"
