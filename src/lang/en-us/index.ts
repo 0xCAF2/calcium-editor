@@ -36,6 +36,9 @@ const categories: CategoryDefinition[] = [
     ],
   },
   {
+    List: ["calcium_list", "calcium_subscript", "calcium_slice"],
+  },
+  {
     Logic: [
       "calcium_arithmetic",
       "calcium_relational",
@@ -52,7 +55,7 @@ const categories: CategoryDefinition[] = [
     ],
   },
   {
-    Functions: [
+    Function: [
       "calcium_call",
       "calcium_expr_stmt",
       "calcium_def",
