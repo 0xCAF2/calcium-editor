@@ -36,7 +36,11 @@ const categories: CategoryDefinition[] = [
     ],
   },
   {
-    List: ["calcium_list", "calcium_subscript", "calcium_slice"],
+    List: [
+      "calcium_list",
+      "calcium_subscript",
+      "calcium_slice" /* dummy comment for newline */,
+    ],
   },
   {
     Logic: [
@@ -51,7 +55,7 @@ const categories: CategoryDefinition[] = [
     Loop: [
       "calcium_for",
       "calcium_while",
-      "calcium_break_continue" /* dummy for newline */,
+      "calcium_break_continue" /* dummy comment for newline */,
     ],
   },
   {

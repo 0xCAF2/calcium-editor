@@ -45,7 +45,7 @@ const categories: CategoryDefinition[] = [
   {
     演算: [
       "pseudo_arithmetic",
-      "pseudo_relational" /* dummy for next newline */,
+      "pseudo_relational" /* dummy comment for next newline */,
     ],
   },
   {
@@ -60,27 +60,27 @@ const categories: CategoryDefinition[] = [
     条件分岐: [
       "pseudo_logical",
       "pseudo_not",
-      "pseudo_if" /* dummy for newline */,
+      "pseudo_if" /* dummy comment for newline */,
     ],
   },
   {
     繰り返し: [
       "pseudo_for_increment",
       "pseudo_for_decrement",
-      "pseudo_while" /* dummy for newline */,
+      "pseudo_while" /* dummy comment for newline */,
     ],
   },
   {
     関数: [
       "pseudo_len",
       "pseudo_int",
-      "pseudo_random" /* dummy for next newline */,
+      "pseudo_random" /* dummy comment for next newline */,
     ],
   },
   {
     入力: [
       "pseudo_input_int",
-      "pseudo_input_str" /* dummy for pretty newlines */,
+      "pseudo_input_str" /* dummy comment for pretty newlines */,
     ],
   },
 ]
