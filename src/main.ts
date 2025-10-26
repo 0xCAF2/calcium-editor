@@ -8,9 +8,12 @@ const userLanguage =
   navigator.language || (navigator.languages && navigator.languages[0])
 
 let l10n: L10N
+// @ts-ignore
 let calciumEditor: CalciumEditor
 
 if (userLanguage === "ja-JP" || userLanguage === "ja") {
+  await import("./lang/ja-jp/message")
+  await import("./lang/ja-jp/tooltip")
   const ja = await import("./lang/ja-jp")
   calciumEditor = ja.buildCalciumEditor(
     document.querySelector("#editor")!,
@@ -18,6 +21,8 @@ if (userLanguage === "ja-JP" || userLanguage === "ja") {
   )
   l10n = new JaJpL10N()
 } else {
+  await import("./lang/en-us/message")
+  await import("./lang/en-us/tooltip")
   const en = await import("./lang/en-us")
   calciumEditor = en.buildCalciumEditor(
     document.querySelector("#editor")!,
