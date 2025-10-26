@@ -26,4 +26,11 @@ if (userLanguage === "ja-JP" || userLanguage === "ja") {
   l10n = new EnUsL10N()
 }
 
+document.title = l10n.title
+// set description meta tag
+const descriptionMeta = document.querySelector(
+  'meta[name="description"]'
+) as HTMLMetaElement
+descriptionMeta.content = l10n.description
+
 createMenu(l10n)
