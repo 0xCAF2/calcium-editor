@@ -1,4 +1,4 @@
-import type { L10N } from "../l10n"
+import type { L10N } from "../../l10n"
 
 export function createRunButton(l10n: L10N): HTMLElement {
   const button = document.createElement("div")

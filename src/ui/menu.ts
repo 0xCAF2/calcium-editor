@@ -1,7 +1,7 @@
 import type { L10N } from "../l10n"
-import { createFileButton } from "./file-button"
-import { createHelpButton } from "./help-button"
-import { createRunButton } from "./run-button"
+import { createFileButton } from "./button/file-button"
+import { createHelpButton } from "./button/help-button"
+import { createRunButton } from "./button/run-button"
 
 const menu = document.querySelector("#menu") as HTMLElement
 menu.style.display = "flex"
