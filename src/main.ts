@@ -38,4 +38,4 @@ const descriptionMeta = document.querySelector(
 ) as HTMLMetaElement
 descriptionMeta.content = l10n.description
 
-createMenu(l10n)
+createMenu(l10n, calciumEditor)
