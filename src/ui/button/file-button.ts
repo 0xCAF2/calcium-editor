@@ -1,8 +1,7 @@
-import { CalciumEditor } from "../../editor"
-import { editorState } from "../state"
+import { editorState } from "../state/editor-state"
 import { fileDialogState } from "../state/editor-state"
 
-export function createFileButton(editor: CalciumEditor): HTMLElement {
+export function createFileButton(): HTMLElement {
   const button = document.createElement("div")
   button.id = "file-button"
 
@@ -14,7 +13,6 @@ export function createFileButton(editor: CalciumEditor): HTMLElement {
   }
 
   button.onclick = () => {
-    editorState.current.to(fileDialogState, editor)
     editorState.current = fileDialogState
   }
 

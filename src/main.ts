@@ -3,12 +3,12 @@ import { JaJpL10N } from "./l10n/ja-jp"
 import { EnUsL10N } from "./l10n/en-us"
 import { createMenu } from "./ui/menu"
 import { CalciumEditor } from "./editor"
+import { editorState } from "./ui/state/editor-state"
 // Detect the user's preferred language
 const userLanguage =
   navigator.language || (navigator.languages && navigator.languages[0])
 
 let l10n: L10N
-// @ts-ignore
 let calciumEditor: CalciumEditor
 
 if (userLanguage === "ja-JP" || userLanguage === "ja") {
@@ -38,4 +38,5 @@ const descriptionMeta = document.querySelector(
 ) as HTMLMetaElement
 descriptionMeta.content = l10n.description
 
-createMenu(l10n, calciumEditor)
+editorState.editor = calciumEditor
+createMenu(l10n)

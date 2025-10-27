@@ -1,8 +1,7 @@
-import { CalciumEditor } from "../../editor"
-import { editorState } from "../state"
+import { editorState } from "../state/editor-state"
 import { mainState } from "../state/editor-state"
 
-export function openFileDialog(editor: CalciumEditor): void {
+export function openFileDialog(): void {
   const dialog = document.createElement("div")
   dialog.id = "file-dialog"
 
@@ -10,7 +9,6 @@ export function openFileDialog(editor: CalciumEditor): void {
   backButton.id = "file-dialog-back-button"
   backButton.textContent = "←"
   backButton.onclick = () => {
-    editorState.current.to(mainState, editor)
     editorState.current = mainState
   }
   dialog.appendChild(backButton)

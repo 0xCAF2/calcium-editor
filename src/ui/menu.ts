@@ -1,4 +1,3 @@
-import { CalciumEditor } from "../editor"
 import type { L10N } from "../l10n"
 import { createFileButton } from "./button/file-button"
 import { createHelpButton } from "./button/help-button"
@@ -10,8 +9,8 @@ menu.style.alignItems = "center"
 menu.style.justifyContent = "space-between"
 menu.style.padding = "4px"
 
-export function createMenu(l10n: L10N, editor: CalciumEditor): void {
-  menu.appendChild(createFileButton(editor))
-  menu.appendChild(createRunButton(l10n, editor))
+export function createMenu(l10n: L10N): void {
+  menu.appendChild(createFileButton())
+  menu.appendChild(createRunButton(l10n))
   menu.appendChild(createHelpButton(l10n))
 }
