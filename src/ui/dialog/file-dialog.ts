@@ -20,6 +20,7 @@ export function openFileDialog(): void {
     const blockCodeString = localStorage.getItem(key)
     if (blockCodeString) {
       const blockCode = JSON.parse(blockCodeString)
+      editorState.isLoadingFile = true
       Blockly.serialization.workspaces.load(
         blockCode,
         editorState.editor.workspace
@@ -50,7 +51,7 @@ export function openFileDialog(): void {
       editorState.editor.workspace
     )
     const key = `calcium-editor-${
-      editorState.l10n.newFile
+      editorState.l10n.savedFile
     }-${new Date().toLocaleString()}`
     localStorage.setItem(key, JSON.stringify(blockCode))
     addButton.style.visibility = "hidden"
@@ -63,7 +64,7 @@ export function openFileDialog(): void {
   dialog.appendChild(addButton)
 
   const filteredKeys = Object.keys(localStorage).filter((key) =>
-    key.startsWith(`calcium-editor-${editorState.l10n.newFile}`)
+    key.startsWith(`calcium-editor-${editorState.l10n.savedFile}`)
   )
   filteredKeys.sort().reverse()
 

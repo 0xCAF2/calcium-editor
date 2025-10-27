@@ -76,6 +76,8 @@ export class EditorStateStore {
     this._l10n = l10n
   }
 
+  isLoadingFile = false
+
   constructor() {
     this._current = mainState
   }

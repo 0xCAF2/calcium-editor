@@ -6,7 +6,7 @@ export class EnUsL10N implements L10N {
     "A visual programming environment for learning Python. You can create and run Python programs using blocks."
   helpUrl = "https://help.caed.app/"
 
-  newFile = "New File"
+  savedFile = "Saved file"
   noFiles = "No files saved."
 
   run = "Run"

@@ -6,7 +6,7 @@ export class JaJpL10N implements L10N {
     "擬似言語の学習向けプログラミング環境です。ブロックで Python プログラムを作って実行できます。"
   helpUrl = "https://help.caed.app/ja"
 
-  newFile = "新規ファイル"
+  savedFile = "保存ファイル"
   noFiles = "保存されたファイルはありません。"
 
   run = "実行する"

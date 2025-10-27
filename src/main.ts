@@ -1,3 +1,4 @@
+import * as Blockly from "blockly"
 import type { L10N } from "./l10n"
 import { JaJpL10N } from "./l10n/ja-jp"
 import { EnUsL10N } from "./l10n/en-us"
@@ -42,3 +43,30 @@ editorState.editor = calciumEditor
 editorState.l10n = l10n
 
 createMenu(l10n)
+
+const previousCode = localStorage.getItem(`calcium-editor-${l10n.savedFile}`)
+if (previousCode) {
+  Blockly.serialization.workspaces.load(
+    JSON.parse(previousCode!),
+    editorState.editor.workspace
+  )
+}
+
+editorState.editor.workspace.addChangeListener((e) => {
+  if (e.type === Blockly.Events.FINISHED_LOADING || editorState.isLoadingFile) {
+    // do not autosave when loading a file
+    editorState.isLoadingFile = false
+    return
+  }
+  const blockCode = Blockly.serialization.workspaces.save(
+    editorState.editor.workspace
+  )
+  localStorage.setItem(
+    `calcium-editor-${l10n.savedFile}`,
+    JSON.stringify(blockCode)
+  )
+})
+
+window.onbeforeunload = (e) => {
+  e.preventDefault()
+}
