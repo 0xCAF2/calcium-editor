@@ -7,6 +7,7 @@ export class EnUsL10N implements L10N {
   helpUrl = "https://help.caed.app/"
 
   newFile = "New File"
+  noFiles = "No files saved."
 
   run = "Run"
   stop = "Stop"

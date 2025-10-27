@@ -1,4 +1,5 @@
 import { CalciumEditor } from "../../editor"
+import { L10N } from "../../l10n"
 import { openFileDialog } from "../dialog/file-dialog"
 import { CalciumEditorNotSetError, InvalidStateTransitionError } from "../error"
 
@@ -59,6 +60,20 @@ export class EditorStateStore {
 
   set editor(editor: CalciumEditor) {
     this._editor = editor
+  }
+
+  private _l10n: L10N | null = null
+
+  get l10n(): L10N {
+    if (this._l10n) {
+      return this._l10n
+    } else {
+      throw new CalciumEditorNotSetError()
+    }
+  }
+
+  set l10n(l10n: L10N) {
+    this._l10n = l10n
   }
 
   constructor() {

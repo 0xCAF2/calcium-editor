@@ -39,4 +39,6 @@ const descriptionMeta = document.querySelector(
 descriptionMeta.content = l10n.description
 
 editorState.editor = calciumEditor
+editorState.l10n = l10n
+
 createMenu(l10n)

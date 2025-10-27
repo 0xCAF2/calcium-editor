@@ -7,6 +7,7 @@ export class JaJpL10N implements L10N {
   helpUrl = "https://help.caed.app/ja"
 
   newFile = "新規ファイル"
+  noFiles = "保存されたファイルはありません。"
 
   run = "実行する"
   stop = "実行を終了する"

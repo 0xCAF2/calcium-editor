@@ -5,6 +5,7 @@ export type L10N = {
   helpUrl: string
 
   newFile: string
+  noFiles: string
 
   run: string
   stop: string
