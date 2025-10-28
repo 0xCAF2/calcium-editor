@@ -1,6 +1,5 @@
 import * as Blockly from "blockly"
-import { editorState } from "../state/editor-state"
-import { mainState } from "../state/editor-state"
+import { editorState, mainState } from "../state/editor-state"
 
 export function openFileDialog(): void {
   const dialog = document.createElement("div")
@@ -95,4 +94,9 @@ export function openFileDialog(): void {
   dialog.appendChild(fileList)
 
   document.body.appendChild(dialog)
+}
+
+export function closeFileDialog(): void {
+  const dialog = document.querySelector("#file-dialog")
+  dialog?.remove()
 }

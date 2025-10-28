@@ -1,6 +1,7 @@
 import { CalciumEditor } from "../../editor"
 import { L10N } from "../../l10n"
-import { openFileDialog } from "../dialog/file-dialog"
+import { closeFileDialog, openFileDialog } from "../dialog/file-dialog"
+import { closeRuntimeDialog, openRuntimeDialog } from "../dialog/runtime-dialog"
 import { CalciumEditorNotSetError, InvalidStateTransitionError } from "../error"
 
 export type EditorState = {
@@ -10,6 +11,7 @@ export type EditorState = {
 export const mainState: EditorState = {
   to(next: EditorState): void {
     if (next === runtimeState) {
+      openRuntimeDialog()
     } else if (next === fileDialogState) {
       openFileDialog()
     }
@@ -19,6 +21,7 @@ export const mainState: EditorState = {
 export const runtimeState: EditorState = {
   to(next: EditorState): void {
     if (next === mainState) {
+      closeRuntimeDialog()
     } else {
       throw new InvalidStateTransitionError()
     }
@@ -28,8 +31,7 @@ export const runtimeState: EditorState = {
 export const fileDialogState: EditorState = {
   to(next: EditorState): void {
     if (next === mainState) {
-      const dialog = document.querySelector("#file-dialog")
-      dialog?.remove()
+      closeFileDialog()
     } else {
       throw new InvalidStateTransitionError()
     }
