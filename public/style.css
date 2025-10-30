@@ -30,14 +30,20 @@ body {
 }
 #run-button {
   height: 36px;
-  cursor: pointer;
   padding-left: 16px;
   padding-right: 16px;
   text-align: center;
   align-content: center;
   color: white;
-  background-color: dodgerblue;
   border-radius: 8px;
+}
+.enabled-run-button {
+  background-color: dodgerblue;
+  cursor: pointer;
+}
+.disabled-run-button {
+  background-color: lightgray;
+  cursor: default;
 }
 #help-button {
   width: 32px;
@@ -115,4 +121,12 @@ body {
   color: black;
   background-color: orange;
   border-radius: 8px;
+}
+#runtime-output-area {
+  width: 100%;
+  min-height: 200px;
+  background-color: black;
+  color: white;
+  font-family: monospace;
+  font-size: 14px;
 }

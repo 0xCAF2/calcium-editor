@@ -16,12 +16,27 @@ export function openRuntimeDialog() {
     editorState.current = mainState
   }
 
+  const outputArea = document.createElement("textarea")
+  outputArea.id = "runtime-output-area"
+  outputArea.readOnly = true
+
   menu.appendChild(closeButton)
   dialog.appendChild(menu)
+  dialog.appendChild(outputArea)
   document.body.appendChild(dialog)
 }
 
 export function closeRuntimeDialog() {
   const dialog = document.querySelector("#runtime-dialog")
   dialog?.remove()
+}
+
+export function appendRuntimeOutput(text: string) {
+  const outputArea = document.querySelector(
+    "#runtime-output-area"
+  ) as HTMLTextAreaElement
+  if (outputArea) {
+    outputArea.value += text + "\n"
+    outputArea.scrollTop = outputArea.scrollHeight
+  }
 }

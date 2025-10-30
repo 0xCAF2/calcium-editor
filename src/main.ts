@@ -15,12 +15,15 @@ let calciumEditor: CalciumEditor
 if (userLanguage === "ja-JP" || userLanguage === "ja") {
   await import("./lang/ja-jp/message")
   await import("./lang/ja-jp/tooltip")
+  await import("./lang/ps-jp")
   const ja = await import("./lang/ja-jp")
   calciumEditor = ja.buildCalciumEditor(
     document.querySelector("#editor")!,
     "calc(100% - 48px)"
   )
   l10n = new JaJpL10N()
+  await import("./generator/calcium")
+  await import("./generator/pseudo")
 } else {
   await import("./lang/en-us/message")
   await import("./lang/en-us/tooltip")
@@ -30,6 +33,7 @@ if (userLanguage === "ja-JP" || userLanguage === "ja") {
     "calc(100% - 48px)"
   )
   l10n = new EnUsL10N()
+  await import("./generator/calcium")
 }
 
 document.title = l10n.title

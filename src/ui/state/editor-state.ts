@@ -1,8 +1,13 @@
 import { CalciumEditor } from "../../editor"
 import { L10N } from "../../l10n"
 import { closeFileDialog, openFileDialog } from "../dialog/file-dialog"
-import { closeRuntimeDialog, openRuntimeDialog } from "../dialog/runtime-dialog"
+import {
+  appendRuntimeOutput,
+  closeRuntimeDialog,
+  openRuntimeDialog,
+} from "../dialog/runtime-dialog"
 import { CalciumEditorNotSetError, InvalidStateTransitionError } from "../error"
+import { buttonState, disabledState, enabledState } from "./button-state"
 
 export type EditorState = {
   to(next: EditorState): void
@@ -12,6 +17,8 @@ export const mainState: EditorState = {
   to(next: EditorState): void {
     if (next === runtimeState) {
       openRuntimeDialog()
+      const code = editorState.editor.code
+      editorState.worker.postMessage({ code })
     } else if (next === fileDialogState) {
       openFileDialog()
     }
@@ -22,6 +29,9 @@ export const runtimeState: EditorState = {
   to(next: EditorState): void {
     if (next === mainState) {
       closeRuntimeDialog()
+      buttonState.current = disabledState
+      editorState.worker.terminate()
+      editorState.worker = createWorker()
     } else {
       throw new InvalidStateTransitionError()
     }
@@ -80,9 +90,34 @@ export class EditorStateStore {
 
   isLoadingFile = false
 
+  worker: Worker
+
   constructor() {
     this._current = mainState
+    this.worker = createWorker()
   }
 }
 
 export const editorState = new EditorStateStore()
+
+function createWorker(): Worker {
+  const worker = new Worker("./worker.js")
+  worker.onmessage = (event) => {
+    const message = event.data
+    if (message.loaded) {
+      buttonState.current = enabledState
+    } else if (message.output || message.output === "") {
+      appendRuntimeOutput(message.output)
+    } else if (message.error) {
+      appendRuntimeOutput(
+        `${
+          message.line
+        } 行目でエラーが発生しました： ${message.error.toString()}`
+      )
+    } else if (message.input || message.input === "") {
+      const input = window.prompt(message.input)
+      worker.postMessage({ input: input ?? "" })
+    }
+  }
+  return worker
+}
