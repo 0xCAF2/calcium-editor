@@ -16,12 +16,16 @@ export function openRuntimeDialog() {
     editorState.current = mainState
   }
 
+  const errorArea = document.createElement("div")
+  errorArea.id = "runtime-error-area"
+
   const outputArea = document.createElement("textarea")
   outputArea.id = "runtime-output-area"
   outputArea.readOnly = true
 
   menu.appendChild(closeButton)
   dialog.appendChild(menu)
+  dialog.appendChild(errorArea)
   dialog.appendChild(outputArea)
   document.body.appendChild(dialog)
 }
@@ -38,5 +42,14 @@ export function appendRuntimeOutput(text: string) {
   if (outputArea) {
     outputArea.value += text + "\n"
     outputArea.scrollTop = outputArea.scrollHeight
+  }
+}
+
+export function appendRuntimeError(text: string) {
+  const errorArea = document.querySelector(
+    "#runtime-error-area"
+  ) as HTMLDivElement
+  if (errorArea) {
+    errorArea.textContent += text
   }
 }

@@ -130,3 +130,10 @@ body {
   font-family: monospace;
   font-size: 14px;
 }
+#runtime-error-area {
+  width: 100%;
+  color: red;
+  font-family: monospace;
+  font-size: 14px;
+  padding: 8px;
+}

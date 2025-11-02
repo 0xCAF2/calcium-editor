@@ -37,7 +37,6 @@ onmessage = async (event) => {
         { input_data: event.data.input }
       )
     } /* else if (event.data.stop) {
-      // not working yet
       let interruptBuffer = new Uint8Array(new SharedArrayBuffer(1))
       interruptBuffer[0] = 2
       pyodide.setInterruptBuffer(interruptBuffer)
@@ -58,7 +57,8 @@ onmessage = async (event) => {
     // locate the error in the original code
     // Neither "#" nor "import" commands count as lines
     // since they are not part of the user code
-    const lineNumber = pyodide.runPython("runtime.env.addr.line") - 1
-    postMessage({ error: e, line: lineNumber })
+    // const lineNumber = pyodide.runPython("runtime.env.addr.line") - 1
+    const error = e.toString().split("\n")
+    postMessage({ error: error.slice(-2, -1) })
   }
 }

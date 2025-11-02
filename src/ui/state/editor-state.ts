@@ -2,6 +2,7 @@ import { CalciumEditor } from "../../editor"
 import { L10N } from "../../l10n"
 import { closeFileDialog, openFileDialog } from "../dialog/file-dialog"
 import {
+  appendRuntimeError,
   appendRuntimeOutput,
   closeRuntimeDialog,
   openRuntimeDialog,
@@ -109,11 +110,7 @@ function createWorker(): Worker {
     } else if (message.output || message.output === "") {
       appendRuntimeOutput(message.output)
     } else if (message.error) {
-      appendRuntimeOutput(
-        `${
-          message.line
-        } 行目でエラーが発生しました： ${message.error.toString()}`
-      )
+      appendRuntimeError(message.error.join("\n"))
     } else if (message.input || message.input === "") {
       const input = window.prompt(message.input)
       worker.postMessage({ input: input ?? "" })
