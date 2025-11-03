@@ -5,10 +5,11 @@ import {
   appendRuntimeError,
   appendRuntimeOutput,
   closeRuntimeDialog,
+  enableRuntimeInput,
   openRuntimeDialog,
 } from "../dialog/runtime-dialog"
 import { CalciumEditorNotSetError, InvalidStateTransitionError } from "../error"
-import { buttonState, disabledState, enabledState } from "./button-state"
+import * as runButton from "./run-button-state"
 
 export type EditorState = {
   to(next: EditorState): void
@@ -30,7 +31,7 @@ export const runtimeState: EditorState = {
   to(next: EditorState): void {
     if (next === mainState) {
       closeRuntimeDialog()
-      buttonState.current = disabledState
+      runButton.buttonState.current = runButton.disabledState
       editorState.worker.terminate()
       editorState.worker = createWorker()
     } else {
@@ -106,14 +107,13 @@ function createWorker(): Worker {
   worker.onmessage = (event) => {
     const message = event.data
     if (message.loaded) {
-      buttonState.current = enabledState
+      runButton.buttonState.current = runButton.enabledState
     } else if (message.output || message.output === "") {
       appendRuntimeOutput(message.output)
     } else if (message.error) {
       appendRuntimeError(message.error.join("\n"))
     } else if (message.input || message.input === "") {
-      const input = window.prompt(message.input)
-      worker.postMessage({ input: input ?? "" })
+      enableRuntimeInput(message.input)
     }
   }
   return worker

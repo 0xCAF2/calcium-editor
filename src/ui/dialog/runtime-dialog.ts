@@ -19,6 +19,24 @@ export function openRuntimeDialog() {
   const errorArea = document.createElement("div")
   errorArea.id = "runtime-error-area"
 
+  const inputField = document.createElement("input")
+  inputField.id = "runtime-input-field"
+  inputField.type = "text"
+  inputField.disabled = true
+
+  const inputButton = document.createElement("div")
+  inputButton.id = "runtime-input-button"
+  inputButton.className = "runtime-input-button-disabled"
+  inputButton.textContent = editorState.l10n.input
+
+  const inputDiv = document.createElement("div")
+  inputDiv.style.display = "flex"
+  inputDiv.style.justifyContent = "center"
+  inputDiv.style.alignItems = "center"
+  inputDiv.style.marginTop = "8px"
+  inputDiv.appendChild(inputField)
+  inputDiv.appendChild(inputButton)
+
   const outputArea = document.createElement("textarea")
   outputArea.id = "runtime-output-area"
   outputArea.readOnly = true
@@ -26,6 +44,7 @@ export function openRuntimeDialog() {
   menu.appendChild(closeButton)
   dialog.appendChild(menu)
   dialog.appendChild(errorArea)
+  dialog.appendChild(inputDiv)
   dialog.appendChild(outputArea)
   document.body.appendChild(dialog)
 }
@@ -51,5 +70,32 @@ export function appendRuntimeError(text: string) {
   ) as HTMLDivElement
   if (errorArea) {
     errorArea.textContent += text
+  }
+}
+
+export function enableRuntimeInput(placeholder: string) {
+  const inputField = document.querySelector(
+    "#runtime-input-field"
+  ) as HTMLInputElement
+  const inputButton = document.querySelector(
+    "#runtime-input-button"
+  ) as HTMLDivElement
+
+  if (inputField && inputButton) {
+    inputField.placeholder = placeholder
+    inputButton.className = "runtime-input-button-enabled"
+    const onSubmit = () => {
+      inputButton.onclick = null
+      inputField.onsubmit = null
+      inputField.disabled = true
+      const input = inputField.value
+      inputField.value = ""
+      inputField.placeholder = ""
+      inputButton.className = "runtime-input-button-disabled"
+      editorState.worker.postMessage({ input })
+    }
+    inputButton.onclick = onSubmit
+    inputField.onsubmit = onSubmit
+    inputField.disabled = false
   }
 }

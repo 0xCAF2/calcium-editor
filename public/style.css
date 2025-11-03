@@ -129,6 +129,7 @@ body {
   color: white;
   font-family: monospace;
   font-size: 14px;
+  overflow-y: scroll;
 }
 #runtime-error-area {
   width: 100%;
@@ -136,4 +137,28 @@ body {
   font-family: monospace;
   font-size: 14px;
   padding: 8px;
+}
+#runtime-input-field {
+  width: 60%;
+  margin: 8px;
+  padding: 8px;
+  font-family: monospace;
+  font-size: 14px;
+}
+#runtime-input-button {
+  height: 32px;
+  padding-left: 16px;
+  padding-right: 16px;
+  text-align: center;
+  align-content: center;
+  color: white;
+  border-radius: 8px;
+}
+.runtime-input-button-enabled {
+  background-color: lightseagreen;
+  cursor: pointer;
+}
+.runtime-input-button-disabled {
+  background-color: lightgray;
+  cursor: default;
 }

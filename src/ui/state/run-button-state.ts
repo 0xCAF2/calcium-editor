@@ -1,11 +1,11 @@
 import { editorState, runtimeState } from "./editor-state"
 
-export type ButtonState = {
-  to(next: ButtonState): void
+type RunButtonState = {
+  to(next: RunButtonState): void
 }
 
-export const enabledState: ButtonState = {
-  to(next: ButtonState): void {
+export const enabledState: RunButtonState = {
+  to(next: RunButtonState): void {
     if (next === disabledState) {
       const runButton = document.querySelector("#run-button") as HTMLElement
       runButton.classList.remove("enabled-run-button")
@@ -15,8 +15,8 @@ export const enabledState: ButtonState = {
   },
 }
 
-export const disabledState: ButtonState = {
-  to(next: ButtonState): void {
+export const disabledState: RunButtonState = {
+  to(next: RunButtonState): void {
     if (next === enabledState) {
       const runButton = document.querySelector("#run-button") as HTMLElement
       runButton.classList.remove("disabled-run-button")
@@ -29,13 +29,13 @@ export const disabledState: ButtonState = {
 }
 
 export class ButtonStateStore {
-  private _current: ButtonState
+  private _current: RunButtonState
 
   get current() {
     return this._current
   }
 
-  set current(nextState: ButtonState) {
+  set current(nextState: RunButtonState) {
     this._current.to(nextState)
     this._current = nextState
   }

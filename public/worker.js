@@ -25,16 +25,14 @@ onmessage = async (event) => {
   let result
   try {
     if (event.data.code) {
-      const dict = pyodide.globals.get("dict")
-      const globals = dict(Object.entries({ code: event.data.code }))
+      pyodide.globals.set("code", event.data.code)
       result = await pyodide.runPythonAsync(
-        `from calciumpy.runtime import Runtime; runtime = Runtime(code, decodes_str=True); result = runtime.run(); print(end='', flush=True); result.value`,
-        { globals }
+        `from calciumpy.runtime import Runtime; runtime = Runtime(code, decodes_str=True); result = runtime.run(); print(end='', flush=True); result.value`
       )
     } else if (event.data.input) {
+      pyodide.globals.set("input_data", event.data.input)
       result = await pyodide.runPythonAsync(
-        `result = runtime.resume(input_data); result.value`,
-        { input_data: event.data.input }
+        `result = runtime.resume(input_data); result.value`
       )
     } /* else if (event.data.stop) {
       let interruptBuffer = new Uint8Array(new SharedArrayBuffer(1))

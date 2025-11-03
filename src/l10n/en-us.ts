@@ -11,4 +11,6 @@ export class EnUsL10N implements L10N {
 
   run = "Run"
   stop = "Stop"
+
+  input = "Input"
 }
