@@ -9,7 +9,6 @@ async function loadPyodideAndPackages() {
   pyodide = await loadPyodide({
     stdout: (output) => {
       postMessage({ output })
-      console.log(output)
     },
   })
   await pyodide.loadPackage("micropip")
@@ -34,12 +33,8 @@ onmessage = async (event) => {
       result = await pyodide.runPythonAsync(
         `result = runtime.resume(input_data); result.value`
       )
-    } /* else if (event.data.stop) {
-      let interruptBuffer = new Uint8Array(new SharedArrayBuffer(1))
-      interruptBuffer[0] = 2
-      pyodide.setInterruptBuffer(interruptBuffer)
-      return
-    } */
+    }
+
     if (result === RESULT_PAUSED) {
       postMessage({ input: pyodide.runPython("runtime.env.prompt") })
     } else if (result === RESULT_EXECUTED) {

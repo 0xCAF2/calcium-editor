@@ -74,7 +74,7 @@ body {
   background-color: lightsalmon;
   text-align: center;
   align-content: center;
-  font-weight: bold;
+  font-size: x-large;
   color: white;
   margin-left: 4px;
   margin-top: 4px;
@@ -86,11 +86,11 @@ body {
   cursor: pointer;
   text-align: center;
   align-content: center;
-  font-weight: bold;
+  font-size: x-large;
   color: black;
-  margin-left: 4px;
-  margin-top: 4px;
+  margin: 16px;
   border-radius: 8px;
+  border: 1px solid black;
 }
 #file-dialog-file-list {
   padding-left: 8px;

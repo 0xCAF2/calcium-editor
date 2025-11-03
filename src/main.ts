@@ -11,6 +11,8 @@ const userLanguage =
 
 let l10n: L10N
 let calciumEditor: CalciumEditor
+// timer id used to debounce autosave (number from window.setTimeout)
+let autosaveTimer: number | undefined
 
 if (userLanguage === "ja-JP" || userLanguage === "ja") {
   await import("./lang/ja-jp/message")
@@ -57,18 +59,31 @@ if (previousCode) {
 }
 
 editorState.editor.workspace.addChangeListener((e) => {
-  if (e.type === Blockly.Events.FINISHED_LOADING || editorState.isLoadingFile) {
+  if (editorState.isLoadingFile && e.type !== Blockly.Events.FINISHED_LOADING) {
     // do not autosave when loading a file
+    return
+  }
+  if (editorState.isLoadingFile && e.type === Blockly.Events.FINISHED_LOADING) {
+    // finished loading a file then re-enable autosave
     editorState.isLoadingFile = false
     return
   }
+  // debounce autosave to avoid frequent saves while the user is actively editing.
+  // Clear any pending save.
+  if (autosaveTimer !== undefined) {
+    clearTimeout(autosaveTimer)
+  }
+
   const blockCode = Blockly.serialization.workspaces.save(
     editorState.editor.workspace
   )
-  localStorage.setItem(
-    `calcium-editor-${l10n.savedFile}`,
-    JSON.stringify(blockCode)
-  )
+  autosaveTimer = setTimeout(() => {
+    localStorage.setItem(
+      `calcium-editor-${l10n.savedFile}`,
+      JSON.stringify(blockCode)
+    )
+    autosaveTimer = undefined
+  }, 2000)
 })
 
 window.onbeforeunload = (e) => {
