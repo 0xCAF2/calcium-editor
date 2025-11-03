@@ -4,7 +4,7 @@ export class JaJpL10N implements L10N {
   title = "カルシウム | プログラミング"
   description =
     "擬似言語の学習向けプログラミング環境です。ブロックで Python プログラムを作って実行できます。"
-  helpUrl = "https://help.caed.app/ja"
+  helpUrl = "https://caed.app/help/ja/"
 
   savedFile = "保存ファイル"
   noFiles = "保存されたファイルはありません。"
