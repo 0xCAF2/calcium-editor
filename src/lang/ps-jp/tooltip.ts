@@ -1,0 +1,66 @@
+import { ConstantValues, tooltipManager } from "../../constant-manager"
+
+const PSEUDO_ARITHMETIC_TOOLTIP =
+  "数値や文字列に対して、四則演算や文字列の結合を行います。"
+const PSEUDO_ARRAY_TOOLTIP = "配列の要素を1つだけ指定します。"
+const PSEUDO_ARRAY_SLICE_TOOLTIP = "配列の範囲を決めて、要素を指定します。"
+const PSEUDO_ASSIGN_ARRAY_CONTAINER_TOOLTIP = "配列の要素を追加できます。"
+const PSEUDO_ASSIGN_ARRAY_ITEM_TOOLTIP =
+  "要素を追加して、配列の大きさを変えます。"
+const PSEUDO_ASSIGN_ARRAY_TOOLTIP = "新しい配列を代入します。"
+const PSEUDO_ASSIGN_ZERO_TOOLTIP = "配列の要素をすべて0に書き換えます。"
+const PSEUDO_ASSIGNMENT_TOOLTIP = "変数や配列の中身を変更します。"
+const PSEUDO_FOR_DECREMENT_TOOLTIP = "変数の値を減らしながら、繰り返します。"
+const PSEUDO_FOR_INCREMENT_TOOLTIP = "変数の値を増やしながら、繰り返します。"
+const PSEUDO_IF_CONTAINER_TOOLTIP = "条件に応じて、処理を分岐します。"
+const PSEUDO_IF_ELIF_TOOLTIP = "条件に応じて、処理を分岐します。"
+const PSEUDO_IF_ELSE_TOOLTIP = "条件に応じて、処理を分岐します。"
+const PSEUDO_IF_TOOLTIP = "条件に応じて、処理を分岐します。"
+const PSEUDO_INPUT_INT_TOOLTIP = "整数を入力から受け取って、変数に代入します。"
+const PSEUDO_INPUT_STR_TOOLTIP =
+  "文字列を入力から受け取って、変数に代入します。"
+const PSEUDO_INT_TOOLTIP = "整数に変換します。"
+const PSEUDO_LOGICAL_TOOLTIP = "2つの条件を論理演算します。"
+const PSEUDO_NOT_TOOLTIP = "条件を否定して、反転させます。"
+const PSEUDO_NUMBER_TOOLTIP = "数値を表します。"
+const PSEUDO_PRINT_ARG_CONTAINER_TOOLTIP = "表示する値を追加できます。"
+const PSEUDO_PRINT_ARG_TOOLTIP = "表示する値を追加します。"
+const PSEUDO_PRINT_TOOLTIP = "値を表示します。"
+const PSEUDO_RANDOM_TOOLTIP = "0 以上 1 未満のランダムな小数を返します。"
+const PSEUDO_RELATIONAL_TOOLTIP = "2つの値を比較します。"
+const PSEUDO_STR_TOOLTIP = "文字列を表します。"
+const PSEUDO_VARIABLE_TOOLTIP = "変数の名前を表します。"
+const PSEUDO_WHILE_TOOLTIP = "条件を満たす間、繰り返します。"
+
+const tooltips: ConstantValues = {
+  PSEUDO_ARITHMETIC_TOOLTIP,
+  PSEUDO_ARRAY_TOOLTIP,
+  PSEUDO_ARRAY_SLICE_TOOLTIP,
+  PSEUDO_ASSIGN_ARRAY_CONTAINER_TOOLTIP,
+  PSEUDO_ASSIGN_ARRAY_ITEM_TOOLTIP,
+  PSEUDO_ASSIGN_ARRAY_TOOLTIP,
+  PSEUDO_ASSIGN_ZERO_TOOLTIP,
+  PSEUDO_ASSIGNMENT_TOOLTIP,
+  PSEUDO_FOR_DECREMENT_TOOLTIP,
+  PSEUDO_FOR_INCREMENT_TOOLTIP,
+  PSEUDO_IF_CONTAINER_TOOLTIP,
+  PSEUDO_IF_ELIF_TOOLTIP,
+  PSEUDO_IF_ELSE_TOOLTIP,
+  PSEUDO_IF_TOOLTIP,
+  PSEUDO_INPUT_INT_TOOLTIP,
+  PSEUDO_INPUT_STR_TOOLTIP,
+  PSEUDO_INT_TOOLTIP,
+  PSEUDO_LOGICAL_TOOLTIP,
+  PSEUDO_NOT_TOOLTIP,
+  PSEUDO_NUMBER_TOOLTIP,
+  PSEUDO_PRINT_ARG_CONTAINER_TOOLTIP,
+  PSEUDO_PRINT_ARG_TOOLTIP,
+  PSEUDO_PRINT_TOOLTIP,
+  PSEUDO_RANDOM_TOOLTIP,
+  PSEUDO_RELATIONAL_TOOLTIP,
+  PSEUDO_STR_TOOLTIP,
+  PSEUDO_VARIABLE_TOOLTIP,
+  PSEUDO_WHILE_TOOLTIP,
+}
+
+tooltipManager.addValues(tooltips)
