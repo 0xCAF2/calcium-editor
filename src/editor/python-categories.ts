@@ -90,6 +90,10 @@ export const pythonCategories: Blockly.utils.toolbox.ToolboxItemInfo[] = [
       },
       {
         kind: "block",
+        type: "calcium_compound_assignment",
+      },
+      {
+        kind: "block",
         type: "calcium_expr_stmt",
       },
       {
