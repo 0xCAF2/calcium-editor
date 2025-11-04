@@ -1,9 +1,10 @@
 ---
 layout: home
+lastUpdated: true
 
 hero:
   name: "カルシウム"
-  tagline: 擬似言語を使ってプログラミングを学ぶためのブロックエディタです。
+  tagline: 擬似言語や Python を使ってプログラミングを学ぶためのブロックエディタです。
   actions:
     - theme: brand
       text: カルシウムを使う
