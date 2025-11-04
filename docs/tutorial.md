@@ -9,7 +9,6 @@ lastUpdated: true
 
 "Calcium" is a block editor designed to help you learn programming.
 You can assemble Python-like code using blocks and run it.
-Blocks for pseudocode commonly used in introductory informatics (Information I) are also provided.
 
 ## Adding a block by dragging
 
