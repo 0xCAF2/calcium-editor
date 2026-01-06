@@ -5,6 +5,8 @@ import { EnUsL10N } from "./l10n/en-us"
 import { createMenu } from "./ui/menu"
 import { CalciumEditor } from "./editor"
 import { editorState } from "./ui/state/editor-state"
+import "./loadJson.js"
+
 // Detect the user's preferred language
 const userLanguage =
   navigator.language || (navigator.languages && navigator.languages[0])
