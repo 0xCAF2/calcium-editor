@@ -2,11 +2,11 @@ import { calciumGenerator, trimParens } from "."
 
 const self = calciumGenerator
 
-calciumGenerator.forBlock['calcium_print'] = (block) => {
+calciumGenerator.forBlock["calcium_print"] = (block) => {
   const args: any[] = []
-  const countOfArguments: number = Reflect.get(block, 'countOfArguments')
+  const countOfArguments: number = Reflect.get(block, "countOfArguments")
   for (let i = 0; i < countOfArguments; ++i) {
-    let arg = self.valueToCode(block, 'ARG' + i, 0) || '""'
+    let arg = self.valueToCode(block, "ARG" + i, 0) || "null"
     arg = trimParens(arg)
     args.push(JSON.parse(arg))
   }
@@ -14,8 +14,8 @@ calciumGenerator.forBlock['calcium_print'] = (block) => {
     JSON.stringify([
       self.indent,
       [],
-      'expr',
-      ['call', ['var', 'print'], args],
-    ]) + ','
+      "expr",
+      ["call", ["var", "print"], args],
+    ]) + ","
   )
 }
