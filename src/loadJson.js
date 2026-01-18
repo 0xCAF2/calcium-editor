@@ -11,9 +11,9 @@ function _loadJson(json) {
 
 function _dumpJson() {
   const json = Blockly.serialization.workspaces.save(
-    editorState.editor.workspace
+    editorState.editor.workspace,
   )
-  return json
+  return JSON.stringify(json)
 }
 
 window._loadJson = _loadJson
