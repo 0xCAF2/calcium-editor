@@ -23,7 +23,7 @@ if (userLanguage === "ja-JP" || userLanguage === "ja") {
   const ja = await import("./lang/ja-jp")
   calciumEditor = ja.buildCalciumEditor(
     document.querySelector("#editor")!,
-    "calc(100% - 48px)"
+    "calc(100% - 48px)",
   )
   l10n = new JaJpL10N()
   await import("./generator/calcium")
@@ -34,7 +34,7 @@ if (userLanguage === "ja-JP" || userLanguage === "ja") {
   const en = await import("./lang/en-us")
   calciumEditor = en.buildCalciumEditor(
     document.querySelector("#editor")!,
-    "calc(100% - 48px)"
+    "calc(100% - 48px)",
   )
   l10n = new EnUsL10N()
   await import("./generator/calcium")
@@ -43,7 +43,7 @@ if (userLanguage === "ja-JP" || userLanguage === "ja") {
 document.title = l10n.title
 // set description meta tag
 const descriptionMeta = document.querySelector(
-  'meta[name="description"]'
+  'meta[name="description"]',
 ) as HTMLMetaElement
 descriptionMeta.content = l10n.description
 
@@ -56,8 +56,32 @@ const previousCode = localStorage.getItem(`calcium-editor-${l10n.savedFile}`)
 if (previousCode) {
   Blockly.serialization.workspaces.load(
     JSON.parse(previousCode!),
-    editorState.editor.workspace
+    editorState.editor.workspace,
   )
+} else {
+  const contentJsonName = new URLSearchParams(window.location.search).get(
+    "json",
+  )
+  if (contentJsonName) {
+    try {
+      const response = await fetch(
+        `${window.location.origin}/content/${contentJsonName}.json`,
+      )
+      if (response.ok) {
+        const contentJson = await response.json()
+        Blockly.serialization.workspaces.load(
+          contentJson,
+          editorState.editor.workspace,
+        )
+      } else {
+        console.warn(
+          `Failed to load content JSON: ${response.status} ${response.statusText}`,
+        )
+      }
+    } catch (error) {
+      console.error("Error fetching content JSON:", error)
+    }
+  }
 }
 
 editorState.editor.workspace.addChangeListener((e) => {
@@ -77,12 +101,12 @@ editorState.editor.workspace.addChangeListener((e) => {
   }
 
   const blockCode = Blockly.serialization.workspaces.save(
-    editorState.editor.workspace
+    editorState.editor.workspace,
   )
   autosaveTimer = setTimeout(() => {
     localStorage.setItem(
       `calcium-editor-${l10n.savedFile}`,
-      JSON.stringify(blockCode)
+      JSON.stringify(blockCode),
     )
     autosaveTimer = undefined
   }, 2000)
