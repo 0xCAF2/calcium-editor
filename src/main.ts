@@ -52,35 +52,33 @@ editorState.l10n = l10n
 
 createMenu(l10n)
 
-const previousCode = localStorage.getItem(`calcium-editor-${l10n.savedFile}`)
-if (previousCode) {
-  Blockly.serialization.workspaces.load(
-    JSON.parse(previousCode!),
-    editorState.editor.workspace,
-  )
-} else {
-  const contentJsonName = new URLSearchParams(window.location.search).get(
-    "json",
-  )
-  if (contentJsonName) {
-    try {
-      const response = await fetch(
-        `${window.location.origin}/content/${contentJsonName}.json`,
+const contentJsonName = new URLSearchParams(window.location.search).get("json")
+if (contentJsonName) {
+  try {
+    const response = await fetch(
+      `${window.location.origin}/content/${contentJsonName}.json`,
+    )
+    if (response.ok) {
+      const contentJson = await response.json()
+      Blockly.serialization.workspaces.load(
+        contentJson,
+        editorState.editor.workspace,
       )
-      if (response.ok) {
-        const contentJson = await response.json()
-        Blockly.serialization.workspaces.load(
-          contentJson,
-          editorState.editor.workspace,
-        )
-      } else {
-        console.warn(
-          `Failed to load content JSON: ${response.status} ${response.statusText}`,
-        )
-      }
-    } catch (error) {
-      console.error("Error fetching content JSON:", error)
+    } else {
+      console.warn(
+        `Failed to load content JSON: ${response.status} ${response.statusText}`,
+      )
     }
+  } catch (error) {
+    console.error("Error fetching content JSON:", error)
+  }
+} else {
+  const previousCode = localStorage.getItem(`calcium-editor-${l10n.savedFile}`)
+  if (previousCode) {
+    Blockly.serialization.workspaces.load(
+      JSON.parse(previousCode!),
+      editorState.editor.workspace,
+    )
   }
 }
 
