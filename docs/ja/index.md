@@ -1,6 +1,5 @@
 ---
 layout: home
-lastUpdated: true
 
 hero:
   name: "カルシウム"

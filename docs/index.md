@@ -1,10 +1,9 @@
 ---
 layout: home
-lastUpdated: true
 
 hero:
   name: "Calcium Editor"
-  text: "A visual programming editor to learn Python on the browser"
+  text: "A visual programming editor to learn Python on a browser"
   tagline: 日本語でも利用できます
   actions:
     - theme: brand
