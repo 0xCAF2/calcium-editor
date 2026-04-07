@@ -8,7 +8,7 @@ hero:
   actions:
     - theme: brand
       text: カルシウムを使う
-      link: https://caed.app/
+      link: https://caed.app/ja/
     - theme: alt
       text: ドキュメント & チュートリアル
       link: /ja/tutorial

@@ -103,7 +103,7 @@ export class EditorStateStore {
 export const editorState = new EditorStateStore()
 
 function createWorker(): Worker {
-  const worker = new Worker("./worker.js")
+  const worker = new Worker("/worker.js")
   worker.onmessage = (event) => {
     const message = event.data
     if (message.loaded) {

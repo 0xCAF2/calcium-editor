@@ -1,7 +1,4 @@
 export type L10N = {
-  title: string
-  description: string
-
   helpUrl: string
 
   savedFile: string

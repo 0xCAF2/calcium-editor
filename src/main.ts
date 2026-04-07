@@ -7,16 +7,13 @@ import { CalciumEditor } from "./editor"
 import { editorState } from "./ui/state/editor-state"
 import "./loadJson.js"
 
-// Detect the user's preferred language
-const userLanguage =
-  navigator.language || (navigator.languages && navigator.languages[0])
-
 let l10n: L10N
 let calciumEditor: CalciumEditor
 // timer id used to debounce autosave (number from window.setTimeout)
 let autosaveTimer: number | undefined
 
-if (userLanguage === "ja-JP" || userLanguage === "ja") {
+// check URL whether it contains "ja" to determine if the user prefers Japanese
+if (window.location.pathname.includes("/ja/")) {
   await import("./lang/ja-jp/message")
   await import("./lang/ja-jp/tooltip")
   await import("./lang/ps-jp")
@@ -39,13 +36,6 @@ if (userLanguage === "ja-JP" || userLanguage === "ja") {
   l10n = new EnUsL10N()
   await import("./generator/calcium")
 }
-
-document.title = l10n.title
-// set description meta tag
-const descriptionMeta = document.querySelector(
-  'meta[name="description"]',
-) as HTMLMetaElement
-descriptionMeta.content = l10n.description
 
 editorState.editor = calciumEditor
 editorState.l10n = l10n
