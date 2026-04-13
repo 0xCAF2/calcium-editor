@@ -1,5 +1,9 @@
 # calcium-editor
 
+**Deprecated:** This project will be no longer updated.
+
+---
+
 A visual programming editor to learn Python on a browser
 
 ## Hosted web pages
