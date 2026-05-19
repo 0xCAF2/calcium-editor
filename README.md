@@ -1,9 +1,5 @@
 # calcium-editor
 
-**Deprecated:** This project will be no longer updated.
-
----
-
 A visual programming editor to learn Python on a browser
 
 ## Hosted web pages
@@ -13,7 +9,7 @@ A visual programming editor to learn Python on a browser
 This app uses [Blockly](https://developers.google.com/blockly) library.
 
 ブロックで Python プログラムを作成できます。
-日本の高等学校「情報 I」で扱われる擬似言語を使うことも可能です。
+日本の高等学校「情報 I」で扱われる[擬似言語を使う](https://caed.app/ja/)ことも可能です。
 
 ## NOTICE
 
