@@ -1,7 +1,7 @@
 const RESULT_EXECUTED = 1
 const RESULT_PAUSED = 4
 
-importScripts("https://cdn.jsdelivr.net/pyodide/v0.28.3/full/pyodide.js")
+importScripts("https://cdn.jsdelivr.net/pyodide/v0.29.4/full/pyodide.js")
 
 let pyodide
 
@@ -26,12 +26,12 @@ onmessage = async (event) => {
     if (event.data.code) {
       pyodide.globals.set("code", event.data.code)
       result = await pyodide.runPythonAsync(
-        `from calciumpy.runtime import Runtime; runtime = Runtime(code, decodes_str=True); result = runtime.run(); print(end='', flush=True); result.value`
+        `from calciumpy.runtime import Runtime; runtime = Runtime(code, decodes_str=True); result = runtime.run(); print(end='', flush=True); result.value`,
       )
     } else if (event.data.input) {
       pyodide.globals.set("input_data", event.data.input)
       result = await pyodide.runPythonAsync(
-        `result = runtime.resume(input_data); result.value`
+        `result = runtime.resume(input_data); result.value`,
       )
     }
 
@@ -39,7 +39,7 @@ onmessage = async (event) => {
       postMessage({ input: pyodide.runPython("runtime.env.prompt") })
     } else if (result === RESULT_EXECUTED) {
       result = await pyodide.runPythonAsync(
-        `result = runtime.run(); result.value`
+        `result = runtime.run(); result.value`,
       )
       if (result === RESULT_PAUSED) {
         postMessage({ input: pyodide.runPython("runtime.env.prompt") })
