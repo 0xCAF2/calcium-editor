@@ -5,7 +5,7 @@ import { EnUsL10N } from "./l10n/en-us"
 import { createMenu } from "./ui/menu"
 import { CalciumEditor } from "./editor"
 import { editorState } from "./ui/state/editor-state"
-import "./loadJson.js"
+import "./load-json.js"
 
 let l10n: L10N
 let calciumEditor: CalciumEditor
