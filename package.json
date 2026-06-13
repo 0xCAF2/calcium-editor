@@ -4,12 +4,11 @@
   "version": "0.11.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "dev": "bun run index.ts",
+    "ja": "bun run index-ja.ts",
+    "build": "tsc && bun build",
+    "docs:dev": "bunx vitepress dev docs",
+    "docs:build": "bunx vitepress build docs"
   },
   "devDependencies": {
     "oxfmt": "^0.52.0",
