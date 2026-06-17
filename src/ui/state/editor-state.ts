@@ -1,15 +1,10 @@
 import { CalciumEditor } from "../../editor"
 import { L10N } from "../../l10n"
 import { closeFileDialog, openFileDialog } from "../dialog/file-dialog"
-import {
-  appendRuntimeError,
-  appendRuntimeOutput,
-  closeRuntimeDialog,
-  enableRuntimeInput,
-  openRuntimeDialog,
-} from "../dialog/runtime-dialog"
+import { closeRuntimeDialog, openRuntimeDialog } from "../dialog/runtime-dialog"
 import { CalciumEditorNotSetError, InvalidStateTransitionError } from "../error"
 import * as runButton from "./run-button-state"
+import { createWorker } from "../../worker/create-worker"
 
 export type EditorState = {
   to(next: EditorState): void
@@ -101,20 +96,3 @@ export class EditorStateStore {
 }
 
 export const editorState = new EditorStateStore()
-
-function createWorker(): Worker {
-  const worker = new Worker("/worker.js")
-  worker.onmessage = (event) => {
-    const message = event.data
-    if (message.loaded) {
-      runButton.buttonState.current = runButton.enabledState
-    } else if (message.output || message.output === "") {
-      appendRuntimeOutput(message.output)
-    } else if (message.error) {
-      appendRuntimeError(message.error.join("\n"))
-    } else if (message.input || message.input === "") {
-      enableRuntimeInput(message.input)
-    }
-  }
-  return worker
-}
