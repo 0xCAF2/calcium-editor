@@ -1,5 +1,5 @@
 import { serve } from "bun"
-import index from "./public/index.html"
+import index from "../public/index.html"
 
 const server = serve({
   routes: {
