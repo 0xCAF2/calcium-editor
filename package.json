@@ -1,11 +1,11 @@
 {
-  "name": "calcium-editor",
+  "name": "caed",
   "version": "0.11.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "bun run dev/index.ts",
-    "ja": "bun run dev/index-ja.ts",
+    "dev-ja": "bun run dev/index-ja.ts",
     "build": "tsc && bun build",
     "docs:dev": "bunx vitepress dev docs",
     "docs:build": "bunx vitepress build docs"
