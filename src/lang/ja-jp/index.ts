@@ -20,12 +20,11 @@ export type { CategoryDefinition } from "../../editor"
 
 export function buildCalciumEditor(
   parent: HTMLElement,
-  height?: string
+  height?: string,
 ): CalciumEditor {
   return buildEditor({
     parent,
     options: {
-      renderer: CALCIUM_RENDERER_NAME,
       categories: categories,
     },
     height,

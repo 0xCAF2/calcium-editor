@@ -44,7 +44,7 @@ export const buildEditor = ({
 }): CalciumEditor => {
   const toolbox: Blockly.utils.toolbox.ToolboxDefinition = createToolbox(
     options?.categories ?? [],
-    options?.includesPythonCategories ?? true
+    options?.includesPythonCategories ?? true,
   )
 
   const table = document.createElement("table")
@@ -81,13 +81,13 @@ export const buildEditor = ({
     let element: HTMLElement = blocklyArea
     let x = 0
     let y = 0
-    do {
+    while (true) {
       x += element.offsetLeft
       y += element.offsetTop
       const parent = element.offsetParent
       if (!parent) break
       element = parent as HTMLElement
-    } while (true)
+    }
     blocklyDiv.style.left = x + "px"
     blocklyDiv.style.top = y + "px"
     blocklyDiv.style.width = blocklyArea.offsetWidth + "px"
