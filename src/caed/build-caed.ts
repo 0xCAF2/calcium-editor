@@ -2,6 +2,7 @@ import * as Blockly from "blockly"
 import { createMenu } from "../ui/menu.js"
 import { editorState } from "../ui/state/editor-state.js"
 import "../load-json.js"
+import { LOCALSTORAGE_KEY_PREFIX } from "./prefix.js"
 
 export async function buildCaed() {
   // timer id used to debounce autosave (number from window.setTimeout)
@@ -33,7 +34,7 @@ export async function buildCaed() {
     }
   } else {
     const previousCode = localStorage.getItem(
-      `calcium-editor-${editorState.l10n.savedFile}`,
+      `${LOCALSTORAGE_KEY_PREFIX}${editorState.l10n.savedFile}`,
     )
     if (previousCode) {
       Blockly.serialization.workspaces.load(
@@ -70,7 +71,7 @@ export async function buildCaed() {
     )
     autosaveTimer = setTimeout(() => {
       localStorage.setItem(
-        `calcium-editor-${editorState.l10n.savedFile}`,
+        `${LOCALSTORAGE_KEY_PREFIX}${editorState.l10n.savedFile}`,
         JSON.stringify(blockCode),
       )
       autosaveTimer = undefined
