@@ -1,4 +1,4 @@
-export type L10N = {
+export type LocalizedString = {
   helpUrl: string
 
   savedFile: string

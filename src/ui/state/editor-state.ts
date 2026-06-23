@@ -1,5 +1,5 @@
 import { CalciumEditor } from "../../editor"
-import { L10N } from "../../l10n"
+import { LocalizedString } from "../../localization"
 import { closeFileDialog, openFileDialog } from "../dialog/file-dialog"
 import { closeRuntimeDialog, openRuntimeDialog } from "../dialog/runtime-dialog"
 import { CalciumEditorNotSetError, InvalidStateTransitionError } from "../error"
@@ -71,9 +71,9 @@ export class EditorStateStore {
     this._editor = editor
   }
 
-  private _l10n: L10N | null = null
+  private _l10n: LocalizedString | null = null
 
-  get l10n(): L10N {
+  get l10n(): LocalizedString {
     if (this._l10n) {
       return this._l10n
     } else {
@@ -81,7 +81,7 @@ export class EditorStateStore {
     }
   }
 
-  set l10n(l10n: L10N) {
+  set l10n(l10n: LocalizedString) {
     this._l10n = l10n
   }
 

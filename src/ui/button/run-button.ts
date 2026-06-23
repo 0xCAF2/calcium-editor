@@ -1,6 +1,6 @@
-import type { L10N } from "../../l10n"
+import type { LocalizedString } from "../../localization"
 
-export function createRunButton(l10n: L10N): HTMLElement {
+export function createRunButton(l10n: LocalizedString): HTMLElement {
   const button = document.createElement("div")
   button.id = "run-button"
   button.classList.add("disabled-run-button")

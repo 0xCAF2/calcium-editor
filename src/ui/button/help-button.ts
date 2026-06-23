@@ -1,6 +1,6 @@
-import type { L10N } from "../../l10n"
+import type { LocalizedString } from "../../localization"
 
-export function createHelpButton(l10n: L10N): HTMLElement {
+export function createHelpButton(l10n: LocalizedString): HTMLElement {
   const button = document.createElement("div")
   button.id = "help-button"
 

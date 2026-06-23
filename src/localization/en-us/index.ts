@@ -1,20 +1,31 @@
 import * as Blockly from "blockly"
-
 import "./message"
 import "./tooltip"
-
 import * as Lang from "blockly/msg/en"
+import type { LocalizedString } from ".."
+import { buildEditor, CalciumEditor, CategoryDefinition } from "../../editor"
+import "../../generator/calcium"
 
 // @ts-ignore
 Blockly.setLocale(Lang)
 
-import { buildEditor, CalciumEditor, CategoryDefinition } from "../../editor"
-export { buildEditor, CalciumEditor } from "../../editor"
+export class EnUsLocalization implements LocalizedString {
+  helpUrl = "https://help.caed.app/en-us/"
+
+  savedFile = "Saved file"
+  noFiles = "No files saved."
+
+  run = "Run"
+  stop = "Stop"
+
+  input = "Input"
+}
+
 export type { CategoryDefinition } from "../../editor"
 
 export function buildCalciumEditor(
   parent: HTMLElement,
-  height?: string
+  height?: string,
 ): CalciumEditor {
   return buildEditor({
     parent,
@@ -23,6 +34,10 @@ export function buildCalciumEditor(
     },
     height,
   })
+}
+
+export function buildLocalization(): LocalizedString {
+  return new EnUsLocalization()
 }
 
 const categories: CategoryDefinition[] = [

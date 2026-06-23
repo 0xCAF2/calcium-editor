@@ -1,21 +1,28 @@
 import * as Blockly from "blockly"
-
 import "./message"
 import "./tooltip"
-
 import * as Lang from "blockly/msg/ja"
+import type { LocalizedString } from ".."
+import "../../block/pseudo"
+import { buildEditor, CalciumEditor, CategoryDefinition } from "../../editor"
+import "../../generator/calcium"
+import "../../generator/pseudo"
+
 // @ts-ignore
 Blockly.setLocale(Lang)
-import "../ps-jp"
 
-import { CALCIUM_RENDERER_NAME } from "../../editor/calcium-renderer"
-import {
-  buildEditor,
-  CalciumEditor,
-  type CategoryDefinition,
-} from "../../editor"
+export class JaJpLocalization implements LocalizedString {
+  helpUrl = "https://help.caed.app/ja-jp/"
 
-export { buildEditor, CalciumEditor } from "../../editor"
+  savedFile = "保存ファイル"
+  noFiles = "保存されたファイルはありません。"
+
+  run = "実行する"
+  stop = "実行を終了する"
+
+  input = "入力する"
+}
+
 export type { CategoryDefinition } from "../../editor"
 
 export function buildCalciumEditor(
@@ -29,6 +36,10 @@ export function buildCalciumEditor(
     },
     height,
   })
+}
+
+export function buildLocalization() {
+  return new JaJpLocalization()
 }
 
 const categories: CategoryDefinition[] = [
