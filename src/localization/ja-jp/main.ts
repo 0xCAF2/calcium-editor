@@ -5,7 +5,7 @@ import "../../generator/calcium/"
 import "../../generator/pseudo/"
 
 import { editorState } from "../../ui/state/editor-state"
-import { buildCaed } from "../../caed/build-caed"
+import { buildPage } from "../../caed/build-page"
 
 editorState.editor = l10n.buildCalciumEditor(
   document.querySelector("#editor")!,
@@ -13,4 +13,4 @@ editorState.editor = l10n.buildCalciumEditor(
 )
 editorState.l10n = l10n.buildLocalization()
 
-await buildCaed()
+await buildPage()

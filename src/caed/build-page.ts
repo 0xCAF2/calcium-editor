@@ -4,7 +4,7 @@ import { editorState } from "../ui/state/editor-state.js"
 import "../load-json.js"
 import { LOCALSTORAGE_KEY_PREFIX } from "./prefix.js"
 
-export async function buildCaed() {
+export async function buildPage() {
   // timer id used to debounce autosave (number from window.setTimeout)
   let autosaveTimer: number | undefined
 

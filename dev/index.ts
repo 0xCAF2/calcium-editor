@@ -1,11 +1,13 @@
 import { serve } from "bun"
-import index from "../public/en/index.html"
-import indexJa from "../public/index.html"
+import index from "../public/index.html"
+import indexEn from "../public/en/index.html"
+import indexJa from "../public/ja/index.html"
 
 const server = serve({
   routes: {
-    "/en/": index,
-    "/": indexJa,
+    "/": index,
+    "/en/": indexEn,
+    "/ja/": indexJa,
   },
   development: {
     hmr: true,

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "bun run dev/index.ts",
-    "build": "bun build public/en/index.html --outdir pages/en/ && bun build public/index.html --outdir pages",
+    "build": "bun build public/en/index.html --outdir pages/en/ && bun build public/ja/index.html --outdir pages/ja/ && bun build public/index.html --outdir pages",
     "docs:dev": "bunx vitepress dev docs",
     "docs:build": "bunx vitepress build docs"
   },
