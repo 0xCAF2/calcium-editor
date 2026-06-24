@@ -21,5 +21,5 @@ export default defineConfig({
         "「情報I」擬似言語を学ぶためのブロックエディタです。Python 風のコードを実行できます。",
     },
   },
-  base: "/help/",
+  base: "/",
 })

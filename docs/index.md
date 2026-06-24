@@ -8,7 +8,7 @@ hero:
   actions:
     - theme: brand
       text: Use Calcium Editor
-      link: https://caed.app/
+      link: https://caed.app/en/
     - theme: alt
       text: Docs & Tutorials
       link: /tutorial
