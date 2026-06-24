@@ -1,6 +1,6 @@
 import { serve } from "bun"
-import index from "../public/index.html"
-import indexJa from "../public/index-ja.html"
+import index from "../public/en/index.html"
+import indexJa from "../public/index.html"
 
 const server = serve({
   routes: {
