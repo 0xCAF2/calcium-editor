@@ -9,6 +9,7 @@ export function createWorker(): Worker {
   const blob = new Blob([workerCode], { type: "text/javascript" })
   const workerUrl = URL.createObjectURL(blob)
   const worker = new Worker(workerUrl)
+  URL.revokeObjectURL(workerUrl)
   worker.onmessage = (event) => {
     const message = event.data
     if (message.loaded) {
