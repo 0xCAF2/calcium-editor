@@ -21,26 +21,11 @@ export class EnUsLocalization implements LocalizedString {
   input = "Input"
 }
 
-export type { CategoryDefinition } from "../../editor"
-
-export function buildCalciumEditor(
-  parent: HTMLElement,
-  height?: string,
-): CalciumEditor {
-  return buildEditor({
-    parent,
-    options: {
-      categories: categories,
-    },
-    height,
-  })
-}
-
 export function buildLocalization(): LocalizedString {
   return new EnUsLocalization()
 }
 
-const categories: CategoryDefinition[] = [
+export const categories: CategoryDefinition[] = [
   {
     Basic: [
       "calcium_variable",

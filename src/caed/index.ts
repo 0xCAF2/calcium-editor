@@ -1,18 +1,26 @@
-import { buildEditor, InjectOptions } from "../editor"
+import { buildEditor, CalciumEditor, InjectOptions } from "../editor"
 
 export class Caed {
   public parameters = new CaedParams()
   public errorMessages: CaedErrorMessages = new CaedErrorMessages()
 
-  buildEditor() {
+  private _editor?: CalciumEditor
+
+  get editor(): CalciumEditor | undefined {
+    return this._editor
+  }
+
+  buildEditor(): void {
     if (!this.parameters.parent) {
       throw new Error(this.errorMessages.invalidParent)
     }
-    return buildEditor({
-      parent: this.parameters.parent,
-      options: this.parameters.options,
-      height: this.parameters.height,
-    })
+    if (!this._editor) {
+      this._editor = buildEditor({
+        parent: this.parameters.parent,
+        options: this.parameters.options,
+        height: this.parameters.height,
+      })
+    }
   }
 
   set parent(value: HTMLElement) {
