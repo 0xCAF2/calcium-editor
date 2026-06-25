@@ -4,7 +4,7 @@ import "./tooltip"
 import * as Lang from "blockly/msg/ja"
 import type { LocalizedString } from ".."
 import "../../block/pseudo"
-import { buildEditor, CalciumEditor, CategoryDefinition } from "../../editor"
+import { CategoryDefinition } from "../../editor"
 import "../../generator/calcium"
 import "../../generator/pseudo"
 
@@ -23,26 +23,11 @@ export class JaJpLocalization implements LocalizedString {
   input = "入力する"
 }
 
-export type { CategoryDefinition } from "../../editor"
-
-export function buildCalciumEditor(
-  parent: HTMLElement,
-  height?: string,
-): CalciumEditor {
-  return buildEditor({
-    parent,
-    options: {
-      categories: categories,
-    },
-    height,
-  })
-}
-
 export function buildLocalization() {
   return new JaJpLocalization()
 }
 
-const categories: CategoryDefinition[] = [
+export const categories: CategoryDefinition[] = [
   {
     基本: [
       "pseudo_variable",
