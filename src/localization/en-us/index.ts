@@ -3,7 +3,7 @@ import "./message"
 import "./tooltip"
 import * as Lang from "blockly/msg/en"
 import type { LocalizedString } from ".."
-import { buildEditor, CalciumEditor, CategoryDefinition } from "../../editor"
+import { CategoryDefinition } from "../../editor"
 import "../../generator/calcium"
 
 // @ts-ignore
