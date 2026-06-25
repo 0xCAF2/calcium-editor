@@ -1,7 +1,7 @@
 import * as l10n from "."
 import "./message"
 import "./tooltip"
-import "../../generator/calcium"
+import "../../generator"
 import "../../generator/pseudo"
 
 import { editorState } from "../../ui/state/editor-state"

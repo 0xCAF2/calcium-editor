@@ -1,4 +1,6 @@
 import { buildEditor, CalciumEditor, InjectOptions } from "../editor"
+import { createMenu } from "../ui/menu"
+import { editorState } from "../ui/state/editor-state"
 
 export class Caed {
   public parameters = new CaedParams()
@@ -10,7 +12,7 @@ export class Caed {
     return this._editor
   }
 
-  buildEditor(): void {
+  private buildEditor(): void {
     if (!this.parameters.parent) {
       throw new Error(this.errorMessages.invalidParent)
     }
@@ -37,6 +39,16 @@ export class Caed {
     } else {
       this.parameters.height = value
     }
+  }
+  // This getter includes a call to buildEditor() as a side effect to localize
+  // the build process.
+  get build(): null {
+    if (this.parameters.parent && !this._editor) {
+      this.buildEditor()
+      editorState.editor = this._editor!
+      createMenu(editorState.l10n)
+    }
+    return null
   }
 }
 

@@ -15,7 +15,7 @@ export const mainState: EditorState = {
     if (next === runtimeState) {
       openRuntimeDialog()
       const code = editorState.editor.code
-      editorState.worker.postMessage({ code })
+      editorState.worker?.postMessage({ code })
     } else if (next === fileDialogState) {
       openFileDialog()
     }
@@ -27,7 +27,7 @@ export const runtimeState: EditorState = {
     if (next === mainState) {
       closeRuntimeDialog()
       runButton.buttonState.current = runButton.disabledState
-      editorState.worker.terminate()
+      editorState.worker?.terminate()
       editorState.worker = createWorker()
     } else {
       throw new InvalidStateTransitionError()
@@ -69,6 +69,7 @@ export class EditorStateStore {
 
   set editor(editor: CalciumEditor) {
     this._editor = editor
+    this.worker = createWorker()
   }
 
   private _l10n: LocalizedString | null = null
@@ -87,11 +88,10 @@ export class EditorStateStore {
 
   isLoadingFile = false
 
-  worker: Worker
+  worker?: Worker
 
   constructor() {
     this._current = mainState
-    this.worker = createWorker()
   }
 }
 
