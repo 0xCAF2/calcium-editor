@@ -10,7 +10,7 @@ import "../../generator/calcium"
 Blockly.setLocale(Lang)
 
 export class EnUsLocalization implements LocalizedString {
-  helpUrl = "https://help.caed.app/en-us/"
+  helpUrl = "https://help.caed.app/"
 
   savedFile = "Saved file"
   noFiles = "No files saved."

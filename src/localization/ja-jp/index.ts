@@ -12,7 +12,7 @@ import "../../generator/pseudo"
 Blockly.setLocale(Lang)
 
 export class JaJpLocalization implements LocalizedString {
-  helpUrl = "https://help.caed.app/ja-jp/"
+  helpUrl = "https://help.caed.app/ja/"
 
   savedFile = "保存ファイル"
   noFiles = "保存されたファイルはありません。"
