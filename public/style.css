@@ -1,18 +1,13 @@
-html,
-body,
 #editor {
   margin: 0;
   padding: 0;
   width: 100%;
   height: calc(100% - 48px);
 }
-html,
-body {
-  height: 100%;
-}
 #menu {
   z-index: 9999;
   height: 40px;
+  padding-bottom: 8px;
 }
 .line {
   width: 24px;

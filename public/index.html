@@ -10,8 +10,32 @@
       content="擬似言語の学習向けプログラミングツールです。ブロックで Python プログラムを作って実行できます。"
     />
     <link rel="stylesheet" href="./style.css" />
+    <style>
+      .link {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: x-large;
+      }
+      .link-button {
+        background-color: #0caede;
+        border-radius: 8px;
+        text-align: center;
+        cursor: pointer;
+        padding: 8px;
+        margin: 80px;
+      }
+    </style>
   </head>
   <body>
     <script type="module" src="../src/localization/ja-jp/caede.js"></script>
+    <div style="padding: 40px">
+      <a href="/en/" class="link">
+        <div class="link-button" onclick="">Caed (English)</div>
+      </a>
+      <a href="/ja/" class="link">
+        <div class="link-button" onclick="">かえで（日本語）</div>
+      </a>
+    </div>
   </body>
 </html>
