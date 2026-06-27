@@ -1,13 +1,13 @@
 ---
 title: Tutorial
-titleTemplate: Calcium Editor
-description: Explains the basics of using Calcium.
+titleTemplate: Caed | Calcium Editor
+description: Explains the basics of using Caed.
 lastUpdated: true
 ---
 
 # Tutorial
 
-"Calcium" is a block editor designed to help you learn programming.
+"Caed" is a block editor designed to help you learn programming.
 You can assemble Python-like code using blocks and run it.
 
 ## Adding a block by dragging
@@ -37,7 +37,7 @@ To return to the editor, press the "Stop" button.
 
 ## Differences from Scratch
 
-Calcium uses blocks like Scratch, but it has these distinguishing features:
+Caed uses blocks like [Scratch](https://scratch.mit.edu/), but it has these distinguishing features:
 
 - It is closer to a text programming environment.
   - It focuses on algorithms and data structures rather than creating animations.

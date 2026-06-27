@@ -1,5 +1,6 @@
 import * as Blockly from "blockly"
 import { editorState, mainState } from "../state/editor-state"
+import { LOCALSTORAGE_KEY_PREFIX } from "../../caed/prefix"
 
 export function openFileDialog(): void {
   const dialog = document.createElement("div")
@@ -22,7 +23,7 @@ export function openFileDialog(): void {
       editorState.isLoadingFile = true
       Blockly.serialization.workspaces.load(
         blockCode,
-        editorState.editor.workspace
+        editorState.editor.workspace,
       )
     }
     editorState.current = mainState
@@ -32,7 +33,7 @@ export function openFileDialog(): void {
   function createFileItem(key: string) {
     const fileItem = document.createElement("div")
     fileItem.className = "file-dialog-file-item"
-    fileItem.textContent = key.replace("calcium-editor-", "")
+    fileItem.textContent = key.replace(LOCALSTORAGE_KEY_PREFIX, "")
     fileItem.onclick = () => loadFromKey(key)
     return fileItem
   }
@@ -47,9 +48,9 @@ export function openFileDialog(): void {
 
   const addButton = createDialogButton("file-dialog-add-button", "+", () => {
     const blockCode = Blockly.serialization.workspaces.save(
-      editorState.editor.workspace
+      editorState.editor.workspace,
     )
-    const key = `calcium-editor-${
+    const key = `${LOCALSTORAGE_KEY_PREFIX}${
       editorState.l10n.savedFile
     }-${new Date().toLocaleString()}`
     localStorage.setItem(key, JSON.stringify(blockCode))
@@ -63,7 +64,7 @@ export function openFileDialog(): void {
   dialog.appendChild(addButton)
 
   const filteredKeys = Object.keys(localStorage).filter((key) =>
-    key.startsWith(`calcium-editor-${editorState.l10n.savedFile}`)
+    key.startsWith(`${LOCALSTORAGE_KEY_PREFIX}${editorState.l10n.savedFile}`),
   )
   filteredKeys.sort().reverse()
 
@@ -73,7 +74,7 @@ export function openFileDialog(): void {
   }
 
   const allKeys = Object.keys(localStorage).filter((key) =>
-    key.startsWith("calcium-editor-")
+    key.startsWith(LOCALSTORAGE_KEY_PREFIX),
   )
 
   if (allKeys.length === 0) {

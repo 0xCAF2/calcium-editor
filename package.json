@@ -1,23 +1,23 @@
 {
-  "name": "calcium-editor",
+  "name": "caed",
+  "version": "0.11.0",
   "private": true,
-  "version": "0.10.3",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
-  },
-  "devDependencies": {
-    "typescript": "~5.9.3",
-    "vite": "^7.1.7",
-    "vitepress": "^2.0.0-alpha.12"
+    "dev": "bun run dev/index.ts",
+    "build": "bun build public/en/index.html --outdir en/ && bun build public/ja/index.html --outdir ja/ && bun build public/index.html --outdir ./",
+    "docs:dev": "bunx vitepress dev docs",
+    "docs:build": "bunx vitepress build docs"
   },
   "dependencies": {
     "@blockly/theme-dark": "^8.0.1",
     "blockly": "^12.3.1"
+  },
+  "devDependencies": {
+    "oxfmt": "^0.52.0",
+    "oxlint": "^1.67.0",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.13",
+    "vitepress": "^1.6.4"
   }
 }

@@ -1,15 +1,10 @@
 import { CalciumEditor } from "../../editor"
-import { L10N } from "../../l10n"
+import { LocalizedString } from "../../localization"
 import { closeFileDialog, openFileDialog } from "../dialog/file-dialog"
-import {
-  appendRuntimeError,
-  appendRuntimeOutput,
-  closeRuntimeDialog,
-  enableRuntimeInput,
-  openRuntimeDialog,
-} from "../dialog/runtime-dialog"
+import { closeRuntimeDialog, openRuntimeDialog } from "../dialog/runtime-dialog"
 import { CalciumEditorNotSetError, InvalidStateTransitionError } from "../error"
 import * as runButton from "./run-button-state"
+import { createWorker } from "../../worker/create-worker"
 
 export type EditorState = {
   to(next: EditorState): void
@@ -20,7 +15,7 @@ export const mainState: EditorState = {
     if (next === runtimeState) {
       openRuntimeDialog()
       const code = editorState.editor.code
-      editorState.worker.postMessage({ code })
+      editorState.worker?.postMessage({ code })
     } else if (next === fileDialogState) {
       openFileDialog()
     }
@@ -32,7 +27,7 @@ export const runtimeState: EditorState = {
     if (next === mainState) {
       closeRuntimeDialog()
       runButton.buttonState.current = runButton.disabledState
-      editorState.worker.terminate()
+      editorState.worker?.terminate()
       editorState.worker = createWorker()
     } else {
       throw new InvalidStateTransitionError()
@@ -74,11 +69,12 @@ export class EditorStateStore {
 
   set editor(editor: CalciumEditor) {
     this._editor = editor
+    this.worker = createWorker()
   }
 
-  private _l10n: L10N | null = null
+  private _l10n: LocalizedString | null = null
 
-  get l10n(): L10N {
+  get l10n(): LocalizedString {
     if (this._l10n) {
       return this._l10n
     } else {
@@ -86,35 +82,17 @@ export class EditorStateStore {
     }
   }
 
-  set l10n(l10n: L10N) {
+  set l10n(l10n: LocalizedString) {
     this._l10n = l10n
   }
 
   isLoadingFile = false
 
-  worker: Worker
+  worker?: Worker
 
   constructor() {
     this._current = mainState
-    this.worker = createWorker()
   }
 }
 
 export const editorState = new EditorStateStore()
-
-function createWorker(): Worker {
-  const worker = new Worker("/worker.js")
-  worker.onmessage = (event) => {
-    const message = event.data
-    if (message.loaded) {
-      runButton.buttonState.current = runButton.enabledState
-    } else if (message.output || message.output === "") {
-      appendRuntimeOutput(message.output)
-    } else if (message.error) {
-      appendRuntimeError(message.error.join("\n"))
-    } else if (message.input || message.input === "") {
-      enableRuntimeInput(message.input)
-    }
-  }
-  return worker
-}
