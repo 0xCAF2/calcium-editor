@@ -7,7 +7,7 @@ calciumGenerator.forBlock["pseudo_assign_array"] = (block) => {
   ref = JSON.parse(trimParens(ref))
 
   const itemCount = Reflect.get(block, "itemCount_")
-  const elements = new Array(itemCount)
+  const elements = Array.from({ length: itemCount })
   for (let i = 0; i < itemCount; ++i) {
     let elem = self.valueToCode(block, "ITEM" + i, 0) || '["num", "0"]'
     elem = trimParens(elem)
