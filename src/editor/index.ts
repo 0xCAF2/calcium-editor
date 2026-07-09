@@ -1,11 +1,9 @@
 import * as Blockly from "blockly"
 // @ts-ignore
 import DarkTheme from "@blockly/theme-dark"
-import { createToolbox, CategoryDefinition } from "./create-toolbox"
 import { calciumGenerator } from "../generator"
 import { CALCIUM_RENDERER_NAME } from "./calcium-renderer"
-
-export type { CategoryDefinition } from "./create-toolbox"
+import { pythonCategories } from "./python-categories"
 
 export class CalciumEditor {
   workspace: Blockly.Workspace
@@ -26,7 +24,7 @@ export type InjectOptions = {
   renderer?: string
   sounds?: boolean
   theme?: any
-  categories?: CategoryDefinition[]
+  toolbox?: Blockly.utils.toolbox.ToolboxDefinition
   zoom?: {
     startScale: number
   }
@@ -42,10 +40,24 @@ export const buildEditor = ({
   options?: InjectOptions
   height?: string
 }): CalciumEditor => {
-  const toolbox: Blockly.utils.toolbox.ToolboxDefinition = createToolbox(
-    options?.categories ?? [],
-    options?.includesPythonCategories ?? true,
-  )
+  if (options?.includesPythonCategories !== false) {
+    // Add Python categories to the toolbox. Include them by default.
+    if (options?.toolbox) {
+      const toolbox = options.toolbox as Blockly.utils.toolbox.ToolboxInfo
+      toolbox.contents = [
+        ...toolbox.contents,
+        ...pythonCategories,
+      ]
+    } else {
+      options = {
+        ...options,
+        toolbox: {
+          kind: "categoryToolbox",
+          contents: pythonCategories,
+        },
+      }
+    }
+  }
 
   const table = document.createElement("table")
   table.style.width = "100%"
@@ -72,7 +84,7 @@ export const buildEditor = ({
     renderer: options?.renderer ?? CALCIUM_RENDERER_NAME,
     sounds: options?.sounds ?? false,
     theme: options?.theme ?? DarkTheme,
-    toolbox,
+    toolbox: options?.toolbox,
     zoom: options?.zoom ?? {
       startScale: 0.7,
     },

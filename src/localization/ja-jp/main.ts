@@ -12,11 +12,13 @@ const caed = new Caed()
 caed.parent = document.querySelector("#editor")!
 caed.height = "calc(100% - 48px)"
 caed.options = {
-  categories: l10n.categories,
+  toolbox: l10n.toolbox,
+  includesPythonCategories: true,
 }
-caed.buildEditor()
-editorState.editor = caed.editor!
 
 editorState.l10n = l10n.buildLocalization()
+
+// This getter includes a call to buildEditor() as a side effect.
+caed.build
 
 await buildPage()
