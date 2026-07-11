@@ -1,5 +1,4 @@
 import * as Blockly from "blockly"
-import { createMenu } from "../ui/menu"
 import { editorState } from "../ui/state/editor-state"
 import "../load-json.js"
 import { LOCALSTORAGE_KEY_PREFIX } from "./prefix"
@@ -7,8 +6,6 @@ import { LOCALSTORAGE_KEY_PREFIX } from "./prefix"
 export async function buildPage() {
   // timer id used to debounce autosave (number from window.setTimeout)
   let autosaveTimer: number | undefined
-
-  createMenu(editorState.l10n)
 
   const contentJsonName = new URLSearchParams(window.location.search).get(
     "json",

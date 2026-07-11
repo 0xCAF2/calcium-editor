@@ -25703,7 +25703,7 @@ function trimLastComma(code) {
 setLocale(exports_en);
 
 class EnUsLocalization {
-  helpUrl = "https://help.caed.app/en-us/";
+  helpUrl = "https://help.caed.app/";
   savedFile = "Saved file";
   noFiles = "No files saved.";
   run = "Run";
@@ -25713,48 +25713,121 @@ class EnUsLocalization {
 function buildLocalization() {
   return new EnUsLocalization;
 }
-var categories = [
-  {
-    Basic: [
-      "calcium_variable",
-      "calcium_number",
-      "calcium_str",
-      "calcium_assignment",
-      "calcium_print"
-    ]
-  },
-  {
-    List: [
-      "calcium_list",
-      "calcium_subscript",
-      "calcium_slice"
-    ]
-  },
-  {
-    Logic: [
-      "calcium_arithmetic",
-      "calcium_relational",
-      "calcium_logical",
-      "calcium_not",
-      "calcium_if"
-    ]
-  },
-  {
-    Loop: [
-      "calcium_for",
-      "calcium_while",
-      "calcium_break_continue"
-    ]
-  },
-  {
-    Function: [
-      "calcium_call",
-      "calcium_expr_stmt",
-      "calcium_def",
-      "calcium_return"
-    ]
-  }
-];
+var toolbox = {
+  kind: "categoryToolbox",
+  contents: [
+    {
+      kind: "category",
+      name: "Core",
+      contents: [
+        {
+          kind: "block",
+          type: "calcium_variable"
+        },
+        {
+          kind: "block",
+          type: "calcium_number"
+        },
+        {
+          kind: "block",
+          type: "calcium_str"
+        },
+        {
+          kind: "block",
+          type: "calcium_assignment"
+        },
+        {
+          kind: "block",
+          type: "calcium_print"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "List",
+      contents: [
+        {
+          kind: "block",
+          type: "calcium_list"
+        },
+        {
+          kind: "block",
+          type: "calcium_subscript"
+        },
+        {
+          kind: "block",
+          type: "calcium_slice"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "Logic",
+      contents: [
+        {
+          kind: "block",
+          type: "calcium_arithmetic"
+        },
+        {
+          kind: "block",
+          type: "calcium_relational"
+        },
+        {
+          kind: "block",
+          type: "calcium_logical"
+        },
+        {
+          kind: "block",
+          type: "calcium_not"
+        },
+        {
+          kind: "block",
+          type: "calcium_if"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "Loop",
+      contents: [
+        {
+          kind: "block",
+          type: "calcium_for"
+        },
+        {
+          kind: "block",
+          type: "calcium_while"
+        },
+        {
+          kind: "block",
+          type: "calcium_break_continue"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "Function",
+      contents: [
+        {
+          kind: "block",
+          type: "calcium_call"
+        },
+        {
+          kind: "block",
+          type: "calcium_expr_stmt"
+        },
+        {
+          kind: "block",
+          type: "calcium_def"
+        },
+        {
+          kind: "block",
+          type: "calcium_return"
+        }
+      ]
+    }
+  ]
+};
 // src/generator/calcium/arithmetic.ts
 var self2 = calciumGenerator;
 calciumGenerator.forBlock["calcium_arithmetic"] = (block) => {
@@ -26437,61 +26510,6 @@ class EditorStateStore {
 }
 var editorState = new EditorStateStore;
 
-// src/ui/button/file-button.ts
-function createFileButton() {
-  const button = document.createElement("div");
-  button.id = "file-button";
-  for (let i = 0;i < 3; i++) {
-    const line = document.createElement("div");
-    line.className = "line";
-    button.appendChild(line);
-  }
-  button.onclick = () => {
-    editorState.current = fileDialogState;
-  };
-  return button;
-}
-
-// src/ui/button/help-button.ts
-function createHelpButton(l10n) {
-  const button = document.createElement("div");
-  button.id = "help-button";
-  const helpLink = document.createElement("a");
-  helpLink.href = l10n.helpUrl;
-  helpLink.target = "_blank";
-  helpLink.textContent = "?";
-  helpLink.style.width = "100%";
-  helpLink.style.height = "100%";
-  helpLink.style.display = "flex";
-  helpLink.style.alignItems = "center";
-  helpLink.style.justifyContent = "center";
-  helpLink.style.textDecoration = "none";
-  helpLink.style.color = "inherit";
-  button.appendChild(helpLink);
-  return button;
-}
-
-// src/ui/button/run-button.ts
-function createRunButton(l10n) {
-  const button = document.createElement("div");
-  button.id = "run-button";
-  button.classList.add("disabled-run-button");
-  button.textContent = "▶︎ " + l10n.run;
-  return button;
-}
-
-// src/ui/menu.ts
-function createMenu(l10n) {
-  const menu = document.querySelector("#menu");
-  menu.style.display = "flex";
-  menu.style.alignItems = "center";
-  menu.style.justifyContent = "space-between";
-  menu.style.padding = "4px";
-  menu.appendChild(createFileButton());
-  menu.appendChild(createRunButton(l10n));
-  menu.appendChild(createHelpButton(l10n));
-}
-
 // src/load-json.js
 function _loadJson(json) {
   editorState.isLoadingFile = true;
@@ -26510,7 +26528,6 @@ window._dumpJson = _dumpJson;
 // src/caed/build-page.ts
 async function buildPage() {
   let autosaveTimer;
-  createMenu(editorState.l10n);
   const contentJsonName = new URLSearchParams(window.location.search).get("json");
   if (contentJsonName) {
     try {
@@ -26735,6 +26752,35 @@ var src_default = Theme2.defineTheme("dark", {
     cursorColour: "#d0d0d0"
   }
 });
+
+// src/editor/calcium-renderer.ts
+var CALCIUM_RENDERER_NAME = "calcium_renderer";
+
+class CalciumRenderer extends zelos.Renderer {
+  constructor(name) {
+    super(name);
+  }
+  makeConstants_() {
+    return new CalciumConstantProvider;
+  }
+}
+
+class CalciumConstantProvider extends zelos.ConstantProvider {
+  constructor() {
+    super();
+  }
+  shapeFor(connection) {
+    if (connection.type !== INPUT_VALUE) {
+      return super.shapeFor(connection);
+    }
+    const block = connection.getSourceBlock();
+    if (block.type.includes("_if") || block.type.includes("_elif") || block.type.includes("_while") || block.type.includes("_not") && !block.type.includes("bitwise")) {
+      return this.HEXAGONAL;
+    }
+    return this.ROUNDED;
+  }
+}
+blockRendering.register(CALCIUM_RENDERER_NAME, CalciumRenderer);
 
 // src/block/calcium/arithmetic.ts
 var CALCIUM_ARITHMETIC_NAME = "calcium_arithmetic";
@@ -28372,7 +28418,10 @@ var pythonCategories = [
       },
       {
         kind: "block",
-        type: "calcium_number"
+        type: "calcium_number",
+        fields: {
+          NUM: "0"
+        }
       },
       {
         kind: "block",
@@ -28442,7 +28491,17 @@ var pythonCategories = [
       },
       {
         kind: "block",
-        type: "calcium_assignment"
+        type: "calcium_assignment",
+        inputs: {
+          REF: {
+            shadow: {
+              type: "calcium_variable",
+              fields: {
+                VAR: "i"
+              }
+            }
+          }
+        }
       },
       {
         kind: "block",
@@ -28492,55 +28551,6 @@ var pythonCategories = [
   }
 ];
 
-// src/editor/create-toolbox.ts
-function createToolbox(categories2, includesPythonCategories = true) {
-  const blocks = [];
-  for (const category of categories2) {
-    const categoryName = Object.keys(category)[0];
-    blocks.push({
-      kind: "category",
-      name: categoryName,
-      contents: category[categoryName].map((blockName) => ({
-        kind: "block",
-        type: blockName
-      }))
-    });
-  }
-  return {
-    kind: "categoryToolbox",
-    contents: includesPythonCategories ? blocks.concat(pythonCategories) : blocks
-  };
-}
-
-// src/editor/calcium-renderer.ts
-var CALCIUM_RENDERER_NAME = "calcium_renderer";
-
-class CalciumRenderer extends zelos.Renderer {
-  constructor(name) {
-    super(name);
-  }
-  makeConstants_() {
-    return new CalciumConstantProvider;
-  }
-}
-
-class CalciumConstantProvider extends zelos.ConstantProvider {
-  constructor() {
-    super();
-  }
-  shapeFor(connection) {
-    if (connection.type !== INPUT_VALUE) {
-      return super.shapeFor(connection);
-    }
-    const block = connection.getSourceBlock();
-    if (block.type.includes("_if") || block.type.includes("_elif") || block.type.includes("_while") || block.type.includes("_not") && !block.type.includes("bitwise")) {
-      return this.HEXAGONAL;
-    }
-    return this.ROUNDED;
-  }
-}
-blockRendering.register(CALCIUM_RENDERER_NAME, CalciumRenderer);
-
 // src/editor/index.ts
 class CalciumEditor {
   workspace;
@@ -28558,7 +28568,27 @@ var buildEditor = ({
   options,
   height
 }) => {
-  const toolbox = createToolbox(options?.categories ?? [], options?.includesPythonCategories ?? true);
+  if (options?.includesPythonCategories !== false) {
+    const baseToolbox = options?.toolbox;
+    if (baseToolbox && typeof baseToolbox === "object" && "contents" in baseToolbox) {
+      const toolboxInfo = baseToolbox;
+      options = {
+        ...options,
+        toolbox: {
+          ...toolboxInfo,
+          contents: [...toolboxInfo.contents, ...pythonCategories]
+        }
+      };
+    } else if (!baseToolbox) {
+      options = {
+        ...options,
+        toolbox: {
+          kind: "categoryToolbox",
+          contents: pythonCategories
+        }
+      };
+    }
+  }
   const table = document.createElement("table");
   table.style.width = "100%";
   table.style.height = height ?? "100%";
@@ -28578,7 +28608,7 @@ var buildEditor = ({
     renderer: options?.renderer ?? CALCIUM_RENDERER_NAME,
     sounds: options?.sounds ?? false,
     theme: options?.theme ?? src_default,
-    toolbox,
+    toolbox: options?.toolbox,
     zoom: options?.zoom ?? {
       startScale: 0.7
     }
@@ -28605,6 +28635,61 @@ var buildEditor = ({
   onresize();
   return new CalciumEditor(workspace);
 };
+
+// src/ui/button/file-button.ts
+function createFileButton() {
+  const button = document.createElement("div");
+  button.id = "file-button";
+  for (let i = 0;i < 3; i++) {
+    const line = document.createElement("div");
+    line.className = "line";
+    button.appendChild(line);
+  }
+  button.onclick = () => {
+    editorState.current = fileDialogState;
+  };
+  return button;
+}
+
+// src/ui/button/help-button.ts
+function createHelpButton(l10n) {
+  const button = document.createElement("div");
+  button.id = "help-button";
+  const helpLink = document.createElement("a");
+  helpLink.href = l10n.helpUrl;
+  helpLink.target = "_blank";
+  helpLink.textContent = "?";
+  helpLink.style.width = "100%";
+  helpLink.style.height = "100%";
+  helpLink.style.display = "flex";
+  helpLink.style.alignItems = "center";
+  helpLink.style.justifyContent = "center";
+  helpLink.style.textDecoration = "none";
+  helpLink.style.color = "inherit";
+  button.appendChild(helpLink);
+  return button;
+}
+
+// src/ui/button/run-button.ts
+function createRunButton(l10n) {
+  const button = document.createElement("div");
+  button.id = "run-button";
+  button.classList.add("disabled-run-button");
+  button.textContent = "▶︎ " + l10n.run;
+  return button;
+}
+
+// src/ui/menu.ts
+function createMenu(l10n) {
+  const menu = document.querySelector("#menu");
+  menu.style.display = "flex";
+  menu.style.alignItems = "center";
+  menu.style.justifyContent = "space-between";
+  menu.style.padding = "4px";
+  menu.appendChild(createFileButton());
+  menu.appendChild(createRunButton(l10n));
+  menu.appendChild(createHelpButton(l10n));
+}
 
 // src/caed/index.ts
 class Caed {
@@ -28666,9 +28751,9 @@ var caed = new Caed;
 caed.parent = document.querySelector("#editor");
 caed.height = "calc(100% - 48px)";
 caed.options = {
-  categories
+  toolbox,
+  includesPythonCategories: true
 };
-caed.buildEditor();
-editorState.editor = caed.editor;
 editorState.l10n = buildLocalization();
+caed.build;
 await buildPage();

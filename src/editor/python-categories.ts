@@ -17,6 +17,9 @@ export const pythonCategories: Blockly.utils.toolbox.ToolboxItemInfo[] = [
       {
         kind: "block",
         type: "calcium_number",
+        fields: {
+          NUM: "0",
+        }
       },
       {
         kind: "block",
@@ -87,6 +90,16 @@ export const pythonCategories: Blockly.utils.toolbox.ToolboxItemInfo[] = [
       {
         kind: "block",
         type: "calcium_assignment",
+        inputs: {
+          REF: {
+            shadow: {
+              type: "calcium_variable",
+              fields: {
+                VAR: "i",
+              }
+            },
+          }
+        }
       },
       {
         kind: "block",

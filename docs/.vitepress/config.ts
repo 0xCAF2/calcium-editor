@@ -16,7 +16,7 @@ export default defineConfig({
     ja: {
       label: "日本語",
       lang: "ja",
-      title: "かえで | プログラミング",
+      title: "カルシウム | プログラミング",
       description:
         "「情報I」擬似言語を学ぶためのブロックエディタです。Python 風のコードを実行できます。",
     },
