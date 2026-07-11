@@ -27970,6 +27970,141 @@ class JaJpLocalization {
 function buildLocalization() {
   return new JaJpLocalization;
 }
+var toolbox = {
+  kind: "categoryToolbox",
+  contents: [
+    {
+      kind: "category",
+      name: "基本",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_variable"
+        },
+        {
+          kind: "block",
+          type: "pseudo_number"
+        },
+        {
+          kind: "block",
+          type: "pseudo_str"
+        },
+        {
+          kind: "block",
+          type: "pseudo_assignment"
+        },
+        {
+          kind: "block",
+          type: "pseudo_print"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "演算",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_arithmetic"
+        },
+        {
+          kind: "block",
+          type: "pseudo_relational"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "配列",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_array"
+        },
+        {
+          kind: "block",
+          type: "pseudo_array_slice"
+        },
+        {
+          kind: "block",
+          type: "pseudo_assign_array"
+        },
+        {
+          kind: "block",
+          type: "pseudo_assign_zero"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "条件分岐",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_logical"
+        },
+        {
+          kind: "block",
+          type: "pseudo_not"
+        },
+        {
+          kind: "block",
+          type: "pseudo_if"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "繰り返し",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_for_increment"
+        },
+        {
+          kind: "block",
+          type: "pseudo_for_decrement"
+        },
+        {
+          kind: "block",
+          type: "pseudo_while"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "関数",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_len"
+        },
+        {
+          kind: "block",
+          type: "pseudo_int"
+        },
+        {
+          kind: "block",
+          type: "pseudo_random"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "入力",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_input_int"
+        },
+        {
+          kind: "block",
+          type: "pseudo_input_str"
+        }
+      ]
+    }
+  ]
+};
 
 // src/caed/prefix.ts
 var LOCALSTORAGE_KEY_PREFIX = "caed-";
@@ -28324,6 +28459,65 @@ class EditorStateStore {
   }
 }
 var editorState = new EditorStateStore;
+
+// src/load-json.js
+function _loadJson(json) {
+  editorState.isLoadingFile = true;
+  if (json instanceof String || typeof json === "string") {
+    json = JSON.parse(json);
+  }
+  serialization.workspaces.load(json, editorState.editor.workspace);
+}
+function _dumpJson() {
+  const json = serialization.workspaces.save(editorState.editor.workspace);
+  return JSON.stringify(json);
+}
+window._loadJson = _loadJson;
+window._dumpJson = _dumpJson;
+
+// src/caed/build-page.ts
+async function buildPage() {
+  let autosaveTimer;
+  const contentJsonName = new URLSearchParams(window.location.search).get("json");
+  if (contentJsonName) {
+    try {
+      const response = await fetch(`${window.location.origin}/content/${contentJsonName}.json`);
+      if (response.ok) {
+        const contentJson = await response.json();
+        serialization.workspaces.load(contentJson, editorState.editor.workspace);
+      } else {
+        console.warn(`Failed to load content JSON: ${response.status} ${response.statusText}`);
+      }
+    } catch (error) {
+      console.error("Error fetching content JSON:", error);
+    }
+  } else {
+    const previousCode = localStorage.getItem(`${LOCALSTORAGE_KEY_PREFIX}${editorState.l10n.savedFile}`);
+    if (previousCode) {
+      serialization.workspaces.load(JSON.parse(previousCode), editorState.editor.workspace);
+    }
+  }
+  editorState.editor.workspace.addChangeListener((e) => {
+    if (editorState.isLoadingFile && e.type !== Events.FINISHED_LOADING) {
+      return;
+    }
+    if (editorState.isLoadingFile && e.type === Events.FINISHED_LOADING) {
+      editorState.isLoadingFile = false;
+      return;
+    }
+    if (autosaveTimer !== undefined) {
+      clearTimeout(autosaveTimer);
+    }
+    const blockCode = serialization.workspaces.save(editorState.editor.workspace);
+    autosaveTimer = setTimeout(() => {
+      localStorage.setItem(`${LOCALSTORAGE_KEY_PREFIX}${editorState.l10n.savedFile}`, JSON.stringify(blockCode));
+      autosaveTimer = undefined;
+    }, 2000);
+  });
+  window.onbeforeunload = (e) => {
+    e.preventDefault();
+  };
+}
 
 // node_modules/blockly/blockly.mjs
 var import_blockly_compressed = __toESM(require_blockly_compressed(), 1);
@@ -30386,27 +30580,14 @@ class CaedErrorMessages {
   }
 }
 
-// src/localization/ja-jp/caede.js
-editorState.l10n = buildLocalization();
+// src/localization/ja-jp/main.ts
 var caed = new Caed;
+caed.parent = document.querySelector("#editor");
+caed.height = "calc(100% - 48px)";
 caed.options = {
-  categories: undefined
+  toolbox,
+  includesPythonCategories: true
 };
-var menuDiv = document.createElement("div");
-menuDiv.id = "menu";
-document.body.appendChild(menuDiv);
-var parentDiv = document.createElement("div");
-document.body.appendChild(parentDiv);
-caed.parent = parentDiv;
-Object.defineProperty(window, "高さ", {
-  set: function(value) {
-    caed.height = value;
-  },
-  enumerable: true
-});
-Object.defineProperty(window, "エディタを表示する", {
-  get: function() {
-    return caed.build;
-  },
-  enumerable: true
-});
+editorState.l10n = buildLocalization();
+caed.build;
+await buildPage();
