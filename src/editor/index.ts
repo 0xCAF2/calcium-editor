@@ -42,13 +42,21 @@ export const buildEditor = ({
 }): CalciumEditor => {
   if (options?.includesPythonCategories !== false) {
     // Add Python categories to the toolbox. Include them by default.
-    if (options?.toolbox) {
-      const toolbox = options.toolbox as Blockly.utils.toolbox.ToolboxInfo
-      toolbox.contents = [
-        ...toolbox.contents,
-        ...pythonCategories,
-      ]
-    } else {
+    const baseToolbox = options?.toolbox
+    if (
+      baseToolbox &&
+      typeof baseToolbox === "object" &&
+      "contents" in baseToolbox
+    ) {
+      const toolboxInfo = baseToolbox as Blockly.utils.toolbox.ToolboxInfo
+      options = {
+        ...options,
+        toolbox: {
+          ...toolboxInfo,
+          contents: [...toolboxInfo.contents, ...pythonCategories],
+        },
+      }
+    } else if (!baseToolbox) {
       options = {
         ...options,
         toolbox: {
