@@ -9,6 +9,7 @@ calciumGenerator.forBlock["pseudo_array_slice"] = (block) => {
   let start = self.valueToCode(block, "START", 0) || '["num", "0"]'
   start = JSON.parse(trimParens(start))
 
+  // The value is included in the slice, so we use "END" instead of "STOP".
   let endStr = self.valueToCode(block, "END", 0) || '["num", "2"]'
   let end = JSON.parse(trimParens(endStr))
   if (end !== null) {
