@@ -27750,9 +27750,9 @@ var self26 = calciumGenerator;
 calciumGenerator.forBlock["calcium_slice"] = (block) => {
   let start = self26.valueToCode(block, "START", 0) || '["num", "0"]';
   start = JSON.parse(trimParens(start));
-  let end = self26.valueToCode(block, "END", 0) || '["num", "0"]';
-  end = JSON.parse(trimParens(end));
-  const code = JSON.stringify(["slice", start, end]);
+  let stop = self26.valueToCode(block, "STOP", 0) || '["num", "0"]';
+  stop = JSON.parse(trimParens(stop));
+  const code = JSON.stringify(["slice", start, stop]);
   return [code, 0];
 };
 
@@ -28780,7 +28780,9 @@ Extensions.registerMutator(CALCIUM_CALL_MUTATOR_NAME, {
     for (let i = 0;i < this.countOfArguments; ++i) {
       const itemBlock = workspace.newBlock(CALCIUM_CALL_ARG_NAME);
       itemBlock.initSvg();
-      connection?.connect(itemBlock.previousConnection);
+      if (connection && itemBlock.previousConnection) {
+        connection.connect(itemBlock.previousConnection);
+      }
       connection = itemBlock.nextConnection;
     }
     return containerBlock;
@@ -29724,7 +29726,9 @@ var calciumPrintMutatorMixin = {
     for (let i = 0;i < this.countOfArguments; ++i) {
       const itemBlock = workspace.newBlock(CALCIUM_PRINT_ARG_NAME);
       itemBlock.initSvg();
-      connection?.connect(itemBlock.previousConnection);
+      if (connection && itemBlock.previousConnection) {
+        connection.connect(itemBlock.previousConnection);
+      }
       connection = itemBlock.nextConnection;
     }
     return containerBlock;
@@ -29913,7 +29917,7 @@ var calciumSliceBlock = {
     },
     {
       type: "input_value",
-      name: "END",
+      name: "STOP",
       check: [
         "Number",
         "calcium_variable",
@@ -30050,11 +30054,17 @@ var pythonCategories = [
     contents: [
       {
         kind: "block",
-        type: "calcium_variable"
+        type: "calcium_variable",
+        fields: {
+          NAME: "self"
+        }
       },
       {
         kind: "block",
-        type: "calcium_str"
+        type: "calcium_str",
+        fields: {
+          STR: "Hello, World."
+        }
       },
       {
         kind: "block",
@@ -30073,19 +30083,75 @@ var pythonCategories = [
       },
       {
         kind: "block",
-        type: "calcium_attribute"
+        type: "calcium_attribute",
+        inputs: {
+          REF: {
+            shadow: {
+              type: "calcium_variable",
+              fields: {
+                NAME: "self"
+              }
+            }
+          }
+        }
       },
       {
         kind: "block",
-        type: "calcium_call"
+        type: "calcium_call",
+        inputs: {
+          REF: {
+            shadow: {
+              type: "calcium_variable",
+              fields: {
+                NAME: ""
+              }
+            }
+          }
+        }
       },
       {
         kind: "block",
-        type: "calcium_subscript"
+        type: "calcium_subscript",
+        inputs: {
+          REF: {
+            shadow: {
+              type: "calcium_variable",
+              fields: {
+                NAME: "my_list"
+              }
+            }
+          },
+          SUB: {
+            shadow: {
+              type: "calcium_number",
+              fields: {
+                NUM: "0"
+              }
+            }
+          }
+        }
       },
       {
         kind: "block",
-        type: "calcium_arithmetic"
+        type: "calcium_arithmetic",
+        inputs: {
+          LEFT: {
+            shadow: {
+              type: "calcium_variable",
+              fields: {
+                NAME: "i"
+              }
+            }
+          },
+          RIGHT: {
+            shadow: {
+              type: "calcium_number",
+              fields: {
+                NUM: "1"
+              }
+            }
+          }
+        }
       },
       {
         kind: "block",
@@ -30093,7 +30159,28 @@ var pythonCategories = [
       },
       {
         kind: "block",
-        type: "calcium_relational"
+        type: "calcium_relational",
+        fields: {
+          OP: "=="
+        },
+        inputs: {
+          LEFT: {
+            shadow: {
+              type: "calcium_variable",
+              fields: {
+                NAME: "i"
+              }
+            }
+          },
+          RIGHT: {
+            shadow: {
+              type: "calcium_number",
+              fields: {
+                NUM: "0"
+              }
+            }
+          }
+        }
       },
       {
         kind: "block",
@@ -30101,19 +30188,75 @@ var pythonCategories = [
       },
       {
         kind: "block",
-        type: "calcium_not"
+        type: "calcium_not",
+        inputs: {
+          VALUE: {
+            shadow: {
+              type: "calcium_variable",
+              fields: {
+                NAME: "value"
+              }
+            }
+          }
+        }
       },
       {
         kind: "block",
-        type: "calcium_kwarg"
+        type: "calcium_kwarg",
+        inputs: {
+          VALUE: {
+            shadow: {
+              type: "calcium_str",
+              fields: {
+                STR: ""
+              }
+            }
+          }
+        }
       },
       {
         kind: "block",
-        type: "calcium_slice"
+        type: "calcium_slice",
+        inputs: {
+          START: {
+            shadow: {
+              type: "calcium_number",
+              fields: {
+                NUM: "0"
+              }
+            }
+          },
+          STOP: {
+            shadow: {
+              type: "calcium_number",
+              fields: {
+                NUM: "10"
+              }
+            }
+          }
+        }
       },
       {
         kind: "block",
-        type: "calcium_comma"
+        type: "calcium_comma",
+        inputs: {
+          FIRST: {
+            shadow: {
+              type: "calcium_variable",
+              fields: {
+                NAME: "a"
+              }
+            }
+          },
+          SECOND: {
+            shadow: {
+              type: "calcium_variable",
+              fields: {
+                NAME: "b"
+              }
+            }
+          }
+        }
       },
       {
         kind: "block",
@@ -30127,7 +30270,17 @@ var pythonCategories = [
     contents: [
       {
         kind: "block",
-        type: "calcium_print"
+        type: "calcium_print",
+        inputs: {
+          ARG0: {
+            shadow: {
+              type: "calcium_variable",
+              fields: {
+                NAME: "i"
+              }
+            }
+          }
+        }
       },
       {
         kind: "block",
@@ -30137,7 +30290,15 @@ var pythonCategories = [
             shadow: {
               type: "calcium_variable",
               fields: {
-                VAR: "i"
+                NAME: "i"
+              }
+            }
+          },
+          VALUE: {
+            shadow: {
+              type: "calcium_number",
+              fields: {
+                NUM: "0"
               }
             }
           }
@@ -30145,7 +30306,28 @@ var pythonCategories = [
       },
       {
         kind: "block",
-        type: "calcium_compound_assignment"
+        type: "calcium_compound_assignment",
+        fields: {
+          OP: "+="
+        },
+        inputs: {
+          REF: {
+            shadow: {
+              type: "calcium_variable",
+              fields: {
+                NAME: "i"
+              }
+            }
+          },
+          VALUE: {
+            shadow: {
+              type: "calcium_number",
+              fields: {
+                NUM: "1"
+              }
+            }
+          }
+        }
       },
       {
         kind: "block",
@@ -30153,15 +30335,78 @@ var pythonCategories = [
       },
       {
         kind: "block",
-        type: "calcium_if"
+        type: "calcium_if",
+        inputs: {
+          IF0: {
+            shadow: {
+              type: "calcium_relational",
+              inputs: {
+                LEFT: {
+                  shadow: {
+                    type: "calcium_variable",
+                    fields: {
+                      NAME: "i"
+                    }
+                  }
+                },
+                RIGHT: {
+                  shadow: {
+                    type: "calcium_number",
+                    fields: {
+                      NUM: "0"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       },
       {
         kind: "block",
-        type: "calcium_for"
+        type: "calcium_for",
+        inputs: {
+          VARS: {
+            shadow: {
+              type: "calcium_variable",
+              fields: {
+                NAME: "i"
+              }
+            }
+          }
+        }
       },
       {
         kind: "block",
-        type: "calcium_while"
+        type: "calcium_while",
+        inputs: {
+          CONDITION: {
+            shadow: {
+              type: "calcium_relational",
+              fields: {
+                OP: "<"
+              },
+              inputs: {
+                LEFT: {
+                  shadow: {
+                    type: "calcium_variable",
+                    fields: {
+                      NAME: "i"
+                    }
+                  }
+                },
+                RIGHT: {
+                  shadow: {
+                    type: "calcium_number",
+                    fields: {
+                      NUM: "0"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       },
       {
         kind: "block",

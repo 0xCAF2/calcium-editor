@@ -1,44 +1,44 @@
-import * as Blockly from 'blockly'
+import * as Blockly from "blockly"
 // @ts-ignore
-import { BlockDefinition } from 'blockly/core/blocks'
-import { tooltipManager } from '../../constant-manager'
+import { BlockDefinition } from "blockly/core/blocks"
+import { tooltipManager } from "../../constant-manager"
 
-const CALCIUM_SLICE_NAME = 'calcium_slice'
+const CALCIUM_SLICE_NAME = "calcium_slice"
 
 const calciumSliceBlock: BlockDefinition = {
   type: CALCIUM_SLICE_NAME,
-  message0: '%1 : %2',
+  message0: "%1 : %2",
   args0: [
     {
-      type: 'input_value',
-      name: 'START',
+      type: "input_value",
+      name: "START",
       check: [
-        'Number',
-        'calcium_variable',
-        'calcium_attribute',
-        'calcium_subscript',
-        'calcium_call',
-        'calcium_arithmetic',
+        "Number",
+        "calcium_variable",
+        "calcium_attribute",
+        "calcium_subscript",
+        "calcium_call",
+        "calcium_arithmetic",
       ],
     },
     {
-      type: 'input_value',
-      name: 'END',
+      type: "input_value",
+      name: "STOP",
       check: [
-        'Number',
-        'calcium_variable',
-        'calcium_attribute',
-        'calcium_subscript',
-        'calcium_call',
-        'calcium_arithmetic',
+        "Number",
+        "calcium_variable",
+        "calcium_attribute",
+        "calcium_subscript",
+        "calcium_call",
+        "calcium_arithmetic",
       ],
     },
   ],
   inputsInline: true,
-  output: 'calcium_slice',
+  output: "calcium_slice",
   colour: 120,
-  tooltip: tooltipManager.getValue('CALCIUM_SLICE_TOOLTIP'),
-  helpUrl: '',
+  tooltip: tooltipManager.getValue("CALCIUM_SLICE_TOOLTIP"),
+  helpUrl: "",
 }
 
 Blockly.defineBlocksWithJsonArray([calciumSliceBlock])
