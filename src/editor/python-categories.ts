@@ -333,6 +333,34 @@ export const pythonCategories: Blockly.utils.toolbox.ToolboxItemInfo[] = [
       {
         kind: "block",
         type: "calcium_while",
+        inputs: {
+          CONDITION: {
+            shadow: {
+              type: "calcium_relational",
+              fields: {
+                OP: "<",
+              },
+              inputs: {
+                LEFT: {
+                  shadow: {
+                    type: "calcium_variable",
+                    fields: {
+                      NAME: "i",
+                    },
+                  },
+                },
+                RIGHT: {
+                  shadow: {
+                    type: "calcium_number",
+                    fields: {
+                      NUM: "0",
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
       },
       {
         kind: "block",
