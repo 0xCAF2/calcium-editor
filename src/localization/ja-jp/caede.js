@@ -11,7 +11,7 @@ editorState.l10n = l10n.buildLocalization()
 
 const caed = new Caed()
 caed.options = {
-  categories: l10n.categories,
+  toolbox: l10n.toolbox,
 }
 const menuDiv = document.createElement("div")
 menuDiv.id = "menu"
