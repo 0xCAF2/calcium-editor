@@ -27970,6 +27970,141 @@ class JaJpLocalization {
 function buildLocalization() {
   return new JaJpLocalization;
 }
+var toolbox = {
+  kind: "categoryToolbox",
+  contents: [
+    {
+      kind: "category",
+      name: "基本",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_variable"
+        },
+        {
+          kind: "block",
+          type: "pseudo_number"
+        },
+        {
+          kind: "block",
+          type: "pseudo_str"
+        },
+        {
+          kind: "block",
+          type: "pseudo_assignment"
+        },
+        {
+          kind: "block",
+          type: "pseudo_print"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "演算",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_arithmetic"
+        },
+        {
+          kind: "block",
+          type: "pseudo_relational"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "配列",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_array"
+        },
+        {
+          kind: "block",
+          type: "pseudo_array_slice"
+        },
+        {
+          kind: "block",
+          type: "pseudo_assign_array"
+        },
+        {
+          kind: "block",
+          type: "pseudo_assign_zero"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "条件分岐",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_logical"
+        },
+        {
+          kind: "block",
+          type: "pseudo_not"
+        },
+        {
+          kind: "block",
+          type: "pseudo_if"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "繰り返し",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_for_increment"
+        },
+        {
+          kind: "block",
+          type: "pseudo_for_decrement"
+        },
+        {
+          kind: "block",
+          type: "pseudo_while"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "関数",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_len"
+        },
+        {
+          kind: "block",
+          type: "pseudo_int"
+        },
+        {
+          kind: "block",
+          type: "pseudo_random"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "入力",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_input_int"
+        },
+        {
+          kind: "block",
+          type: "pseudo_input_str"
+        }
+      ]
+    }
+  ]
+};
 
 // src/caed/prefix.ts
 var LOCALSTORAGE_KEY_PREFIX = "caed-";
@@ -30635,7 +30770,7 @@ class CaedErrorMessages {
 editorState.l10n = buildLocalization();
 var caed = new Caed;
 caed.options = {
-  categories: undefined
+  toolbox
 };
 var menuDiv = document.createElement("div");
 menuDiv.id = "menu";
