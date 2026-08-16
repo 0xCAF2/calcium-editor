@@ -21,6 +21,7 @@ export class Caed {
         parent: this.parameters.parent,
         options: this.parameters.options,
         height: this.parameters.height,
+        blocks: this.parameters.blocks,
       })
     }
   }
@@ -40,6 +41,11 @@ export class Caed {
       this.parameters.height = value
     }
   }
+
+  set blocks(value: any) {
+    this.parameters.blocks = value
+  }
+
   // This getter includes a call to buildEditor() as a side effect to localize
   // the build process.
   get build(): null {
@@ -56,6 +62,7 @@ export class CaedParams {
   public parent?: HTMLElement
   public options?: InjectOptions
   public height?: string
+  public blocks?: any
 }
 
 export class CaedErrorMessages {

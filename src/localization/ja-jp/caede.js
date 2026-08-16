@@ -27,6 +27,13 @@ Object.defineProperty(window, "高さ", {
   enumerable: true,
 })
 
+Object.defineProperty(window, "ブロック", {
+  set: function (value) {
+    caed.blocks = value
+  },
+  enumerable: true,
+})
+
 Object.defineProperty(window, "エディタを表示する", {
   get: function () {
     // This getter includes a call to buildEditor() as a side effect to localize

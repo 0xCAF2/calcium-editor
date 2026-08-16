@@ -7,38 +7,14 @@ export async function buildPage() {
   // timer id used to debounce autosave (number from window.setTimeout)
   let autosaveTimer: number | undefined
 
-  const contentJsonName = new URLSearchParams(window.location.search).get(
-    "json",
+  const previousCode = localStorage.getItem(
+    `${LOCALSTORAGE_KEY_PREFIX}${editorState.l10n.savedFile}`,
   )
-  if (contentJsonName) {
-    try {
-      const response = await fetch(
-        `${window.location.origin}/content/${contentJsonName}.json`,
-      )
-      if (response.ok) {
-        const contentJson = await response.json()
-        Blockly.serialization.workspaces.load(
-          contentJson,
-          editorState.editor.workspace,
-        )
-      } else {
-        console.warn(
-          `Failed to load content JSON: ${response.status} ${response.statusText}`,
-        )
-      }
-    } catch (error) {
-      console.error("Error fetching content JSON:", error)
-    }
-  } else {
-    const previousCode = localStorage.getItem(
-      `${LOCALSTORAGE_KEY_PREFIX}${editorState.l10n.savedFile}`,
+  if (previousCode) {
+    Blockly.serialization.workspaces.load(
+      JSON.parse(previousCode!),
+      editorState.editor.workspace,
     )
-    if (previousCode) {
-      Blockly.serialization.workspaces.load(
-        JSON.parse(previousCode!),
-        editorState.editor.workspace,
-      )
-    }
   }
 
   editorState.editor.workspace.addChangeListener((e) => {

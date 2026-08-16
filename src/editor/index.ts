@@ -35,10 +35,12 @@ export const buildEditor = ({
   parent,
   options,
   height,
+  blocks,
 }: {
   parent: HTMLElement
   options?: InjectOptions
   height?: string
+  blocks?: any
 }): CalciumEditor => {
   if (options?.includesPythonCategories !== false) {
     // Add Python categories to the toolbox. Include them by default.
@@ -116,5 +118,11 @@ export const buildEditor = ({
   }
   window.addEventListener("resize", onresize, false)
   onresize()
+
+  // Load blocks if provided
+  if (blocks) {
+    Blockly.serialization.workspaces.load(blocks, workspace)
+  }
+
   return new CalciumEditor(workspace)
 }
