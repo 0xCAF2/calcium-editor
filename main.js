@@ -24486,6 +24486,468 @@ var require_blockly = __commonJS((exports, module) => {
     return Blockly;
   });
 });
+
+// node_modules/blockly/msg/ja.js
+var require_ja = __commonJS((exports, module) => {
+  (function(root, factory) {
+    if (typeof define === "function" && define.amd) {
+      define([], factory);
+    } else if (typeof exports === "object") {
+      module.exports = factory();
+    } else {
+      var messages2 = factory();
+      for (var key in messages2) {
+        root.Blockly.Msg[key] = messages2[key];
+      }
+    }
+  })(exports, function() {
+    var Blockly2 = Blockly2 || { Msg: Object.create(null) };
+    Blockly2.Msg["ADD_COMMENT"] = "コメントを追加";
+    Blockly2.Msg["ALT_KEY"] = "Alt";
+    Blockly2.Msg["CANNOT_DELETE_VARIABLE_PROCEDURE"] = "変数 '%1' は関数 '%2' の定義の一部であるため、削除できません";
+    Blockly2.Msg["CHANGE_VALUE_TITLE"] = "値を変える：";
+    Blockly2.Msg["CHROME_OS"] = "ChromeOS";
+    Blockly2.Msg["CLEAN_UP"] = "ブロックを整理する";
+    Blockly2.Msg["CLOSE"] = "Close";
+    Blockly2.Msg["COLLAPSED_WARNINGS_WARNING"] = "つぶしたブロックには警告が入っています。";
+    Blockly2.Msg["COLLAPSE_ALL"] = "ブロックを折りたたむ";
+    Blockly2.Msg["COLLAPSE_BLOCK"] = "ブロックを折りたたむ";
+    Blockly2.Msg["COLOUR_BLEND_COLOUR1"] = "色 1";
+    Blockly2.Msg["COLOUR_BLEND_COLOUR2"] = "色 2";
+    Blockly2.Msg["COLOUR_BLEND_HELPURL"] = "https://meyerweb.com/eric/tools/color-blend/#:::rgbp";
+    Blockly2.Msg["COLOUR_BLEND_RATIO"] = "比率";
+    Blockly2.Msg["COLOUR_BLEND_TITLE"] = "ブレンド";
+    Blockly2.Msg["COLOUR_BLEND_TOOLTIP"] = "2色を与えられた比率（0.0～1.0）で混ぜます。";
+    Blockly2.Msg["COLOUR_PICKER_HELPURL"] = "https://ja.wikipedia.org/wiki/色";
+    Blockly2.Msg["COLOUR_PICKER_TOOLTIP"] = "パレットから色を選んでください。";
+    Blockly2.Msg["COLOUR_RANDOM_HELPURL"] = "http://randomcolour.com";
+    Blockly2.Msg["COLOUR_RANDOM_TITLE"] = "ランダムな色";
+    Blockly2.Msg["COLOUR_RANDOM_TOOLTIP"] = "ランダムに色を選ぶ。";
+    Blockly2.Msg["COLOUR_RGB_BLUE"] = "青";
+    Blockly2.Msg["COLOUR_RGB_GREEN"] = "緑";
+    Blockly2.Msg["COLOUR_RGB_HELPURL"] = "https://www.december.com/html/spec/colorpercompact.html";
+    Blockly2.Msg["COLOUR_RGB_RED"] = "赤";
+    Blockly2.Msg["COLOUR_RGB_TITLE"] = "色:";
+    Blockly2.Msg["COLOUR_RGB_TOOLTIP"] = "赤、緑、および青の指定された量で色を作成します。すべての値は 0 ～ 100 の間でなければなりません。";
+    Blockly2.Msg["COMMAND_KEY"] = "⌘ Command";
+    Blockly2.Msg["CONTROLS_FLOW_STATEMENTS_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Loops#loop-termination-blocks";
+    Blockly2.Msg["CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK"] = "ループから抜け出す";
+    Blockly2.Msg["CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE"] = "ループの次の反復処理を続行します";
+    Blockly2.Msg["CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK"] = "入っているループから抜け出します。";
+    Blockly2.Msg["CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE"] = "このループの残りの部分をスキップして、ループの繰り返しを続けます。";
+    Blockly2.Msg["CONTROLS_FLOW_STATEMENTS_WARNING"] = "注意: このブロックは、ループ内でのみ使用できます。";
+    Blockly2.Msg["CONTROLS_FOREACH_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Loops#for-each";
+    Blockly2.Msg["CONTROLS_FOREACH_TITLE"] = "リスト%2の各項目%1について";
+    Blockly2.Msg["CONTROLS_FOREACH_TOOLTIP"] = "リストの各項目について、その項目を変数'%1'として、いくつかのステートメントを実行します。";
+    Blockly2.Msg["CONTROLS_FOR_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Loops#count-with";
+    Blockly2.Msg["CONTROLS_FOR_TITLE"] = "%1 を %2 から %3 まで %4 ずつカウントする";
+    Blockly2.Msg["CONTROLS_FOR_TOOLTIP"] = "変数 '%1' が開始番号から終了番号まで指定した間隔での値をとって、指定したブロックを実行する。";
+    Blockly2.Msg["CONTROLS_IF_ELSEIF_TOOLTIP"] = "「もしも」のブロックに条件を追加します。";
+    Blockly2.Msg["CONTROLS_IF_ELSE_TOOLTIP"] = "Ifブロックに、すべてをキャッチする条件を追加。";
+    Blockly2.Msg["CONTROLS_IF_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/IfElse";
+    Blockly2.Msg["CONTROLS_IF_IF_TOOLTIP"] = "追加、削除、またはセクションを順序変更して、ブロックをこれを再構成します。";
+    Blockly2.Msg["CONTROLS_IF_MSG_ELSE"] = "そうでなければ";
+    Blockly2.Msg["CONTROLS_IF_MSG_ELSEIF"] = "そうでなくもし";
+    Blockly2.Msg["CONTROLS_IF_MSG_IF"] = "もし";
+    Blockly2.Msg["CONTROLS_IF_TOOLTIP_1"] = "値が true の場合、ステートメントを実行します。";
+    Blockly2.Msg["CONTROLS_IF_TOOLTIP_2"] = "値が true の場合は、最初のステートメントのブロックを実行します。それ以外の場合は、2番目のステートメントのブロックを実行します。";
+    Blockly2.Msg["CONTROLS_IF_TOOLTIP_3"] = "最初の値が true の場合は、最初のステートメントのブロックを実行します。それ以外の場合で、2番目の値が true の場合は、2番目のステートメントのブロックを実行します。";
+    Blockly2.Msg["CONTROLS_IF_TOOLTIP_4"] = "最初の値が true の場合は、最初のステートメントのブロックを実行します。それ以外の場合で、2番目の値が true の場合は、2番目のステートメントのブロックを実行します。すべての値が true でない場合は、最後のステートメントのブロックを実行します。";
+    Blockly2.Msg["CONTROLS_REPEAT_HELPURL"] = "https://ja.wikipedia.org/wiki/for文";
+    Blockly2.Msg["CONTROLS_REPEAT_INPUT_DO"] = "実行";
+    Blockly2.Msg["CONTROLS_REPEAT_TITLE"] = "%1 回繰り返す";
+    Blockly2.Msg["CONTROLS_REPEAT_TOOLTIP"] = "いくつかのステートメントを数回実行します。";
+    Blockly2.Msg["CONTROLS_WHILEUNTIL_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Loops#repeat";
+    Blockly2.Msg["CONTROLS_WHILEUNTIL_OPERATOR_UNTIL"] = "繰り返す：終わる条件";
+    Blockly2.Msg["CONTROLS_WHILEUNTIL_OPERATOR_WHILE"] = "繰り返す：続ける条件";
+    Blockly2.Msg["CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL"] = "値がfalseの間、いくつかのステートメントを実行する。";
+    Blockly2.Msg["CONTROLS_WHILEUNTIL_TOOLTIP_WHILE"] = "値がtrueの間、いくつかのステートメントを実行する。";
+    Blockly2.Msg["CONTROL_KEY"] = "Ctrl";
+    Blockly2.Msg["COPY_SHORTCUT"] = "Copy";
+    Blockly2.Msg["CUT_SHORTCUT"] = "Cut";
+    Blockly2.Msg["DELETE_ALL_BLOCKS"] = "%1個あるすべてのブロックを削除しますか？";
+    Blockly2.Msg["DELETE_BLOCK"] = "ブロックを削除";
+    Blockly2.Msg["DELETE_VARIABLE"] = "変数 '%1' を削除";
+    Blockly2.Msg["DELETE_VARIABLE_CONFIRMATION"] = "%1か所で使われている変数 '%2' を削除しますか？";
+    Blockly2.Msg["DELETE_X_BLOCKS"] = "%1個のブロックを削除";
+    Blockly2.Msg["DIALOG_CANCEL"] = "キャンセル";
+    Blockly2.Msg["DIALOG_OK"] = "OK";
+    Blockly2.Msg["DISABLE_BLOCK"] = "ブロックを無効にする";
+    Blockly2.Msg["DUPLICATE_BLOCK"] = "複製";
+    Blockly2.Msg["DUPLICATE_COMMENT"] = "コメントを複製";
+    Blockly2.Msg["EDIT_BLOCK_CONTENTS"] = "Edit Block contents";
+    Blockly2.Msg["ENABLE_BLOCK"] = "ブロックを有効にする";
+    Blockly2.Msg["EXPAND_ALL"] = "ブロックを展開する";
+    Blockly2.Msg["EXPAND_BLOCK"] = "ブロックを展開する";
+    Blockly2.Msg["EXTERNAL_INPUTS"] = "外部入力";
+    Blockly2.Msg["HELP"] = "ヘルプ";
+    Blockly2.Msg["HELP_PROMPT"] = "Press %1 for help on keyboard controls";
+    Blockly2.Msg["INLINE_INPUTS"] = "インライン入力";
+    Blockly2.Msg["KEYBOARD_NAV_CONSTRAINED_MOVE_HINT"] = "Use the arrow keys to move, then %1 to accept the position";
+    Blockly2.Msg["KEYBOARD_NAV_COPIED_HINT"] = "Copied. Press %1 to paste.";
+    Blockly2.Msg["KEYBOARD_NAV_CUT_HINT"] = "Cut. Press %1 to paste.";
+    Blockly2.Msg["KEYBOARD_NAV_UNCONSTRAINED_MOVE_HINT"] = "Hold %1 and use arrow keys to move freely, then %2 to accept the position";
+    Blockly2.Msg["LINUX"] = "Linux";
+    Blockly2.Msg["LISTS_CREATE_EMPTY_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Lists#create-empty-list";
+    Blockly2.Msg["LISTS_CREATE_EMPTY_TITLE"] = "空のリストを作成";
+    Blockly2.Msg["LISTS_CREATE_EMPTY_TOOLTIP"] = "長さ０でデータ・レコードを含まない空のリストを返す";
+    Blockly2.Msg["LISTS_CREATE_WITH_CONTAINER_TITLE_ADD"] = "リスト";
+    Blockly2.Msg["LISTS_CREATE_WITH_CONTAINER_TOOLTIP"] = "追加、削除、またはセクションの順序変更をして、このリスト・ブロックを再構成する。";
+    Blockly2.Msg["LISTS_CREATE_WITH_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Lists#create-list-with";
+    Blockly2.Msg["LISTS_CREATE_WITH_INPUT_WITH"] = "以下を使ってリストを作成：";
+    Blockly2.Msg["LISTS_CREATE_WITH_ITEM_TOOLTIP"] = "リストに項目を追加。";
+    Blockly2.Msg["LISTS_CREATE_WITH_TOOLTIP"] = "項目数が不定のリストを作成。";
+    Blockly2.Msg["LISTS_GET_INDEX_FIRST"] = "最初";
+    Blockly2.Msg["LISTS_GET_INDEX_FROM_END"] = "位置：後ろから";
+    Blockly2.Msg["LISTS_GET_INDEX_FROM_START"] = "#";
+    Blockly2.Msg["LISTS_GET_INDEX_GET"] = "取得";
+    Blockly2.Msg["LISTS_GET_INDEX_GET_REMOVE"] = "取得して削除";
+    Blockly2.Msg["LISTS_GET_INDEX_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Lists#getting-items-from-a-list";
+    Blockly2.Msg["LISTS_GET_INDEX_LAST"] = "最後";
+    Blockly2.Msg["LISTS_GET_INDEX_RANDOM"] = "ランダム";
+    Blockly2.Msg["LISTS_GET_INDEX_REMOVE"] = "削除";
+    Blockly2.Msg["LISTS_GET_INDEX_TAIL"] = "";
+    Blockly2.Msg["LISTS_GET_INDEX_TOOLTIP_GET_FIRST"] = "リストの最初の項目を返します。";
+    Blockly2.Msg["LISTS_GET_INDEX_TOOLTIP_GET_FROM"] = "リスト内の指定位置にある項目を返します。";
+    Blockly2.Msg["LISTS_GET_INDEX_TOOLTIP_GET_LAST"] = "リストの最後の項目を返します。";
+    Blockly2.Msg["LISTS_GET_INDEX_TOOLTIP_GET_RANDOM"] = "ランダム アイテム リストを返します。";
+    Blockly2.Msg["LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FIRST"] = "リスト内の最初の項目を削除し返します。";
+    Blockly2.Msg["LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM"] = "リスト内の指定位置にある項目を削除し、返します。";
+    Blockly2.Msg["LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_LAST"] = "リスト内の最後の項目を削除したあと返します。";
+    Blockly2.Msg["LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_RANDOM"] = "リストのランダムなアイテムを削除し返します。";
+    Blockly2.Msg["LISTS_GET_INDEX_TOOLTIP_REMOVE_FIRST"] = "リスト内の最初の項目を削除します。";
+    Blockly2.Msg["LISTS_GET_INDEX_TOOLTIP_REMOVE_FROM"] = "リスト内の指定された項目を削除します。";
+    Blockly2.Msg["LISTS_GET_INDEX_TOOLTIP_REMOVE_LAST"] = "リスト内の最後の項目を削除します。";
+    Blockly2.Msg["LISTS_GET_INDEX_TOOLTIP_REMOVE_RANDOM"] = "リスト内にあるアイテムをランダムに削除します。";
+    Blockly2.Msg["LISTS_GET_SUBLIST_END_FROM_END"] = "終了位置：後ろから";
+    Blockly2.Msg["LISTS_GET_SUBLIST_END_FROM_START"] = "終了位置：";
+    Blockly2.Msg["LISTS_GET_SUBLIST_END_LAST"] = "最後まで";
+    Blockly2.Msg["LISTS_GET_SUBLIST_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Lists#getting-a-sublist";
+    Blockly2.Msg["LISTS_GET_SUBLIST_START_FIRST"] = "最初からサブリストを取得する。";
+    Blockly2.Msg["LISTS_GET_SUBLIST_START_FROM_END"] = "端から #のサブリストを取得します。";
+    Blockly2.Msg["LISTS_GET_SUBLIST_START_FROM_START"] = "# からサブディレクトリのリストを取得します。";
+    Blockly2.Msg["LISTS_GET_SUBLIST_TAIL"] = "";
+    Blockly2.Msg["LISTS_GET_SUBLIST_TOOLTIP"] = "リストの指定された部分のコピーを作成します。";
+    Blockly2.Msg["LISTS_INDEX_FROM_END_TOOLTIP"] = "%1 は、最後の項目です。";
+    Blockly2.Msg["LISTS_INDEX_FROM_START_TOOLTIP"] = "%1 は、最初の項目です。";
+    Blockly2.Msg["LISTS_INDEX_OF_FIRST"] = "で以下のアイテムの最初の出現箇所を検索：";
+    Blockly2.Msg["LISTS_INDEX_OF_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Lists#finding-items-in-a-list";
+    Blockly2.Msg["LISTS_INDEX_OF_LAST"] = "で以下のテキストの最後の出現箇所を検索：";
+    Blockly2.Msg["LISTS_INDEX_OF_TOOLTIP"] = "リスト項目の最初/最後に出現するインデックス位置を返します。項目が見つからない場合は %1 を返します。";
+    Blockly2.Msg["LISTS_INLIST"] = "リスト";
+    Blockly2.Msg["LISTS_ISEMPTY_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Lists#is-empty";
+    Blockly2.Msg["LISTS_ISEMPTY_TITLE"] = "%1が空";
+    Blockly2.Msg["LISTS_ISEMPTY_TOOLTIP"] = "リストが空の場合は、true を返します。";
+    Blockly2.Msg["LISTS_LENGTH_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Lists#length-of";
+    Blockly2.Msg["LISTS_LENGTH_TITLE"] = "%1の長さ";
+    Blockly2.Msg["LISTS_LENGTH_TOOLTIP"] = "リストの長さを返します。";
+    Blockly2.Msg["LISTS_REPEAT_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Lists#create-list-with";
+    Blockly2.Msg["LISTS_REPEAT_TITLE"] = "項目%1を%2回繰り返したリストを作成";
+    Blockly2.Msg["LISTS_REPEAT_TOOLTIP"] = "与えられた値を指定された回数繰り返してリストを作成。";
+    Blockly2.Msg["LISTS_REVERSE_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Lists#reversing-a-list";
+    Blockly2.Msg["LISTS_REVERSE_MESSAGE0"] = "%1を逆順に";
+    Blockly2.Msg["LISTS_REVERSE_TOOLTIP"] = "リストのコピーを逆順にする。";
+    Blockly2.Msg["LISTS_SET_INDEX_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Lists#in-list--set";
+    Blockly2.Msg["LISTS_SET_INDEX_INPUT_TO"] = "値：";
+    Blockly2.Msg["LISTS_SET_INDEX_INSERT"] = "挿入位置：";
+    Blockly2.Msg["LISTS_SET_INDEX_SET"] = "セット";
+    Blockly2.Msg["LISTS_SET_INDEX_TOOLTIP_INSERT_FIRST"] = "リストの先頭に項目を挿入します。";
+    Blockly2.Msg["LISTS_SET_INDEX_TOOLTIP_INSERT_FROM"] = "リスト内の指定位置に項目を挿入します。";
+    Blockly2.Msg["LISTS_SET_INDEX_TOOLTIP_INSERT_LAST"] = "リストの末尾に項目を追加します。";
+    Blockly2.Msg["LISTS_SET_INDEX_TOOLTIP_INSERT_RANDOM"] = "リストに項目をランダムに挿入します。";
+    Blockly2.Msg["LISTS_SET_INDEX_TOOLTIP_SET_FIRST"] = "リスト内に最初の項目を設定します。";
+    Blockly2.Msg["LISTS_SET_INDEX_TOOLTIP_SET_FROM"] = "リスト内の指定された位置に項目を設定します。";
+    Blockly2.Msg["LISTS_SET_INDEX_TOOLTIP_SET_LAST"] = "リスト内の最後の項目を設定します。";
+    Blockly2.Msg["LISTS_SET_INDEX_TOOLTIP_SET_RANDOM"] = "リスト内にランダムなアイテムを設定します。";
+    Blockly2.Msg["LISTS_SORT_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Lists#sorting-a-list";
+    Blockly2.Msg["LISTS_SORT_ORDER_ASCENDING"] = "昇順";
+    Blockly2.Msg["LISTS_SORT_ORDER_DESCENDING"] = "降順";
+    Blockly2.Msg["LISTS_SORT_TITLE"] = "%1 ( %2 ) に %3 を並び替える";
+    Blockly2.Msg["LISTS_SORT_TOOLTIP"] = "リストのコピーを並べ替え";
+    Blockly2.Msg["LISTS_SORT_TYPE_IGNORECASE"] = "アルファベット順（大文字・小文字の区別無し）";
+    Blockly2.Msg["LISTS_SORT_TYPE_NUMERIC"] = "数値順";
+    Blockly2.Msg["LISTS_SORT_TYPE_TEXT"] = "アルファベット順";
+    Blockly2.Msg["LISTS_SPLIT_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Lists#splitting-strings-and-joining-lists";
+    Blockly2.Msg["LISTS_SPLIT_LIST_FROM_TEXT"] = "テキストからリストを作る";
+    Blockly2.Msg["LISTS_SPLIT_TEXT_FROM_LIST"] = "リストからテキストを作る";
+    Blockly2.Msg["LISTS_SPLIT_TOOLTIP_JOIN"] = "テキストのリストを区切り記号で区切られた一つのテキストにする";
+    Blockly2.Msg["LISTS_SPLIT_TOOLTIP_SPLIT"] = "テキストを区切り記号で分割したリストにする";
+    Blockly2.Msg["LISTS_SPLIT_WITH_DELIMITER"] = "区切り記号";
+    Blockly2.Msg["LOGIC_BOOLEAN_FALSE"] = "false";
+    Blockly2.Msg["LOGIC_BOOLEAN_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Logic#values";
+    Blockly2.Msg["LOGIC_BOOLEAN_TOOLTIP"] = "true または false を返します。";
+    Blockly2.Msg["LOGIC_BOOLEAN_TRUE"] = "true";
+    Blockly2.Msg["LOGIC_COMPARE_HELPURL"] = "https://ja.wikipedia.org/wiki/不等式";
+    Blockly2.Msg["LOGIC_COMPARE_TOOLTIP_EQ"] = "両方の入力が互いに等しい場合に true を返します。";
+    Blockly2.Msg["LOGIC_COMPARE_TOOLTIP_GT"] = "最初の入力が 2 番目の入力よりも大きい場合は true を返します。";
+    Blockly2.Msg["LOGIC_COMPARE_TOOLTIP_GTE"] = "最初の入力が 2 番目の入力以上の場合に true を返します。";
+    Blockly2.Msg["LOGIC_COMPARE_TOOLTIP_LT"] = "最初の入力が 2 番目の入力よりも小さい場合は true を返します。";
+    Blockly2.Msg["LOGIC_COMPARE_TOOLTIP_LTE"] = "最初の入力が 2 番目の入力以下の場合に true を返します。";
+    Blockly2.Msg["LOGIC_COMPARE_TOOLTIP_NEQ"] = "両方の入力が互いに等しくない場合に true を返します。";
+    Blockly2.Msg["LOGIC_NEGATE_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Logic#not";
+    Blockly2.Msg["LOGIC_NEGATE_TITLE"] = "%1ではない";
+    Blockly2.Msg["LOGIC_NEGATE_TOOLTIP"] = "入力が false の場合は、true を返します。入力が true の場合は false を返します。";
+    Blockly2.Msg["LOGIC_NULL"] = "null";
+    Blockly2.Msg["LOGIC_NULL_HELPURL"] = "https://en.wikipedia.org/wiki/Nullable_type";
+    Blockly2.Msg["LOGIC_NULL_TOOLTIP"] = "null を返します。";
+    Blockly2.Msg["LOGIC_OPERATION_AND"] = "かつ";
+    Blockly2.Msg["LOGIC_OPERATION_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Logic#logical-operations";
+    Blockly2.Msg["LOGIC_OPERATION_OR"] = "または";
+    Blockly2.Msg["LOGIC_OPERATION_TOOLTIP_AND"] = "両方の入力が true のときに true を返します。";
+    Blockly2.Msg["LOGIC_OPERATION_TOOLTIP_OR"] = "少なくとも 1 つの入力が true のときに true を返します。";
+    Blockly2.Msg["LOGIC_TERNARY_CONDITION"] = "テスト";
+    Blockly2.Msg["LOGIC_TERNARY_HELPURL"] = "https://ja.wikipedia.org/wiki/%3F:";
+    Blockly2.Msg["LOGIC_TERNARY_IF_FALSE"] = "false の場合";
+    Blockly2.Msg["LOGIC_TERNARY_IF_TRUE"] = "true の場合";
+    Blockly2.Msg["LOGIC_TERNARY_TOOLTIP"] = "'テスト' の条件をチェックします。条件が true の場合、'true' の値を返します。それ以外の場合 'false' のを返します。";
+    Blockly2.Msg["MAC_OS"] = "macOS";
+    Blockly2.Msg["MATH_ADDITION_SYMBOL"] = "+";
+    Blockly2.Msg["MATH_ARITHMETIC_HELPURL"] = "https://ja.wikipedia.org/wiki/算術";
+    Blockly2.Msg["MATH_ARITHMETIC_TOOLTIP_ADD"] = "2 つの数の合計を返します。";
+    Blockly2.Msg["MATH_ARITHMETIC_TOOLTIP_DIVIDE"] = "2 つの数の商を返します。";
+    Blockly2.Msg["MATH_ARITHMETIC_TOOLTIP_MINUS"] = "2 つの数の差を返します。";
+    Blockly2.Msg["MATH_ARITHMETIC_TOOLTIP_MULTIPLY"] = "2 つの数の積を返します。";
+    Blockly2.Msg["MATH_ARITHMETIC_TOOLTIP_POWER"] = "最初の数を2 番目の値で累乗した結果を返します。";
+    Blockly2.Msg["MATH_ATAN2_HELPURL"] = "https://ja.wikipedia.org/wiki/Atan2";
+    Blockly2.Msg["MATH_ATAN2_TITLE"] = "X:%1 Y:%2のatan2";
+    Blockly2.Msg["MATH_ATAN2_TOOLTIP"] = "アークタンジェントを用いて、点 (X, Y) の角度を -180度から 180度で返します。";
+    Blockly2.Msg["MATH_CHANGE_HELPURL"] = "https://ja.wikipedia.org/wiki/加法";
+    Blockly2.Msg["MATH_CHANGE_TITLE"] = "%1 を %2 増やす";
+    Blockly2.Msg["MATH_CHANGE_TOOLTIP"] = "変数'%1'に数をたす。";
+    Blockly2.Msg["MATH_CONSTANT_HELPURL"] = "https://ja.wikipedia.org/wiki/数学定数";
+    Blockly2.Msg["MATH_CONSTANT_TOOLTIP"] = "いずれかの共通の定数のを返す: π (3.141…), e (2.718…), φ (1.618…), sqrt(2) (1.414…), sqrt(½) (0.707…), or ∞ (無限).";
+    Blockly2.Msg["MATH_CONSTRAIN_HELPURL"] = "https://en.wikipedia.org/wiki/Clamping_(graphics)";
+    Blockly2.Msg["MATH_CONSTRAIN_TITLE"] = "%1 を %2 以上 %3 以下の範囲に制限";
+    Blockly2.Msg["MATH_CONSTRAIN_TOOLTIP"] = "指定した上限と下限の間に値を制限する（上限と下限の値を含む）。";
+    Blockly2.Msg["MATH_DIVISION_SYMBOL"] = "÷";
+    Blockly2.Msg["MATH_IS_DIVISIBLE_BY"] = "は以下で割りきれる：";
+    Blockly2.Msg["MATH_IS_EVEN"] = "は偶数";
+    Blockly2.Msg["MATH_IS_NEGATIVE"] = "は負";
+    Blockly2.Msg["MATH_IS_ODD"] = "は奇数";
+    Blockly2.Msg["MATH_IS_POSITIVE"] = "は正";
+    Blockly2.Msg["MATH_IS_PRIME"] = "は素数";
+    Blockly2.Msg["MATH_IS_TOOLTIP"] = "数字が、偶数、奇数、素数、整数、正数、負数、または特定の数で割り切れるかどうかを判定し、true か false を返します。";
+    Blockly2.Msg["MATH_IS_WHOLE"] = "は整数";
+    Blockly2.Msg["MATH_MODULO_HELPURL"] = "https://ja.wikipedia.org/wiki/剰余演算";
+    Blockly2.Msg["MATH_MODULO_TITLE"] = "%1÷%2の余り";
+    Blockly2.Msg["MATH_MODULO_TOOLTIP"] = "2つの数値の割り算の余りを返す。";
+    Blockly2.Msg["MATH_MULTIPLICATION_SYMBOL"] = "×";
+    Blockly2.Msg["MATH_NUMBER_HELPURL"] = "https://ja.wikipedia.org/wiki/数";
+    Blockly2.Msg["MATH_NUMBER_TOOLTIP"] = "数字。";
+    Blockly2.Msg["MATH_ONLIST_HELPURL"] = "";
+    Blockly2.Msg["MATH_ONLIST_OPERATOR_AVERAGE"] = "リストの平均";
+    Blockly2.Msg["MATH_ONLIST_OPERATOR_MAX"] = "リストの最大値";
+    Blockly2.Msg["MATH_ONLIST_OPERATOR_MEDIAN"] = "リストの中央値";
+    Blockly2.Msg["MATH_ONLIST_OPERATOR_MIN"] = "リストの最小値";
+    Blockly2.Msg["MATH_ONLIST_OPERATOR_MODE"] = "リストの最頻値";
+    Blockly2.Msg["MATH_ONLIST_OPERATOR_RANDOM"] = "リストからランダムに選ばれた項目";
+    Blockly2.Msg["MATH_ONLIST_OPERATOR_STD_DEV"] = "リストの標準偏差";
+    Blockly2.Msg["MATH_ONLIST_OPERATOR_SUM"] = "リストの合計";
+    Blockly2.Msg["MATH_ONLIST_TOOLTIP_AVERAGE"] = "リストの数値の平均 (算術平均) を返す。";
+    Blockly2.Msg["MATH_ONLIST_TOOLTIP_MAX"] = "リストの最大値を返す。";
+    Blockly2.Msg["MATH_ONLIST_TOOLTIP_MEDIAN"] = "リストの中央値を返す。";
+    Blockly2.Msg["MATH_ONLIST_TOOLTIP_MIN"] = "リストの最小値を返す。";
+    Blockly2.Msg["MATH_ONLIST_TOOLTIP_MODE"] = "リスト中の最頻項目のリストを返す。";
+    Blockly2.Msg["MATH_ONLIST_TOOLTIP_RANDOM"] = "リストからランダムに選ばれた要素を返す。";
+    Blockly2.Msg["MATH_ONLIST_TOOLTIP_STD_DEV"] = "リストの標準偏差を返す。";
+    Blockly2.Msg["MATH_ONLIST_TOOLTIP_SUM"] = "リストの数値を足して返す。";
+    Blockly2.Msg["MATH_POWER_SYMBOL"] = "^";
+    Blockly2.Msg["MATH_RANDOM_FLOAT_HELPURL"] = "https://ja.wikipedia.org/wiki/疑似乱数";
+    Blockly2.Msg["MATH_RANDOM_FLOAT_TITLE_RANDOM"] = "1未満の正の乱数";
+    Blockly2.Msg["MATH_RANDOM_FLOAT_TOOLTIP"] = "0.0以上で1.0未満の範囲の乱数を返します。";
+    Blockly2.Msg["MATH_RANDOM_INT_HELPURL"] = "https://ja.wikipedia.org/wiki/疑似乱数";
+    Blockly2.Msg["MATH_RANDOM_INT_TITLE"] = "%1から%2までのランダムな整数";
+    Blockly2.Msg["MATH_RANDOM_INT_TOOLTIP"] = "指定された（上下限を含む）範囲のランダムな整数を返します。";
+    Blockly2.Msg["MATH_ROUND_HELPURL"] = "https://ja.wikipedia.org/wiki/端数処理";
+    Blockly2.Msg["MATH_ROUND_OPERATOR_ROUND"] = "四捨五入";
+    Blockly2.Msg["MATH_ROUND_OPERATOR_ROUNDDOWN"] = "切り捨て";
+    Blockly2.Msg["MATH_ROUND_OPERATOR_ROUNDUP"] = "切り上げ";
+    Blockly2.Msg["MATH_ROUND_TOOLTIP"] = "数値を切り上げるか切り捨てる";
+    Blockly2.Msg["MATH_SINGLE_HELPURL"] = "https://ja.wikipedia.org/wiki/平方根";
+    Blockly2.Msg["MATH_SINGLE_OP_ABSOLUTE"] = "絶対値";
+    Blockly2.Msg["MATH_SINGLE_OP_ROOT"] = "平方根";
+    Blockly2.Msg["MATH_SINGLE_TOOLTIP_ABS"] = "絶対値を返す。";
+    Blockly2.Msg["MATH_SINGLE_TOOLTIP_EXP"] = "ネイピア数eの数値乗を返す。";
+    Blockly2.Msg["MATH_SINGLE_TOOLTIP_LN"] = "数値の自然対数を返す。";
+    Blockly2.Msg["MATH_SINGLE_TOOLTIP_LOG10"] = "底が10の対数を返す。";
+    Blockly2.Msg["MATH_SINGLE_TOOLTIP_NEG"] = "負の数を返す。";
+    Blockly2.Msg["MATH_SINGLE_TOOLTIP_POW10"] = "10の数値乗を返す。";
+    Blockly2.Msg["MATH_SINGLE_TOOLTIP_ROOT"] = "平方根を返す。";
+    Blockly2.Msg["MATH_SUBTRACTION_SYMBOL"] = "-";
+    Blockly2.Msg["MATH_TRIG_ACOS"] = "acos";
+    Blockly2.Msg["MATH_TRIG_ASIN"] = "asin";
+    Blockly2.Msg["MATH_TRIG_ATAN"] = "atan";
+    Blockly2.Msg["MATH_TRIG_COS"] = "cos";
+    Blockly2.Msg["MATH_TRIG_HELPURL"] = "https://ja.wikipedia.org/wiki/三角関数";
+    Blockly2.Msg["MATH_TRIG_SIN"] = "sin";
+    Blockly2.Msg["MATH_TRIG_TAN"] = "tan";
+    Blockly2.Msg["MATH_TRIG_TOOLTIP_ACOS"] = "アークコサイン（arccosin）を返す。";
+    Blockly2.Msg["MATH_TRIG_TOOLTIP_ASIN"] = "アークサイン（arcsin）を返す。";
+    Blockly2.Msg["MATH_TRIG_TOOLTIP_ATAN"] = "アークタンジェント（arctan）を返す。";
+    Blockly2.Msg["MATH_TRIG_TOOLTIP_COS"] = "（ラジアンではなく）度数の余弦（cosin）を返す。";
+    Blockly2.Msg["MATH_TRIG_TOOLTIP_SIN"] = "（ラジアンではなく）度数の正弦（sin）を返す。";
+    Blockly2.Msg["MATH_TRIG_TOOLTIP_TAN"] = "（ラジアンではなく）度数の正接（tan）を返す。";
+    Blockly2.Msg["MOVE_BLOCK"] = "Move Block";
+    Blockly2.Msg["NEW_COLOUR_VARIABLE"] = "色の変数を作る...";
+    Blockly2.Msg["NEW_NUMBER_VARIABLE"] = "数の変数を作る...";
+    Blockly2.Msg["NEW_STRING_VARIABLE"] = "文字列の変数を作る...";
+    Blockly2.Msg["NEW_VARIABLE"] = "変数の作成…";
+    Blockly2.Msg["NEW_VARIABLE_TITLE"] = "新しい変数の名前:";
+    Blockly2.Msg["NEW_VARIABLE_TYPE_TITLE"] = "新しい変数の型:";
+    Blockly2.Msg["OPTION_KEY"] = "⌥ Option";
+    Blockly2.Msg["ORDINAL_NUMBER_SUFFIX"] = "";
+    Blockly2.Msg["PASTE_SHORTCUT"] = "Paste";
+    Blockly2.Msg["PROCEDURES_ALLOW_STATEMENTS"] = "ステートメントを許可";
+    Blockly2.Msg["PROCEDURES_BEFORE_PARAMS"] = "引数：";
+    Blockly2.Msg["PROCEDURES_CALLNORETURN_HELPURL"] = "https://ja.wikipedia.org/wiki/サブルーチン";
+    Blockly2.Msg["PROCEDURES_CALLNORETURN_TOOLTIP"] = "ユーザー定義関数 '%1' を実行します。";
+    Blockly2.Msg["PROCEDURES_CALLRETURN_HELPURL"] = "https://ja.wikipedia.org/wiki/サブルーチン";
+    Blockly2.Msg["PROCEDURES_CALLRETURN_TOOLTIP"] = "ユーザー定義関数 '%1' を実行し、その出力を使用します。";
+    Blockly2.Msg["PROCEDURES_CALL_BEFORE_PARAMS"] = "引数：";
+    Blockly2.Msg["PROCEDURES_CALL_DISABLED_DEF_WARNING"] = "定義ブロックが無効のため、ユーザー定義関数 '%1' を実行できません。";
+    Blockly2.Msg["PROCEDURES_CREATE_DO"] = "'%1' を作成";
+    Blockly2.Msg["PROCEDURES_DEFNORETURN_COMMENT"] = "この関数の説明…";
+    Blockly2.Msg["PROCEDURES_DEFNORETURN_DO"] = "";
+    Blockly2.Msg["PROCEDURES_DEFNORETURN_HELPURL"] = "https://en.wikipedia.org/wiki/Subroutine";
+    Blockly2.Msg["PROCEDURES_DEFNORETURN_PROCEDURE"] = "何かする";
+    Blockly2.Msg["PROCEDURES_DEFNORETURN_TITLE"] = "関数";
+    Blockly2.Msg["PROCEDURES_DEFNORETURN_TOOLTIP"] = "出力なしの関数を作成します。";
+    Blockly2.Msg["PROCEDURES_DEFRETURN_HELPURL"] = "https://en.wikipedia.org/wiki/Subroutine";
+    Blockly2.Msg["PROCEDURES_DEFRETURN_RETURN"] = "返す";
+    Blockly2.Msg["PROCEDURES_DEFRETURN_TOOLTIP"] = "一つの出力を持つ関数を作成します。";
+    Blockly2.Msg["PROCEDURES_DEF_DUPLICATE_WARNING"] = "警告: この関数には重複するパラメーターがあります。";
+    Blockly2.Msg["PROCEDURES_HIGHLIGHT_DEF"] = "関数の内容を強調表示します。";
+    Blockly2.Msg["PROCEDURES_IFRETURN_HELPURL"] = "https://c2.com/cgi/wiki?GuardClause";
+    Blockly2.Msg["PROCEDURES_IFRETURN_TOOLTIP"] = "1番目の値が true の場合、2番目の値を返します。";
+    Blockly2.Msg["PROCEDURES_IFRETURN_WARNING"] = "警告: このブロックは、関数定義内でのみ使用できます。";
+    Blockly2.Msg["PROCEDURES_MUTATORARG_TITLE"] = "入力名:";
+    Blockly2.Msg["PROCEDURES_MUTATORARG_TOOLTIP"] = "関数への入力の追加。";
+    Blockly2.Msg["PROCEDURES_MUTATORCONTAINER_TITLE"] = "入力";
+    Blockly2.Msg["PROCEDURES_MUTATORCONTAINER_TOOLTIP"] = "この関数への入力の追加、削除、順番変更。";
+    Blockly2.Msg["REDO"] = "やり直す";
+    Blockly2.Msg["REMOVE_COMMENT"] = "コメントを削除";
+    Blockly2.Msg["RENAME_VARIABLE"] = "変数の名前を変える…";
+    Blockly2.Msg["RENAME_VARIABLE_TITLE"] = "「%1」という名前の変数名をすべて変える：";
+    Blockly2.Msg["SHORTCUTS_CODE_NAVIGATION"] = "Code navigation";
+    Blockly2.Msg["SHORTCUTS_EDITING"] = "Editing";
+    Blockly2.Msg["SHORTCUTS_GENERAL"] = "General";
+    Blockly2.Msg["TEXT_APPEND_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Text#text-modification";
+    Blockly2.Msg["TEXT_APPEND_TITLE"] = "項目 %1 へテキストを追加 %2";
+    Blockly2.Msg["TEXT_APPEND_TOOLTIP"] = "変数 '%1' にテキストを追加。";
+    Blockly2.Msg["TEXT_CHANGECASE_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Text#adjusting-text-case";
+    Blockly2.Msg["TEXT_CHANGECASE_OPERATOR_LOWERCASE"] = "小文字に";
+    Blockly2.Msg["TEXT_CHANGECASE_OPERATOR_TITLECASE"] = "タイトル ケースに";
+    Blockly2.Msg["TEXT_CHANGECASE_OPERATOR_UPPERCASE"] = "大文字に";
+    Blockly2.Msg["TEXT_CHANGECASE_TOOLTIP"] = "別のケースに、テキストのコピーを返します。";
+    Blockly2.Msg["TEXT_CHARAT_FIRST"] = "最初の文字を得る";
+    Blockly2.Msg["TEXT_CHARAT_FROM_END"] = "の、後ろから以下の数字番目の文字：";
+    Blockly2.Msg["TEXT_CHARAT_FROM_START"] = "の、以下の数字番目の文字：";
+    Blockly2.Msg["TEXT_CHARAT_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Text#extracting-text";
+    Blockly2.Msg["TEXT_CHARAT_LAST"] = "最後の文字を得る";
+    Blockly2.Msg["TEXT_CHARAT_RANDOM"] = "ランダムな文字を得る";
+    Blockly2.Msg["TEXT_CHARAT_TAIL"] = "";
+    Blockly2.Msg["TEXT_CHARAT_TITLE"] = "テキスト %1 %2";
+    Blockly2.Msg["TEXT_CHARAT_TOOLTIP"] = "指定された位置に文字を返します。";
+    Blockly2.Msg["TEXT_COUNT_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Text#counting-substrings";
+    Blockly2.Msg["TEXT_COUNT_MESSAGE0"] = "%2に含まれる%1の数を数える";
+    Blockly2.Msg["TEXT_COUNT_TOOLTIP"] = "とある文が別の文のなかに使われた回数を数える。";
+    Blockly2.Msg["TEXT_CREATE_JOIN_ITEM_TOOLTIP"] = "テキストへ項目を追加。";
+    Blockly2.Msg["TEXT_CREATE_JOIN_TITLE_JOIN"] = "結合";
+    Blockly2.Msg["TEXT_CREATE_JOIN_TOOLTIP"] = "セクションを追加、削除、または順序変更して、ブロックを再構成。";
+    Blockly2.Msg["TEXT_GET_SUBSTRING_END_FROM_END"] = "終了位置：後ろから";
+    Blockly2.Msg["TEXT_GET_SUBSTRING_END_FROM_START"] = "終了位置：";
+    Blockly2.Msg["TEXT_GET_SUBSTRING_END_LAST"] = "最後の文字";
+    Blockly2.Msg["TEXT_GET_SUBSTRING_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Text#extracting-a-region-of-text";
+    Blockly2.Msg["TEXT_GET_SUBSTRING_INPUT_IN_TEXT"] = "テキスト";
+    Blockly2.Msg["TEXT_GET_SUBSTRING_START_FIRST"] = "の部分文字列を取得；最初から";
+    Blockly2.Msg["TEXT_GET_SUBSTRING_START_FROM_END"] = "の部分文字列を取得；開始位置：後ろから";
+    Blockly2.Msg["TEXT_GET_SUBSTRING_START_FROM_START"] = "の部分文字列を取得；開始位置：";
+    Blockly2.Msg["TEXT_GET_SUBSTRING_TAIL"] = "";
+    Blockly2.Msg["TEXT_GET_SUBSTRING_TOOLTIP"] = "テキストの指定部分を返します。";
+    Blockly2.Msg["TEXT_INDEXOF_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Text#finding-text";
+    Blockly2.Msg["TEXT_INDEXOF_OPERATOR_FIRST"] = "で以下のテキストの最初の出現箇所を検索：";
+    Blockly2.Msg["TEXT_INDEXOF_OPERATOR_LAST"] = "で以下のテキストの最後の出現箇所を検索：";
+    Blockly2.Msg["TEXT_INDEXOF_TITLE"] = "テキスト %1 %2 %3";
+    Blockly2.Msg["TEXT_INDEXOF_TOOLTIP"] = "二番目のテキストの中で一番目のテキストが最初／最後に出現したインデックスを返す。テキストが見つからない場合は%1を返す。";
+    Blockly2.Msg["TEXT_ISEMPTY_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Text#checking-for-empty-text";
+    Blockly2.Msg["TEXT_ISEMPTY_TITLE"] = "%1が空";
+    Blockly2.Msg["TEXT_ISEMPTY_TOOLTIP"] = "与えられたテキストが空の場合は true を返す。";
+    Blockly2.Msg["TEXT_JOIN_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Text#text-creation";
+    Blockly2.Msg["TEXT_JOIN_TITLE_CREATEWITH"] = "テキストを結合して作成：";
+    Blockly2.Msg["TEXT_JOIN_TOOLTIP"] = "任意の数の項目一部を一緒に接合してテキストを作成。";
+    Blockly2.Msg["TEXT_LENGTH_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Text#text-modification";
+    Blockly2.Msg["TEXT_LENGTH_TITLE"] = "%1の長さ";
+    Blockly2.Msg["TEXT_LENGTH_TOOLTIP"] = "与えられたテキストの(スペースを含む)文字数を返す。";
+    Blockly2.Msg["TEXT_PRINT_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Text#printing-text";
+    Blockly2.Msg["TEXT_PRINT_TITLE"] = "%1 を表示";
+    Blockly2.Msg["TEXT_PRINT_TOOLTIP"] = "指定したテキスト、番号または他の値を印刷します。";
+    Blockly2.Msg["TEXT_PROMPT_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Text#getting-input-from-the-user";
+    Blockly2.Msg["TEXT_PROMPT_TOOLTIP_NUMBER"] = "ユーザーに数値のインプットを求める。";
+    Blockly2.Msg["TEXT_PROMPT_TOOLTIP_TEXT"] = "ユーザーにテキスト入力を求める。";
+    Blockly2.Msg["TEXT_PROMPT_TYPE_NUMBER"] = "メッセージで番号の入力を求める";
+    Blockly2.Msg["TEXT_PROMPT_TYPE_TEXT"] = "メッセージでテキスト入力を求める";
+    Blockly2.Msg["TEXT_REPLACE_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Text#replacing-substrings";
+    Blockly2.Msg["TEXT_REPLACE_MESSAGE0"] = "%3に含まれる%1を%2に置換";
+    Blockly2.Msg["TEXT_REPLACE_TOOLTIP"] = "文に含まれるキーワードを置換する。";
+    Blockly2.Msg["TEXT_REVERSE_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Text#reversing-text";
+    Blockly2.Msg["TEXT_REVERSE_MESSAGE0"] = "%1を逆順に";
+    Blockly2.Msg["TEXT_REVERSE_TOOLTIP"] = "文の文字を逆順にする。";
+    Blockly2.Msg["TEXT_TEXT_HELPURL"] = "https://ja.wikipedia.org/wiki/文字列";
+    Blockly2.Msg["TEXT_TEXT_TOOLTIP"] = "文字、単語、または行のテキスト。";
+    Blockly2.Msg["TEXT_TRIM_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Text#trimming-removing-spaces";
+    Blockly2.Msg["TEXT_TRIM_OPERATOR_BOTH"] = "両端のスペースを取り除く";
+    Blockly2.Msg["TEXT_TRIM_OPERATOR_LEFT"] = "左端のスペースを取り除く";
+    Blockly2.Msg["TEXT_TRIM_OPERATOR_RIGHT"] = "右端のスペースを取り除く";
+    Blockly2.Msg["TEXT_TRIM_TOOLTIP"] = "スペースを 1 つまたは両方の端から削除したのち、テキストのコピーを返します。";
+    Blockly2.Msg["TODAY"] = "今日";
+    Blockly2.Msg["UNDO"] = "取り消す";
+    Blockly2.Msg["UNKNOWN"] = "Unknown";
+    Blockly2.Msg["UNNAMED_KEY"] = "名前なし";
+    Blockly2.Msg["VARIABLES_DEFAULT_NAME"] = "項目";
+    Blockly2.Msg["VARIABLES_GET_CREATE_SET"] = "'セット%1を作成します。";
+    Blockly2.Msg["VARIABLES_GET_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Variables#get";
+    Blockly2.Msg["VARIABLES_GET_TOOLTIP"] = "この変数の値を返します。";
+    Blockly2.Msg["VARIABLES_SET"] = "%1 に %2 をセット";
+    Blockly2.Msg["VARIABLES_SET_CREATE_GET"] = "'%1 を取得' を作成します。";
+    Blockly2.Msg["VARIABLES_SET_HELPURL"] = "https://github.com/RaspberryPiFoundation/blockly/wiki/Variables#set";
+    Blockly2.Msg["VARIABLES_SET_TOOLTIP"] = "この入力を変数と等しくなるように設定します。";
+    Blockly2.Msg["VARIABLE_ALREADY_EXISTS"] = "変数名 '%1' は既に存在しています。";
+    Blockly2.Msg["VARIABLE_ALREADY_EXISTS_FOR_ANOTHER_TYPE"] = "'%2' 型の '%1' という名前の変数が既に存在します。";
+    Blockly2.Msg["VARIABLE_ALREADY_EXISTS_FOR_A_PARAMETER"] = "'%2' 手続きの '%1' という名前の変数が既に存在します。";
+    Blockly2.Msg["WINDOWS"] = "Windows";
+    Blockly2.Msg["WORKSPACE_ARIA_LABEL"] = "Blocklyワークスペース";
+    Blockly2.Msg["WORKSPACE_COMMENT_DEFAULT_TEXT"] = "ここへ入力";
+    Blockly2.Msg["CONTROLS_FOREACH_INPUT_DO"] = Blockly2.Msg["CONTROLS_REPEAT_INPUT_DO"];
+    Blockly2.Msg["CONTROLS_FOR_INPUT_DO"] = Blockly2.Msg["CONTROLS_REPEAT_INPUT_DO"];
+    Blockly2.Msg["CONTROLS_IF_ELSEIF_TITLE_ELSEIF"] = Blockly2.Msg["CONTROLS_IF_MSG_ELSEIF"];
+    Blockly2.Msg["CONTROLS_IF_ELSE_TITLE_ELSE"] = Blockly2.Msg["CONTROLS_IF_MSG_ELSE"];
+    Blockly2.Msg["CONTROLS_IF_IF_TITLE_IF"] = Blockly2.Msg["CONTROLS_IF_MSG_IF"];
+    Blockly2.Msg["CONTROLS_IF_MSG_THEN"] = Blockly2.Msg["CONTROLS_REPEAT_INPUT_DO"];
+    Blockly2.Msg["CONTROLS_WHILEUNTIL_INPUT_DO"] = Blockly2.Msg["CONTROLS_REPEAT_INPUT_DO"];
+    Blockly2.Msg["LISTS_CREATE_WITH_ITEM_TITLE"] = Blockly2.Msg["VARIABLES_DEFAULT_NAME"];
+    Blockly2.Msg["LISTS_GET_INDEX_INPUT_IN_LIST"] = Blockly2.Msg["LISTS_INLIST"];
+    Blockly2.Msg["LISTS_GET_SUBLIST_INPUT_IN_LIST"] = Blockly2.Msg["LISTS_INLIST"];
+    Blockly2.Msg["LISTS_INDEX_OF_INPUT_IN_LIST"] = Blockly2.Msg["LISTS_INLIST"];
+    Blockly2.Msg["LISTS_SET_INDEX_INPUT_IN_LIST"] = Blockly2.Msg["LISTS_INLIST"];
+    Blockly2.Msg["MATH_CHANGE_TITLE_ITEM"] = Blockly2.Msg["VARIABLES_DEFAULT_NAME"];
+    Blockly2.Msg["PROCEDURES_DEFRETURN_COMMENT"] = Blockly2.Msg["PROCEDURES_DEFNORETURN_COMMENT"];
+    Blockly2.Msg["PROCEDURES_DEFRETURN_DO"] = Blockly2.Msg["PROCEDURES_DEFNORETURN_DO"];
+    Blockly2.Msg["PROCEDURES_DEFRETURN_PROCEDURE"] = Blockly2.Msg["PROCEDURES_DEFNORETURN_PROCEDURE"];
+    Blockly2.Msg["PROCEDURES_DEFRETURN_TITLE"] = Blockly2.Msg["PROCEDURES_DEFNORETURN_TITLE"];
+    Blockly2.Msg["TEXT_APPEND_VARIABLE"] = Blockly2.Msg["VARIABLES_DEFAULT_NAME"];
+    Blockly2.Msg["TEXT_CREATE_JOIN_ITEM_TITLE_ITEM"] = Blockly2.Msg["VARIABLES_DEFAULT_NAME"];
+    Blockly2.Msg["COLOUR_HUE"] = "20";
+    Blockly2.Msg["LISTS_HUE"] = "260";
+    Blockly2.Msg["LOGIC_HUE"] = "210";
+    Blockly2.Msg["LOOPS_HUE"] = "120";
+    Blockly2.Msg["MATH_HUE"] = "230";
+    Blockly2.Msg["PROCEDURES_HUE"] = "290";
+    Blockly2.Msg["TEXTS_HUE"] = "160";
+    Blockly2.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
+    Blockly2.Msg["VARIABLES_HUE"] = "330";
+    return Blockly2.Msg;
+  });
+});
 // node_modules/blockly/index.mjs
 var import__ = __toESM(require_blockly(), 1);
 var {
@@ -24664,58 +25126,92 @@ class ConstantManager {
 var messageManager = new ConstantManager;
 var tooltipManager = new ConstantManager;
 
-// src/localization/en-us/message.ts
-var CALCIUM_CALL_ARG_MESSAGE = "Add argument";
-var CALCIUM_DEF_PARAM_MESSAGE = "Parameter %1";
-var CALCIUM_LIST_ITEM_MESSAGE = "List item";
-var CALCIUM_PRINT_ARG_MESSAGE = "Add argument";
+// src/localization/ja-jp/message.ts
+var CALCIUM_CALL_ARG_MESSAGE = "引数を追加";
+var CALCIUM_DEF_PARAM_MESSAGE = "引数 %1";
+var CALCIUM_LIST_ITEM_MESSAGE = "リストの要素";
+var CALCIUM_PRINT_ARG_MESSAGE = "引数を追加";
+var PSEUDO_CALL_ARG_MESSAGE = "引数を追加";
+var PSEUDO_LIST_ITEM_MESSAGE = "リストの要素";
+var PSEUDO_PRINT_ARG_MESSAGE = "引数を追加";
 var messages = {
   CALCIUM_CALL_ARG_MESSAGE,
   CALCIUM_DEF_PARAM_MESSAGE,
   CALCIUM_LIST_ITEM_MESSAGE,
-  CALCIUM_PRINT_ARG_MESSAGE
+  CALCIUM_PRINT_ARG_MESSAGE,
+  PSEUDO_CALL_ARG_MESSAGE,
+  PSEUDO_LIST_ITEM_MESSAGE,
+  PSEUDO_PRINT_ARG_MESSAGE
 };
 messageManager.addValues(messages);
 
-// src/localization/en-us/tooltip.ts
-var CALCIUM_ARITHMETIC_TOOLTIP = "Perform arithmetic operations or string concatenation on numbers and strings.";
-var CALCIUM_ASSIGNMENT_TOOLTIP = "Assign a value to a variable.";
-var CALCIUM_ATTRIBUTE_TOOLTIP = "Access an attribute of an object.";
-var CALCIUM_BOOLEAN_TOOLTIP = "Represents a boolean value.";
-var CALCIUM_BREAK_CONTINUE_TOOLTIP = "Exit the loop or skip to the next iteration.";
-var CALCIUM_CALL_ARG_CONTAINER_TOOLTIP = "Create arguments.";
-var CALCIUM_CALL_ARG_TOOLTIP = "Add an argument to a function.";
-var CALCIUM_CALL_TOOLTIP = "Call a function or method.";
-var CALCIUM_CLASS_TOOLTIP = "Define a class.";
-var CALCIUM_COMMA_TOOLTIP = "Expand multiple elements.";
-var CALCIUM_COMPOUND_ASSIGNMENT_TOOLTIP = "Assign a computed value to a variable.";
-var CALCIUM_DEF_TOOLTIP = "Define a function.";
-var CALCIUM_DEF_METHOD_TOOLTIP = "Define a method.";
-var CALCIUM_DEF_PARAM_TOOLTIP = "A parameter that a function or method accepts.";
-var CALCIUM_DICT_TOOLTIP = "Create a dictionary.";
-var CALCIUM_EXPR_STMT_TOOLTIP = "Use a function call expression.";
-var CALCIUM_FOR_TOOLTIP = "Iterate over elements of a list or dictionary.";
-var CALCIUM_IF_TOOLTIP = "Block executed when the condition is true.";
-var CALCIUM_IF_CONTAINER_TOOLTIP = "Block executed when the condition is true.";
-var CALCIUM_IF_ELIF_TOOLTIP = "Block executed when the previous condition is false and the current condition is true.";
-var CALCIUM_IF_ELSE_TOOLTIP = "Block executed last when all conditions are false.";
-var CALCIUM_IMPORT_TOOLTIP = "Make a Python module available for use.";
-var CALCIUM_KWARG_TOOLTIP = "A keyword argument passed to a function.";
-var CALCIUM_LIST_TOOLTIP = "Create a list.";
-var CALCIUM_LIST_ITEM_TOOLTIP = "Add an item to the list.";
-var CALCIUM_LOGICAL_TOOLTIP = "Perform a logical operation.";
-var CALCIUM_NONE_TOOLTIP = "Represents the absence of a value.";
-var CALCIUM_NOT_TOOLTIP = "Represents negation.";
-var CALCIUM_NUMBER_TOOLTIP = "Represents a number.";
-var CALCIUM_PRINT_ARG_TOOLTIP = "Add a value to print.";
-var CALCIUM_PRINT_TOOLTIP = "Display the specified values.";
-var CALCIUM_RELATIONAL_TOOLTIP = "Compare values.";
-var CALCIUM_RETURN_TOOLTIP = "Exit a function.";
-var CALCIUM_SLICE_TOOLTIP = "Extract a portion of a list or string.";
-var CALCIUM_STR_TOOLTIP = "Represents a string.";
-var CALCIUM_SUBSCRIPT_TOOLTIP = "Access an element of a list or dictionary.";
-var CALCIUM_VARIABLE_TOOLTIP = "Represents a variable name.";
-var CALCIUM_WHILE_TOOLTIP = "Repeat while the condition is true.";
+// src/localization/ja-jp/tooltip.ts
+var CALCIUM_ARITHMETIC_TOOLTIP = "数値や文字列に対して、四則演算や文字列の結合を行います。";
+var CALCIUM_ASSIGNMENT_TOOLTIP = "変数に値を代入します。";
+var CALCIUM_ATTRIBUTE_TOOLTIP = "オブジェクトの属性を取り出します。";
+var CALCIUM_BOOLEAN_TOOLTIP = "真偽値を表します。";
+var CALCIUM_BREAK_CONTINUE_TOOLTIP = "ループを終了するか、次のループに進みます。";
+var CALCIUM_CALL_ARG_CONTAINER_TOOLTIP = "引数を作成します。";
+var CALCIUM_CALL_ARG_TOOLTIP = "関数の引数を追加します。";
+var CALCIUM_CALL_TOOLTIP = "関数やメソッドを呼び出します。";
+var CALCIUM_CLASS_TOOLTIP = "クラスを定義します。";
+var CALCIUM_COMMA_TOOLTIP = "複数の要素を展開します。";
+var CALCIUM_COMPOUND_ASSIGNMENT_TOOLTIP = "変数に計算した値を代入します。";
+var CALCIUM_DEF_TOOLTIP = "関数を定義します。";
+var CALCIUM_DEF_METHOD_TOOLTIP = "メソッドを定義します。";
+var CALCIUM_DEF_PARAM_TOOLTIP = "関数やメソッドが受け取る引数です。";
+var CALCIUM_DICT_TOOLTIP = "辞書を作成します。";
+var CALCIUM_EXPR_STMT_TOOLTIP = "関数の呼び出し式を使います。";
+var CALCIUM_FOR_TOOLTIP = "リストや辞書の要素を取り出しながら、繰り返します。";
+var CALCIUM_IF_TOOLTIP = "条件が真の場合に実行されるブロックです。";
+var CALCIUM_IF_CONTAINER_TOOLTIP = "条件が真の場合に実行されるブロックです。";
+var CALCIUM_IF_ELIF_TOOLTIP = "前の条件が偽、かつ条件が真の場合に実行されるブロックです。";
+var CALCIUM_IF_ELSE_TOOLTIP = "条件が全て偽の場合、最後に実行されるブロックです。";
+var CALCIUM_IMPORT_TOOLTIP = "Python のモジュールを使えるようにします。";
+var CALCIUM_KWARG_TOOLTIP = "関数に渡すキーワード引数です。";
+var CALCIUM_LIST_TOOLTIP = "リストを作成します。";
+var CALCIUM_LIST_ITEM_TOOLTIP = "リストの要素を追加します。";
+var CALCIUM_LOGICAL_TOOLTIP = "論理演算を行います。";
+var CALCIUM_NONE_TOOLTIP = "値がないことを表します。";
+var CALCIUM_NOT_TOOLTIP = "否定を表します。";
+var CALCIUM_NUMBER_TOOLTIP = "数値を表します。";
+var CALCIUM_PRINT_ARG_TOOLTIP = "表示する値を追加します。";
+var CALCIUM_PRINT_TOOLTIP = "指定した値を表示します。";
+var CALCIUM_RELATIONAL_TOOLTIP = "値を比較します。";
+var CALCIUM_RETURN_TOOLTIP = "関数を終了します。";
+var CALCIUM_SLICE_TOOLTIP = "リストや文字列の一部を抽出します。";
+var CALCIUM_STR_TOOLTIP = "文字列を表します。";
+var CALCIUM_SUBSCRIPT_TOOLTIP = "リストや辞書の要素を取り出します。";
+var CALCIUM_VARIABLE_TOOLTIP = "変数の名前を表します。";
+var CALCIUM_WHILE_TOOLTIP = "条件が真の間、繰り返し実行します。";
+var PSEUDO_ARITHMETIC_TOOLTIP = "数値や文字列に対して、四則演算や文字列の結合を行います。";
+var PSEUDO_ARRAY_TOOLTIP = "配列の要素を1つだけ指定します。";
+var PSEUDO_ARRAY_SLICE_TOOLTIP = "配列の範囲を決めて、要素を指定します。";
+var PSEUDO_ASSIGN_ARRAY_CONTAINER_TOOLTIP = "配列の要素を追加できます。";
+var PSEUDO_ASSIGN_ARRAY_ITEM_TOOLTIP = "要素を追加して、配列の大きさを変えます。";
+var PSEUDO_ASSIGN_ARRAY_TOOLTIP = "新しい配列を代入します。";
+var PSEUDO_ASSIGN_ZERO_TOOLTIP = "配列の要素をすべて0に書き換えます。";
+var PSEUDO_ASSIGNMENT_TOOLTIP = "変数や配列の中身を変更します。";
+var PSEUDO_FOR_DECREMENT_TOOLTIP = "変数の値を減らしながら、繰り返します。";
+var PSEUDO_FOR_INCREMENT_TOOLTIP = "変数の値を増やしながら、繰り返します。";
+var PSEUDO_IF_CONTAINER_TOOLTIP = "条件に応じて、処理を分岐します。";
+var PSEUDO_IF_ELIF_TOOLTIP = "条件に応じて、処理を分岐します。";
+var PSEUDO_IF_ELSE_TOOLTIP = "条件に応じて、処理を分岐します。";
+var PSEUDO_IF_TOOLTIP = "条件に応じて、処理を分岐します。";
+var PSEUDO_INPUT_INT_TOOLTIP = "整数を入力から受け取って、変数に代入します。";
+var PSEUDO_INPUT_STR_TOOLTIP = "文字列を入力から受け取って、変数に代入します。";
+var PSEUDO_INT_TOOLTIP = "整数に変換します。";
+var PSEUDO_LOGICAL_TOOLTIP = "2つの条件を論理演算します。";
+var PSEUDO_NOT_TOOLTIP = "条件を否定して、反転させます。";
+var PSEUDO_NUMBER_TOOLTIP = "数値を表します。";
+var PSEUDO_PRINT_ARG_CONTAINER_TOOLTIP = "表示する値を追加できます。";
+var PSEUDO_PRINT_ARG_TOOLTIP = "表示する値を追加します。";
+var PSEUDO_PRINT_TOOLTIP = "値を表示します。";
+var PSEUDO_RANDOM_TOOLTIP = "0 以上 1 未満のランダムな小数を返します。";
+var PSEUDO_RELATIONAL_TOOLTIP = "2つの値を比較します。";
+var PSEUDO_STR_TOOLTIP = "文字列を表します。";
+var PSEUDO_VARIABLE_TOOLTIP = "変数の名前を表します。";
+var PSEUDO_WHILE_TOOLTIP = "条件を満たす間、繰り返します。";
 var tooltips = {
   CALCIUM_ARITHMETIC_TOOLTIP,
   CALCIUM_ASSIGNMENT_TOOLTIP,
@@ -24754,13 +25250,41 @@ var tooltips = {
   CALCIUM_STR_TOOLTIP,
   CALCIUM_SUBSCRIPT_TOOLTIP,
   CALCIUM_VARIABLE_TOOLTIP,
-  CALCIUM_WHILE_TOOLTIP
+  CALCIUM_WHILE_TOOLTIP,
+  PSEUDO_ARITHMETIC_TOOLTIP,
+  PSEUDO_ARRAY_TOOLTIP,
+  PSEUDO_ARRAY_SLICE_TOOLTIP,
+  PSEUDO_ASSIGN_ARRAY_CONTAINER_TOOLTIP,
+  PSEUDO_ASSIGN_ARRAY_ITEM_TOOLTIP,
+  PSEUDO_ASSIGN_ARRAY_TOOLTIP,
+  PSEUDO_ASSIGN_ZERO_TOOLTIP,
+  PSEUDO_ASSIGNMENT_TOOLTIP,
+  PSEUDO_FOR_DECREMENT_TOOLTIP,
+  PSEUDO_FOR_INCREMENT_TOOLTIP,
+  PSEUDO_IF_CONTAINER_TOOLTIP,
+  PSEUDO_IF_ELIF_TOOLTIP,
+  PSEUDO_IF_ELSE_TOOLTIP,
+  PSEUDO_IF_TOOLTIP,
+  PSEUDO_INPUT_INT_TOOLTIP,
+  PSEUDO_INPUT_STR_TOOLTIP,
+  PSEUDO_INT_TOOLTIP,
+  PSEUDO_LOGICAL_TOOLTIP,
+  PSEUDO_NOT_TOOLTIP,
+  PSEUDO_NUMBER_TOOLTIP,
+  PSEUDO_PRINT_ARG_CONTAINER_TOOLTIP,
+  PSEUDO_PRINT_ARG_TOOLTIP,
+  PSEUDO_PRINT_TOOLTIP,
+  PSEUDO_RANDOM_TOOLTIP,
+  PSEUDO_RELATIONAL_TOOLTIP,
+  PSEUDO_STR_TOOLTIP,
+  PSEUDO_VARIABLE_TOOLTIP,
+  PSEUDO_WHILE_TOOLTIP
 };
 tooltipManager.addValues(tooltips);
 
-// node_modules/blockly/msg/en.mjs
-var exports_en = {};
-__export(exports_en, {
+// node_modules/blockly/msg/ja.mjs
+var exports_ja = {};
+__export(exports_ja, {
   WORKSPACE_COMMENT_DEFAULT_TEXT: () => WORKSPACE_COMMENT_DEFAULT_TEXT,
   WORKSPACE_ARIA_LABEL: () => WORKSPACE_ARIA_LABEL,
   WINDOWS: () => WINDOWS,
@@ -25205,7 +25729,7 @@ __export(exports_en, {
   ALT_KEY: () => ALT_KEY,
   ADD_COMMENT: () => ADD_COMMENT
 });
-var import_en = __toESM(require_en(), 1);
+var import_ja = __toESM(require_ja(), 1);
 var {
   LOGIC_HUE,
   LOOPS_HUE,
@@ -25650,7 +26174,1184 @@ var {
   KEYBOARD_NAV_CONSTRAINED_MOVE_HINT,
   KEYBOARD_NAV_COPIED_HINT,
   KEYBOARD_NAV_CUT_HINT
-} = import_en.default;
+} = import_ja.default;
+
+// src/block/pseudo/arithmetic.ts
+var PSEUDO_ARITHMETIC_NAME = "pseudo_arithmetic";
+var pseudoArithmetic = {
+  type: PSEUDO_ARITHMETIC_NAME,
+  message0: "%1 %2 %3",
+  args0: [
+    {
+      type: "input_value",
+      name: "LEFT",
+      check: [
+        "calcium_variable",
+        "calcium_attribute",
+        "calcium_subscript",
+        "calcium_call",
+        "calcium_arithmetic",
+        "Number",
+        "String"
+      ]
+    },
+    {
+      type: "field_dropdown",
+      name: "OP",
+      options: [
+        ["+", "+"],
+        ["-", "-"],
+        ["*", "*"],
+        ["/", "/"],
+        ["÷", "//"],
+        ["%", "%"],
+        ["**", "**"]
+      ]
+    },
+    {
+      type: "input_value",
+      name: "RIGHT",
+      check: [
+        "calcium_variable",
+        "calcium_attribute",
+        "calcium_subscript",
+        "calcium_call",
+        "calcium_arithmetic",
+        "Number",
+        "String"
+      ]
+    }
+  ],
+  inputsInline: true,
+  output: "calcium_arithmetic",
+  colour: 210,
+  tooltip: tooltipManager.getValue("PSEUDO_ARITHMETIC_TOOLTIP"),
+  helpUrl: ""
+};
+defineBlocksWithJsonArray([pseudoArithmetic]);
+
+// src/block/pseudo/array.ts
+var PSEUDO_ARRAY_NAME = "pseudo_array";
+var pseudoArray = {
+  type: PSEUDO_ARRAY_NAME,
+  message0: "%1 [ %2 ]",
+  args0: [
+    {
+      type: "input_value",
+      name: "REF",
+      check: ["calcium_variable"]
+    },
+    {
+      type: "input_value",
+      name: "SUB",
+      check: ["Number", "calcium_variable", "calcium_arithmetic"]
+    }
+  ],
+  inputsInline: true,
+  output: "calcium_subscript",
+  colour: 210,
+  tooltip: tooltipManager.getValue("PSEUDO_ARRAY_TOOLTIP"),
+  helpUrl: ""
+};
+defineBlocksWithJsonArray([pseudoArray]);
+
+// src/block/pseudo/array-slice.ts
+var PSEUDO_ARRAY_SLICE_NAME = "pseudo_array_slice";
+var pseudoArraySlice = {
+  type: PSEUDO_ARRAY_SLICE_NAME,
+  message0: "%1 [ %2 , %3 ]",
+  args0: [
+    {
+      type: "input_value",
+      name: "REF",
+      check: ["calcium_variable"]
+    },
+    {
+      type: "input_value",
+      name: "START",
+      check: ["Number", "calcium_variable", "calcium_arithmetic"]
+    },
+    {
+      type: "input_value",
+      name: "END",
+      check: ["Number", "calcium_variable", "calcium_arithmetic"]
+    }
+  ],
+  inputsInline: true,
+  output: "calcium_subscript",
+  colour: 210,
+  tooltip: tooltipManager.getValue("PSEUDO_ARRAY_SLICE_TOOLTIP"),
+  helpUrl: ""
+};
+defineBlocksWithJsonArray([pseudoArraySlice]);
+
+// src/block/type-check/all-types.ts
+var allTypesForCheck = [
+  "calcium_variable",
+  "calcium_attribute",
+  "calcium_subscript",
+  "calcium_call",
+  "calcium_arithmetic",
+  "Number",
+  "String",
+  "Array",
+  "calcium_dict",
+  "calcium_none",
+  "calcium_not",
+  "Boolean"
+];
+
+// src/block/pseudo/assign-array.ts
+var PSEUDO_ASSIGN_ARRAY_NAME = "pseudo_assign_array";
+var PSEUDO_ASSIGN_ARRAY_CONTAINER_NAME = "pseudo_assign_array_container";
+var PSEUDO_ASSIGN_ARRAY_ITEM_NAME = "pseudo_assign_array_item";
+var PSEUDO_ASSIGN_ARRAY_MUTATOR = "pseudo_assign_array_mutator";
+var pseudoAssignArrayItem = {
+  type: PSEUDO_ASSIGN_ARRAY_ITEM_NAME,
+  message0: "要素を追加",
+  inputsInline: true,
+  previousStatement: null,
+  nextStatement: null,
+  colour: 330,
+  tooltip: tooltipManager.getValue("PSEUDO_ASSIGN_ARRAY_ITEM_TOOLTIP"),
+  helpUrl: ""
+};
+var pseudoAssignArrayContainer = {
+  type: PSEUDO_ASSIGN_ARRAY_CONTAINER_NAME,
+  message0: "%1",
+  args0: [
+    {
+      type: "input_statement",
+      name: "ITEMS"
+    }
+  ],
+  colour: 330,
+  tooltip: tooltipManager.getValue("PSEUDO_ASSIGN_ARRAY_CONTAINER_TOOLTIP"),
+  helpUrl: ""
+};
+defineBlocksWithJsonArray([
+  pseudoAssignArrayItem,
+  pseudoAssignArrayContainer
+]);
+Extensions.registerMutator(PSEUDO_ASSIGN_ARRAY_MUTATOR, {
+  saveExtraState: function() {
+    return {
+      itemCount: this.itemCount_
+    };
+  },
+  loadExtraState: function(state) {
+    this.itemCount_ = state.itemCount;
+    this.updateShape_();
+  },
+  compose: function(containerBlock) {
+    let itemBlock = containerBlock.getInputTargetBlock("ITEMS");
+    const connections = [];
+    while (itemBlock && !itemBlock.isInsertionMarker()) {
+      connections.push(itemBlock.valueConnection_);
+      itemBlock = itemBlock.nextConnection && itemBlock.nextConnection.targetBlock();
+    }
+    for (var i = 0;i < this.itemCount_; i++) {
+      var connection = this.getInput("ITEM" + i).connection.targetConnection;
+      if (connection && connections.indexOf(connection) == -1) {
+        connection.disconnect();
+      }
+    }
+    this.itemCount_ = connections.length;
+    this.updateShape_();
+    for (let i2 = 0;i2 < this.itemCount_; ++i2) {
+      connections[i2]?.reconnect(this, "ITEM" + i2);
+    }
+  },
+  decompose: function(workspace) {
+    const containerBlock = workspace.newBlock(PSEUDO_ASSIGN_ARRAY_CONTAINER_NAME);
+    containerBlock.initSvg();
+    let connection = containerBlock.getInput("ITEMS")?.connection;
+    for (let i = 0;i < this.itemCount_; i++) {
+      const itemBlock = workspace.newBlock(PSEUDO_ASSIGN_ARRAY_ITEM_NAME);
+      itemBlock.initSvg();
+      connection?.connect(itemBlock.previousConnection);
+      connection = itemBlock.nextConnection;
+    }
+    return containerBlock;
+  },
+  saveConnections: function(containerBlock) {
+    let itemBlock = containerBlock.getInputTargetBlock("ITEMS");
+    let i = 0;
+    while (itemBlock) {
+      const input = this.getInput("ITEM" + i);
+      itemBlock.valueConnection_ = input && input.connection.targetConnection;
+      i++;
+      itemBlock = itemBlock.nextConnection && itemBlock.nextConnection.targetBlock();
+    }
+  },
+  updateShape_: function() {
+    if (this.getInput("]")) {
+      this.removeInput("]");
+    }
+    let i;
+    for (i = 0;i < this.itemCount_; i++) {
+      if (!this.getInput("ITEM" + i)) {
+        const input = this.appendValueInput("ITEM" + i);
+        input.init();
+        input.setCheck(allTypesForCheck);
+        if (i !== 0) {
+          input.appendField(",");
+        }
+      }
+    }
+    this.appendDummyInput("]").appendField("]");
+    while (this.getInput("ITEM" + i)) {
+      this.removeInput("ITEM" + i);
+      i++;
+    }
+  }
+}, undefined, [PSEUDO_ASSIGN_ARRAY_ITEM_NAME]);
+var pseudoAssignArray = {
+  [PSEUDO_ASSIGN_ARRAY_NAME]: {
+    init() {
+      this.jsonInit({
+        type: "pseudo_assign_array",
+        message0: "%1 = [",
+        args0: [
+          {
+            type: "input_value",
+            name: "REF",
+            check: ["calcium_variable"]
+          }
+        ],
+        inputsInline: true,
+        previousStatement: null,
+        nextStatement: null,
+        colour: 330,
+        tooltip: tooltipManager.getValue("PSEUDO_ASSIGN_ARRAY_TOOLTIP"),
+        helpUrl: "",
+        mutator: PSEUDO_ASSIGN_ARRAY_MUTATOR
+      });
+      this.itemCount_ = 5;
+      this.updateShape_();
+    }
+  }
+};
+common.defineBlocks(pseudoAssignArray);
+
+// src/block/pseudo/assign-zero.ts
+var PSEUDO_ASSIGN_ZERO_NAME = "pseudo_assign_zero";
+var pseudoAssignZero = {
+  type: PSEUDO_ASSIGN_ZERO_NAME,
+  message0: "%1 のすべての値を0にする",
+  args0: [
+    {
+      type: "input_value",
+      name: "REF",
+      check: ["calcium_variable"]
+    }
+  ],
+  inputsInline: true,
+  previousStatement: null,
+  nextStatement: null,
+  colour: 330,
+  tooltip: tooltipManager.getValue("PSEUDO_ASSIGN_ZERO_TOOLTIP"),
+  helpUrl: ""
+};
+defineBlocksWithJsonArray([pseudoAssignZero]);
+
+// src/block/pseudo/assignment.ts
+var PSEUDO_ASSIGNMENT_NAME = "pseudo_assignment";
+var pseudoAssignment = {
+  type: PSEUDO_ASSIGNMENT_NAME,
+  message0: "%1 = %2",
+  args0: [
+    {
+      type: "input_value",
+      name: "REF",
+      check: ["calcium_variable", "calcium_attribute", "calcium_subscript"]
+    },
+    {
+      type: "input_value",
+      name: "VALUE",
+      check: allTypesForCheck
+    }
+  ],
+  inputsInline: true,
+  previousStatement: null,
+  nextStatement: null,
+  colour: 330,
+  tooltip: tooltipManager.getValue("PSEUDO_ASSIGNMENT_TOOLTIP"),
+  helpUrl: ""
+};
+defineBlocksWithJsonArray([pseudoAssignment]);
+
+// src/block/pseudo/for-decrement.ts
+var PSEUDO_FOR_DECREMENT_NAME = "pseudo_for_decrement";
+var pseudoForDecrement = {
+  type: PSEUDO_FOR_DECREMENT_NAME,
+  message0: "%1 を %2 から %3 まで %4 ずつ減らしながら %5 繰り返す %6",
+  args0: [
+    {
+      type: "input_value",
+      name: "VAR",
+      check: ["calcium_variable"]
+    },
+    {
+      type: "input_value",
+      name: "START",
+      check: [
+        "Number",
+        "calcium_variable",
+        "calcium_attribute",
+        "calcium_subscript",
+        "calcium_arithmetic"
+      ]
+    },
+    {
+      type: "input_value",
+      name: "STOP",
+      check: [
+        "Number",
+        "calcium_variable",
+        "calcium_attribute",
+        "calcium_subscript",
+        "calcium_arithmetic"
+      ]
+    },
+    {
+      type: "input_value",
+      name: "STEP",
+      check: [
+        "Number",
+        "calcium_variable",
+        "calcium_attribute",
+        "calcium_subscript",
+        "calcium_arithmetic"
+      ]
+    },
+    {
+      type: "input_dummy"
+    },
+    {
+      type: "input_statement",
+      name: "STMTS"
+    }
+  ],
+  inputsInline: true,
+  previousStatement: null,
+  nextStatement: null,
+  colour: 330,
+  tooltip: tooltipManager.getValue("PSEUDO_FOR_DECREMENT_TOOLTIP"),
+  helpUrl: ""
+};
+common.defineBlocksWithJsonArray([pseudoForDecrement]);
+
+// src/block/pseudo/for-increment.ts
+var PSEUDO_FOR_INCREMENT_NAME = "pseudo_for_increment";
+var pseudoForIncrement = {
+  type: PSEUDO_FOR_INCREMENT_NAME,
+  message0: "%1 を %2 から %3 まで %4 ずつ増やしながら %5 繰り返す %6",
+  args0: [
+    {
+      type: "input_value",
+      name: "VAR",
+      check: ["calcium_variable"]
+    },
+    {
+      type: "input_value",
+      name: "START",
+      check: [
+        "Number",
+        "calcium_variable",
+        "calcium_attribute",
+        "calcium_subscript",
+        "calcium_arithmetic"
+      ]
+    },
+    {
+      type: "input_value",
+      name: "STOP",
+      check: [
+        "Number",
+        "calcium_variable",
+        "calcium_attribute",
+        "calcium_subscript",
+        "calcium_arithmetic"
+      ]
+    },
+    {
+      type: "input_value",
+      name: "STEP",
+      check: [
+        "Number",
+        "calcium_variable",
+        "calcium_attribute",
+        "calcium_subscript",
+        "calcium_arithmetic"
+      ]
+    },
+    {
+      type: "input_dummy"
+    },
+    {
+      type: "input_statement",
+      name: "STMTS"
+    }
+  ],
+  inputsInline: true,
+  previousStatement: null,
+  nextStatement: null,
+  colour: 330,
+  tooltip: tooltipManager.getValue("PSEUDO_FOR_INCREMENT_TOOLTIP"),
+  helpUrl: ""
+};
+defineBlocksWithJsonArray([pseudoForIncrement]);
+
+// src/block/pseudo/if.ts
+var PSEUDO_IF_NAME = "pseudo_if";
+var PSEUDO_IF_CONTAINER_NAME = "pseudo_if_container";
+var PSEUDO_IF_ELIF_NAME = "pseudo_if_elif";
+var PSEUDO_IF_ELSE_NAME = "pseudo_if_else";
+var PSEUDO_IF_MUTATOR_NAME = "pseudo_if_mutator";
+var pseudoIfMutatorMixin = {
+  saveExtraState() {
+    return {
+      elifCount: this.elifCount_,
+      elseCount: this.elseCount_
+    };
+  },
+  loadExtraState(state) {
+    this.elifCount_ = state.elifCount;
+    this.elseCount_ = state.elseCount;
+    this.rebuildShape_();
+  },
+  compose(containerBlock) {
+    let clauseBlock = containerBlock.nextConnection?.targetBlock();
+    this.elifCount_ = 0;
+    this.elseCount_ = 0;
+    const valueConnections = [null];
+    const statementConnections = [null];
+    let elseStatementConnection = null;
+    while (clauseBlock && !clauseBlock.isInsertionMarker()) {
+      switch (clauseBlock.type) {
+        case PSEUDO_IF_ELIF_NAME:
+          this.elifCount_++;
+          valueConnections.push(clauseBlock.valueConnection_);
+          statementConnections.push(clauseBlock.statementConnection_);
+          break;
+        case PSEUDO_IF_ELSE_NAME:
+          this.elseCount_++;
+          elseStatementConnection = clauseBlock.statementConnection_;
+          break;
+        default:
+          throw Error("Unknown block type." + clauseBlock.type);
+      }
+      clauseBlock = clauseBlock.nextConnection && clauseBlock.nextConnection.targetBlock();
+    }
+    this.updateShape_();
+    this.reconnectChildBlocks_(valueConnections, statementConnections, elseStatementConnection);
+  },
+  decompose(workspace) {
+    const containerBlock = workspace.newBlock(PSEUDO_IF_CONTAINER_NAME);
+    containerBlock.initSvg();
+    let connection = containerBlock.nextConnection;
+    for (let i = 1;i < this.elifCount_ + 1; ++i) {
+      const elifBlock = workspace.newBlock(PSEUDO_IF_ELIF_NAME);
+      elifBlock.initSvg();
+      connection.connect(elifBlock.previousConnection);
+      connection = elifBlock.nextConnection;
+    }
+    if (this.elseCount_) {
+      const elseBlock = workspace.newBlock(PSEUDO_IF_ELSE_NAME);
+      elseBlock.initSvg();
+      connection.connect(elseBlock.previousConnection);
+    }
+    return containerBlock;
+  },
+  rebuildShape_() {
+    const valueConnections = [];
+    const statementConnections = [];
+    let elseStatementConnection = null;
+    if (this.getInput("ELSE")) {
+      elseStatementConnection = this.getInput("ELSE").connection.targetConnection;
+    }
+    let i = 1;
+    let inputIf;
+    while (inputIf = this.getInput("IF" + i)) {
+      const inputDo = this.getInput("DO" + i);
+      valueConnections.push(inputIf.connection.targetConnection);
+      statementConnections.push(inputDo.connection.targetConnection);
+      i++;
+    }
+    this.updateShape_();
+    this.reconnectChildBlocks_(valueConnections, statementConnections, elseStatementConnection);
+  },
+  reconnectChildBlocks_(valueConnections, statementConnections, elseStatementConnection) {
+    for (let i = 1;i < this.elifCount_ + 1; ++i) {
+      valueConnections[i]?.reconnect(this, "IF" + i);
+      statementConnections[i]?.reconnect(this, "DO" + i);
+    }
+    elseStatementConnection?.reconnect(this, "ELSE");
+  },
+  saveConnections(containerBlock) {
+    let clauseBlock = containerBlock.nextConnection?.targetBlock();
+    let i = 1;
+    while (clauseBlock) {
+      switch (clauseBlock.type) {
+        case PSEUDO_IF_ELIF_NAME:
+          const inputIf = this.getInput("IF" + i);
+          const inputDo = this.getInput("DO" + i);
+          clauseBlock.valueConnection_ = inputIf && inputIf.connection.targetConnection;
+          clauseBlock.statementConnection_ = inputDo && inputDo.connection.targetConnection;
+          ++i;
+          break;
+        case PSEUDO_IF_ELSE_NAME:
+          const elseDo = this.getInput("ELSE");
+          clauseBlock.statementConnection_ = elseDo && elseDo.connection.targetConnection;
+          break;
+        default:
+          throw Error("Unknown block type.");
+      }
+      clauseBlock = clauseBlock.nextConnection && clauseBlock.nextConnection.targetBlock();
+    }
+  },
+  updateShape_() {
+    if (this.getInput("ELSE")) {
+      this.removeInput("ELSE");
+      this.removeInput("ELSE_LABEL");
+    }
+    let i = 1;
+    while (this.getInput("IF" + i)) {
+      this.removeInput("IF" + i);
+      this.removeInput("ELIF" + i);
+      this.removeInput("DO" + i);
+      ++i;
+    }
+    for (let i2 = 1;i2 < this.elifCount_ + 1; ++i2) {
+      this.appendValueInput("IF" + i2).setCheck([
+        "Boolean",
+        "calcium_variable",
+        "calcium_attribute",
+        "calcium_subscript",
+        "calcium_call",
+        "calcium_arithmetic"
+      ]).appendField("そうでなくもし");
+      this.appendDummyInput("ELIF" + i2).appendField("ならば:");
+      this.appendStatementInput("DO" + i2).appendField("");
+    }
+    if (this.elseCount_) {
+      this.appendDummyInput("ELSE_LABEL").appendField("そうでなければ:");
+      this.appendStatementInput("ELSE").appendField("");
+    }
+  }
+};
+Extensions.registerMutator(PSEUDO_IF_MUTATOR_NAME, pseudoIfMutatorMixin, undefined, [PSEUDO_IF_ELIF_NAME, PSEUDO_IF_ELSE_NAME]);
+var pseudoIfChildBlocks = [
+  {
+    type: PSEUDO_IF_CONTAINER_NAME,
+    message0: "もし",
+    nextStatement: null,
+    enableContextMenu: false,
+    colour: 330,
+    tooltip: tooltipManager.getValue("PSEUDO_IF_CONTAINER_TOOLTIP")
+  },
+  {
+    type: PSEUDO_IF_ELIF_NAME,
+    message0: "そうでなくもし",
+    previousStatement: null,
+    nextStatement: null,
+    enableContextMenu: false,
+    colour: 330,
+    tooltip: tooltipManager.getValue("PSEUDO_IF_ELIF_TOOLTIP")
+  },
+  {
+    type: PSEUDO_IF_ELSE_NAME,
+    message0: "そうでなければ",
+    previousStatement: null,
+    enableContextMenu: false,
+    colour: 330,
+    tooltip: tooltipManager.getValue("PSEUDO_IF_ELSE_TOOLTIP")
+  }
+];
+defineBlocksWithJsonArray(pseudoIfChildBlocks);
+var pseudoIfBlock = {
+  [PSEUDO_IF_NAME]: {
+    init() {
+      this.jsonInit({
+        type: PSEUDO_IF_NAME,
+        message0: "もし %1 ならば:",
+        args0: [
+          {
+            type: "input_value",
+            name: "IF0",
+            check: [
+              "Boolean",
+              "calcium_variable",
+              "calcium_attribute",
+              "calcium_subscript",
+              "calcium_call",
+              "calcium_arithmetic"
+            ]
+          }
+        ],
+        message1: "%1",
+        args1: [
+          {
+            type: "input_statement",
+            name: "DO0"
+          }
+        ],
+        previousStatement: null,
+        nextStatement: null,
+        colour: 330,
+        tooltip: tooltipManager.getValue("PSEUDO_IF_TOOLTIP"),
+        mutator: PSEUDO_IF_MUTATOR_NAME,
+        helpUrl: ""
+      });
+      this.elifCount_ = 0;
+      this.elseCount_ = 0;
+    }
+  }
+};
+common.defineBlocks(pseudoIfBlock);
+
+// src/block/pseudo/input-int.ts
+var PSEUDO_INPUT_INT_NAME = "pseudo_input_int";
+var pseudoInputInt = {
+  type: PSEUDO_INPUT_INT_NAME,
+  message0: "%1 =【外部からの入力（数）】",
+  args0: [
+    {
+      type: "input_value",
+      name: "REF",
+      check: ["calcium_variable"]
+    }
+  ],
+  inputsInline: true,
+  previousStatement: null,
+  nextStatement: null,
+  colour: 330,
+  tooltip: tooltipManager.getValue("PSEUDO_INPUT_INT_TOOLTIP"),
+  helpUrl: ""
+};
+defineBlocksWithJsonArray([pseudoInputInt]);
+
+// src/block/pseudo/input-str.ts
+var PSEUDO_INPUT_STR_NAME = "pseudo_input_str";
+var pseudoInputStr = {
+  type: PSEUDO_INPUT_STR_NAME,
+  message0: "%1 =【外部からの入力（文字列）】",
+  args0: [
+    {
+      type: "input_value",
+      name: "REF",
+      check: ["calcium_variable"]
+    }
+  ],
+  inputsInline: true,
+  previousStatement: null,
+  nextStatement: null,
+  colour: 330,
+  tooltip: tooltipManager.getValue("PSEUDO_INPUT_STR_TOOLTIP"),
+  helpUrl: ""
+};
+defineBlocksWithJsonArray([pseudoInputStr]);
+
+// src/block/pseudo/int.ts
+var PSEUDO_INT_NAME = "pseudo_int";
+var pseudoInt = {
+  type: PSEUDO_INT_NAME,
+  message0: "整数 ( %1 )",
+  args0: [
+    {
+      type: "input_value",
+      name: "INT",
+      check: ["calcium_variable", "calcium_subscript", "calcium_arithmetic"]
+    }
+  ],
+  inputsInline: true,
+  output: "calcium_call",
+  colour: 210,
+  tooltip: tooltipManager.getValue("PSEUDO_INT_TOOLTIP"),
+  helpUrl: ""
+};
+defineBlocksWithJsonArray([pseudoInt]);
+
+// src/block/pseudo/len.ts
+var PSEUDO_LEN_NAME = "pseudo_len";
+var pseudoLen = {
+  type: PSEUDO_LEN_NAME,
+  message0: "要素数 ( %1 )",
+  args0: [
+    {
+      type: "input_value",
+      name: "ARRAY",
+      check: ["calcium_variable"]
+    }
+  ],
+  inputsInline: true,
+  output: "calcium_call",
+  colour: 210,
+  tooltip: tooltipManager.getValue("PSEUDO_LEN_TOOLTIP"),
+  helpUrl: ""
+};
+defineBlocksWithJsonArray([pseudoLen]);
+
+// src/block/pseudo/logical.ts
+var PSEUDO_LOGICAL_NAME = "pseudo_logical";
+var pseudoLogical = {
+  type: PSEUDO_LOGICAL_NAME,
+  message0: "%1 %2 %3",
+  args0: [
+    {
+      type: "input_value",
+      name: "LEFT",
+      check: [
+        "Boolean",
+        "calcium_variable",
+        "calcium_attribute",
+        "calcium_call",
+        "calcium_subscript",
+        "calcium_arithmetic"
+      ]
+    },
+    {
+      type: "field_dropdown",
+      name: "OP",
+      options: [
+        ["and", "and"],
+        ["or", "or"]
+      ]
+    },
+    {
+      type: "input_value",
+      name: "RIGHT",
+      check: [
+        "Boolean",
+        "calcium_variable",
+        "calcium_attribute",
+        "calcium_call",
+        "calcium_subscript",
+        "calcium_arithmetic"
+      ]
+    }
+  ],
+  inputsInline: true,
+  output: "Boolean",
+  colour: 210,
+  tooltip: tooltipManager.getValue("PSEUDO_LOGICAL_TOOLTIP"),
+  helpUrl: ""
+};
+defineBlocksWithJsonArray([pseudoLogical]);
+
+// src/block/pseudo/not.ts
+var PSEUDO_NOT_NAME = "pseudo_not";
+var pseudoNot = {
+  type: PSEUDO_NOT_NAME,
+  message0: "not %1",
+  args0: [
+    {
+      type: "input_value",
+      name: "VALUE",
+      check: [
+        "calcium_variable",
+        "calcium_attribute",
+        "calcium_subscript",
+        "calcium_call",
+        "Boolean"
+      ]
+    }
+  ],
+  inputsInline: true,
+  output: "Boolean",
+  colour: 210,
+  tooltip: tooltipManager.getValue("PSEUDO_NOT_TOOLTIP"),
+  helpUrl: ""
+};
+defineBlocksWithJsonArray([pseudoNot]);
+
+// src/util/parse-number.ts
+function parseNumber(str) {
+  let resultStr = "";
+  for (let i = 0;i < str.length; ++i) {
+    resultStr += parseFullWidthNumber(str[i]);
+  }
+  if (!/^[-+]?((0[xX][0-9a-fA-F_]+)|(0[bB][01_]+)|(0[0-7_]+)|([0-9_]+(\.[0-9_]*)?([eE][-+]?[0-9_]+)?([jJ])?)|(\.[0-9_]+([eE][-+]?[0-9_]+)?([jJ])?))$/.test(resultStr)) {
+    throw new Error("invalid character in number");
+  }
+  return parseBasedOnPrefix(resultStr);
+}
+function parseBasedOnPrefix(str) {
+  if ((str.startsWith("0x") || str.startsWith("0X") || str.startsWith("0b") || str.startsWith("0B") || str.startsWith("0") && !str.includes(".")) && (str.endsWith("j") || str.endsWith("J"))) {
+    throw new Error("complex number with non-decimal base is not allowed");
+  }
+  if (str.endsWith("j") || str.endsWith("J")) {
+    return parseComplexNumber(str);
+  } else if (str.startsWith("0x") || str.startsWith("0X")) {
+    return parseWithRadix(str, 16, "hexadecimal");
+  } else if (str.startsWith("0b") || str.startsWith("0B")) {
+    return str.substring(0, 2) + parseWithRadix(str.substring(2), 2, "binary");
+  } else if (str.startsWith("0") && !str.includes(".")) {
+    return parseWithRadix(str, 8, "octal");
+  } else if (str.includes(".") || str.includes("e") || str.includes("E")) {
+    return parseFloatOrThrow(str, "float");
+  } else {
+    return parseWithRadix(str, 10, "decimal");
+  }
+}
+function parseWithRadix(str, radix, type) {
+  const num = parseInt(str, radix);
+  if (isNaN(num)) {
+    throw new Error(`cannot parse as ${type}`);
+  }
+  return str;
+}
+function parseFloatOrThrow(str, type) {
+  const num = parseFloat(str);
+  if (isNaN(num)) {
+    throw new Error(`cannot parse as ${type}`);
+  }
+  return str;
+}
+function parseComplexNumber(str) {
+  const realPart = str.slice(0, -1);
+  const num = parseFloat(realPart);
+  if (isNaN(num)) {
+    throw new Error("cannot parse as complex number");
+  }
+  return str;
+}
+function parseFullWidthNumber(char) {
+  switch (char) {
+    case "１":
+      return "1";
+    case "２":
+      return "2";
+    case "３":
+      return "3";
+    case "４":
+      return "4";
+    case "５":
+      return "5";
+    case "６":
+      return "6";
+    case "７":
+      return "7";
+    case "８":
+      return "8";
+    case "９":
+      return "9";
+    case "０":
+      return "0";
+    default:
+      return char;
+  }
+}
+
+// src/block/pseudo/number.ts
+var PSEUDO_NUMBER_NAME = "pseudo_number";
+common.defineBlocks({
+  [PSEUDO_NUMBER_NAME]: {
+    init() {
+      const dummyInput = this.appendDummyInput();
+      dummyInput.appendField("数値 ");
+      dummyInput.appendField(new FieldTextInput("0", function(newValue) {
+        try {
+          const parsedNum = parseNumber(newValue);
+          return parsedNum;
+        } catch {
+          return null;
+        }
+      }), "NUM");
+      this.setInputsInline(true);
+      this.setOutput(true, "Number");
+      this.setColour(210);
+      this.setTooltip(tooltipManager.getValue("PSEUDO_NUMBER_TOOLTIP"));
+    }
+  }
+});
+
+// src/block/pseudo/print.ts
+var PSEUDO_PRINT_NAME = "pseudo_print";
+var PSEUDO_PRINT_ARG_NAME = "pseudo_print_arg";
+var PSEUDO_PRINT_MUTATOR_NAME = "pseudo_print_mutator";
+var pseudoPrintArgsContainerName = "pseudo_print_args_container";
+var pseudoPrintMutatorMixin = {
+  compose(containerBlock) {
+    let itemBlock = containerBlock.getInputTargetBlock("ARGS");
+    const connections = [];
+    while (itemBlock) {
+      connections.push(itemBlock.valueConnection_);
+      itemBlock = itemBlock.nextConnection && itemBlock.nextConnection.targetBlock();
+    }
+    for (let i = 0;i < this.countOfArguments; ++i) {
+      const connection = this.getInput("ARG" + i).connection.targetConnection;
+      if (connection && connections.indexOf(connection) === -1) {
+        connection.disconnect();
+      }
+    }
+    this.countOfArguments = connections.length;
+    this.updateShape();
+    for (let i = 0;i < this.countOfArguments; ++i) {
+      connections[i]?.reconnect(this, "ARG" + i);
+    }
+  },
+  decompose(workspace) {
+    const containerBlock = workspace.newBlock(pseudoPrintArgsContainerName);
+    containerBlock.initSvg();
+    let connection = containerBlock.getInput("ARGS")?.connection;
+    for (let i = 0;i < this.countOfArguments; ++i) {
+      const itemBlock = workspace.newBlock(PSEUDO_PRINT_ARG_NAME);
+      itemBlock.initSvg();
+      connection?.connect(itemBlock.previousConnection);
+      connection = itemBlock.nextConnection;
+    }
+    return containerBlock;
+  },
+  saveExtraState() {
+    return {
+      countOfArguments: this.countOfArguments
+    };
+  },
+  loadExtraState(state) {
+    this.countOfArguments = state.countOfArguments;
+    this.updateShape();
+  },
+  updateShape() {
+    if (this.getInput(")")) {
+      this.removeInput(")");
+    }
+    let i = 0;
+    for (;i < this.countOfArguments; ++i) {
+      if (!this.getInput("ARG" + i)) {
+        const input = this.appendValueInput("ARG" + i);
+        input.init();
+        input.setCheck([...allTypesForCheck, "calcium_kwarg"]);
+        if (i !== 0) {
+          input.appendField(",");
+        }
+      }
+    }
+    this.appendDummyInput(")").appendField(")");
+    while (this.getInput("ARG" + i)) {
+      this.removeInput("ARG" + i);
+      ++i;
+    }
+  },
+  saveConnections(containerBlock) {
+    let itemBlock = containerBlock.getInputTargetBlock("ARGS");
+    let i = 0;
+    while (itemBlock) {
+      const input = this.getInput("ARG" + i);
+      itemBlock.valueConnection_ = input && input.connection.targetConnection;
+      ++i;
+      itemBlock = itemBlock.nextConnection && itemBlock.nextConnection.targetBlock();
+    }
+  }
+};
+Extensions.registerMutator(PSEUDO_PRINT_MUTATOR_NAME, pseudoPrintMutatorMixin, undefined, [PSEUDO_PRINT_ARG_NAME]);
+var pseudoPrintArgBlocks = [
+  {
+    type: PSEUDO_PRINT_ARG_NAME,
+    message0: "引数を追加",
+    inputsInline: true,
+    previousStatement: null,
+    nextStatement: null,
+    colour: 330,
+    tooltip: tooltipManager.getValue("PSEUDO_PRINT_ARG_TOOLTIP"),
+    helpUrl: ""
+  },
+  {
+    type: pseudoPrintArgsContainerName,
+    message0: "%1",
+    args0: [
+      {
+        type: "input_statement",
+        name: "ARGS"
+      }
+    ],
+    colour: 330,
+    tooltip: tooltipManager.getValue("PSEUDO_PRINT_ARG_CONTAINER_TOOLTIP"),
+    helpUrl: ""
+  }
+];
+defineBlocksWithJsonArray(pseudoPrintArgBlocks);
+var pseudoPrintBlock = {
+  [PSEUDO_PRINT_NAME]: {
+    init() {
+      this.jsonInit({
+        type: PSEUDO_PRINT_NAME,
+        message0: "表示する (",
+        inputsInline: true,
+        previousStatement: null,
+        nextStatement: null,
+        colour: 330,
+        tooltip: tooltipManager.getValue("PSEUDO_PRINT_TOOLTIP"),
+        helpUrl: "",
+        mutator: PSEUDO_PRINT_MUTATOR_NAME
+      });
+      this.countOfArguments = 1;
+      this.updateShape();
+    }
+  }
+};
+common.defineBlocks(pseudoPrintBlock);
+
+// src/block/pseudo/random.ts
+var PSEUDO_RANDOM_NAME = "pseudo_random";
+var pseudoRandom = {
+  type: PSEUDO_RANDOM_NAME,
+  message0: "乱数 (  )",
+  inputsInline: true,
+  output: "calcium_call",
+  colour: 210,
+  tooltip: tooltipManager.getValue("PSEUDO_RANDOM_TOOLTIP"),
+  helpUrl: ""
+};
+defineBlocksWithJsonArray([pseudoRandom]);
+
+// src/block/pseudo/relational.ts
+var PSEUDO_RELATIONAL_NAME = "pseudo_relational";
+var pseudoRelational = {
+  type: PSEUDO_RELATIONAL_NAME,
+  message0: "%1 %2 %3",
+  args0: [
+    {
+      type: "input_value",
+      name: "LEFT",
+      check: [
+        "calcium_variable",
+        "calcium_attribute",
+        "calcium_subscript",
+        "calcium_call",
+        "calcium_arithmetic",
+        "Number",
+        "String"
+      ]
+    },
+    {
+      type: "field_dropdown",
+      name: "OP",
+      options: [
+        ["==", "=="],
+        ["!=", "!="],
+        ["<", "<"],
+        ["<=", "<="],
+        [">", ">"],
+        [">=", ">="]
+      ]
+    },
+    {
+      type: "input_value",
+      name: "RIGHT",
+      check: [
+        "calcium_variable",
+        "calcium_attribute",
+        "calcium_subscript",
+        "calcium_call",
+        "calcium_arithmetic",
+        "Number",
+        "String"
+      ]
+    }
+  ],
+  inputsInline: true,
+  output: "Boolean",
+  colour: 210,
+  tooltip: tooltipManager.getValue("PSEUDO_RELATIONAL_TOOLTIP"),
+  helpUrl: ""
+};
+defineBlocksWithJsonArray([pseudoRelational]);
+
+// src/util/sanitize-str.ts
+function sanitizeStr(inputStr) {
+  let result = "";
+  for (let i = 0;i < inputStr.length; i++) {
+    const char = inputStr[i];
+    if (char === '"') {
+      let j = i - 1;
+      let countOfBackslashes = 0;
+      while (j >= 0 && inputStr[j] === "\\") {
+        countOfBackslashes++;
+        j--;
+      }
+      if (countOfBackslashes % 2 === 1) {
+        result += '"';
+      }
+    } else {
+      result += char;
+    }
+  }
+  return result;
+}
+
+// src/block/pseudo/str.ts
+var PSEUDO_STR_NAME = "pseudo_str";
+var pseudoStr = {
+  [PSEUDO_STR_NAME]: {
+    init() {
+      this.appendDummyInput().appendField("文字列 ").appendField(new FieldTextInput('""', function(newValue) {
+        return `"${sanitizeStr(newValue)}"`;
+      }), "STR");
+      this.setInputsInline(true);
+      this.setOutput(true, "String");
+      this.setColour(210);
+      this.setTooltip(tooltipManager.getValue("PSEUDO_STR_TOOLTIP"));
+    }
+  }
+};
+common.defineBlocks(pseudoStr);
+
+// src/block/pseudo/variable.ts
+var PSEUDO_VARIABLE_NAME = "pseudo_variable";
+var pseudoVariable = {
+  type: PSEUDO_VARIABLE_NAME,
+  message0: "変数 %1",
+  args0: [
+    {
+      type: "field_input",
+      name: "NAME",
+      text: "i"
+    }
+  ],
+  inputsInline: true,
+  output: "calcium_variable",
+  colour: 210,
+  tooltip: tooltipManager.getValue("PSEUDO_VARIABLE_TOOLTIP"),
+  helpUrl: ""
+};
+defineBlocksWithJsonArray([pseudoVariable]);
+
+// src/block/pseudo/while.ts
+var PSEUDO_WHILE_NAME = "pseudo_while";
+var pseudoWhile = {
+  type: PSEUDO_WHILE_NAME,
+  message0: "%1 の間繰り返す: %2 %3",
+  args0: [
+    {
+      type: "input_value",
+      name: "CONDITION",
+      check: [
+        "Boolean",
+        "calcium_variable",
+        "calcium_attribute",
+        "calcium_subscript",
+        "calcium_call",
+        "calcium_arithmetic"
+      ]
+    },
+    {
+      type: "input_dummy"
+    },
+    {
+      type: "input_statement",
+      name: "DO"
+    }
+  ],
+  inputsInline: true,
+  previousStatement: null,
+  nextStatement: null,
+  colour: 330,
+  tooltip: tooltipManager.getValue("PSEUDO_WHILE_TOOLTIP"),
+  helpUrl: ""
+};
+defineBlocksWithJsonArray([pseudoWhile]);
 
 // src/generator/calcium/index.ts
 class CalciumGenerator extends Generator {
@@ -25699,163 +27400,102 @@ function trimLastComma(code) {
   return result;
 }
 
-// src/localization/en-us/index.ts
-setLocale(exports_en);
+// src/generator/pseudo/arithmetic.ts
+calciumGenerator.forBlock["pseudo_arithmetic"] = calciumGenerator.forBlock["calcium_arithmetic"];
 
-class EnUsLocalization {
-  helpUrl = "https://help.caed.app/";
-  savedFile = "Saved file";
-  noFiles = "No files saved.";
-  run = "Run";
-  stop = "Stop";
-  input = "Input";
-}
-function buildLocalization() {
-  return new EnUsLocalization;
-}
-var toolbox = {
-  kind: "categoryToolbox",
-  contents: [
-    {
-      kind: "category",
-      name: "Core",
-      contents: [
-        {
-          kind: "block",
-          type: "calcium_variable"
-        },
-        {
-          kind: "block",
-          type: "calcium_number"
-        },
-        {
-          kind: "block",
-          type: "calcium_str"
-        },
-        {
-          kind: "block",
-          type: "calcium_assignment"
-        },
-        {
-          kind: "block",
-          type: "calcium_print"
-        }
-      ]
-    },
-    {
-      kind: "category",
-      name: "List",
-      contents: [
-        {
-          kind: "block",
-          type: "calcium_list"
-        },
-        {
-          kind: "block",
-          type: "calcium_subscript"
-        },
-        {
-          kind: "block",
-          type: "calcium_slice"
-        }
-      ]
-    },
-    {
-      kind: "category",
-      name: "Logic",
-      contents: [
-        {
-          kind: "block",
-          type: "calcium_arithmetic"
-        },
-        {
-          kind: "block",
-          type: "calcium_relational"
-        },
-        {
-          kind: "block",
-          type: "calcium_logical"
-        },
-        {
-          kind: "block",
-          type: "calcium_not"
-        },
-        {
-          kind: "block",
-          type: "calcium_if"
-        }
-      ]
-    },
-    {
-      kind: "category",
-      name: "Loop",
-      contents: [
-        {
-          kind: "block",
-          type: "calcium_for"
-        },
-        {
-          kind: "block",
-          type: "calcium_while"
-        },
-        {
-          kind: "block",
-          type: "calcium_break_continue"
-        }
-      ]
-    },
-    {
-      kind: "category",
-      name: "Function",
-      contents: [
-        {
-          kind: "block",
-          type: "calcium_call"
-        },
-        {
-          kind: "block",
-          type: "calcium_expr_stmt"
-        },
-        {
-          kind: "block",
-          type: "calcium_def"
-        },
-        {
-          kind: "block",
-          type: "calcium_return"
-        }
-      ]
-    }
-  ]
+// src/generator/pseudo/array.ts
+var self2 = calciumGenerator;
+calciumGenerator.forBlock["pseudo_array"] = (block) => {
+  let ref = self2.valueToCode(block, "REF", 0) || '["var", "Data"]';
+  ref = JSON.parse(trimParens(ref));
+  let sub = self2.valueToCode(block, "SUB", 0) || '["num", "0"]';
+  sub = JSON.parse(trimParens(sub));
+  const code = JSON.stringify(["sub", ref, sub]);
+  return [code, 0];
+};
+
+// src/generator/pseudo/array-slice.ts
+var self3 = calciumGenerator;
+calciumGenerator.forBlock["pseudo_array_slice"] = (block) => {
+  let ref = self3.valueToCode(block, "REF", 0) || '["var", "Data"]';
+  ref = JSON.parse(trimParens(ref));
+  let start = self3.valueToCode(block, "START", 0) || '["num", "0"]';
+  start = JSON.parse(trimParens(start));
+  let endStr = self3.valueToCode(block, "END", 0) || '["num", "2"]';
+  let end = JSON.parse(trimParens(endStr));
+  if (end !== null) {
+    end = ["+", end, ["num", "1"]];
+  }
+  const code = JSON.stringify(["sub", ref, start, end]);
+  return [code, 0];
+};
+
+// src/generator/pseudo/assign-array.ts
+var self4 = calciumGenerator;
+calciumGenerator.forBlock["pseudo_assign_array"] = (block) => {
+  let ref = self4.valueToCode(block, "REF", 0) || '["var", "Data"]';
+  ref = JSON.parse(trimParens(ref));
+  const itemCount = Reflect.get(block, "itemCount_");
+  const elements = Array.from({ length: itemCount });
+  for (let i = 0;i < itemCount; ++i) {
+    let elem = self4.valueToCode(block, "ITEM" + i, 0) || '["num", "0"]';
+    elem = trimParens(elem);
+    elements[i] = elem;
+  }
+  let array = `["list", [${elements.join(", ")}]]`;
+  array = JSON.parse(array);
+  return JSON.stringify([self4.indent, [], "=", ref, array]) + ",";
+};
+
+// src/generator/pseudo/assign-zero.ts
+var self5 = calciumGenerator;
+calciumGenerator.forBlock["pseudo_assign_zero"] = (block) => {
+  let ref = self5.valueToCode(block, "REF", 0) || '["var", "Data"]';
+  ref = JSON.parse(trimParens(ref));
+  const forRange = [
+    self5.indent,
+    [],
+    "for",
+    ["var", "i"],
+    ["call", ["var", "range"], [["call", ["var", "len"], [ref]]]]
+  ];
+  const assign = [
+    self5.indent + 1,
+    [],
+    "=",
+    ["sub", ref, ["var", "i"]],
+    ["num", "0"]
+  ];
+  return `${JSON.stringify(forRange)},${JSON.stringify(assign)},`;
 };
 // src/generator/calcium/arithmetic.ts
-var self2 = calciumGenerator;
+var self6 = calciumGenerator;
 calciumGenerator.forBlock["calcium_arithmetic"] = (block) => {
   const op = block.getFieldValue("OP");
-  let left = self2.valueToCode(block, "LEFT", 0) || '["var", "i"]';
+  let left = self6.valueToCode(block, "LEFT", 0) || '["var", "i"]';
   left = JSON.parse(trimParens(left));
-  let right = self2.valueToCode(block, "RIGHT", 0) || '["num", "1"]';
+  let right = self6.valueToCode(block, "RIGHT", 0) || '["num", "1"]';
   right = JSON.parse(trimParens(right));
   const code = JSON.stringify([op, left, right]);
   return [code, 0];
 };
 
 // src/generator/calcium/assignment.ts
-var self3 = calciumGenerator;
+var self7 = calciumGenerator;
 calciumGenerator.forBlock["calcium_assignment"] = (block) => {
-  let ref = self3.valueToCode(block, "REF", 0) || `["var", "i"]`;
+  let ref = self7.valueToCode(block, "REF", 0) || `["var", "i"]`;
   ref = trimParens(ref);
   ref = JSON.parse(ref);
-  let arg0 = self3.valueToCode(block, "VALUE", 0) || '["num", "0"]';
+  let arg0 = self7.valueToCode(block, "VALUE", 0) || '["num", "0"]';
   arg0 = trimParens(arg0);
   arg0 = JSON.parse(arg0);
-  return JSON.stringify([self3.indent, [], "=", ref, arg0]) + ",";
+  return JSON.stringify([self7.indent, [], "=", ref, arg0]) + ",";
 };
 
 // src/generator/calcium/attribute.ts
-var self4 = calciumGenerator;
+var self8 = calciumGenerator;
 calciumGenerator.forBlock["calcium_attribute"] = (block) => {
-  let ref = self4.valueToCode(block, "REF", 0) || `["var", "self"]`;
+  let ref = self8.valueToCode(block, "REF", 0) || `["var", "self"]`;
   ref = JSON.parse(trimParens(ref));
   let attr = ["attr"];
   attr.push(ref);
@@ -25869,79 +27509,79 @@ calciumGenerator.forBlock["calcium_boolean"] = (block) => {
 };
 
 // src/generator/calcium/break-continue.ts
-var self5 = calciumGenerator;
+var self9 = calciumGenerator;
 calciumGenerator.forBlock["calcium_break_continue"] = (block) => {
-  return JSON.stringify([self5.indent, [], block.getFieldValue("FLOW")]) + ",";
+  return JSON.stringify([self9.indent, [], block.getFieldValue("FLOW")]) + ",";
 };
 
 // src/generator/calcium/call.ts
-var self6 = calciumGenerator;
+var self10 = calciumGenerator;
 calciumGenerator.forBlock["calcium_call"] = (block) => {
   const args = [];
   const countOfArguments = Reflect.get(block, "countOfArguments");
   for (let i = 0;i < countOfArguments; ++i) {
-    let arg = self6.valueToCode(block, "ARG" + i, 0) || "null";
+    let arg = self10.valueToCode(block, "ARG" + i, 0) || "null";
     arg = trimParens(arg);
     args.push(JSON.parse(arg));
   }
-  const calleeStr = self6.valueToCode(block, "REF", 0) || `["var", "print"]`;
+  const calleeStr = self10.valueToCode(block, "REF", 0) || `["var", "print"]`;
   const calleeRef = JSON.parse(calleeStr);
   return [JSON.stringify(["call", calleeRef, args]), 0];
 };
 
 // src/generator/calcium/class.ts
-var self7 = calciumGenerator;
+var self11 = calciumGenerator;
 calciumGenerator.forBlock["calcium_class"] = (block) => {
   const className = block.getFieldValue("NAME");
-  const superclassCode = self7.valueToCode(block, "SUPERCLASS", 0) || "null";
+  const superclassCode = self11.valueToCode(block, "SUPERCLASS", 0) || "null";
   const superclass = JSON.parse(superclassCode);
-  self7.shiftIndent(1);
-  const stmts = self7.statementToCode(block, "STMTS") || JSON.stringify([self7.indent, [], "pass"]) + ",";
-  self7.shiftIndent(-1);
-  return JSON.stringify([self7.indent, [], "class", className, superclass]) + "," + stmts;
+  self11.shiftIndent(1);
+  const stmts = self11.statementToCode(block, "STMTS") || JSON.stringify([self11.indent, [], "pass"]) + ",";
+  self11.shiftIndent(-1);
+  return JSON.stringify([self11.indent, [], "class", className, superclass]) + "," + stmts;
 };
 
 // src/generator/calcium/comma.ts
-var self8 = calciumGenerator;
+var self12 = calciumGenerator;
 calciumGenerator.forBlock["calcium_comma"] = (block) => {
-  let first = self8.valueToCode(block, "FIRST", 0) || '["var", "a"]';
+  let first = self12.valueToCode(block, "FIRST", 0) || '["var", "a"]';
   first = JSON.parse(first);
-  let second = self8.valueToCode(block, "SECOND", 0) || '["var", "b"]';
+  let second = self12.valueToCode(block, "SECOND", 0) || '["var", "b"]';
   second = JSON.parse(second);
   return [JSON.stringify([",", first, second]), 0];
 };
 
 // src/generator/calcium/compound-assignment.ts
-var self9 = calciumGenerator;
+var self13 = calciumGenerator;
 calciumGenerator.forBlock["calcium_compound_assignment"] = (block) => {
-  let ref = self9.valueToCode(block, "REF", 0) || '["var", "i"]';
+  let ref = self13.valueToCode(block, "REF", 0) || '["var", "i"]';
   ref = JSON.parse(trimParens(ref));
   const op = block.getFieldValue("OP");
-  let value = self9.valueToCode(block, "VALUE", 0) || '["num", "0"]';
+  let value = self13.valueToCode(block, "VALUE", 0) || '["num", "0"]';
   value = JSON.parse(trimParens(value));
-  return JSON.stringify([self9.indent, [], op, ref, value]) + ",";
+  return JSON.stringify([self13.indent, [], op, ref, value]) + ",";
 };
 
 // src/generator/calcium/def.ts
-var self10 = calciumGenerator;
+var self14 = calciumGenerator;
 calciumGenerator.forBlock["calcium_def"] = (block) => {
   const funcName = block.getField("NAME")?.getText() ?? "f";
-  self10.shiftIndent(1);
-  const stmts = self10.statementToCode(block, "STMTS") || JSON.stringify([self10.indent, [], "pass"]) + ",";
-  self10.shiftIndent(-1);
+  self14.shiftIndent(1);
+  const stmts = self14.statementToCode(block, "STMTS") || JSON.stringify([self14.indent, [], "pass"]) + ",";
+  self14.shiftIndent(-1);
   const params = Reflect.get(block, "parameters") ?? [];
-  return JSON.stringify([self10.indent, [], "def", funcName, params]) + "," + stmts;
+  return JSON.stringify([self14.indent, [], "def", funcName, params]) + "," + stmts;
 };
 calciumGenerator.forBlock["calcium_def_method"] = (block) => {
   const funcName = block.getField("NAME")?.getText() ?? "__init__";
-  self10.shiftIndent(1);
-  const stmts = self10.statementToCode(block, "STMTS") || JSON.stringify([self10.indent, [], "pass"]) + ",";
-  self10.shiftIndent(-1);
+  self14.shiftIndent(1);
+  const stmts = self14.statementToCode(block, "STMTS") || JSON.stringify([self14.indent, [], "pass"]) + ",";
+  self14.shiftIndent(-1);
   const params = Reflect.get(block, "parameters") ?? [];
   if (params.length === 0 || params[0] !== "self") {
     params.unshift("self");
   }
-  return JSON.stringify([self10.indent, [], "def", funcName, params]) + "," + stmts;
+  return JSON.stringify([self14.indent, [], "def", funcName, params]) + "," + stmts;
 };
 
 // src/generator/calcium/dict.ts
@@ -25950,23 +27590,23 @@ calciumGenerator.forBlock["calcium_dict"] = () => {
 };
 
 // src/generator/calcium/expr_stmt.ts
-var self11 = calciumGenerator;
+var self15 = calciumGenerator;
 calciumGenerator.forBlock["calcium_expr_stmt"] = (block) => {
-  const callStr = self11.valueToCode(block, "CALL", 0) || '["call", ["var", "print"], [""]]';
+  const callStr = self15.valueToCode(block, "CALL", 0) || '["call", ["var", "print"], [""]]';
   const call = JSON.parse(callStr);
-  return JSON.stringify([self11.indent, [], "expr", call]) + ",";
+  return JSON.stringify([self15.indent, [], "expr", call]) + ",";
 };
 
 // src/generator/calcium/for.ts
-var self12 = calciumGenerator;
+var self16 = calciumGenerator;
 calciumGenerator.forBlock["calcium_for"] = (block) => {
-  const vars = self12.valueToCode(block, "VARS", 0) || '["var", "i"]';
-  const iterable = self12.valueToCode(block, "ITER", 0) || '["list", [["num", "0"], ["num", "1"], ["num", "2"]]]';
-  self12.shiftIndent(1);
-  const stmts = self12.statementToCode(block, "STMTS") || JSON.stringify([self12.indent, [], "pass"]) + ",";
-  self12.shiftIndent(-1);
+  const vars = self16.valueToCode(block, "VARS", 0) || '["var", "i"]';
+  const iterable = self16.valueToCode(block, "ITER", 0) || '["list", [["num", "0"], ["num", "1"], ["num", "2"]]]';
+  self16.shiftIndent(1);
+  const stmts = self16.statementToCode(block, "STMTS") || JSON.stringify([self16.indent, [], "pass"]) + ",";
+  self16.shiftIndent(-1);
   return JSON.stringify([
-    self12.indent,
+    self16.indent,
     [],
     "for",
     JSON.parse(vars),
@@ -25975,73 +27615,73 @@ calciumGenerator.forBlock["calcium_for"] = (block) => {
 };
 
 // src/generator/calcium/if.ts
-var self13 = calciumGenerator;
+var self17 = calciumGenerator;
 calciumGenerator.forBlock["calcium_if"] = (block) => {
   let n = 0;
-  let codeArray = [[self13.indent, [], "ifs"]];
-  self13.shiftIndent(1);
+  let codeArray = [[self17.indent, [], "ifs"]];
+  self17.shiftIndent(1);
   let branchCode, conditionCode;
   do {
-    conditionCode = self13.valueToCode(block, "IF" + n, 0) || "false";
+    conditionCode = self17.valueToCode(block, "IF" + n, 0) || "false";
     conditionCode = trimParens(conditionCode);
     codeArray.push([
-      self13.indent,
+      self17.indent,
       [],
       n === 0 ? "if" : "elif",
       JSON.parse(conditionCode)
     ]);
-    self13.shiftIndent(1);
-    branchCode = self13.statementToCode(block, "DO" + n) || JSON.stringify([self13.indent, [], "pass"]) + ",";
-    self13.shiftIndent(-1);
+    self17.shiftIndent(1);
+    branchCode = self17.statementToCode(block, "DO" + n) || JSON.stringify([self17.indent, [], "pass"]) + ",";
+    self17.shiftIndent(-1);
     codeArray = codeArray.concat(JSON.parse("[" + trimLastComma(branchCode) + "]"));
     ++n;
   } while (block.getInput("IF" + n));
   if (block.getInput("ELSE")) {
-    codeArray.push([self13.indent, [], "else"]);
-    self13.shiftIndent(1);
-    branchCode = self13.statementToCode(block, "ELSE") || JSON.stringify([self13.indent, [], "pass"]) + ",";
+    codeArray.push([self17.indent, [], "else"]);
+    self17.shiftIndent(1);
+    branchCode = self17.statementToCode(block, "ELSE") || JSON.stringify([self17.indent, [], "pass"]) + ",";
     codeArray = codeArray.concat(JSON.parse("[" + trimLastComma(branchCode) + "]"));
-    self13.shiftIndent(-1);
+    self17.shiftIndent(-1);
   }
-  self13.shiftIndent(-1);
+  self17.shiftIndent(-1);
   const codeStr = JSON.stringify(codeArray);
   return codeStr.substring(1, codeStr.length - 1) + ",";
 };
 
 // src/generator/calcium/import.ts
-var self14 = calciumGenerator;
+var self18 = calciumGenerator;
 calciumGenerator.forBlock["calcium_import"] = (block) => {
   const moduleName = block.getField("NAME")?.getText();
-  return JSON.stringify([self14.indent, [], "import", moduleName]) + ",";
+  return JSON.stringify([self18.indent, [], "import", moduleName]) + ",";
 };
 
 // src/generator/calcium/kwarg.ts
-var self15 = calciumGenerator;
+var self19 = calciumGenerator;
 calciumGenerator.forBlock["calcium_kwarg"] = (block) => {
   const kw = block.getField("NAME")?.getText() ?? "end";
-  let value = self15.valueToCode(block, "VALUE", 0) || '""';
+  let value = self19.valueToCode(block, "VALUE", 0) || '""';
   value = JSON.parse(trimParens(value));
   return [JSON.stringify(["kwarg", kw, value]), 0];
 };
 
 // src/generator/calcium/list.ts
-var self16 = calciumGenerator;
+var self20 = calciumGenerator;
 calciumGenerator.forBlock["calcium_list"] = (block) => {
   const length = Reflect.get(block, "itemCount_");
   const elements = new Array(length);
   for (let i = 0;i < length; ++i) {
-    elements[i] = JSON.parse(self16.valueToCode(block, "ITEM" + i, 0) || "null");
+    elements[i] = JSON.parse(self20.valueToCode(block, "ITEM" + i, 0) || "null");
   }
   return [JSON.stringify(["list", elements]), 0];
 };
 
 // src/generator/calcium/logical.ts
-var self17 = calciumGenerator;
+var self21 = calciumGenerator;
 calciumGenerator.forBlock["calcium_logical"] = (block) => {
   const op = block.getFieldValue("OP");
-  let left = self17.valueToCode(block, "LEFT", 0) || '["num", "0"]';
+  let left = self21.valueToCode(block, "LEFT", 0) || '["num", "0"]';
   left = JSON.parse(trimParens(left));
-  let right = self17.valueToCode(block, "RIGHT", 0) || '["num", "0"]';
+  let right = self21.valueToCode(block, "RIGHT", 0) || '["num", "0"]';
   right = JSON.parse(trimParens(right));
   const code = JSON.stringify([op, left, right]);
   return [code, 0];
@@ -26053,9 +27693,9 @@ calciumGenerator.forBlock["calcium_none"] = (_) => {
 };
 
 // src/generator/calcium/not.ts
-var self18 = calciumGenerator;
+var self22 = calciumGenerator;
 calciumGenerator.forBlock["calcium_not"] = (block) => {
-  let value = self18.valueToCode(block, "VALUE", 0) || "true";
+  let value = self22.valueToCode(block, "VALUE", 0) || "true";
   value = JSON.parse(trimParens(value));
   return [JSON.stringify(["not", value]), 0];
 };
@@ -26068,17 +27708,17 @@ calciumGenerator.forBlock["calcium_number"] = (block) => {
 };
 
 // src/generator/calcium/print.ts
-var self19 = calciumGenerator;
+var self23 = calciumGenerator;
 calciumGenerator.forBlock["calcium_print"] = (block) => {
   const args = [];
   const countOfArguments = Reflect.get(block, "countOfArguments");
   for (let i = 0;i < countOfArguments; ++i) {
-    let arg = self19.valueToCode(block, "ARG" + i, 0) || "null";
+    let arg = self23.valueToCode(block, "ARG" + i, 0) || "null";
     arg = trimParens(arg);
     args.push(JSON.parse(arg));
   }
   return JSON.stringify([
-    self19.indent,
+    self23.indent,
     [],
     "expr",
     ["call", ["var", "print"], args]
@@ -26086,31 +27726,31 @@ calciumGenerator.forBlock["calcium_print"] = (block) => {
 };
 
 // src/generator/calcium/relational.ts
-var self20 = calciumGenerator;
+var self24 = calciumGenerator;
 calciumGenerator.forBlock["calcium_relational"] = (block) => {
   const op = block.getFieldValue("OP");
-  let left = self20.valueToCode(block, "LEFT", 0) || '["num", "0"]';
+  let left = self24.valueToCode(block, "LEFT", 0) || '["num", "0"]';
   left = JSON.parse(trimParens(left));
-  let right = self20.valueToCode(block, "RIGHT", 0) || '["num", "0"]';
+  let right = self24.valueToCode(block, "RIGHT", 0) || '["num", "0"]';
   right = JSON.parse(trimParens(right));
   const code = JSON.stringify([op, left, right]);
   return [code, 0];
 };
 
 // src/generator/calcium/return.ts
-var self21 = calciumGenerator;
+var self25 = calciumGenerator;
 calciumGenerator.forBlock["calcium_return"] = (block) => {
-  let value = self21.valueToCode(block, "VALUE", 0) || "null";
+  let value = self25.valueToCode(block, "VALUE", 0) || "null";
   value = JSON.parse(trimParens(value));
-  return JSON.stringify([self21.indent, [], "return", value]) + ",";
+  return JSON.stringify([self25.indent, [], "return", value]) + ",";
 };
 
 // src/generator/calcium/slice.ts
-var self22 = calciumGenerator;
+var self26 = calciumGenerator;
 calciumGenerator.forBlock["calcium_slice"] = (block) => {
-  let start = self22.valueToCode(block, "START", 0) || '["num", "0"]';
+  let start = self26.valueToCode(block, "START", 0) || '["num", "0"]';
   start = JSON.parse(trimParens(start));
-  let stop = self22.valueToCode(block, "STOP", 0) || '["num", "0"]';
+  let stop = self26.valueToCode(block, "STOP", 0) || '["num", "0"]';
   stop = JSON.parse(trimParens(stop));
   const code = JSON.stringify(["slice", start, stop]);
   return [code, 0];
@@ -26123,11 +27763,11 @@ calciumGenerator.forBlock["calcium_str"] = (block) => {
 };
 
 // src/generator/calcium/subscript.ts
-var self23 = calciumGenerator;
+var self27 = calciumGenerator;
 calciumGenerator.forBlock["calcium_subscript"] = (block) => {
-  let ref = self23.valueToCode(block, "REF", 0) || `["var", "s"]`;
+  let ref = self27.valueToCode(block, "REF", 0) || `["var", "s"]`;
   ref = JSON.parse(trimParens(ref));
-  let subCode = self23.valueToCode(block, "SUB", 0) || '["num", "0"]';
+  let subCode = self27.valueToCode(block, "SUB", 0) || '["num", "0"]';
   let sub = JSON.parse(trimParens(subCode));
   if (sub instanceof Array && sub[0] === "slice") {
     const start = sub[1];
@@ -26146,14 +27786,324 @@ calciumGenerator.forBlock["calcium_variable"] = (block) => {
 };
 
 // src/generator/calcium/while.ts
-var self24 = calciumGenerator;
+var self28 = calciumGenerator;
 calciumGenerator.forBlock["calcium_while"] = (block) => {
-  let condition = self24.valueToCode(block, "CONDITION", 0) || "false";
+  let condition = self28.valueToCode(block, "CONDITION", 0) || "false";
   condition = JSON.parse(trimParens(condition));
-  self24.shiftIndent(1);
-  const stmts = self24.statementToCode(block, "DO") || JSON.stringify([self24.indent, [], "pass"]) + ",";
-  self24.shiftIndent(-1);
-  return JSON.stringify([self24.indent, [], "while", condition]) + "," + stmts;
+  self28.shiftIndent(1);
+  const stmts = self28.statementToCode(block, "DO") || JSON.stringify([self28.indent, [], "pass"]) + ",";
+  self28.shiftIndent(-1);
+  return JSON.stringify([self28.indent, [], "while", condition]) + "," + stmts;
+};
+
+// src/generator/pseudo/assignment.ts
+calciumGenerator.forBlock["pseudo_assignment"] = calciumGenerator.forBlock["calcium_assignment"];
+
+// src/generator/pseudo/for-decrement.ts
+var self29 = calciumGenerator;
+calciumGenerator.forBlock["pseudo_for_decrement"] = (block) => {
+  let variable = self29.valueToCode(block, "VAR", 0) || '["var", "i"]';
+  variable = JSON.parse(variable);
+  let startStr = self29.valueToCode(block, "START", 0);
+  let start;
+  if (!startStr) {
+    start = ["num", "2"];
+  } else {
+    start = JSON.parse(trimParens(startStr));
+  }
+  let stopStr = self29.valueToCode(block, "STOP", 0) || '["num", "0"]';
+  let stop = JSON.parse(trimParens(stopStr));
+  stop = ["-", stop, ["num", "1"]];
+  let stepStr = self29.valueToCode(block, "STEP", 0) || '["-_", ["num", "1"]]';
+  let step;
+  step = JSON.parse(trimParens(stepStr));
+  self29.shiftIndent(1);
+  const stmts = self29.statementToCode(block, "STMTS") || JSON.stringify([self29.indent, [], "pass"]) + ",";
+  self29.shiftIndent(-1);
+  const range = [start, stop, step];
+  return JSON.stringify([
+    self29.indent,
+    [],
+    "for",
+    variable,
+    ["call", ["var", "range"], range]
+  ]) + "," + stmts;
+};
+
+// src/generator/pseudo/for-increment.ts
+var self30 = calciumGenerator;
+calciumGenerator.forBlock["pseudo_for_increment"] = (block) => {
+  let variable = self30.valueToCode(block, "VAR", 0) || '["var", "i"]';
+  variable = JSON.parse(variable);
+  let startStr = self30.valueToCode(block, "START", 0);
+  let start;
+  if (!startStr) {
+    start = ["num", "0"];
+  } else {
+    start = JSON.parse(trimParens(startStr));
+  }
+  let stopStr = self30.valueToCode(block, "STOP", 0) || '["num", "9"]';
+  let stop = JSON.parse(trimParens(stopStr));
+  stop = ["+", stop, ["num", "1"]];
+  let stepStr = self30.valueToCode(block, "STEP", 0) || '["num", "1"]';
+  let step;
+  step = JSON.parse(trimParens(stepStr));
+  self30.shiftIndent(1);
+  const stmts = self30.statementToCode(block, "STMTS") || JSON.stringify([self30.indent, [], "pass"]) + ",";
+  self30.shiftIndent(-1);
+  const range = [start, stop, step];
+  return JSON.stringify([
+    self30.indent,
+    [],
+    "for",
+    variable,
+    ["call", ["var", "range"], range]
+  ]) + "," + stmts;
+};
+
+// src/generator/pseudo/if.ts
+calciumGenerator.forBlock["pseudo_if"] = calciumGenerator.forBlock["calcium_if"];
+
+// src/generator/pseudo/input-int.ts
+var self31 = calciumGenerator;
+calciumGenerator.forBlock["pseudo_input_int"] = (block) => {
+  let ref = self31.valueToCode(block, "REF", 0) || '["var", "Data"]';
+  ref = JSON.parse(trimParens(ref));
+  const code = [
+    self31.indent,
+    [],
+    "=",
+    ref,
+    ["call", ["var", "int"], [["call", ["var", "input"], [""]]]]
+  ];
+  return JSON.stringify(code) + ",";
+};
+
+// src/generator/pseudo/input-str.ts
+var self32 = calciumGenerator;
+calciumGenerator.forBlock["pseudo_input_str"] = (block) => {
+  let ref = self32.valueToCode(block, "REF", 0) || '["var", "Data"]';
+  ref = JSON.parse(trimParens(ref));
+  const code = [self32.indent, [], "=", ref, ["call", ["var", "input"], [""]]];
+  return JSON.stringify(code) + ",";
+};
+
+// src/generator/pseudo/int.ts
+var self33 = calciumGenerator;
+calciumGenerator.forBlock["pseudo_int"] = (block) => {
+  let value = self33.valueToCode(block, "INT", 0) || '["var", "x"]';
+  value = JSON.parse(trimParens(value));
+  const code = ["call", ["var", "int"], [value]];
+  return [JSON.stringify(code), 0];
+};
+
+// src/generator/pseudo/len.ts
+var self34 = calciumGenerator;
+calciumGenerator.forBlock["pseudo_len"] = (block) => {
+  let array = self34.valueToCode(block, "ARRAY", 0) || '["list", []]';
+  array = JSON.parse(trimParens(array));
+  const code = ["call", ["var", "len"], [array]];
+  return [JSON.stringify(code), 0];
+};
+
+// src/generator/pseudo/logical.ts
+calciumGenerator.forBlock["pseudo_logical"] = calciumGenerator.forBlock["calcium_logical"];
+
+// src/generator/pseudo/not.ts
+calciumGenerator.forBlock["pseudo_not"] = calciumGenerator.forBlock["calcium_not"];
+
+// src/generator/pseudo/number.ts
+calciumGenerator.forBlock["pseudo_number"] = calciumGenerator.forBlock["calcium_number"];
+
+// src/generator/pseudo/print.ts
+var self35 = calciumGenerator;
+calciumGenerator.forBlock["pseudo_print"] = (block) => {
+  const args = [];
+  const countOfArguments = Reflect.get(block, "countOfArguments");
+  for (let i = 0;i < countOfArguments; ++i) {
+    let arg = self35.valueToCode(block, "ARG" + i, 0) || "null";
+    arg = trimParens(arg);
+    args.push(JSON.parse(arg));
+  }
+  return JSON.stringify([
+    self35.indent,
+    [],
+    "expr",
+    ["call", ["var", "print"], args]
+  ]) + ",";
+};
+
+// src/generator/pseudo/random.ts
+calciumGenerator.forBlock["pseudo_random"] = () => {
+  const code = ["call", ["attr", ["var", "random"], "random"], []];
+  return [JSON.stringify(code), 0];
+};
+
+// src/generator/pseudo/relational.ts
+calciumGenerator.forBlock["pseudo_relational"] = calciumGenerator.forBlock["calcium_relational"];
+
+// src/generator/pseudo/str.ts
+calciumGenerator.forBlock["pseudo_str"] = (block) => {
+  const str = block.getField("STR")?.getText() || "";
+  return [`${JSON.stringify(str)}`, 0];
+};
+
+// src/generator/pseudo/variable.ts
+calciumGenerator.forBlock["pseudo_variable"] = (block) => {
+  return [JSON.stringify(["var", block.getField("NAME")?.getText() ?? "i"]), 0];
+};
+
+// src/generator/pseudo/while.ts
+calciumGenerator.forBlock["pseudo_while"] = calciumGenerator.forBlock["calcium_while"];
+
+// src/localization/ja-jp/index.ts
+setLocale(exports_ja);
+
+class JaJpLocalization {
+  helpUrl = "https://help.caed.app/ja/";
+  savedFile = "保存ファイル";
+  noFiles = "保存されたファイルはありません。";
+  run = "実行する";
+  stop = "実行を終了する";
+  input = "入力する";
+}
+function buildLocalization() {
+  return new JaJpLocalization;
+}
+var toolbox = {
+  kind: "categoryToolbox",
+  contents: [
+    {
+      kind: "category",
+      name: "基本",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_variable"
+        },
+        {
+          kind: "block",
+          type: "pseudo_number"
+        },
+        {
+          kind: "block",
+          type: "pseudo_str"
+        },
+        {
+          kind: "block",
+          type: "pseudo_assignment"
+        },
+        {
+          kind: "block",
+          type: "pseudo_print"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "演算",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_arithmetic"
+        },
+        {
+          kind: "block",
+          type: "pseudo_relational"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "配列",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_array"
+        },
+        {
+          kind: "block",
+          type: "pseudo_array_slice"
+        },
+        {
+          kind: "block",
+          type: "pseudo_assign_array"
+        },
+        {
+          kind: "block",
+          type: "pseudo_assign_zero"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "条件分岐",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_logical"
+        },
+        {
+          kind: "block",
+          type: "pseudo_not"
+        },
+        {
+          kind: "block",
+          type: "pseudo_if"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "繰り返し",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_for_increment"
+        },
+        {
+          kind: "block",
+          type: "pseudo_for_decrement"
+        },
+        {
+          kind: "block",
+          type: "pseudo_while"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "関数",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_len"
+        },
+        {
+          kind: "block",
+          type: "pseudo_int"
+        },
+        {
+          kind: "block",
+          type: "pseudo_random"
+        }
+      ]
+    },
+    {
+      kind: "category",
+      name: "入力",
+      contents: [
+        {
+          kind: "block",
+          type: "pseudo_input_int"
+        },
+        {
+          kind: "block",
+          type: "pseudo_input_str"
+        }
+      ]
+    }
+  ]
 };
 
 // src/caed/prefix.ts
@@ -26510,65 +28460,6 @@ class EditorStateStore {
 }
 var editorState = new EditorStateStore;
 
-// src/load-json.js
-function _loadJson(json) {
-  editorState.isLoadingFile = true;
-  if (json instanceof String || typeof json === "string") {
-    json = JSON.parse(json);
-  }
-  serialization.workspaces.load(json, editorState.editor.workspace);
-}
-function _dumpJson() {
-  const json = serialization.workspaces.save(editorState.editor.workspace);
-  return JSON.stringify(json);
-}
-window._loadJson = _loadJson;
-window._dumpJson = _dumpJson;
-
-// src/caed/build-page.ts
-async function buildPage() {
-  let autosaveTimer;
-  const contentJsonName = new URLSearchParams(window.location.search).get("json");
-  if (contentJsonName) {
-    try {
-      const response = await fetch(`${window.location.origin}/content/${contentJsonName}.json`);
-      if (response.ok) {
-        const contentJson = await response.json();
-        serialization.workspaces.load(contentJson, editorState.editor.workspace);
-      } else {
-        console.warn(`Failed to load content JSON: ${response.status} ${response.statusText}`);
-      }
-    } catch (error) {
-      console.error("Error fetching content JSON:", error);
-    }
-  } else {
-    const previousCode = localStorage.getItem(`${LOCALSTORAGE_KEY_PREFIX}${editorState.l10n.savedFile}`);
-    if (previousCode) {
-      serialization.workspaces.load(JSON.parse(previousCode), editorState.editor.workspace);
-    }
-  }
-  editorState.editor.workspace.addChangeListener((e) => {
-    if (editorState.isLoadingFile && e.type !== Events.FINISHED_LOADING) {
-      return;
-    }
-    if (editorState.isLoadingFile && e.type === Events.FINISHED_LOADING) {
-      editorState.isLoadingFile = false;
-      return;
-    }
-    if (autosaveTimer !== undefined) {
-      clearTimeout(autosaveTimer);
-    }
-    const blockCode = serialization.workspaces.save(editorState.editor.workspace);
-    autosaveTimer = setTimeout(() => {
-      localStorage.setItem(`${LOCALSTORAGE_KEY_PREFIX}${editorState.l10n.savedFile}`, JSON.stringify(blockCode));
-      autosaveTimer = undefined;
-    }, 2000);
-  });
-  window.onbeforeunload = (e) => {
-    e.preventDefault();
-  };
-}
-
 // node_modules/blockly/blockly.mjs
 var import_blockly_compressed = __toESM(require_blockly_compressed(), 1);
 var {
@@ -26835,22 +28726,6 @@ var calciumArithmetic = {
   helpUrl: ""
 };
 defineBlocksWithJsonArray([calciumArithmetic]);
-
-// src/block/type-check/all-types.ts
-var allTypesForCheck = [
-  "calcium_variable",
-  "calcium_attribute",
-  "calcium_subscript",
-  "calcium_call",
-  "calcium_arithmetic",
-  "Number",
-  "String",
-  "Array",
-  "calcium_dict",
-  "calcium_none",
-  "calcium_not",
-  "Boolean"
-];
 
 // src/block/calcium/assignment.ts
 var CALCIUM_ASSIGNMENT_NAME = "calcium_assignment";
@@ -27933,84 +29808,6 @@ var calciumNot = {
 };
 defineBlocksWithJsonArray([calciumNot]);
 
-// src/util/parse-number.ts
-function parseNumber(str) {
-  let resultStr = "";
-  for (let i = 0;i < str.length; ++i) {
-    resultStr += parseFullWidthNumber(str[i]);
-  }
-  if (!/^[-+]?((0[xX][0-9a-fA-F_]+)|(0[bB][01_]+)|(0[0-7_]+)|([0-9_]+(\.[0-9_]*)?([eE][-+]?[0-9_]+)?([jJ])?)|(\.[0-9_]+([eE][-+]?[0-9_]+)?([jJ])?))$/.test(resultStr)) {
-    throw new Error("invalid character in number");
-  }
-  return parseBasedOnPrefix(resultStr);
-}
-function parseBasedOnPrefix(str) {
-  if ((str.startsWith("0x") || str.startsWith("0X") || str.startsWith("0b") || str.startsWith("0B") || str.startsWith("0") && !str.includes(".")) && (str.endsWith("j") || str.endsWith("J"))) {
-    throw new Error("complex number with non-decimal base is not allowed");
-  }
-  if (str.endsWith("j") || str.endsWith("J")) {
-    return parseComplexNumber(str);
-  } else if (str.startsWith("0x") || str.startsWith("0X")) {
-    return parseWithRadix(str, 16, "hexadecimal");
-  } else if (str.startsWith("0b") || str.startsWith("0B")) {
-    return str.substring(0, 2) + parseWithRadix(str.substring(2), 2, "binary");
-  } else if (str.startsWith("0") && !str.includes(".")) {
-    return parseWithRadix(str, 8, "octal");
-  } else if (str.includes(".") || str.includes("e") || str.includes("E")) {
-    return parseFloatOrThrow(str, "float");
-  } else {
-    return parseWithRadix(str, 10, "decimal");
-  }
-}
-function parseWithRadix(str, radix, type) {
-  const num = parseInt(str, radix);
-  if (isNaN(num)) {
-    throw new Error(`cannot parse as ${type}`);
-  }
-  return str;
-}
-function parseFloatOrThrow(str, type) {
-  const num = parseFloat(str);
-  if (isNaN(num)) {
-    throw new Error(`cannot parse as ${type}`);
-  }
-  return str;
-}
-function parseComplexNumber(str) {
-  const realPart = str.slice(0, -1);
-  const num = parseFloat(realPart);
-  if (isNaN(num)) {
-    throw new Error("cannot parse as complex number");
-  }
-  return str;
-}
-function parseFullWidthNumber(char) {
-  switch (char) {
-    case "１":
-      return "1";
-    case "２":
-      return "2";
-    case "３":
-      return "3";
-    case "４":
-      return "4";
-    case "５":
-      return "5";
-    case "６":
-      return "6";
-    case "７":
-      return "7";
-    case "８":
-      return "8";
-    case "９":
-      return "9";
-    case "０":
-      return "0";
-    default:
-      return char;
-  }
-}
-
 // src/block/calcium/number.ts
 var CALCIUM_NUMBER_NAME = "calcium_number";
 var calciumNumberBlock = {
@@ -28273,28 +30070,6 @@ var calciumSliceBlock = {
   helpUrl: ""
 };
 defineBlocksWithJsonArray([calciumSliceBlock]);
-
-// src/util/sanitize-str.ts
-function sanitizeStr(inputStr) {
-  let result = "";
-  for (let i = 0;i < inputStr.length; i++) {
-    const char = inputStr[i];
-    if (char === '"') {
-      let j = i - 1;
-      let countOfBackslashes = 0;
-      while (j >= 0 && inputStr[j] === "\\") {
-        countOfBackslashes++;
-        j--;
-      }
-      if (countOfBackslashes % 2 === 1) {
-        result += '"';
-      }
-    } else {
-      result += char;
-    }
-  }
-  return result;
-}
 
 // src/block/calcium/str.ts
 var CALCIUM_STR_NAME = "calcium_str";
@@ -28811,7 +30586,8 @@ class CalciumEditor {
 var buildEditor = ({
   parent,
   options,
-  height
+  height,
+  blocks
 }) => {
   if (options?.includesPythonCategories !== false) {
     const baseToolbox = options?.toolbox;
@@ -28878,6 +30654,9 @@ var buildEditor = ({
   };
   window.addEventListener("resize", onresize, false);
   onresize();
+  if (blocks) {
+    serialization.workspaces.load(blocks, workspace);
+  }
   return new CalciumEditor(workspace);
 };
 
@@ -28952,7 +30731,8 @@ class Caed {
       this._editor = buildEditor({
         parent: this.parameters.parent,
         options: this.parameters.options,
-        height: this.parameters.height
+        height: this.parameters.height,
+        blocks: this.parameters.blocks
       });
     }
   }
@@ -28969,6 +30749,9 @@ class Caed {
       this.parameters.height = value;
     }
   }
+  set blocks(value) {
+    this.parameters.blocks = value;
+  }
   get build() {
     if (this.parameters.parent && !this._editor) {
       this.buildEditor();
@@ -28983,6 +30766,7 @@ class CaedParams {
   parent;
   options;
   height;
+  blocks;
 }
 
 class CaedErrorMessages {
@@ -28991,14 +30775,33 @@ class CaedErrorMessages {
   }
 }
 
-// src/localization/en-us/main.ts
-var caed = new Caed;
-caed.parent = document.querySelector("#editor");
-caed.height = "calc(100% - 48px)";
-caed.options = {
-  toolbox,
-  includesPythonCategories: true
-};
+// src/localization/ja-jp/caede.js
 editorState.l10n = buildLocalization();
-caed.build;
-await buildPage();
+var caed = new Caed;
+caed.options = {
+  toolbox
+};
+var menuDiv = document.createElement("div");
+menuDiv.id = "menu";
+document.body.appendChild(menuDiv);
+var parentDiv = document.createElement("div");
+document.body.appendChild(parentDiv);
+caed.parent = parentDiv;
+Object.defineProperty(window, "高さ", {
+  set: function(value) {
+    caed.height = value;
+  },
+  enumerable: true
+});
+Object.defineProperty(window, "ブロック", {
+  set: function(value) {
+    caed.blocks = value;
+  },
+  enumerable: true
+});
+Object.defineProperty(window, "エディタを表示する", {
+  get: function() {
+    return caed.build;
+  },
+  enumerable: true
+});

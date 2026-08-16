@@ -28460,6 +28460,50 @@ class EditorStateStore {
 }
 var editorState = new EditorStateStore;
 
+// src/load-json.js
+function _loadJson(json) {
+  editorState.isLoadingFile = true;
+  if (json instanceof String || typeof json === "string") {
+    json = JSON.parse(json);
+  }
+  serialization.workspaces.load(json, editorState.editor.workspace);
+}
+function _dumpJson() {
+  const json = serialization.workspaces.save(editorState.editor.workspace);
+  return JSON.stringify(json);
+}
+window._loadJson = _loadJson;
+window._dumpJson = _dumpJson;
+
+// src/caed/build-page.ts
+async function buildPage() {
+  let autosaveTimer;
+  const previousCode = localStorage.getItem(`${LOCALSTORAGE_KEY_PREFIX}${editorState.l10n.savedFile}`);
+  if (previousCode) {
+    serialization.workspaces.load(JSON.parse(previousCode), editorState.editor.workspace);
+  }
+  editorState.editor.workspace.addChangeListener((e) => {
+    if (editorState.isLoadingFile && e.type !== Events.FINISHED_LOADING) {
+      return;
+    }
+    if (editorState.isLoadingFile && e.type === Events.FINISHED_LOADING) {
+      editorState.isLoadingFile = false;
+      return;
+    }
+    if (autosaveTimer !== undefined) {
+      clearTimeout(autosaveTimer);
+    }
+    const blockCode = serialization.workspaces.save(editorState.editor.workspace);
+    autosaveTimer = setTimeout(() => {
+      localStorage.setItem(`${LOCALSTORAGE_KEY_PREFIX}${editorState.l10n.savedFile}`, JSON.stringify(blockCode));
+      autosaveTimer = undefined;
+    }, 2000);
+  });
+  window.onbeforeunload = (e) => {
+    e.preventDefault();
+  };
+}
+
 // node_modules/blockly/blockly.mjs
 var import_blockly_compressed = __toESM(require_blockly_compressed(), 1);
 var {
@@ -30586,7 +30630,8 @@ class CalciumEditor {
 var buildEditor = ({
   parent,
   options,
-  height
+  height,
+  blocks
 }) => {
   if (options?.includesPythonCategories !== false) {
     const baseToolbox = options?.toolbox;
@@ -30653,6 +30698,9 @@ var buildEditor = ({
   };
   window.addEventListener("resize", onresize, false);
   onresize();
+  if (blocks) {
+    serialization.workspaces.load(blocks, workspace);
+  }
   return new CalciumEditor(workspace);
 };
 
@@ -30727,7 +30775,8 @@ class Caed {
       this._editor = buildEditor({
         parent: this.parameters.parent,
         options: this.parameters.options,
-        height: this.parameters.height
+        height: this.parameters.height,
+        blocks: this.parameters.blocks
       });
     }
   }
@@ -30744,6 +30793,9 @@ class Caed {
       this.parameters.height = value;
     }
   }
+  set blocks(value) {
+    this.parameters.blocks = value;
+  }
   get build() {
     if (this.parameters.parent && !this._editor) {
       this.buildEditor();
@@ -30758,6 +30810,7 @@ class CaedParams {
   parent;
   options;
   height;
+  blocks;
 }
 
 class CaedErrorMessages {
@@ -30766,27 +30819,14 @@ class CaedErrorMessages {
   }
 }
 
-// src/localization/ja-jp/caede.js
-editorState.l10n = buildLocalization();
+// src/localization/ja-jp/main.ts
 var caed = new Caed;
+caed.parent = document.querySelector("#editor");
+caed.height = "calc(100% - 48px)";
 caed.options = {
-  toolbox
+  toolbox,
+  includesPythonCategories: true
 };
-var menuDiv = document.createElement("div");
-menuDiv.id = "menu";
-document.body.appendChild(menuDiv);
-var parentDiv = document.createElement("div");
-document.body.appendChild(parentDiv);
-caed.parent = parentDiv;
-Object.defineProperty(window, "高さ", {
-  set: function(value) {
-    caed.height = value;
-  },
-  enumerable: true
-});
-Object.defineProperty(window, "エディタを表示する", {
-  get: function() {
-    return caed.build;
-  },
-  enumerable: true
-});
+editorState.l10n = buildLocalization();
+caed.build;
+await buildPage();
